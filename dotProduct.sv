@@ -1,18 +1,19 @@
-module Conv2D #(
+module DotProduct #(
     parameter DATA_WIDTH = 8,
     parameter ACC_WIDTH = 32,
-    parameter KERNEL_SIZE = 3
+    parameter N_INPUTS = 32
 ) (
     input logic clk,
-    input logic [DATA_WIDTH-1:0] imagem [0:N_INPUTS-1]
+    input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],
+    input logic signed [DATA_WIDTH-1:0] weight [0:N_INPUTS-1],
+    output logic signed [ACC_WIDTH-1:0] out
 );
 
-localparam N_INPUTS = KERNEL_SIZE * KERNEL_SIZE; //kernel = N x N
+
 localparam STAGES = $clog2(N_INPUTS); //estágios de soma pipeline
 
-logic signed [DATA_WIDTH-1:0] kernel [0:N_INPUTS-1];
-logic signed [2*DATA_WIDTH*2-1:0] soma [0:STAGES][0:N_INPUTS-1];
-logic signed [2*DATA_WIDTH-1:0] mult [0:N_INPUTS-1];
+logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
+logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
 
 genvar m;
 genvar s;
@@ -21,7 +22,7 @@ genvar n;
 generate
     for (m = 0; m < N_INPUTS; m = m + 1) begin
         always @(posedge clk) begin
-            mult[m] <= imagem[m] * kernel[m];
+            mult[m] <= input_vec[m] * weight[m];
         end
     end
 endgenerate
@@ -55,5 +56,7 @@ generate
         end
     end
 endgenerate
+
+assign out = soma[STAGES-1][0];
 
 endmodule
