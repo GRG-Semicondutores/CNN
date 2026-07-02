@@ -1,5 +1,5 @@
 module ReLU #(
-    parameter DATA_WIDTH = 32;
+    parameter DATA_WIDTH = 32
 ) (
     input logic signed [DATA_WIDTH-1:0] in,
     output logic signed [DATA_WIDTH-1:0] out
