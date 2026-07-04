@@ -4,8 +4,11 @@ module convolution #(
     parameter DATA_WIDTH = 8,
     parameter ACC_WIDTH = 32
 ) (
+    input logic clk,
+    input logic rst,
     input logic signed [DATA_WIDTH-1:0] imagem [0:N_PIXELS-1],
     input logic signed [DATA_WIDTH-1:0] kernel [0:N_KERNEL-1],
+    input logic start,
     output logic signed [ACC_WIDTH-1:0] result [0:N_OUT-1]
 );
 
@@ -13,12 +16,20 @@ localparam N_PIXELS = IMG_SIZE * IMG_SIZE;
 localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE;
 localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1;
 localparam N_OUT = OUT_SIZE * OUT_SIZE;
+localparam BIT_COUNT = $clog2(N_OUT);
+localparam BIT_CONV = $clog2(N_PIXELS);
 
 logic signed [DATA_WIDTH-1:0] imagem_slice [0:N_KERNEL-1];
+logic signed [ACC_WIDTH-1:0] single_result;
+logic [BIT_COUNT-1:0] count;
+logic [BIT_CONV-1:0] conv;
+logic [BIT_CONV-1:0] conv_row;
+logic [BIT_CONV-1:0] conv_col;
+logic valid_product;
+logic valid_in;
+logic valid_out;
 
-//todo: saída result deve ser populada um a um pelo pipeline do dotProduct
-//bias em convolução
-//implementar estratégias de valid no dotProduct para saber quando pode mandar a próxima
+//todo: lembrar que existe bias aqui tbm
 DotProduct #(
     .DATA_WIDTH(DATA_WIDTH),
     .ACC_WIDTH(ACC_WIDTH),
@@ -27,35 +38,64 @@ DotProduct #(
     .clk(clk),
     .input_vec(imagem_slice),
     .weight(kernel),
-    .out(result)
+    .valid_in(valid_in),
+    .valid_out(valid_product),
+    .out(single_result)
 );
 
+//índice que desliza a janela de convolução
 always_comb begin : conv_comb
     conv = conv_row + IMG_SIZE * conv_col;
 end
 
-always @(posedge clk) begin
+always @(posedge clk) begin :conv_window
     if (rst) begin
-        conv <= 0;
         conv_row <= 0;
         conv_col <= 0;
-    end else begin
-        if (conv_row < OUT_SIZE - 1) begin
-            conv_row <= conv_row + 'b1;
-        end else if (conv_col < OUT_SIZE - 1) begin
+        count <= 0;
+        valid_in <= 0;
+        valid_out <= 0;
+    end else if (start) begin //start é um único pulso de clock que deve ser enviado quando tem uma imagem pronta para passar pelo processamento
+        if (valid_in == 0) begin
+            valid_in <= 1'b1;
             conv_row <= 0;
+            conv_col <= 0;
+        end
+
+    end else if (valid_in) begin //valid_in diz ao bloco de MAC (dotProduct) que está sendo enviado um dado válido para ele poder validar a saída
+        if (conv_row < OUT_SIZE - 1) begin
+            conv_row <= conv_row + 'b1; //desliza as linhas
+        end else if (conv_col < OUT_SIZE - 1) begin
+            conv_row <= 0; //desliza as colunas
             conv_col <= conv_col + 'b1;
-        end else begin
-            valid = 1'b1;
+        end else if (conv_row == (OUT_SIZE - 1) && conv_col == (OUT_SIZE - 1)) begin //terminou de deslizar, acabaram as entradas válidas, pois terminou a convolução
+            valid_in <= 1'b0;
         end
     end
 end
 
+integer i;
+integer j;
+
+//image_slice é o pedaço de imagem com tamanho do kernel que vai ser enviado para o MAC junto com o kernel
 always @(*) begin
     for (i = 0; i < KERNEL_SIZE; i = i + 1) begin
         for (j = 0; j < KERNEL_SIZE; j = j + 1) begin
             imagem_slice[KERNEL_SIZE * i + j] = imagem[(IMG_SIZE * i) + j + conv];
         end
+    end
+end
+
+always @(posedge clk) begin
+    if (count < N_OUT) begin
+        valid_out <= 1'b0; //valid_out sinaliza a saída deste bloco com os resultados prontos
+        if (valid_product) begin//valid_product é enviado pelo dotProduct para saber se há uma saída válida no resultado do pipeline
+            result[count] <= single_result;
+            count <= count + 1;
+        end
+    end else begin //terminou de contar, saída válida
+        count <= 0;
+        valid_out <= 1'b1;
     end
 end
 

@@ -1,5 +1,8 @@
 Adder_CSA.sv
-Adder_KSA.sv
+convolution.sv
+dotProduct.sv
+maxPooling.sv
 multiplier_tb.sv
 Multiplier_WTM.sv
 neuron.sv
+ReLU.sv

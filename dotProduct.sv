@@ -6,19 +6,26 @@ module DotProduct #(
     input logic clk,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],
     input logic signed [DATA_WIDTH-1:0] weight [0:N_INPUTS-1],
+    input logic valid_in,
+    output logic valid_out,
     output logic signed [ACC_WIDTH-1:0] out
 );
 
 
 localparam STAGES = $clog2(N_INPUTS); //estágios de soma pipeline
+localparam LATENCY = STAGES + 1;
 
 logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
 logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
+logic valid_pipe [0:LATENCY];
 
-genvar m;
-genvar s;
-genvar n;
+genvar m; //multiplicadores
+genvar s; //estágios
+genvar n; //número de somadores por estágio
+integer v; //pipeline de valid
 
+
+//gera os multiplicadores que fazem multiplicação elemento a elemento entre o vetor de entrada e os pesos
 generate
     for (m = 0; m < N_INPUTS; m = m + 1) begin
         always @(posedge clk) begin
@@ -57,6 +64,17 @@ generate
     end
 endgenerate
 
+//pipeline de valid, o valid_in é enviado pelos blocos utilizadores deste bloco, para indicar que estão enviando uma entrada válida.
+//depois de LATENCY ciclos de clock, baseados no número de estágios, a saída de um valid_in recebido se torna válida
+always @(posedge clk) begin
+    valid_pipe[0] <= valid_in;
+    for (v = 1; v <= LATENCY; v = v  + 1) begin
+        valid_pipe[v] <= valid_pipe[v - 1];
+    end
+end
+
 assign out = soma[STAGES-1][0];
+//saída válida corresponde ao último índice do pipeline de saída
+assign valid_out = valid_pipe[LATENCY];
 
 endmodule

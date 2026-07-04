@@ -7,7 +7,7 @@ module ReLU #(
 
 localparam MSB = DATA_WIDTH - 1;
 
-// Saída assume 0 para entrada negativa, e assume a própria entrada, para entrada positiva. 
+// Saída assume 0 para entrada negativa, e assume a própria entrada, para entrada positiva.
 // Checa número negativo analisando o último bit: em complemento de 2, último bit 1 significa nº negativo.
 assign out = in[MSB] ? '0 : in;
 
