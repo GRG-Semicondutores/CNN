@@ -1,7 +1,8 @@
 module featureMap #(
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
-    parameter N_CHANNELS = 3
+    parameter N_CHANNELS = 3,
+    parameter KERNEL_SIZE =  3
 ) (
     input logic clk,
     input logic rst,
@@ -14,6 +15,7 @@ module featureMap #(
 localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE;
 localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1;
 localparam N_OUT = OUT_SIZE * OUT_SIZE;
+localparam N_PIXELS = IMG_SIZE * IMG_SIZE;
 
 logic [DATA_WIDTH-1:0] partial_result [0:N_CHANNELS-1][0:N_OUT-1];
 
