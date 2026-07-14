@@ -1,17 +1,19 @@
 `define MAX2(a,b) (((a) > (b)) ? (a) : (b))
 
 /* MaxPooling pega o maior elemento dentre quatro elementos e joga na saída. Imagem deve ser NxN com N par */
-module maxPooling #(
+module MaxPooling #(
     parameter SIDE = 4,
-    parameter DATA_WIDTH = 8
+    parameter DATA_WIDTH = 8,
+
+    localparam SIDE_POOLED = SIDE / 2,
+    localparam N_PIXELS = SIDE * SIDE,
+    localparam N_PIXELS_POOLED = SIDE_POOLED * SIDE_POOLED
 ) (
     input logic [DATA_WIDTH-1:0] imagem_in [0:N_PIXELS-1],
     output logic [DATA_WIDTH-1:0] imagem_out [0:N_PIXELS_POOLED-1]
 );
 
-localparam SIDE_POOLED = SIDE/2;
-localparam N_PIXELS = SIDE*SIDE;
-localparam N_PIXELS_POOLED = SIDE_POOLED*SIDE_POOLED;
+
 
 genvar i;
 genvar j;

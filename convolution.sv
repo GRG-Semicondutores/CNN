@@ -1,36 +1,37 @@
-module convolution #(
+module Convolution #(
     parameter IMG_SIZE = 5,
     parameter KERNEL_SIZE = 3,
     parameter DATA_WIDTH = 8,
-    parameter ACC_WIDTH = 32
+    parameter ACC_WIDTH = 32,
+    parameter PADDING = 0,
+
+    localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
+    localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
+    localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
+    localparam N_OUT = OUT_SIZE * OUT_SIZE,
+    localparam BIT_COUNT = $clog2(N_OUT),
+    localparam BIT_CONV = $clog2(N_PIXELS)
 ) (
     input logic clk,
     input logic rst,
     input logic signed [DATA_WIDTH-1:0] imagem [0:N_PIXELS-1],
     input logic signed [DATA_WIDTH-1:0] kernel [0:N_KERNEL-1],
     input logic start,
-    input logic [ACC_WIDTH-1:0] bias,
+    input logic signed [ACC_WIDTH-1:0] bias,
     output logic signed [ACC_WIDTH-1:0] result [0:N_OUT-1]
 );
 
-localparam N_PIXELS = IMG_SIZE * IMG_SIZE;
-localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE;
-localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1;
-localparam N_OUT = OUT_SIZE * OUT_SIZE;
-localparam BIT_COUNT = $clog2(N_OUT);
-localparam BIT_CONV = $clog2(N_PIXELS);
+
 
 logic signed [DATA_WIDTH-1:0] imagem_slice [0:N_KERNEL-1];
 logic signed [ACC_WIDTH-1:0] single_result;
 logic [BIT_COUNT-1:0] count;
-logic [BIT_CONV-1:0] conv;
 logic [BIT_CONV-1:0] conv_row;
 logic [BIT_CONV-1:0] conv_col;
 logic valid_product;
 logic valid_in;
 logic valid_out;
 
-//todo: lembrar que existe bias aqui tbm
 DotProduct #(
     .DATA_WIDTH(DATA_WIDTH),
     .ACC_WIDTH(ACC_WIDTH),
@@ -43,11 +44,6 @@ DotProduct #(
     .valid_out(valid_product),
     .out(single_result)
 );
-
-//índice que desliza a janela de convolução
-always_comb begin : conv_comb
-    conv = conv_row + IMG_SIZE * conv_col;
-end
 
 always @(posedge clk) begin :conv_window
     if (rst) begin
@@ -78,11 +74,21 @@ end
 integer i;
 integer j;
 
+integer row;
+integer col;
+
+
+
 //image_slice é o pedaço de imagem com tamanho do kernel que vai ser enviado para o MAC junto com o kernel
 always @(*) begin
     for (i = 0; i < KERNEL_SIZE; i = i + 1) begin
         for (j = 0; j < KERNEL_SIZE; j = j + 1) begin
-            imagem_slice[KERNEL_SIZE * i + j] = imagem[(IMG_SIZE * i) + j + conv];
+            row = conv_row + i - PADDING;
+            col = conv_col + j - PADDING;
+            if (row < 0 || row >= IMG_SIZE || col < 0 || col >= IMG_SIZE)
+                imagem_slice[KERNEL_SIZE * i + j] = 0;
+            else
+                imagem_slice[KERNEL_SIZE * i + j] = imagem[IMG_SIZE * row + col];
         end
     end
 end

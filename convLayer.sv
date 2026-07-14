@@ -1,9 +1,11 @@
-module convLayer #(
+module ConvLayer #(
+    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
-    parameter N_FILTERS = 10,
     parameter IMG_SIZE = 5,
-    parameter N_CHANNELS = 3,
     parameter KERNEL_SIZE = 3,
+    parameter N_CHANNELS = 3,
+    parameter N_FILTERS = 10,
+    parameter PADDING = 0,
 
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
     localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1,
@@ -19,17 +21,17 @@ module convLayer #(
     output logic [DATA_WIDTH-1:0] result [0:N_FILTERS-1][0:N_OUT-1]
 );
 
-
-
 genvar n;
 
-generate 
+generate
     for (n = 0; n < N_FILTERS; n = n + 1) begin
-        featureMap #(
+        FeatureMap #(
             .DATA_WIDTH(DATA_WIDTH),
             .IMG_SIZE(IMG_SIZE),
             .N_CHANNELS(N_CHANNELS),
-            .KERNEL_SIZE(KERNEL_SIZE)
+            .KERNEL_SIZE(KERNEL_SIZE),
+            .ACC_WIDTH(ACC_WIDTH),
+            .PADDING(PADDING)
         ) filter (
             .clk(clk),
             .rst(rst),
