@@ -1,8 +1,8 @@
 module CNN #(
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE_1 = 32,
-    parameter N_CHANNELS = 3,
     parameter KERNEL_SIZE = 3,
+    parameter N_CHANNELS = 3,
     parameter N_FILTERS_LAYER_1 = 16,
     parameter N_FILTERS_LAYER_2 = 32,
     parameter PADDING_1 = 1,
@@ -41,12 +41,12 @@ logic signed [DATA_WIDTH-1:0] result2_relu [0:N_FILTERS_LAYER_2-1][0:N_OUT_2-1];
 logic signed [DATA_WIDTH-1:0] result2_pooled [0:N_FILTERS_LAYER_2-1][0:N_OUT_POOLED_2-1];
 
 ConvLayer #(
-    .N_FILTERS(N_FILTERS_LAYER_1), //16 filtros
+    .ACC_WIDTH(ACC_WIDTH),
     .DATA_WIDTH(DATA_WIDTH), //8 bits
     .IMG_SIZE(IMG_SIZE_1), //imagem 5x5
-    .N_CHANNELS(N_CHANNELS), //3 canais
     .KERNEL_SIZE(KERNEL_SIZE), //kernel 3x3
-    .ACC_WIDTH(ACC_WIDTH),
+    .N_CHANNELS(N_CHANNELS), //3 canais
+    .N_FILTERS(N_FILTERS_LAYER_1), //16 filtros
     .PADDING(PADDING_1)
 ) ConvLayer1 (
     .clk(clk),
@@ -72,8 +72,8 @@ generate
         end
 
         MaxPooling #(
-            .SIDE(OUT_SIZE_1), //imagem de entrada do tamanho da saída da primeira convolução
-            .DATA_WIDTH(DATA_WIDTH)
+            .DATA_WIDTH(DATA_WIDTH),
+            .SIDE(OUT_SIZE_1) //imagem de entrada do tamanho da saída da primeira convolução
         ) maxPoolLayer1 (
             .imagem_in(result1_relu[layer1]),
             .imagem_out(result1_pooled[layer1])
@@ -82,11 +82,11 @@ generate
 endgenerate
 
 ConvLayer #(
-    .N_FILTERS(N_FILTERS_LAYER_2),
     .DATA_WIDTH(DATA_WIDTH),
     .IMG_SIZE(IMG_SIZE_2),
+    .KERNEL_SIZE(KERNEL_SIZE),
     .N_CHANNELS(N_CHANNELS_2),
-    .KERNEL_SIZE(KERNEL_SIZE)
+    .N_FILTERS(N_FILTERS_LAYER_2)
 ) ConvLayer2(
     .clk(clk),
     .rst(rst),
@@ -111,8 +111,8 @@ generate
         end
 
         MaxPooling #(
-            .SIDE(OUT_SIZE_2), //imagem de entrada do tamanho da saída da segunda convolução
-            .DATA_WIDTH(DATA_WIDTH)
+            .DATA_WIDTH(DATA_WIDTH),
+            .SIDE(OUT_SIZE_2) //imagem de entrada do tamanho da saída da segunda convolução
         ) maxPoolLayer2 (
             .imagem_in(result2_relu[layer2]),
             .imagem_out(result2_pooled[layer2])
@@ -121,19 +121,19 @@ generate
 endgenerate
 
 FCLayer #(
-    .DATA_WIDTH(DATA_WIDTH),
     .ACC_WIDTH(32),
-    .WEIGHTS(),
-    .N_NEURONS(N_NEURONS_1)
+    .DATA_WIDTH(DATA_WIDTH),
+    .N_NEURONS(N_NEURONS_1),
+    .WEIGHTS()
 ) FCLayer3 (
 
 );
 
 FCLayer #(
-    .DATA_WIDTH(DATA_WIDTH),
     .ACC_WIDTH(32),
-    .WEIGHTS(),
-    .N_NEURONS(N_NEURONS_2)
+    .DATA_WIDTH(DATA_WIDTH),
+    .N_NEURONS(N_NEURONS_2),
+    .WEIGHTS()
 ) FCLayer4 (
 
 );

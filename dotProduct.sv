@@ -1,6 +1,6 @@
 module DotProduct #(
-    parameter DATA_WIDTH = 8,
     parameter ACC_WIDTH = 32,
+    parameter DATA_WIDTH = 8,
     parameter N_INPUTS = 32
 ) (
     input logic clk,

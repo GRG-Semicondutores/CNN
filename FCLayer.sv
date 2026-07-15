@@ -1,8 +1,8 @@
 module FCLayer #(
-    parameter N_NEURONS = 10,
-    parameter WEIGHTS = 2,
+    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
-    parameter ACC_WIDTH = 32
+    parameter N_NEURONS = 10,
+    parameter WEIGHTS = 2
 ) (
     input logic clk,
     input logic valid_in,

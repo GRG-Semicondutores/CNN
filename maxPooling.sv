@@ -2,8 +2,8 @@
 
 /* MaxPooling pega o maior elemento dentre quatro elementos e joga na saída. Imagem deve ser NxN com N par */
 module MaxPooling #(
-    parameter SIDE = 4,
     parameter DATA_WIDTH = 8,
+    parameter SIDE = 4,
 
     localparam SIDE_POOLED = SIDE / 2,
     localparam N_PIXELS = SIDE * SIDE,

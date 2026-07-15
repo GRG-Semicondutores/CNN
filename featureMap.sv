@@ -1,9 +1,9 @@
 module FeatureMap #(
+    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
-    parameter N_CHANNELS = 3,
     parameter KERNEL_SIZE =  3,
-    parameter ACC_WIDTH = 32,
+    parameter N_CHANNELS = 3,
     parameter PADDING = 0,
 
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,

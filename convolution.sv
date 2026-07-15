@@ -1,8 +1,8 @@
 module Convolution #(
+    parameter ACC_WIDTH = 32,
+    parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
     parameter KERNEL_SIZE = 3,
-    parameter DATA_WIDTH = 8,
-    parameter ACC_WIDTH = 32,
     parameter PADDING = 0,
 
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
