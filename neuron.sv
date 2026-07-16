@@ -1,9 +1,7 @@
 module Neuron #(
-    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
     parameter WEIGHTS = 2
-)
-(
+) (
     input logic clk,
     input logic valid_in,
     input logic signed [DATA_WIDTH-1:0] x [0:WEIGHTS-1],
@@ -18,7 +16,6 @@ logic signed [ACC_WIDTH-1:0] y;
 
 DotProduct #(
     .DATA_WIDTH(DATA_WIDTH),
-    .ACC_WIDTH(ACC_WIDTH),
     .N_INPUTS(WEIGHTS)
 ) neuronMAC (
     .clk(clk),

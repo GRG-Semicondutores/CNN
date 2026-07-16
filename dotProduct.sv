@@ -1,7 +1,8 @@
 module DotProduct #(
-    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
-    parameter N_INPUTS = 32
+    parameter N_INPUTS = 32,
+
+    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_INPUTS)
 ) (
     input logic clk,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],

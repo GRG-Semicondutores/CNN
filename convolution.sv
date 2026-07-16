@@ -1,5 +1,4 @@
 module Convolution #(
-    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
     parameter KERNEL_SIZE = 3,
@@ -7,6 +6,7 @@ module Convolution #(
 
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
+    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_KERNEL),
     localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
     localparam BIT_COUNT = $clog2(N_OUT),
@@ -17,7 +17,7 @@ module Convolution #(
     input logic signed [DATA_WIDTH-1:0] imagem [0:N_PIXELS-1],
     input logic signed [DATA_WIDTH-1:0] kernel [0:N_KERNEL-1],
     input logic start,
-    input logic signed [ACC_WIDTH-1:0] bias,
+    input logic signed [DATA_WIDTH-1:0] bias,
     output logic signed [ACC_WIDTH-1:0] result [0:N_OUT-1]
 );
 
@@ -34,7 +34,6 @@ logic valid_out;
 
 DotProduct #(
     .DATA_WIDTH(DATA_WIDTH),
-    .ACC_WIDTH(ACC_WIDTH),
     .N_INPUTS(N_KERNEL)
 ) convolve (
     .clk(clk),
