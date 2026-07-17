@@ -9,8 +9,8 @@ module MaxPooling #(
     localparam N_PIXELS = SIDE * SIDE,
     localparam N_PIXELS_POOLED = SIDE_POOLED * SIDE_POOLED
 ) (
-    input logic [DATA_WIDTH-1:0] imagem_in [0:N_PIXELS-1],
-    output logic [DATA_WIDTH-1:0] imagem_out [0:N_PIXELS_POOLED-1]
+    input logic [DATA_WIDTH-1:0] imagem_in [0:N_PIXELS-1], // ERRO DE TIPO: CNN conecta result*_relu signed a esta porta unsigned; preserve signed para que a interface seja compativel, mesmo que ReLU torne os valores nao negativos.
+    output logic [DATA_WIDTH-1:0] imagem_out [0:N_PIXELS_POOLED-1] // ERRO DE TIPO: CNN recebe este vetor em logic signed; a interface do pooling nao e consistente com os demais mapas de caracteristicas.
 );
 
 

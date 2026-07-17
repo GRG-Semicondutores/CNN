@@ -12,7 +12,7 @@ module Multiplier_WTM_tb;
 
     logic [LENGTH-1:0]   multiplicand;
     logic [LENGTH-1:0]   multiplier;
-    logic [LENGTH*2-1:0] result;
+    logic [LENGTH*2-1:0] result; // ERRO: DUT declara result com 2*LENGTH+1 bits; a porta e truncada nesta ligacao (o bit extra do DUT e redundante, mas a interface nao confere).
     logic [LENGTH*2-1:0] expected;
 
     int total;

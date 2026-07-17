@@ -6,11 +6,11 @@ module Convolution #(
 
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
-    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_KERNEL),
+    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_KERNEL), // ERRO: a largura correta do produto e 2*DATA_WIDTH; DATA_WIDTH*DATA_WIDTH superdimensiona o acumulador e diverge da especificacao aritmetica.
     localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
-    localparam BIT_COUNT = $clog2(N_OUT),
-    localparam BIT_CONV = $clog2(N_PIXELS)
+    localparam BIT_COUNT = $clog2(N_OUT), // ERRO: count precisa representar N_OUT para testar o termino; com N_OUT potencia de 2 (1024), este vetor vai de 0 a 1023 e transborda antes de atingir 1024. Use $clog2(N_OUT + 1).
+    localparam BIT_CONV = $clog2(N_PIXELS) // ERRO DE DIMENSIONAMENTO: conv_row/conv_col indexam um lado da imagem e deveriam usar $clog2(IMG_SIZE), nao a quantidade total de pixels.
 ) (
     input logic clk,
     input logic rst,
@@ -59,7 +59,7 @@ always @(posedge clk) begin :conv_window
         end
 
     end else if (valid_in) begin //valid_in diz ao bloco de MAC (dotProduct) que está sendo enviado um dado válido para ele poder validar a saída
-        if (conv_row < OUT_SIZE - 1) begin
+        if (conv_row < OUT_SIZE - 1) begin // ERRO DE POSICAO: avanca a linha antes da coluna, gravando result em ordem coluna-major; MaxPooling interpreta o vetor como linha-major (SIDE*i+j).
             conv_row <= conv_row + 'b1; //desliza as linhas
         end else if (conv_col < OUT_SIZE - 1) begin
             conv_row <= 0; //desliza as colunas
@@ -92,7 +92,7 @@ always @(*) begin
     end
 end
 
-always @(posedge clk) begin
+always @(posedge clk) begin // ERRO: este processo nao trata rst; count e valid_out podem iniciar em X e o contador de largura ja insuficiente nunca se recupera.
     if (count < N_OUT) begin
         valid_out <= 1'b0; //valid_out sinaliza a saída deste bloco com os resultados prontos
         if (valid_product) begin//valid_product é enviado pelo dotProduct para saber se há uma saída válida no resultado do pipeline

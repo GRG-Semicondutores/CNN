@@ -1,7 +1,7 @@
 module Multiplier_WTM #(parameter int LENGTH = 11)(
     input  [LENGTH-1:0]   multiplicand,
     input  [LENGTH-1:0]   multiplier,
-    output [LENGTH*2:0]   result
+    output [LENGTH*2:0]   result // ERRO: produto unsigned de dois vetores LENGTH requer 2*LENGTH bits ([2*LENGTH-1:0]); esta declaracao tem um bit extra e nao coincide com o testbench.
 );
 
     // ─────────────────────────────────────────────

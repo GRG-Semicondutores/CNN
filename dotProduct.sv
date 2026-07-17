@@ -2,7 +2,7 @@ module DotProduct #(
     parameter DATA_WIDTH = 8,
     parameter N_INPUTS = 32,
 
-    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_INPUTS)
+    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_INPUTS) // ERRO: o acumulador deve ter 2*DATA_WIDTH + $clog2(N_INPUTS) bits; DATA_WIDTH*DATA_WIDTH deixa todos os modulos de MAC com uma largura aritmeticamente incorreta.
 ) (
     input logic clk,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],

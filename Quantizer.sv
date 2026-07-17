@@ -13,7 +13,7 @@ module Quantizer #(
     logic signed [SIZE_IN-1:0] rounded;
     // in + (1 com shift de SHIFT - 1) introduz "meio bit" na escala de saída (shift de SHIFT é igual a um shift de (SHIFT - 1) / 2), serve para não ocorrer arredondamento
     // sempre para baixo.
-    assign rounded = (in + (1 <<< (SHIFT - 1))) >>> (SHIFT);
+    assign rounded = (in + (1 <<< (SHIFT - 1))) >>> (SHIFT); // ERRO DE PARAMETRIZACAO: requer SIZE_IN > SIZE_OUT; com SHIFT <= 0, SHIFT-1 e deslocamentos negativos/inadequados.
 
     // Introduz saturação para, caso o número shiftado para escala de saída dê maior que a máxima representação possível com o número de saída de bits, 
     // ou menor que a mínima representação, o resultado sature.
