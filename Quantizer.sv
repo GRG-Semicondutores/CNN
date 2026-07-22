@@ -15,7 +15,7 @@ module Quantizer #(
     // sempre para baixo.
     assign rounded = (in + (1 <<< (SHIFT - 1))) >>> (SHIFT); // ERRO DE PARAMETRIZACAO: requer SIZE_IN > SIZE_OUT; com SHIFT <= 0, SHIFT-1 e deslocamentos negativos/inadequados.
 
-    // Introduz saturação para, caso o número shiftado para escala de saída dê maior que a máxima representação possível com o número de saída de bits, 
+    // Introduz saturação para, caso o número shiftado para escala de saída dê maior que a máxima representação possível com o número de saída de bits,
     // ou menor que a mínima representação, o resultado sature.
     assign out = ((rounded > QMAX) ? QMAX[SIZE_OUT-1:0] : ((rounded < QMIN) ? QMIN : rounded[SIZE_OUT-1:0]));
 endmodule

@@ -21,7 +21,7 @@ assign valid_out = &partial_valid_out;
 genvar n;
 
 generate
-    for (n = 0; n < N_NEURONS; n = n + 1) begin
+    for (n = 0; n < N_NEURONS; n = n + 1) begin :gen_neurons
         Neuron #(
             .WEIGHTS(WEIGHTS),
             .DATA_WIDTH(DATA_WIDTH)

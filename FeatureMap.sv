@@ -31,7 +31,7 @@ genvar c;
 assign valid_out = &partial_valid_out; //este bloco só manda um valid_out quando todos os valid_out dos blocos convolucionais estiverem válidos.
 
 generate
-    for (c = 0; c < N_CHANNELS; c = c + 1) begin
+    for (c = 0; c < N_CHANNELS; c = c + 1) begin :gen_channels
         Convolution #(
             .IMG_SIZE(IMG_SIZE),
             .DATA_WIDTH(DATA_WIDTH),

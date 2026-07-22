@@ -28,7 +28,7 @@ integer v; //pipeline de valid
 
 //gera os multiplicadores que fazem multiplicação elemento a elemento entre o vetor de entrada e os pesos
 generate
-    for (m = 0; m < N_INPUTS; m = m + 1) begin
+    for (m = 0; m < N_INPUTS; m = m + 1) begin :gen_multipliers
         always @(posedge clk) begin
             mult[m] <= input_vec[m] * weight[m];
         end
@@ -36,10 +36,10 @@ generate
 endgenerate
 
 generate
-    for (s = 0; s < STAGES; s = s + 1) begin :estagios
+    for (s = 0; s < STAGES; s = s + 1) begin :gen_estagios
 
         //cada estágio executa N/2 vezes (N = número de elementos no estágio anterior), sendo N somado de 1, se teve resto no estágio anterior
-        for (n = 0; n < ((N_INPUTS + (1 << s) - 1) >> s) >> 1; n = n + 1) begin :elementos_soma 
+        for (n = 0; n < ((N_INPUTS + (1 << s) - 1) >> s) >> 1; n = n + 1) begin :gen_elementos_soma
             always @(posedge clk) begin
                 //primeiro estágio do pipeline de árvore de soma (soma dois do estágio anterior)
                 if (s == 0) begin :primeiro_estagio
@@ -51,15 +51,15 @@ generate
             end
         end
 
-        if (s == 0) begin :contorno_primeiro_estagio
+        if (s == 0) begin :gen_contorno_primeiro_estagio
             always @(posedge clk) begin
                 //persiste o valor do elemento ímpar (sozinho) para o próximo estágio
                 if (N_INPUTS % 2 == 1)  soma[0][N_INPUTS >> 1] <= mult[N_INPUTS - 1];
             end
-        end else begin
-            always @(posedge clk) begin :contorno_outros_estagios
+        end else begin :gen_contorno_outros_estagios
+            always @(posedge clk) begin
                 //persiste o valor do elemento ímpar (sozinho) para o próximo estágio
-                if (((N_INPUTS + (1 << (s - 1)) - 1) >> (s - 1)) % 2 == 1) soma[s][((N_INPUTS + (1 << s) - 1) >> s) >> 1] <= soma[s - 1][((N_INPUTS + (1 << s) - 1) >> s) - 1]; 
+                if (((N_INPUTS + (1 << (s - 1)) - 1) >> (s - 1)) % 2 == 1) soma[s][((N_INPUTS + (1 << s) - 1) >> s) >> 1] <= soma[s - 1][((N_INPUTS + (1 << s) - 1) >> s) - 1];
             end
         end
     end

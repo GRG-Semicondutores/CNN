@@ -31,7 +31,7 @@ assign valid_out = &partial_valid_out; //só manda valid_out se todos os valid_o
 genvar n;
 
 generate
-    for (n = 0; n < N_FILTERS; n = n + 1) begin
+    for (n = 0; n < N_FILTERS; n = n + 1) begin :gen_feature_maps
         FeatureMap #(
             .DATA_WIDTH(DATA_WIDTH),
             .IMG_SIZE(IMG_SIZE),

@@ -19,8 +19,8 @@ genvar i;
 genvar j;
 
 generate
-    for (i = 0; i < SIDE; i = i + 2) begin :pool_row
-        for (j = 0; j < SIDE; j = j + 2) begin :pool_col
+    for (i = 0; i < SIDE; i = i + 2) begin :gen_pool_row
+        for (j = 0; j < SIDE; j = j + 2) begin :gen_pool_col
             assign imagem_out[((SIDE * i) / 4)  + (j / 2)] = `MAX2(
                 `MAX2(imagem_in[SIDE * (i) + j], imagem_in[SIDE * (i) + j + 1]),
                 `MAX2(imagem_in[SIDE * (i + 1) + j], imagem_in[SIDE * (i + 1) + j + 1])
