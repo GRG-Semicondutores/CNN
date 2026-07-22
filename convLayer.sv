@@ -1,5 +1,5 @@
+/* Módulo ConvLayer utilizado como abstração para declarar N_FILTERS feature maps para a camada */
 module ConvLayer #(
-    parameter ACC_WIDTH = 32,
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
     parameter KERNEL_SIZE = 3,
@@ -8,18 +8,25 @@ module ConvLayer #(
     parameter PADDING = 0,
 
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
-    localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1, // ERRO: PADDING foi omitido; deve ser IMG_SIZE + 2*PADDING - KERNEL_SIZE + 1. Com PADDING=1, CNN espera 32x32, mas esta porta tem 30x30.
+    localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
-    localparam N_PIXELS = IMG_SIZE * IMG_SIZE
+    localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
+    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_KERNEL) + $clog2(N_CHANNELS)
 
 ) (
     input logic clk,
     input logic rst,
     input logic start,
-    input logic [DATA_WIDTH-1:0] imagem [0:N_CHANNELS-1][0:N_PIXELS-1], // ERRO: CNN fornece dados signed, mas esta porta os converte para unsigned antes de FeatureMap/Convolution.
-    input logic [DATA_WIDTH-1:0] kernel [0:N_FILTERS-1][0:N_CHANNELS-1][0:N_KERNEL-1], // ERRO: CNN fornece kernels signed, mas esta porta os converte para unsigned.
-    output logic [DATA_WIDTH-1:0] result [0:N_FILTERS-1][0:N_OUT-1] // ERRO: FeatureMap produz ACC_WIDTH_FMAP bits por posicao; a porta de 8 bits descarta os bits mais significativos sem quantizacao.
+    input logic signed [DATA_WIDTH-1:0] imagem [0:N_CHANNELS-1][0:N_PIXELS-1],
+    input logic signed [DATA_WIDTH-1:0] kernel [0:N_FILTERS-1][0:N_CHANNELS-1][0:N_KERNEL-1],
+    input logic signed [DATA_WIDTH-1:0] bias [0:N_FILTERS-1][0:N_CHANNELS-1],
+    output logic signed [ACC_WIDTH-1:0] result [0:N_FILTERS-1][0:N_OUT-1],
+    output logic valid_out
 );
+
+logic partial_valid_out [0:N_FILTERS-1];
+
+assign valid_out = &partial_valid_out; //só manda valid_out se todos os valid_out das features estiverem válidos.
 
 genvar n;
 
@@ -30,15 +37,17 @@ generate
             .IMG_SIZE(IMG_SIZE),
             .N_CHANNELS(N_CHANNELS),
             .KERNEL_SIZE(KERNEL_SIZE),
-            .ACC_WIDTH(ACC_WIDTH), // ERRO: FeatureMap nao declara o parametro ACC_WIDTH; o compilador ignora esta sobrescrita.
             .PADDING(PADDING)
         ) filter (
             .clk(clk),
             .rst(rst),
-            .start(start),
+            .start(start), //ConvLayer propaga o pulso de start para os feature maps...
             .imagem(imagem),
             .kernel(kernel[n]),
-            .result(result[n]) // ERRO: liga a saida acumulada de FeatureMap a um vetor DATA_WIDTH, causando truncamento de largura.
+            .bias(bias[n]),
+            // ERRO: FeatureMap exige bias, mas ConvLayer nao possui nem conecta uma porta de bias; a entrada fica em Z e contamina cada resultado com X.
+            .result(result[n]),
+            .valid_out(partial_valid_out[n]) //pega todos os valid_out de todos os featureMaps
         );
     end
 endgenerate

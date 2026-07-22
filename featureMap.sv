@@ -1,3 +1,4 @@
+/* Módulo FeatureMap declara N_CHANNELS blocos de convolução e os soma para formar a feature map final */
 module FeatureMap #(
     parameter DATA_WIDTH = 8,
     parameter IMG_SIZE = 5,
@@ -6,23 +7,28 @@ module FeatureMap #(
     parameter PADDING = 0,
 
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
-    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_KERNEL), // ERRO: produto de dois operandos DATA_WIDTH requer 2*DATA_WIDTH bits, nao DATA_WIDTH*DATA_WIDTH; a mesma formula inconsistente e repetida em Convolution/DotProduct.
+    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_KERNEL),
     localparam ACC_WIDTH_FMAP = ACC_WIDTH + $clog2(N_CHANNELS),
-    localparam OUT_SIZE = IMG_SIZE - KERNEL_SIZE + 1, // ERRO: PADDING foi omitido; Convolution gera (IMG_SIZE + 2*PADDING - KERNEL_SIZE + 1)^2 valores, enquanto partial_result/result foram dimensionados sem padding.
+    localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE
 ) (
     input logic clk,
     input logic rst,
     input logic start,
-    input logic [DATA_WIDTH-1:0] imagem [0:N_CHANNELS-1][0:N_PIXELS-1], // ERRO: esta interface e unsigned, mas Convolution espera signed; amostras negativas mudam de significado.
-    input logic [DATA_WIDTH-1:0] kernel [0:N_CHANNELS-1][0:N_KERNEL-1], // ERRO: esta interface e unsigned, mas Convolution espera signed; pesos negativos mudam de significado.
-    output logic [ACC_WIDTH_FMAP-1:0] result [0:N_OUT-1]
+    input logic signed [DATA_WIDTH-1:0] imagem [0:N_CHANNELS-1][0:N_PIXELS-1],
+    input logic signed [DATA_WIDTH-1:0] kernel [0:N_CHANNELS-1][0:N_KERNEL-1],
+    input logic signed [DATA_WIDTH-1:0] bias [0:N_CHANNELS-1], // ERRO: ConvLayer nao conecta este barramento. Alem disso, uma CNN normalmente usa um unico bias por filtro, somado apos reduzir todos os canais, e nao um bias por canal.
+    output logic signed [ACC_WIDTH_FMAP-1:0] result [0:N_OUT-1],
+    output logic valid_out
 );
 
-logic [ACC_WIDTH-1:0] partial_result [0:N_CHANNELS-1][0:N_OUT-1];
+logic signed [ACC_WIDTH-1:0] partial_result [0:N_CHANNELS-1][0:N_OUT-1];
+logic partial_valid_out [0:N_CHANNELS-1];
 
 genvar c;
+
+assign valid_out = &partial_valid_out; //este bloco só manda um valid_out quando todos os valid_out dos blocos convolucionais estiverem válidos.
 
 generate
     for (c = 0; c < N_CHANNELS; c = c + 1) begin
@@ -34,11 +40,12 @@ generate
         ) filters (
             .clk(clk),
             .rst(rst),
-            .start(start),
+            .start(start), //propaga o pulso de start para o convolution
             .imagem(imagem[c]),
             .kernel(kernel[c]),
-            // ERRO: a porta obrigatoria bias de Convolution nao esta conectada; cada convolucao soma Z/X ao resultado.
-            .result(partial_result[c]) // ERRO: com PADDING diferente de zero, Convolution tem N_OUT com padding e partial_result tem N_OUT sem padding.
+            .bias(bias[c]),
+            .result(partial_result[c]),
+            .valid_out(partial_valid_out[c]) //junta todos os valid_out dos blocos convolucionais
         );
     end
 endgenerate

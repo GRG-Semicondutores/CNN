@@ -2,7 +2,7 @@ module DotProduct #(
     parameter DATA_WIDTH = 8,
     parameter N_INPUTS = 32,
 
-    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(N_INPUTS) // ERRO: o acumulador deve ter 2*DATA_WIDTH + $clog2(N_INPUTS) bits; DATA_WIDTH*DATA_WIDTH deixa todos os modulos de MAC com uma largura aritmeticamente incorreta.
+    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_INPUTS)
 ) (
     input logic clk,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],
@@ -67,7 +67,7 @@ endgenerate
 
 //pipeline de valid, o valid_in é enviado pelos blocos utilizadores deste bloco, para indicar que estão enviando uma entrada válida.
 //depois de LATENCY ciclos de clock, baseados no número de estágios, a saída de um valid_in recebido se torna válida
-always @(posedge clk) begin
+always @(posedge clk) begin // ERRO: o pipeline valid_pipe nao tem reset; apos rst do restante da CNN, valid_out pode permanecer X ate os registros serem preenchidos.
     valid_pipe[0] <= valid_in;
     for (v = 1; v <= LATENCY; v = v  + 1) begin
         valid_pipe[v] <= valid_pipe[v - 1];

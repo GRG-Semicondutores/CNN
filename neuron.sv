@@ -2,7 +2,7 @@ module Neuron #(
     parameter DATA_WIDTH = 8,
     parameter WEIGHTS = 2,
 
-    localparam ACC_WIDTH = DATA_WIDTH * DATA_WIDTH + $clog2(WEIGHTS) // ERRO: a largura do produto signed e 2*DATA_WIDTH, nao DATA_WIDTH*DATA_WIDTH; esta largura deve coincidir com DotProduct e FCLayer.
+    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(WEIGHTS)
 ) (
     input logic clk,
     input logic valid_in,
