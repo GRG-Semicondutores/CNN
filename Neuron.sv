@@ -35,6 +35,6 @@ ReLU #(
     .out(z)
 );
 
-assign y = y_1 + b;
+assign y = y_1 + {{(ACC_WIDTH - DATA_WIDTH){b[DATA_WIDTH-1]}}, b};
 
 endmodule

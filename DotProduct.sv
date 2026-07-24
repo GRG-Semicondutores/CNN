@@ -20,20 +20,17 @@ logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
 logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
 logic valid_pipe [0:LATENCY];
 
-genvar m; //multiplicadores
 genvar s; //estágios
 genvar n; //número de somadores por estágio
 integer v; //pipeline de valid
-
+integer m; //multiplicadores
 
 //gera os multiplicadores que fazem multiplicação elemento a elemento entre o vetor de entrada e os pesos
-generate
-    for (m = 0; m < N_INPUTS; m = m + 1) begin :gen_multipliers
-        always @(posedge clk) begin
-            mult[m] <= input_vec[m] * weight[m];
-        end
+always @(posedge clk) begin
+    for (m = 0; m < N_INPUTS; m = m + 1) begin
+        mult[m] <= input_vec[m] * weight[m];
     end
-endgenerate
+end
 
 generate
     for (s = 0; s < STAGES; s = s + 1) begin :gen_estagios
@@ -67,10 +64,14 @@ endgenerate
 
 //pipeline de valid, o valid_in é enviado pelos blocos utilizadores deste bloco, para indicar que estão enviando uma entrada válida.
 //depois de LATENCY ciclos de clock, baseados no número de estágios, a saída de um valid_in recebido se torna válida
-always @(posedge clk) begin // ERRO: o pipeline valid_pipe nao tem reset; apos rst do restante da CNN, valid_out pode permanecer X ate os registros serem preenchidos.
-    valid_pipe[0] <= valid_in;
-    for (v = 1; v <= LATENCY; v = v  + 1) begin
-        valid_pipe[v] <= valid_pipe[v - 1];
+always @(posedge clk) begin
+    if (rst) begin
+        valid_pipe = '0;
+    end else begin
+        valid_pipe[0] <= valid_in;
+        for (v = 1; v <= LATENCY; v = v  + 1) begin
+            valid_pipe[v] <= valid_pipe[v - 1];
+        end
     end
 end
 

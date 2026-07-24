@@ -17,7 +17,6 @@ module Convolution #(
     input logic signed [DATA_WIDTH-1:0] imagem [0:N_PIXELS-1],
     input logic signed [DATA_WIDTH-1:0] kernel [0:N_KERNEL-1],
     input logic start,
-    input logic signed [DATA_WIDTH-1:0] bias,
     output logic signed [ACC_WIDTH-1:0] result [0:N_OUT-1],
     output logic valid_out //Quando a convolução está concluída e a saída está pronta, valid_out se torna 1
 );
@@ -98,7 +97,7 @@ always @(posedge clk) begin // ERRO: count e valid_out tambem sao escritos pelo 
         if (count < N_OUT) begin
             valid_out <= 1'b0; //valid_out sinaliza a saída deste bloco com os resultados prontos
             if (valid_product) begin//valid_product é enviado pelo dotProduct para saber se há uma saída válida no resultado do pipeline
-                result[count] <= single_result + bias;
+                result[count] <= single_result;
                 count <= count + 1;
             end
         end else begin //terminou de contar, saída válida

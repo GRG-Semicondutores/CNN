@@ -45,7 +45,6 @@ generate
             .imagem(imagem),
             .kernel(kernel[n]),
             .bias(bias[n]),
-            // ERRO: FeatureMap exige bias, mas ConvLayer nao possui nem conecta uma porta de bias; a entrada fica em Z e contamina cada resultado com X.
             .result(result[n]),
             .valid_out(partial_valid_out[n]) //pega todos os valid_out de todos os featureMaps
         );
