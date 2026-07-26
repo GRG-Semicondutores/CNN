@@ -8,7 +8,7 @@ module FeatureMap #(
 
     localparam N_KERNEL = KERNEL_SIZE * KERNEL_SIZE,
     localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_KERNEL),
-    localparam ACC_WIDTH_FMAP = ACC_WIDTH + $clog2(N_CHANNELS),
+    localparam ACC_WIDTH_FMAP = 2 * DATA_WIDTH + $clog2(N_KERNEL * N_CHANNELS),
     localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE
@@ -24,7 +24,7 @@ module FeatureMap #(
 );
 
 logic signed [ACC_WIDTH-1:0] partial_result [0:N_CHANNELS-1][0:N_OUT-1];
-logic partial_valid_out [0:N_CHANNELS-1];
+logic [0:N_CHANNELS-1] partial_valid_out;
 
 genvar c;
 

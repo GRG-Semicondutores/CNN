@@ -35,11 +35,12 @@ module CNN #(
     input logic signed [DATA_WIDTH-1:0] kernel2 [0:N_FILTERS_LAYER_2-1][0:N_FILTERS_LAYER_1-1][0:N_KERNEL-1],
     input logic signed [DATA_WIDTH-1:0] FCWeight1 [0:N_NEURONS_1-1][0:N_FLAT-1],
     input logic signed [DATA_WIDTH-1:0] FCWeight2 [0:N_NEURONS_2-1][0:N_NEURONS_1-1],
+    input logic signed [DATA_WIDTH-1:0] ConvBias1 [0:N_FILTERS_LAYER_1-1],
+    input logic signed [DATA_WIDTH-1:0] ConvBias2 [0:N_FILTERS_LAYER_2-1],
     input logic signed [DATA_WIDTH-1:0] FCBias1 [0:N_NEURONS_1-1],
     input logic signed [DATA_WIDTH-1:0] FCBias2 [0:N_NEURONS_2-1],
     output logic valid_out4
 );
-
 
 localparam ACC_WIDTH_1 = 2 * DATA_WIDTH + $clog2(N_KERNEL * N_CHANNELS);
 localparam ACC_WIDTH_2 = 2 * DATA_WIDTH + $clog2(N_KERNEL * N_CHANNELS_2);
@@ -76,6 +77,7 @@ ConvLayer #(
     .start(start), //manda um pulso de start pra convLayer1...
     .imagem(imagem),
     .kernel(kernel1),
+    .bias(ConvBias1),
     .result(result1),
     .valid_out(valid_out1)
 );
@@ -126,6 +128,7 @@ ConvLayer #(
     .start(valid_out1), //começa quando a primeira camada manda que seus resultados estão válidos
     .imagem(result1_pooled),
     .kernel(kernel2),
+    .bias(ConvBias2),
     .result(result2),
     .valid_out(valid_out2)
 );
@@ -181,6 +184,7 @@ FCLayer #(
 ) FCLayer3 (
     .clk(clk),
     .valid_in(valid_out2), //começa quando a camada anterior mandar válido
+    .rst(rst),
     .x(result2_flatten), //utiliza o vetor de entrada flatten, que é a saída da última camada conv
     .w(FCWeight1),
     .b(FCBias1),
@@ -196,6 +200,7 @@ FCLayer #(
 ) FCLayer4 (
     .clk(clk),
     .valid_in(valid_out3),
+    .rst(rst),
     .x(result_FC1), //as entradas da camada 2 são as saídas dos neurônios da camada 1
     .w(FCWeight2),
     .b(FCBias2),

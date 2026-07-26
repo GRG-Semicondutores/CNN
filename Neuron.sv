@@ -6,6 +6,7 @@ module Neuron #(
 ) (
     input logic clk,
     input logic valid_in,
+    input logic rst,
     input logic signed [DATA_WIDTH-1:0] x [0:WEIGHTS-1],
     input logic signed [DATA_WIDTH-1:0] w [0:WEIGHTS-1],
     input logic signed [DATA_WIDTH-1:0] b,
@@ -21,6 +22,7 @@ DotProduct #(
     .N_INPUTS(WEIGHTS)
 ) neuronMAC (
     .clk(clk),
+    .rst(rst),
     .input_vec(x),
     .weight(w),
     .out(y_1),

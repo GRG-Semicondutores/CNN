@@ -5,6 +5,7 @@ module DotProduct #(
     localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_INPUTS)
 ) (
     input logic clk,
+  	input logic rst,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],
     input logic signed [DATA_WIDTH-1:0] weight [0:N_INPUTS-1],
     input logic valid_in,
@@ -18,7 +19,7 @@ localparam LATENCY = STAGES + 1;
 
 logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
 logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
-logic valid_pipe [0:LATENCY];
+logic [0:LATENCY] valid_pipe;
 
 genvar s; //estágios
 genvar n; //número de somadores por estágio
@@ -66,7 +67,7 @@ endgenerate
 //depois de LATENCY ciclos de clock, baseados no número de estágios, a saída de um valid_in recebido se torna válida
 always @(posedge clk) begin
     if (rst) begin
-        valid_pipe = '0;
+        valid_pipe <= '0;
     end else begin
         valid_pipe[0] <= valid_in;
         for (v = 1; v <= LATENCY; v = v  + 1) begin

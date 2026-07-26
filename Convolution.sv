@@ -36,6 +36,7 @@ DotProduct #(
     .N_INPUTS(N_KERNEL)
 ) convolve (
     .clk(clk),
+    .rst(rst),
     .input_vec(imagem_slice),
     .weight(kernel),
     .valid_in(valid_in),
@@ -57,9 +58,9 @@ always @(posedge clk) begin :conv_window
 
     end else if (valid_in) begin //valid_in diz ao bloco de MAC (dotProduct) que está sendo enviado um dado válido para ele poder validar a saída
         if (conv_col < OUT_SIZE - 1) begin
-            conv_row <= 0; //desliza as colunas
             conv_col <= conv_col + 'b1;
         end else if (conv_row < OUT_SIZE - 1) begin
+            conv_col <= 0;
             conv_row <= conv_row + 'b1; //desliza as linhas
         end else if (conv_row == (OUT_SIZE - 1) && conv_col == (OUT_SIZE - 1)) begin //terminou de deslizar, acabaram as entradas válidas, pois terminou a convolução
             valid_in <= 1'b0;
