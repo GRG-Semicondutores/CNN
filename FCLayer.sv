@@ -16,7 +16,7 @@ module FCLayer #(
     output logic valid_out
 );
 
-logic [0:N_NEURONS-1] partial_valid_out;
+logic [N_NEURONS-1:0] partial_valid_out;
 logic [ACC_WIDTH-1:0] z_not_quantized [0:N_NEURONS-1];
 
 assign valid_out = &partial_valid_out;

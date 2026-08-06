@@ -5,7 +5,7 @@ module DotProduct #(
     localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_INPUTS)
 ) (
     input logic clk,
-  	input logic rst,
+    input logic rst,
     input logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1],
     input logic signed [DATA_WIDTH-1:0] weight [0:N_INPUTS-1],
     input logic valid_in,
@@ -19,7 +19,7 @@ localparam LATENCY = STAGES + 1;
 
 logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
 logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
-logic [0:LATENCY] valid_pipe;
+logic [LATENCY:0] valid_pipe;
 
 genvar s; //estágios
 genvar n; //número de somadores por estágio
@@ -57,7 +57,9 @@ generate
         end else begin :gen_contorno_outros_estagios
             always @(posedge clk) begin
                 //persiste o valor do elemento ímpar (sozinho) para o próximo estágio
-                if (((N_INPUTS + (1 << (s - 1)) - 1) >> (s - 1)) % 2 == 1) soma[s][((N_INPUTS + (1 << s) - 1) >> s) >> 1] <= soma[s - 1][((N_INPUTS + (1 << s) - 1) >> s) - 1];
+                if (((N_INPUTS + (1 << (s - 1)) - 1) >> (s - 1)) % 2 == 1) begin
+                    soma[s][((N_INPUTS + (1 << s) - 1) >> s) >> 1] <= soma[s - 1][((N_INPUTS + (1 << s) - 1) >> s) - 1];
+                end
             end
         end
     end

@@ -24,7 +24,7 @@ module FeatureMap #(
 );
 
 logic signed [ACC_WIDTH-1:0] partial_result [0:N_CHANNELS-1][0:N_OUT-1];
-logic [0:N_CHANNELS-1] partial_valid_out;
+logic [N_CHANNELS-1:0] partial_valid_out;
 
 genvar c;
 

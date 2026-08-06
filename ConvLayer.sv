@@ -24,7 +24,7 @@ module ConvLayer #(
     output logic valid_out
 );
 
-logic [0:N_FILTERS-1] partial_valid_out;
+logic [N_FILTERS-1:0] partial_valid_out;
 
 assign valid_out = &partial_valid_out; //só manda valid_out se todos os valid_out das features estiverem válidos.
 

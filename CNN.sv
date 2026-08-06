@@ -3,11 +3,11 @@ module CNN #(
     parameter IMG_SIZE_1 = 32, //tamanho do lado da imagem
     parameter KERNEL_SIZE = 3, //tamanho do lado dos kernels
     parameter N_CHANNELS = 3, //número de canais iniciais da imagem
-    parameter N_FILTERS_LAYER_1 = 16, //número de filtros da primeira camada
-    parameter N_FILTERS_LAYER_2 = 32, //número de filtros da segunda camada
+    parameter N_FILTERS_LAYER_1 = 2, //número de filtros da primeira camada
+    parameter N_FILTERS_LAYER_2 = 4, //número de filtros da segunda camada
     parameter PADDING_1 = 1, //padding da primeira camada
     parameter PADDING_2 = 1, //padding da segunda camada
-    parameter N_NEURONS_1 = 128, //número de neurônios da primeira camada Fully Connected
+    parameter N_NEURONS_1 = 8, //número de neurônios da primeira camada Fully Connected
     parameter N_NEURONS_2 = 10, //número de neurônios da última camada (classes finais)
     parameter SHIFT_1 = 1, //shift do Quantizer (ver arquivo para mais detalhes). Deve vir de um script externo, que indica o formato de ponto fixo adotado para a rede
     parameter SHIFT_2 = 1, //idem, para camada 2
@@ -39,6 +39,7 @@ module CNN #(
     input logic signed [DATA_WIDTH-1:0] ConvBias2 [0:N_FILTERS_LAYER_2-1],
     input logic signed [DATA_WIDTH-1:0] FCBias1 [0:N_NEURONS_1-1],
     input logic signed [DATA_WIDTH-1:0] FCBias2 [0:N_NEURONS_2-1],
+    output logic signed [DATA_WIDTH-1:0] result_FC2 [0:N_NEURONS_2-1],
     output logic valid_out4
 );
 
@@ -57,7 +58,6 @@ logic signed [DATA_WIDTH-1:0] result2_pooled [0:N_FILTERS_LAYER_2-1][0:N_OUT_POO
 
 logic signed [DATA_WIDTH-1:0] result2_flatten [0:N_FLAT-1];
 logic signed [DATA_WIDTH-1:0] result_FC1 [0:N_NEURONS_1-1];
-logic signed [DATA_WIDTH-1:0] result_FC2 [0:N_NEURONS_2-1];
 
 
 logic valid_out1;
