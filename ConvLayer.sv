@@ -11,7 +11,7 @@ module ConvLayer #(
     localparam OUT_SIZE = IMG_SIZE + 2 * PADDING - KERNEL_SIZE + 1,
     localparam N_OUT = OUT_SIZE * OUT_SIZE,
     localparam N_PIXELS = IMG_SIZE * IMG_SIZE,
-    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_KERNEL) + $clog2(N_CHANNELS)
+    localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(N_KERNEL * N_CHANNELS)
 
 ) (
     input logic clk,
@@ -19,12 +19,12 @@ module ConvLayer #(
     input logic start,
     input logic signed [DATA_WIDTH-1:0] imagem [0:N_CHANNELS-1][0:N_PIXELS-1],
     input logic signed [DATA_WIDTH-1:0] kernel [0:N_FILTERS-1][0:N_CHANNELS-1][0:N_KERNEL-1],
-    input logic signed [DATA_WIDTH-1:0] bias [0:N_FILTERS-1][0:N_CHANNELS-1],
+    input logic signed [DATA_WIDTH-1:0] bias [0:N_FILTERS-1],
     output logic signed [ACC_WIDTH-1:0] result [0:N_FILTERS-1][0:N_OUT-1],
     output logic valid_out
 );
 
-logic partial_valid_out [0:N_FILTERS-1];
+logic [N_FILTERS-1:0] partial_valid_out;
 
 assign valid_out = &partial_valid_out; //só manda valid_out se todos os valid_out das features estiverem válidos.
 
@@ -45,7 +45,6 @@ generate
             .imagem(imagem),
             .kernel(kernel[n]),
             .bias(bias[n]),
-            // ERRO: FeatureMap exige bias, mas ConvLayer nao possui nem conecta uma porta de bias; a entrada fica em Z e contamina cada resultado com X.
             .result(result[n]),
             .valid_out(partial_valid_out[n]) //pega todos os valid_out de todos os featureMaps
         );

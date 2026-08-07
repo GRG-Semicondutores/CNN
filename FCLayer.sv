@@ -2,19 +2,22 @@ module FCLayer #(
     parameter DATA_WIDTH = 8,
     parameter N_NEURONS = 10,
     parameter WEIGHTS = 2,
+    parameter SHIFT = 1,
 
     localparam ACC_WIDTH = 2 * DATA_WIDTH + $clog2(WEIGHTS)
 ) (
     input logic clk,
     input logic valid_in,
+    input logic rst,
     input logic signed [DATA_WIDTH-1:0] x [0:WEIGHTS-1],
     input logic signed [DATA_WIDTH-1:0] w [0:N_NEURONS-1][0:WEIGHTS-1],
     input logic signed [DATA_WIDTH-1:0] b [0:N_NEURONS-1],
-    output logic signed [ACC_WIDTH-1:0] z [0:N_NEURONS-1],
+    output logic signed [DATA_WIDTH-1:0] z [0:N_NEURONS-1],
     output logic valid_out
 );
 
-logic partial_valid_out [0:N_NEURONS-1];
+logic [N_NEURONS-1:0] partial_valid_out;
+logic [ACC_WIDTH-1:0] z_not_quantized [0:N_NEURONS-1];
 
 assign valid_out = &partial_valid_out;
 
@@ -28,11 +31,21 @@ generate
         ) neuron (
             .clk(clk),
             .valid_in(valid_in),
+            .rst(rst),
             .x(x),
             .w(w[n]),
             .b(b[n]),
-            .z(z[n]),
+            .z(z_not_quantized[n]),
             .valid_out(partial_valid_out[n])
+        );
+
+        Quantizer #(
+            .SIZE_IN(ACC_WIDTH),
+            .SIZE_OUT(DATA_WIDTH),
+            .SHIFT(SHIFT)
+        ) quantizer (
+            .in(z_not_quantized[n]),
+            .out(z[n])
         );
     end
 endgenerate
