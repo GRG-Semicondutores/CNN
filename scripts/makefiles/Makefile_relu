@@ -1,0 +1,238 @@
+# ==============================================================================
+# Makefile - Testbench da ReLU
+# Projeto: CNN
+# ==============================================================================
+
+SHELL := /bin/bash
+
+
+# ==============================================================================
+# DIRETÓRIOS
+# ==============================================================================
+
+MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
+PROJECT_ROOT := $(abspath $(MAKEFILE_DIR)/../..)
+
+RTL_DIR := $(PROJECT_ROOT)/src/ReLU
+TB_DIR  := $(PROJECT_ROOT)/testbenchs/ReLU
+
+RESULTS_DIR := $(PROJECT_ROOT)/results/ReLU
+
+
+# ==============================================================================
+# ARQUIVOS
+# ==============================================================================
+
+RTL := $(RTL_DIR)/ReLU.sv
+TB  := $(TB_DIR)/testbench.sv
+
+VVP_FILE := $(RESULTS_DIR)/relu.vvp
+WAVE     := $(RESULTS_DIR)/dump.fst
+
+COMPILE_LOG := $(RESULTS_DIR)/compile.log
+SIM_LOG     := $(RESULTS_DIR)/simulation.log
+
+
+# ==============================================================================
+# TOP LEVEL DO TESTBENCH
+# ==============================================================================
+
+# Nome do módulo declarado dentro de testbench.sv
+#
+# Exemplo:
+#
+# module testbench;
+#     ...
+# endmodule
+
+TOP := testbench
+
+
+# ==============================================================================
+# FERRAMENTAS
+# ==============================================================================
+
+IVERILOG ?= iverilog
+VVP      ?= vvp
+GTKWAVE  ?= gtkwave
+SURFER   ?= surfer
+
+
+# ==============================================================================
+# FLAGS
+# ==============================================================================
+
+IVERILOG_FLAGS := \
+	-Wall \
+	-g2012 \
+	-I$(RTL_DIR) \
+	-I$(PROJECT_ROOT)/src \
+	-s $(TOP)
+
+VVP_FLAGS := -fst
+
+
+# ==============================================================================
+# TARGETS
+# ==============================================================================
+
+.PHONY: all icarus compile run gtk surf clean help
+
+
+# ==============================================================================
+# TARGET PADRÃO
+# ==============================================================================
+
+all: icarus
+
+
+# ==============================================================================
+# FLUXO COMPLETO
+# ==============================================================================
+
+icarus: run
+
+
+# ==============================================================================
+# COMPILAÇÃO
+# ==============================================================================
+
+compile:
+	@mkdir -p "$(RESULTS_DIR)"
+
+	@echo ""
+	@echo "========================================"
+	@echo "[IVERILOG] Compilando ReLU..."
+	@echo "========================================"
+	@echo ""
+
+	@set -o pipefail; \
+	$(IVERILOG) \
+		$(IVERILOG_FLAGS) \
+		-o "$(VVP_FILE)" \
+		$(RTL) \
+		$(TB) \
+		2>&1 | tee "$(COMPILE_LOG)"
+
+	@echo ""
+	@echo "[OK] Compilação concluída"
+	@echo ""
+	@echo "Arquivo VVP:"
+	@echo "$(VVP_FILE)"
+	@echo ""
+	@echo "Log de compilação:"
+	@echo "$(COMPILE_LOG)"
+
+
+# ==============================================================================
+# SIMULAÇÃO
+# ==============================================================================
+
+run: compile
+	@echo ""
+	@echo "========================================"
+	@echo "[VVP] Executando testbench..."
+	@echo "========================================"
+	@echo ""
+
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && \
+	$(VVP) "$(VVP_FILE)" $(VVP_FLAGS) \
+	2>&1 | tee "$(SIM_LOG)"
+
+	@echo ""
+	@echo "========================================"
+	@echo "[OK] Simulação concluída"
+	@echo "========================================"
+	@echo ""
+	@echo "Log da simulação:"
+	@echo "$(SIM_LOG)"
+	@echo ""
+
+
+# ==============================================================================
+# GTKWAVE
+# ==============================================================================
+
+gtk: run
+	@echo ""
+	@echo "========================================"
+	@echo "[GTKWAVE] Abrindo waveform..."
+	@echo "========================================"
+	@echo ""
+
+	@if [ -f "$(WAVE)" ]; then \
+		$(GTKWAVE) "$(WAVE)"; \
+	else \
+		echo "Erro: waveform não encontrada:"; \
+		echo "$(WAVE)"; \
+		exit 1; \
+	fi
+
+
+# ==============================================================================
+# SURFER
+# ==============================================================================
+
+surf: run
+	@echo ""
+	@echo "========================================"
+	@echo "[SURFER] Abrindo waveform..."
+	@echo "========================================"
+	@echo ""
+
+	@if [ -f "$(WAVE)" ]; then \
+		$(SURFER) "$(WAVE)"; \
+	else \
+		echo "Erro: waveform não encontrada:"; \
+		echo "$(WAVE)"; \
+		exit 1; \
+	fi
+
+
+# ==============================================================================
+# LIMPEZA
+# ==============================================================================
+
+clean:
+	@echo ""
+	@echo "========================================"
+	@echo "[CLEAN] Limpando resultados da ReLU..."
+	@echo "========================================"
+	@echo ""
+
+	@rm -rf "$(RESULTS_DIR)"
+
+	@echo "[OK] Resultados removidos."
+	@echo ""
+
+
+# ==============================================================================
+# AJUDA
+# ==============================================================================
+
+help:
+	@echo ""
+	@echo "Makefile - ReLU"
+	@echo ""
+	@echo "Comandos:"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu"
+	@echo "      Compila e executa"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu compile"
+	@echo "      Apenas compila"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu run"
+	@echo "      Compila e executa"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu gtk"
+	@echo "      Compila, executa e abre GTKWave"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu surf"
+	@echo "      Compila, executa e abre Surfer"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_relu clean"
+	@echo "      Remove results/ReLU"
+	@echo ""
