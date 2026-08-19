@@ -34,7 +34,6 @@ Isso permite verificar tanto a decisão tomada pelo circuito quanto a correta pr
 
 ##### > 1° - Completando os demais bits com valores aleatórios.
 
-
 ##### > 2° - Fixando os demais bits em 0.
 
 ##### > 3° - Fixando os demais bits em 1.
@@ -43,6 +42,9 @@ Isso permite verificar tanto a decisão tomada pelo circuito quanto a correta pr
 
 ##### > 5° - Fixando os demais bits em alta impedância (Z).
 
+##### > 6° - Fixando os demais bits em indefinido (X).
+
+##### > 7° - Fixando os demais bits em valores alterandos entre X e Z.
 
 ---
 
@@ -60,6 +62,10 @@ Isso permite verificar tanto a decisão tomada pelo circuito quanto a correta pr
 | 8 | 1 | Alternados | `out = 0` |
 | 9 | 0 | Todos `Z` | `out = in`, com propagação de `Z` |
 | 10 | 1 | Todos `Z` | `out = 0` |
+| 11 | 0 | Todos `X` | `out = in`, com propagação de `Z` |
+| 12 | 1 | Todos `X` | `out = 0` |
+| 13 | 0 | Alternados entre X e Z | `out = in`, com propagação de `Z` |
+| 14 | 1 | Alternados entre X e Z | `out = 0` |
 
 Para os padrões alternados, recomenda-se executar tanto a sequência `0101...` quanto `1010...`.
 

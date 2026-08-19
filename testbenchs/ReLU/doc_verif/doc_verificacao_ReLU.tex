@@ -1,0 +1,175 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+
+\geometry{landscape, margin=2.2cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\arraystretch}{1.15}
+
+\title{Requisitos de Verificação -- Bloco ReLU}
+\author{Matheus Grossi}
+\date{2026}
+
+% Inclui a imagem quando ela estiver disponível no mesmo diretório do .tex.
+% Enquanto cap1/cap2 não estiverem presentes, um quadro informativo é exibido.
+\newcommand{\coverageimage}[2]{%
+    \IfFileExists{#1}{%
+        \fbox{\includegraphics[width=0.94\textwidth,height=0.34\textheight,keepaspectratio]{#1}}%
+    }{%
+        \fbox{\parbox[c][0.24\textheight][c]{0.88\textwidth}{\centering
+        \textbf{Imagem de cobertura não disponível no pacote recebido.}\\[0.5em]
+        Arquivo esperado: \texttt{#1}}}%
+    }%
+    \caption{#2}%
+}
+
+\begin{document}
+
+\maketitle
+
+\vspace{1.5cm}
+\section{Identificação do Bloco}
+\begin{itemize}[label=\textbullet]
+    \item \textbf{1.1. Nome do bloco:} Unidade de ativação ReLU (Rectified Linear Unit), com largura de 32 bits.
+    \item \textbf{1.2. Versão:} 1.0.
+    \item \textbf{1.3. Autor do bloco:} Felipe Guedes.
+    \item \textbf{1.4. Responsável pela verificação:} Matheus Grossi.
+    \item \textbf{1.5. Escopo da verificação:} comportamento funcional da ReLU para entradas positivas, negativas, zero e padrões representativos contendo estados de quatro níveis lógicos.
+\end{itemize}
+
+\section{Objetivo da Verificação}
+O objetivo da verificação é garantir que o módulo \textbf{ReLU}, configurado para uma largura de 32 bits, apresente o comportamento esperado para valores positivos, negativos e zero.
+
+Como seria inviável testar exaustivamente todas as combinações possíveis de uma entrada de 32 bits, a estratégia de verificação divide o espaço de entrada em rotinas representativas. O comportamento funcional depende principalmente do bit mais significativo (MSB), que indica o sinal do número em representação de complemento de dois.
+
+\begin{itemize}
+    \item \texttt{MSB = 0}: a entrada representa um valor não negativo e deve ser propagada integralmente para a saída;
+    \item \texttt{MSB = 1}: a entrada representa um valor negativo e a saída deve ser igual a zero.
+\end{itemize}
+
+Os 31 bits menos significativos são exercitados com padrões distintos para verificar a propagação dos dados e a decisão funcional associada ao MSB.
+
+\section{Estratégia de Verificação}
+Para cada padrão aplicado aos bits \texttt{[30:0]}, os dois estados funcionais do MSB são exercitados. A estratégia é composta pelas seguintes rotinas:
+
+\begin{enumerate}
+    \item Bits inferiores preenchidos com valores aleatórios;
+    \item Bits inferiores fixados em \texttt{0};
+    \item Bits inferiores fixados em \texttt{1};
+    \item Bits inferiores alternados entre \texttt{0} e \texttt{1};
+    \item Bits inferiores fixados em alta impedância (\texttt{Z});
+    \item Bits inferiores fixados em estado indefinido (\texttt{X});
+    \item Bits inferiores alternados entre \texttt{X} e \texttt{Z}.
+\end{enumerate}
+
+Para os padrões alternados, devem ser exercitadas as duas polaridades da sequência, como \texttt{0101...} e \texttt{1010...}.
+
+\section{Casos de Teste Executados / Planejados}
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{|c|c|p{4.0cm}|X|}
+\hline
+\textbf{Caso} & \textbf{MSB} & \textbf{Bits [30:0]} & \textbf{Resultado esperado} \\ \hline
+1  & 0 & Aleatórios                  & \texttt{out = in} \\ \hline
+2  & 1 & Aleatórios                  & \texttt{out = 0} \\ \hline
+3  & 0 & Todos \texttt{0}            & \texttt{out = 0} \\ \hline
+4  & 1 & Todos \texttt{0}            & \texttt{out = 0} \\ \hline
+5  & 0 & Todos \texttt{1}            & \texttt{out = in} \\ \hline
+6  & 1 & Todos \texttt{1}            & \texttt{out = 0} \\ \hline
+7  & 0 & Alternados \texttt{0/1}     & \texttt{out = in} \\ \hline
+8  & 1 & Alternados \texttt{0/1}     & \texttt{out = 0} \\ \hline
+9  & 0 & Todos \texttt{Z}            & \texttt{out = in}, preservando os estados \texttt{Z} dos bits inferiores \\ \hline
+10 & 1 & Todos \texttt{Z}            & \texttt{out = 0} \\ \hline
+11 & 0 & Todos \texttt{X}            & \texttt{out = in}, preservando os estados indefinidos dos bits inferiores \\ \hline
+12 & 1 & Todos \texttt{X}            & \texttt{out = 0} \\ \hline
+13 & 0 & Alternados entre \texttt{X/Z} & \texttt{out = in}, preservando os estados de quatro níveis aplicados à entrada \\ \hline
+14 & 1 & Alternados entre \texttt{X/Z} & \texttt{out = 0} \\ \hline
+\end{tabularx}
+\caption{Matriz principal de verificação da ReLU.}
+\end{table}
+
+\section{Casos de Fronteira}
+Os seguintes valores possuem importância especial e devem ser garantidos explicitamente durante a verificação:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{7cm}|p{5cm}|p{6cm}|}
+\hline
+\textbf{Condição} & \textbf{Valor representado} & \textbf{Resultado esperado} \\ \hline
+Todos os bits em \texttt{0} & 0 & 0 \\ \hline
+MSB \texttt{0} e demais bits \texttt{1} & Maior positivo representável & Própria entrada \\ \hline
+MSB \texttt{1} e demais bits \texttt{0} & Menor negativo representável & 0 \\ \hline
+Todos os bits em \texttt{1} & -1 & 0 \\ \hline
+\end{tabular}
+\caption{Casos de fronteira da função ReLU para 32 bits.}
+\end{table}
+
+Esses quatro casos verificam os limites das duas regiões de funcionamento da ReLU: propagação para números não negativos e saturação em zero para números negativos.
+
+\section{Resultados}
+\subsection{Comportamentos esperados}
+A verificação deve confirmar que valores com MSB igual a \texttt{0} são propagados para a saída e que valores com MSB igual a \texttt{1} produzem saída nula. O valor zero também deve permanecer em zero.
+
+Para os padrões contendo \texttt{X} ou \texttt{Z} nos 31 bits inferiores, o objetivo é verificar que esses estados não alteram a decisão determinada pelo MSB conhecido. Quando o MSB é \texttt{0}, os bits inferiores são propagados; quando o MSB é \texttt{1}, a saída é forçada a zero.
+
+\subsection{Critério de aprovação}
+O bloco será considerado aprovado quando:
+\begin{itemize}
+    \item todos os casos determinísticos apresentarem o resultado esperado;
+    \item todos os estímulos aleatórios apresentarem o resultado esperado;
+    \item valores positivos forem preservados integralmente;
+    \item valores negativos produzirem saída igual a zero;
+    \item o valor zero produzir saída igual a zero;
+    \item estados \texttt{X} e \texttt{Z} nos bits inferiores não alterarem a decisão determinada por um MSB conhecido;
+    \item todas as classes definidas na cobertura funcional forem exercitadas;
+    \item nenhum erro de comparação for identificado durante a simulação.
+\end{itemize}
+
+\section{Análise dos Resultados}
+\subsection{Interpretação dos casos de sucesso/falha}
+\textbf{Sucesso:} um caso é considerado correto quando a saída observada corresponde à função ReLU definida para o valor do MSB e preserva, quando aplicável, o conteúdo dos bits inferiores.\par
+
+\textbf{Falha:} ocorre quando um valor não negativo não é propagado corretamente, quando uma entrada negativa não resulta em zero ou quando os padrões especiais aplicados aos bits inferiores produzem comportamento incompatível com a decisão estabelecida pelo MSB.
+
+\subsection{Sumário da cobertura de verificação}
+A cobertura deve garantir o exercício das combinações entre os dois estados funcionais do MSB e os padrões representativos definidos para os demais bits. O plano original estabelece como cobertura funcional mínima o cruzamento do MSB com cinco classes principais de padrão: aleatório, todos em zero, todos em um, alternados e todos em \texttt{Z}. Além disso, a matriz de testes também inclui estímulos com \texttt{X} e alternância \texttt{X/Z}.
+
+\begin{figure}[H]
+    \centering
+    \coverageimage{cap1.png}{Cobertura da verificação da ReLU -- captura 1.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \coverageimage{cap2.png}{Cobertura da verificação da ReLU -- captura 2.}
+\end{figure}
+
+As duas capturas acima devem ser usadas como evidência da taxa de cobertura obtida na execução da bancada. A interpretação quantitativa dos percentuais deve ser feita diretamente a partir dos valores apresentados nas imagens, evitando extrapolar métricas que não estejam explicitamente registradas no relatório de cobertura.
+
+\subsection{Comentários sobre limitações dos testes}
+A verificação não busca percorrer todas as $2^{32}$ combinações binárias possíveis. Em vez disso, o espaço de entrada é particionado segundo o comportamento funcional da ReLU e exercitado com padrões representativos. Essa abordagem reduz o volume de simulação sem deixar de testar diretamente a decisão de sinal, os principais casos de fronteira e padrões especiais de quatro níveis lógicos.
+
+\section{Conclusão}
+O plano de verificação da ReLU foi estruturado para validar de forma direcionada a regra funcional do bloco: preservar entradas não negativas e produzir zero para entradas negativas. A estratégia utiliza o MSB como principal eixo de decisão e combina seus dois estados com diferentes padrões nos 31 bits inferiores, incluindo valores aleatórios, constantes, alternados, \texttt{X} e \texttt{Z}.
+
+O fechamento da verificação deve considerar simultaneamente os resultados das comparações funcionais e as métricas apresentadas nas capturas de cobertura \texttt{cap1} e \texttt{cap2}.
+
+\vfill
+\begin{center}
+    \textbf{Bloco verificado:} ReLU -- 32 bits
+\end{center}
+
+\end{document}
