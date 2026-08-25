@@ -1,53 +1,45 @@
 # ==============================================================================
-# Makefile - Testbench da ReLU
+# Makefile - DotProduct / Icarus Verilog
 # Projeto: CNN
 # ==============================================================================
 
 SHELL := /bin/bash
-
+.DEFAULT_GOAL := all
 
 # ==============================================================================
 # DIRETÓRIOS
 # ==============================================================================
 
-MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+MAKEFILE_DIR  := $(dir $(THIS_MAKEFILE))
+PROJECT_ROOT  := $(abspath $(MAKEFILE_DIR)/../..)
 
-PROJECT_ROOT := $(abspath $(MAKEFILE_DIR)/../..)
+RTL_DIR := $(PROJECT_ROOT)/src/DotProduct
+TB_DIR  := $(PROJECT_ROOT)/testbenchs/DOT
 
-RTL_DIR := $(PROJECT_ROOT)/src/ReLU
-TB_DIR  := $(PROJECT_ROOT)/testbenchs/ReLU
-
-RESULTS_DIR := $(PROJECT_ROOT)/results/ReLU
-
+RESULTS_DIR := $(PROJECT_ROOT)/results/DOT/icarus
 
 # ==============================================================================
 # ARQUIVOS
 # ==============================================================================
 
-RTL := $(RTL_DIR)/ReLU.sv
+RTL := $(RTL_DIR)/DotProduct.sv
 TB  := $(TB_DIR)/testbench.sv
 
-VVP_FILE := $(RESULTS_DIR)/relu.vvp
-WAVE     := $(RESULTS_DIR)/dump.fst
+VVP_FILE := $(RESULTS_DIR)/dotproduct.vvp
 
 COMPILE_LOG := $(RESULTS_DIR)/compile.log
 SIM_LOG     := $(RESULTS_DIR)/simulation.log
 
+# O testbench define o nome abaixo em $dumpfile().
+# O formato efetivo pode ser VCD/FST conforme VVP_FLAGS.
+WAVE := $(RESULTS_DIR)/DotProduct_tb.vcd
 
 # ==============================================================================
-# TOP LEVEL DO TESTBENCH
+# TOP LEVEL
 # ==============================================================================
-
-# Nome do módulo declarado dentro de testbench.sv
-#
-# Exemplo:
-#
-# module testbench;
-#     ...
-# endmodule
 
 TOP := testbench
-
 
 # ==============================================================================
 # FERRAMENTAS
@@ -58,6 +50,17 @@ VVP      ?= vvp
 GTKWAVE  ?= gtkwave
 SURFER   ?= surfer
 
+# ==============================================================================
+# CONTROLE DO TESTBENCH
+# ==============================================================================
+
+# Correspondem aos parâmetros existentes em testbenchs/DOT/testbench.sv.
+ENABLE_WAVEFORM ?= 0
+ENABLE_MONITOR  ?= 0
+
+TB_PARAM_FLAGS := \
+	-P$(TOP).ENABLE_WAVEFORM=$(ENABLE_WAVEFORM) \
+	-P$(TOP).ENABLE_MONITOR=$(ENABLE_MONITOR)
 
 # ==============================================================================
 # FLAGS
@@ -66,44 +69,51 @@ SURFER   ?= surfer
 IVERILOG_FLAGS := \
 	-Wall \
 	-g2012 \
-	-I$(RTL_DIR) \
-	-I$(PROJECT_ROOT)/src \
-	-s $(TOP)
+	-I"$(RTL_DIR)" \
+	-I"$(PROJECT_ROOT)/src" \
+	-s $(TOP) \
+	$(TB_PARAM_FLAGS)
 
-VVP_FLAGS := -fst
-
+# Deixe vazio para VCD padrão.
+# Se desejar forçar FST no Icarus, execute:
+#   make -f scripts/makefiles/Makefile_dot run ENABLE_WAVEFORM=1 VVP_FLAGS=-fst
+VVP_FLAGS ?=
 
 # ==============================================================================
 # TARGETS
 # ==============================================================================
 
-.PHONY: all icarus compile run gtk surf clean help
-
-
-# ==============================================================================
-# TARGET PADRÃO
-# ==============================================================================
+.PHONY: all icarus check_tools check_files compile run wave gtk surf clean help
 
 all: icarus
 
-
-# ==============================================================================
-# FLUXO COMPLETO
-# ==============================================================================
-
 icarus: run
 
+# ==============================================================================
+# VERIFICAÇÕES
+# ==============================================================================
+
+check_tools:
+	@command -v $(IVERILOG) >/dev/null 2>&1 || \
+		( echo "ERRO: iverilog nao encontrado no PATH"; exit 1 )
+	@command -v $(VVP) >/dev/null 2>&1 || \
+		( echo "ERRO: vvp nao encontrado no PATH"; exit 1 )
+
+check_files:
+	@test -f "$(RTL)" || \
+		( echo "ERRO: RTL do DotProduct nao encontrado:"; echo "$(RTL)"; exit 1 )
+	@test -f "$(TB)" || \
+		( echo "ERRO: testbench do DotProduct nao encontrado:"; echo "$(TB)"; exit 1 )
 
 # ==============================================================================
 # COMPILAÇÃO
 # ==============================================================================
 
-compile:
+compile: check_tools check_files
 	@mkdir -p "$(RESULTS_DIR)"
-
 	@echo ""
 	@echo "========================================"
-	@echo "[IVERILOG] Compilando ReLU..."
+	@echo "[IVERILOG] Compilando DotProduct..."
 	@echo "========================================"
 	@echo ""
 
@@ -111,19 +121,15 @@ compile:
 	$(IVERILOG) \
 		$(IVERILOG_FLAGS) \
 		-o "$(VVP_FILE)" \
-		$(RTL) \
-		$(TB) \
+		"$(RTL)" \
+		"$(TB)" \
 		2>&1 | tee "$(COMPILE_LOG)"
 
 	@echo ""
-	@echo "[OK] Compilação concluída"
+	@echo "[OK] Compilacao concluida"
+	@echo "VVP : $(VVP_FILE)"
+	@echo "LOG : $(COMPILE_LOG)"
 	@echo ""
-	@echo "Arquivo VVP:"
-	@echo "$(VVP_FILE)"
-	@echo ""
-	@echo "Log de compilação:"
-	@echo "$(COMPILE_LOG)"
-
 
 # ==============================================================================
 # SIMULAÇÃO
@@ -132,81 +138,58 @@ compile:
 run: compile
 	@echo ""
 	@echo "========================================"
-	@echo "[VVP] Executando testbench..."
+	@echo "[VVP] Executando DotProduct..."
 	@echo "========================================"
 	@echo ""
 
 	@set -o pipefail; \
 	cd "$(RESULTS_DIR)" && \
 	$(VVP) "$(VVP_FILE)" $(VVP_FLAGS) \
-	2>&1 | tee "$(SIM_LOG)"
+		2>&1 | tee "$(SIM_LOG)"
 
 	@echo ""
 	@echo "========================================"
-	@echo "[OK] Simulação concluída"
+	@echo "[OK] Simulacao concluida"
 	@echo "========================================"
+	@echo "LOG : $(SIM_LOG)"
 	@echo ""
-	@echo "Log da simulação:"
-	@echo "$(SIM_LOG)"
-	@echo ""
-
 
 # ==============================================================================
-# GTKWAVE
+# WAVEFORM
 # ==============================================================================
 
-gtk: run
-	@echo ""
-	@echo "========================================"
-	@echo "[GTKWAVE] Abrindo waveform..."
-	@echo "========================================"
-	@echo ""
+wave:
+	@$(MAKE) -f "$(THIS_MAKEFILE)" run VVP_FLAGS="+waveform" ENABLE_MONITOR=$(ENABLE_MONITOR)
+	@echo "WAVE: $(WAVE)"
 
+gtk: wave
+	@echo ""
 	@if [ -f "$(WAVE)" ]; then \
 		$(GTKWAVE) "$(WAVE)"; \
 	else \
-		echo "Erro: waveform não encontrada:"; \
+		echo "ERRO: waveform nao encontrada:"; \
 		echo "$(WAVE)"; \
 		exit 1; \
 	fi
 
-
-# ==============================================================================
-# SURFER
-# ==============================================================================
-
-surf: run
+surf: wave
 	@echo ""
-	@echo "========================================"
-	@echo "[SURFER] Abrindo waveform..."
-	@echo "========================================"
-	@echo ""
-
 	@if [ -f "$(WAVE)" ]; then \
 		$(SURFER) "$(WAVE)"; \
 	else \
-		echo "Erro: waveform não encontrada:"; \
+		echo "ERRO: waveform nao encontrada:"; \
 		echo "$(WAVE)"; \
 		exit 1; \
 	fi
-
 
 # ==============================================================================
 # LIMPEZA
 # ==============================================================================
 
 clean:
-	@echo ""
-	@echo "========================================"
-	@echo "[CLEAN] Limpando resultados da ReLU..."
-	@echo "========================================"
-	@echo ""
-
+	@echo "[CLEAN] Removendo resultados Icarus do DotProduct..."
 	@rm -rf "$(RESULTS_DIR)"
-
 	@echo "[OK] Resultados removidos."
-	@echo ""
-
 
 # ==============================================================================
 # AJUDA
@@ -214,25 +197,30 @@ clean:
 
 help:
 	@echo ""
-	@echo "Makefile - ReLU"
+	@echo "Makefile - DotProduct / Icarus"
 	@echo ""
 	@echo "Comandos:"
+	@echo "  make -f scripts/makefiles/Makefile_dot"
+	@echo "      Compila e executa o testbench"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu"
-	@echo "      Compila e executa"
-	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu compile"
+	@echo "  make -f scripts/makefiles/Makefile_dot compile"
 	@echo "      Apenas compila"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu run"
+	@echo "  make -f scripts/makefiles/Makefile_dot run"
 	@echo "      Compila e executa"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu gtk"
-	@echo "      Compila, executa e abre GTKWave"
+	@echo "  make -f scripts/makefiles/Makefile_dot gtk"
+	@echo "      Executa com waveform e abre GTKWave"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu surf"
-	@echo "      Compila, executa e abre Surfer"
+	@echo "  make -f scripts/makefiles/Makefile_dot wave"
+	@echo "      Gera waveform sem abrir um visualizador"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu clean"
-	@echo "      Remove results/ReLU"
+	@echo "  make -f scripts/makefiles/Makefile_dot surf"
+	@echo "      Executa com waveform e abre Surfer"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_dot run ENABLE_MONITOR=1"
+	@echo "      Habilita o monitor do testbench"
+	@echo ""
+	@echo "  make -f scripts/makefiles/Makefile_dot clean"
+	@echo "      Remove results/DOT/icarus"
 	@echo ""

@@ -1,0 +1,400 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Tracing implementation internals
+
+#include "verilated_vcd_c.h"
+#include "Vtestbench__Syms.h"
+
+
+void Vtestbench___024root__trace_chg_0_sub_0(Vtestbench___024root* vlSelf, VerilatedVcd::Buffer* bufp);
+
+void Vtestbench___024root__trace_chg_0(void* voidSelf, VerilatedVcd::Buffer* bufp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtestbench___024root__trace_chg_0\n"); );
+    // Body
+    Vtestbench___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vtestbench___024root*>(voidSelf);
+    Vtestbench__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    if (VL_UNLIKELY(!vlSymsp->__Vm_activity)) return;
+    Vtestbench___024root__trace_chg_0_sub_0((&vlSymsp->TOP), bufp);
+}
+
+void Vtestbench___024root__trace_chg_0_sub_0(Vtestbench___024root* vlSelf, VerilatedVcd::Buffer* bufp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtestbench___024root__trace_chg_0_sub_0\n"); );
+    Vtestbench__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Body
+    uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 0);
+    if (VL_UNLIKELY(((((vlSelfRef.__Vm_traceActivity[1U] 
+                        | vlSelfRef.__Vm_traceActivity[2U]) 
+                       | vlSelfRef.__Vm_traceActivity[3U]) 
+                      | vlSelfRef.__Vm_traceActivity[4U])))) {
+        bufp->chgIData(oldp+0,(vlSelfRef.testbench__DOT__exp_pipe[0]),21);
+        bufp->chgIData(oldp+1,(vlSelfRef.testbench__DOT__exp_pipe[1]),21);
+        bufp->chgIData(oldp+2,(vlSelfRef.testbench__DOT__exp_pipe[2]),21);
+        bufp->chgIData(oldp+3,(vlSelfRef.testbench__DOT__exp_pipe[3]),21);
+        bufp->chgIData(oldp+4,(vlSelfRef.testbench__DOT__exp_pipe[4]),21);
+        bufp->chgIData(oldp+5,(vlSelfRef.testbench__DOT__exp_pipe[5]),21);
+        bufp->chgBit(oldp+6,(vlSelfRef.testbench__DOT__exp_valid[0]));
+        bufp->chgBit(oldp+7,(vlSelfRef.testbench__DOT__exp_valid[1]));
+        bufp->chgBit(oldp+8,(vlSelfRef.testbench__DOT__exp_valid[2]));
+        bufp->chgBit(oldp+9,(vlSelfRef.testbench__DOT__exp_valid[3]));
+        bufp->chgBit(oldp+10,(vlSelfRef.testbench__DOT__exp_valid[4]));
+        bufp->chgBit(oldp+11,(vlSelfRef.testbench__DOT__exp_valid[5]));
+    }
+    if (VL_UNLIKELY((((vlSelfRef.__Vm_traceActivity[1U] 
+                       | vlSelfRef.__Vm_traceActivity[2U]) 
+                      | vlSelfRef.__Vm_traceActivity[4U])))) {
+        bufp->chgIData(oldp+12,(vlSelfRef.testbench__DOT__exp_test[0]),32);
+        bufp->chgIData(oldp+13,(vlSelfRef.testbench__DOT__exp_test[1]),32);
+        bufp->chgIData(oldp+14,(vlSelfRef.testbench__DOT__exp_test[2]),32);
+        bufp->chgIData(oldp+15,(vlSelfRef.testbench__DOT__exp_test[3]),32);
+        bufp->chgIData(oldp+16,(vlSelfRef.testbench__DOT__exp_test[4]),32);
+        bufp->chgIData(oldp+17,(vlSelfRef.testbench__DOT__exp_test[5]),32);
+        bufp->chgIData(oldp+18,(vlSelfRef.testbench__DOT__exp_tx[0]),32);
+        bufp->chgIData(oldp+19,(vlSelfRef.testbench__DOT__exp_tx[1]),32);
+        bufp->chgIData(oldp+20,(vlSelfRef.testbench__DOT__exp_tx[2]),32);
+        bufp->chgIData(oldp+21,(vlSelfRef.testbench__DOT__exp_tx[3]),32);
+        bufp->chgIData(oldp+22,(vlSelfRef.testbench__DOT__exp_tx[4]),32);
+        bufp->chgIData(oldp+23,(vlSelfRef.testbench__DOT__exp_tx[5]),32);
+        bufp->chgIData(oldp+24,(vlSelfRef.testbench__DOT__test_sent[0]),32);
+        bufp->chgIData(oldp+25,(vlSelfRef.testbench__DOT__test_sent[1]),32);
+        bufp->chgIData(oldp+26,(vlSelfRef.testbench__DOT__test_sent[2]),32);
+        bufp->chgIData(oldp+27,(vlSelfRef.testbench__DOT__test_sent[3]),32);
+        bufp->chgIData(oldp+28,(vlSelfRef.testbench__DOT__test_sent[4]),32);
+        bufp->chgIData(oldp+29,(vlSelfRef.testbench__DOT__test_sent[5]),32);
+        bufp->chgIData(oldp+30,(vlSelfRef.testbench__DOT__test_sent[6]),32);
+        bufp->chgIData(oldp+31,(vlSelfRef.testbench__DOT__test_sent[7]),32);
+        bufp->chgIData(oldp+32,(vlSelfRef.testbench__DOT__test_sent[8]),32);
+        bufp->chgIData(oldp+33,(vlSelfRef.testbench__DOT__test_sent[9]),32);
+        bufp->chgIData(oldp+34,(vlSelfRef.testbench__DOT__test_sent[10]),32);
+        bufp->chgIData(oldp+35,(vlSelfRef.testbench__DOT__test_sent[11]),32);
+        bufp->chgIData(oldp+36,(vlSelfRef.testbench__DOT__test_sent[12]),32);
+        bufp->chgIData(oldp+37,(vlSelfRef.testbench__DOT__test_sent[13]),32);
+        bufp->chgIData(oldp+38,(vlSelfRef.testbench__DOT__test_sent[14]),32);
+        bufp->chgIData(oldp+39,(vlSelfRef.testbench__DOT__test_sent[15]),32);
+        bufp->chgIData(oldp+40,(vlSelfRef.testbench__DOT__test_sent[16]),32);
+        bufp->chgIData(oldp+41,(vlSelfRef.testbench__DOT__test_sent[17]),32);
+        bufp->chgIData(oldp+42,(vlSelfRef.testbench__DOT__test_sent[18]),32);
+        bufp->chgIData(oldp+43,(vlSelfRef.testbench__DOT__test_sent[19]),32);
+        bufp->chgIData(oldp+44,(vlSelfRef.testbench__DOT__test_sent[20]),32);
+        bufp->chgIData(oldp+45,(vlSelfRef.testbench__DOT__test_sent[21]),32);
+        bufp->chgIData(oldp+46,(vlSelfRef.testbench__DOT__test_sent[22]),32);
+        bufp->chgIData(oldp+47,(vlSelfRef.testbench__DOT__test_sent[23]),32);
+        bufp->chgIData(oldp+48,(vlSelfRef.testbench__DOT__test_sent[24]),32);
+        bufp->chgIData(oldp+49,(vlSelfRef.testbench__DOT__test_sent[25]),32);
+        bufp->chgIData(oldp+50,(vlSelfRef.testbench__DOT__test_pass[0]),32);
+        bufp->chgIData(oldp+51,(vlSelfRef.testbench__DOT__test_pass[1]),32);
+        bufp->chgIData(oldp+52,(vlSelfRef.testbench__DOT__test_pass[2]),32);
+        bufp->chgIData(oldp+53,(vlSelfRef.testbench__DOT__test_pass[3]),32);
+        bufp->chgIData(oldp+54,(vlSelfRef.testbench__DOT__test_pass[4]),32);
+        bufp->chgIData(oldp+55,(vlSelfRef.testbench__DOT__test_pass[5]),32);
+        bufp->chgIData(oldp+56,(vlSelfRef.testbench__DOT__test_pass[6]),32);
+        bufp->chgIData(oldp+57,(vlSelfRef.testbench__DOT__test_pass[7]),32);
+        bufp->chgIData(oldp+58,(vlSelfRef.testbench__DOT__test_pass[8]),32);
+        bufp->chgIData(oldp+59,(vlSelfRef.testbench__DOT__test_pass[9]),32);
+        bufp->chgIData(oldp+60,(vlSelfRef.testbench__DOT__test_pass[10]),32);
+        bufp->chgIData(oldp+61,(vlSelfRef.testbench__DOT__test_pass[11]),32);
+        bufp->chgIData(oldp+62,(vlSelfRef.testbench__DOT__test_pass[12]),32);
+        bufp->chgIData(oldp+63,(vlSelfRef.testbench__DOT__test_pass[13]),32);
+        bufp->chgIData(oldp+64,(vlSelfRef.testbench__DOT__test_pass[14]),32);
+        bufp->chgIData(oldp+65,(vlSelfRef.testbench__DOT__test_pass[15]),32);
+        bufp->chgIData(oldp+66,(vlSelfRef.testbench__DOT__test_pass[16]),32);
+        bufp->chgIData(oldp+67,(vlSelfRef.testbench__DOT__test_pass[17]),32);
+        bufp->chgIData(oldp+68,(vlSelfRef.testbench__DOT__test_pass[18]),32);
+        bufp->chgIData(oldp+69,(vlSelfRef.testbench__DOT__test_pass[19]),32);
+        bufp->chgIData(oldp+70,(vlSelfRef.testbench__DOT__test_pass[20]),32);
+        bufp->chgIData(oldp+71,(vlSelfRef.testbench__DOT__test_pass[21]),32);
+        bufp->chgIData(oldp+72,(vlSelfRef.testbench__DOT__test_pass[22]),32);
+        bufp->chgIData(oldp+73,(vlSelfRef.testbench__DOT__test_pass[23]),32);
+        bufp->chgIData(oldp+74,(vlSelfRef.testbench__DOT__test_pass[24]),32);
+        bufp->chgIData(oldp+75,(vlSelfRef.testbench__DOT__test_pass[25]),32);
+        bufp->chgIData(oldp+76,(vlSelfRef.testbench__DOT__test_fail[0]),32);
+        bufp->chgIData(oldp+77,(vlSelfRef.testbench__DOT__test_fail[1]),32);
+        bufp->chgIData(oldp+78,(vlSelfRef.testbench__DOT__test_fail[2]),32);
+        bufp->chgIData(oldp+79,(vlSelfRef.testbench__DOT__test_fail[3]),32);
+        bufp->chgIData(oldp+80,(vlSelfRef.testbench__DOT__test_fail[4]),32);
+        bufp->chgIData(oldp+81,(vlSelfRef.testbench__DOT__test_fail[5]),32);
+        bufp->chgIData(oldp+82,(vlSelfRef.testbench__DOT__test_fail[6]),32);
+        bufp->chgIData(oldp+83,(vlSelfRef.testbench__DOT__test_fail[7]),32);
+        bufp->chgIData(oldp+84,(vlSelfRef.testbench__DOT__test_fail[8]),32);
+        bufp->chgIData(oldp+85,(vlSelfRef.testbench__DOT__test_fail[9]),32);
+        bufp->chgIData(oldp+86,(vlSelfRef.testbench__DOT__test_fail[10]),32);
+        bufp->chgIData(oldp+87,(vlSelfRef.testbench__DOT__test_fail[11]),32);
+        bufp->chgIData(oldp+88,(vlSelfRef.testbench__DOT__test_fail[12]),32);
+        bufp->chgIData(oldp+89,(vlSelfRef.testbench__DOT__test_fail[13]),32);
+        bufp->chgIData(oldp+90,(vlSelfRef.testbench__DOT__test_fail[14]),32);
+        bufp->chgIData(oldp+91,(vlSelfRef.testbench__DOT__test_fail[15]),32);
+        bufp->chgIData(oldp+92,(vlSelfRef.testbench__DOT__test_fail[16]),32);
+        bufp->chgIData(oldp+93,(vlSelfRef.testbench__DOT__test_fail[17]),32);
+        bufp->chgIData(oldp+94,(vlSelfRef.testbench__DOT__test_fail[18]),32);
+        bufp->chgIData(oldp+95,(vlSelfRef.testbench__DOT__test_fail[19]),32);
+        bufp->chgIData(oldp+96,(vlSelfRef.testbench__DOT__test_fail[20]),32);
+        bufp->chgIData(oldp+97,(vlSelfRef.testbench__DOT__test_fail[21]),32);
+        bufp->chgIData(oldp+98,(vlSelfRef.testbench__DOT__test_fail[22]),32);
+        bufp->chgIData(oldp+99,(vlSelfRef.testbench__DOT__test_fail[23]),32);
+        bufp->chgIData(oldp+100,(vlSelfRef.testbench__DOT__test_fail[24]),32);
+        bufp->chgIData(oldp+101,(vlSelfRef.testbench__DOT__test_fail[25]),32);
+        bufp->chgIData(oldp+102,(vlSelfRef.testbench__DOT__test_flushed[0]),32);
+        bufp->chgIData(oldp+103,(vlSelfRef.testbench__DOT__test_flushed[1]),32);
+        bufp->chgIData(oldp+104,(vlSelfRef.testbench__DOT__test_flushed[2]),32);
+        bufp->chgIData(oldp+105,(vlSelfRef.testbench__DOT__test_flushed[3]),32);
+        bufp->chgIData(oldp+106,(vlSelfRef.testbench__DOT__test_flushed[4]),32);
+        bufp->chgIData(oldp+107,(vlSelfRef.testbench__DOT__test_flushed[5]),32);
+        bufp->chgIData(oldp+108,(vlSelfRef.testbench__DOT__test_flushed[6]),32);
+        bufp->chgIData(oldp+109,(vlSelfRef.testbench__DOT__test_flushed[7]),32);
+        bufp->chgIData(oldp+110,(vlSelfRef.testbench__DOT__test_flushed[8]),32);
+        bufp->chgIData(oldp+111,(vlSelfRef.testbench__DOT__test_flushed[9]),32);
+        bufp->chgIData(oldp+112,(vlSelfRef.testbench__DOT__test_flushed[10]),32);
+        bufp->chgIData(oldp+113,(vlSelfRef.testbench__DOT__test_flushed[11]),32);
+        bufp->chgIData(oldp+114,(vlSelfRef.testbench__DOT__test_flushed[12]),32);
+        bufp->chgIData(oldp+115,(vlSelfRef.testbench__DOT__test_flushed[13]),32);
+        bufp->chgIData(oldp+116,(vlSelfRef.testbench__DOT__test_flushed[14]),32);
+        bufp->chgIData(oldp+117,(vlSelfRef.testbench__DOT__test_flushed[15]),32);
+        bufp->chgIData(oldp+118,(vlSelfRef.testbench__DOT__test_flushed[16]),32);
+        bufp->chgIData(oldp+119,(vlSelfRef.testbench__DOT__test_flushed[17]),32);
+        bufp->chgIData(oldp+120,(vlSelfRef.testbench__DOT__test_flushed[18]),32);
+        bufp->chgIData(oldp+121,(vlSelfRef.testbench__DOT__test_flushed[19]),32);
+        bufp->chgIData(oldp+122,(vlSelfRef.testbench__DOT__test_flushed[20]),32);
+        bufp->chgIData(oldp+123,(vlSelfRef.testbench__DOT__test_flushed[21]),32);
+        bufp->chgIData(oldp+124,(vlSelfRef.testbench__DOT__test_flushed[22]),32);
+        bufp->chgIData(oldp+125,(vlSelfRef.testbench__DOT__test_flushed[23]),32);
+        bufp->chgIData(oldp+126,(vlSelfRef.testbench__DOT__test_flushed[24]),32);
+        bufp->chgIData(oldp+127,(vlSelfRef.testbench__DOT__test_flushed[25]),32);
+        bufp->chgIData(oldp+128,(vlSelfRef.testbench__DOT__total_sent),32);
+        bufp->chgIData(oldp+129,(vlSelfRef.testbench__DOT__total_recv),32);
+        bufp->chgIData(oldp+130,(vlSelfRef.testbench__DOT__total_pass),32);
+        bufp->chgIData(oldp+131,(vlSelfRef.testbench__DOT__total_fail),32);
+        bufp->chgIData(oldp+132,(vlSelfRef.testbench__DOT__total_flushed),32);
+        bufp->chgIData(oldp+133,(vlSelfRef.testbench__DOT__latency_pass),32);
+        bufp->chgIData(oldp+134,(vlSelfRef.testbench__DOT__latency_fail),32);
+        bufp->chgIData(oldp+135,(vlSelfRef.testbench__DOT__valid_fail),32);
+        bufp->chgIData(oldp+136,(vlSelfRef.testbench__DOT__data_fail),32);
+        bufp->chgIData(oldp+137,(vlSelfRef.testbench__DOT__cycle_count),32);
+    }
+    if (VL_UNLIKELY((vlSelfRef.__Vm_traceActivity[2U]))) {
+        bufp->chgIData(oldp+138,(vlSelfRef.testbench__DOT__test_skip[0]),32);
+        bufp->chgIData(oldp+139,(vlSelfRef.testbench__DOT__test_skip[1]),32);
+        bufp->chgIData(oldp+140,(vlSelfRef.testbench__DOT__test_skip[2]),32);
+        bufp->chgIData(oldp+141,(vlSelfRef.testbench__DOT__test_skip[3]),32);
+        bufp->chgIData(oldp+142,(vlSelfRef.testbench__DOT__test_skip[4]),32);
+        bufp->chgIData(oldp+143,(vlSelfRef.testbench__DOT__test_skip[5]),32);
+        bufp->chgIData(oldp+144,(vlSelfRef.testbench__DOT__test_skip[6]),32);
+        bufp->chgIData(oldp+145,(vlSelfRef.testbench__DOT__test_skip[7]),32);
+        bufp->chgIData(oldp+146,(vlSelfRef.testbench__DOT__test_skip[8]),32);
+        bufp->chgIData(oldp+147,(vlSelfRef.testbench__DOT__test_skip[9]),32);
+        bufp->chgIData(oldp+148,(vlSelfRef.testbench__DOT__test_skip[10]),32);
+        bufp->chgIData(oldp+149,(vlSelfRef.testbench__DOT__test_skip[11]),32);
+        bufp->chgIData(oldp+150,(vlSelfRef.testbench__DOT__test_skip[12]),32);
+        bufp->chgIData(oldp+151,(vlSelfRef.testbench__DOT__test_skip[13]),32);
+        bufp->chgIData(oldp+152,(vlSelfRef.testbench__DOT__test_skip[14]),32);
+        bufp->chgIData(oldp+153,(vlSelfRef.testbench__DOT__test_skip[15]),32);
+        bufp->chgIData(oldp+154,(vlSelfRef.testbench__DOT__test_skip[16]),32);
+        bufp->chgIData(oldp+155,(vlSelfRef.testbench__DOT__test_skip[17]),32);
+        bufp->chgIData(oldp+156,(vlSelfRef.testbench__DOT__test_skip[18]),32);
+        bufp->chgIData(oldp+157,(vlSelfRef.testbench__DOT__test_skip[19]),32);
+        bufp->chgIData(oldp+158,(vlSelfRef.testbench__DOT__test_skip[20]),32);
+        bufp->chgIData(oldp+159,(vlSelfRef.testbench__DOT__test_skip[21]),32);
+        bufp->chgIData(oldp+160,(vlSelfRef.testbench__DOT__test_skip[22]),32);
+        bufp->chgIData(oldp+161,(vlSelfRef.testbench__DOT__test_skip[23]),32);
+        bufp->chgIData(oldp+162,(vlSelfRef.testbench__DOT__test_skip[24]),32);
+        bufp->chgIData(oldp+163,(vlSelfRef.testbench__DOT__test_skip[25]),32);
+        bufp->chgIData(oldp+164,(vlSelfRef.testbench__DOT__unknown_fail),32);
+        bufp->chgIData(oldp+165,(vlSelfRef.testbench__DOT__r),32);
+    }
+    if (VL_UNLIKELY(((vlSelfRef.__Vm_traceActivity[2U] 
+                      | vlSelfRef.__Vm_traceActivity[3U])))) {
+        bufp->chgBit(oldp+166,(vlSelfRef.testbench__DOT__rst));
+        bufp->chgBit(oldp+167,(vlSelfRef.testbench__DOT__valid_in));
+        bufp->chgCData(oldp+168,(vlSelfRef.testbench__DOT__input_vec[0]),8);
+        bufp->chgCData(oldp+169,(vlSelfRef.testbench__DOT__input_vec[1]),8);
+        bufp->chgCData(oldp+170,(vlSelfRef.testbench__DOT__input_vec[2]),8);
+        bufp->chgCData(oldp+171,(vlSelfRef.testbench__DOT__input_vec[3]),8);
+        bufp->chgCData(oldp+172,(vlSelfRef.testbench__DOT__input_vec[4]),8);
+        bufp->chgCData(oldp+173,(vlSelfRef.testbench__DOT__input_vec[5]),8);
+        bufp->chgCData(oldp+174,(vlSelfRef.testbench__DOT__input_vec[6]),8);
+        bufp->chgCData(oldp+175,(vlSelfRef.testbench__DOT__input_vec[7]),8);
+        bufp->chgCData(oldp+176,(vlSelfRef.testbench__DOT__input_vec[8]),8);
+        bufp->chgCData(oldp+177,(vlSelfRef.testbench__DOT__input_vec[9]),8);
+        bufp->chgCData(oldp+178,(vlSelfRef.testbench__DOT__input_vec[10]),8);
+        bufp->chgCData(oldp+179,(vlSelfRef.testbench__DOT__input_vec[11]),8);
+        bufp->chgCData(oldp+180,(vlSelfRef.testbench__DOT__input_vec[12]),8);
+        bufp->chgCData(oldp+181,(vlSelfRef.testbench__DOT__input_vec[13]),8);
+        bufp->chgCData(oldp+182,(vlSelfRef.testbench__DOT__input_vec[14]),8);
+        bufp->chgCData(oldp+183,(vlSelfRef.testbench__DOT__input_vec[15]),8);
+        bufp->chgCData(oldp+184,(vlSelfRef.testbench__DOT__input_vec[16]),8);
+        bufp->chgCData(oldp+185,(vlSelfRef.testbench__DOT__input_vec[17]),8);
+        bufp->chgCData(oldp+186,(vlSelfRef.testbench__DOT__input_vec[18]),8);
+        bufp->chgCData(oldp+187,(vlSelfRef.testbench__DOT__input_vec[19]),8);
+        bufp->chgCData(oldp+188,(vlSelfRef.testbench__DOT__input_vec[20]),8);
+        bufp->chgCData(oldp+189,(vlSelfRef.testbench__DOT__input_vec[21]),8);
+        bufp->chgCData(oldp+190,(vlSelfRef.testbench__DOT__input_vec[22]),8);
+        bufp->chgCData(oldp+191,(vlSelfRef.testbench__DOT__input_vec[23]),8);
+        bufp->chgCData(oldp+192,(vlSelfRef.testbench__DOT__input_vec[24]),8);
+        bufp->chgCData(oldp+193,(vlSelfRef.testbench__DOT__input_vec[25]),8);
+        bufp->chgCData(oldp+194,(vlSelfRef.testbench__DOT__input_vec[26]),8);
+        bufp->chgCData(oldp+195,(vlSelfRef.testbench__DOT__input_vec[27]),8);
+        bufp->chgCData(oldp+196,(vlSelfRef.testbench__DOT__input_vec[28]),8);
+        bufp->chgCData(oldp+197,(vlSelfRef.testbench__DOT__input_vec[29]),8);
+        bufp->chgCData(oldp+198,(vlSelfRef.testbench__DOT__input_vec[30]),8);
+        bufp->chgCData(oldp+199,(vlSelfRef.testbench__DOT__input_vec[31]),8);
+        bufp->chgCData(oldp+200,(vlSelfRef.testbench__DOT__weight[0]),8);
+        bufp->chgCData(oldp+201,(vlSelfRef.testbench__DOT__weight[1]),8);
+        bufp->chgCData(oldp+202,(vlSelfRef.testbench__DOT__weight[2]),8);
+        bufp->chgCData(oldp+203,(vlSelfRef.testbench__DOT__weight[3]),8);
+        bufp->chgCData(oldp+204,(vlSelfRef.testbench__DOT__weight[4]),8);
+        bufp->chgCData(oldp+205,(vlSelfRef.testbench__DOT__weight[5]),8);
+        bufp->chgCData(oldp+206,(vlSelfRef.testbench__DOT__weight[6]),8);
+        bufp->chgCData(oldp+207,(vlSelfRef.testbench__DOT__weight[7]),8);
+        bufp->chgCData(oldp+208,(vlSelfRef.testbench__DOT__weight[8]),8);
+        bufp->chgCData(oldp+209,(vlSelfRef.testbench__DOT__weight[9]),8);
+        bufp->chgCData(oldp+210,(vlSelfRef.testbench__DOT__weight[10]),8);
+        bufp->chgCData(oldp+211,(vlSelfRef.testbench__DOT__weight[11]),8);
+        bufp->chgCData(oldp+212,(vlSelfRef.testbench__DOT__weight[12]),8);
+        bufp->chgCData(oldp+213,(vlSelfRef.testbench__DOT__weight[13]),8);
+        bufp->chgCData(oldp+214,(vlSelfRef.testbench__DOT__weight[14]),8);
+        bufp->chgCData(oldp+215,(vlSelfRef.testbench__DOT__weight[15]),8);
+        bufp->chgCData(oldp+216,(vlSelfRef.testbench__DOT__weight[16]),8);
+        bufp->chgCData(oldp+217,(vlSelfRef.testbench__DOT__weight[17]),8);
+        bufp->chgCData(oldp+218,(vlSelfRef.testbench__DOT__weight[18]),8);
+        bufp->chgCData(oldp+219,(vlSelfRef.testbench__DOT__weight[19]),8);
+        bufp->chgCData(oldp+220,(vlSelfRef.testbench__DOT__weight[20]),8);
+        bufp->chgCData(oldp+221,(vlSelfRef.testbench__DOT__weight[21]),8);
+        bufp->chgCData(oldp+222,(vlSelfRef.testbench__DOT__weight[22]),8);
+        bufp->chgCData(oldp+223,(vlSelfRef.testbench__DOT__weight[23]),8);
+        bufp->chgCData(oldp+224,(vlSelfRef.testbench__DOT__weight[24]),8);
+        bufp->chgCData(oldp+225,(vlSelfRef.testbench__DOT__weight[25]),8);
+        bufp->chgCData(oldp+226,(vlSelfRef.testbench__DOT__weight[26]),8);
+        bufp->chgCData(oldp+227,(vlSelfRef.testbench__DOT__weight[27]),8);
+        bufp->chgCData(oldp+228,(vlSelfRef.testbench__DOT__weight[28]),8);
+        bufp->chgCData(oldp+229,(vlSelfRef.testbench__DOT__weight[29]),8);
+        bufp->chgCData(oldp+230,(vlSelfRef.testbench__DOT__weight[30]),8);
+        bufp->chgCData(oldp+231,(vlSelfRef.testbench__DOT__weight[31]),8);
+        bufp->chgIData(oldp+232,(vlSelfRef.testbench__DOT__current_test),32);
+        bufp->chgIData(oldp+233,(vlSelfRef.testbench__DOT__tx_count),32);
+        bufp->chgIData(oldp+234,(vlSelfRef.testbench__DOT__c),32);
+    }
+    if (VL_UNLIKELY(((vlSelfRef.__Vm_traceActivity[5U] 
+                      | vlSelfRef.__Vm_traceActivity[7U])))) {
+        bufp->chgCData(oldp+235,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[0]),8);
+        bufp->chgCData(oldp+236,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[1]),8);
+        bufp->chgCData(oldp+237,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[2]),8);
+        bufp->chgCData(oldp+238,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[3]),8);
+        bufp->chgCData(oldp+239,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[4]),8);
+        bufp->chgCData(oldp+240,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[5]),8);
+        bufp->chgCData(oldp+241,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[6]),8);
+        bufp->chgCData(oldp+242,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[7]),8);
+        bufp->chgCData(oldp+243,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[8]),8);
+        bufp->chgCData(oldp+244,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[9]),8);
+        bufp->chgCData(oldp+245,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[10]),8);
+        bufp->chgCData(oldp+246,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[11]),8);
+        bufp->chgCData(oldp+247,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[12]),8);
+        bufp->chgCData(oldp+248,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[13]),8);
+        bufp->chgCData(oldp+249,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[14]),8);
+        bufp->chgCData(oldp+250,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[15]),8);
+        bufp->chgCData(oldp+251,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[16]),8);
+        bufp->chgCData(oldp+252,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[17]),8);
+        bufp->chgCData(oldp+253,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[18]),8);
+        bufp->chgCData(oldp+254,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[19]),8);
+        bufp->chgCData(oldp+255,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[20]),8);
+        bufp->chgCData(oldp+256,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[21]),8);
+        bufp->chgCData(oldp+257,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[22]),8);
+        bufp->chgCData(oldp+258,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[23]),8);
+        bufp->chgCData(oldp+259,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[24]),8);
+        bufp->chgCData(oldp+260,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[25]),8);
+        bufp->chgCData(oldp+261,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[26]),8);
+        bufp->chgCData(oldp+262,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[27]),8);
+        bufp->chgCData(oldp+263,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[28]),8);
+        bufp->chgCData(oldp+264,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[29]),8);
+        bufp->chgCData(oldp+265,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[30]),8);
+        bufp->chgCData(oldp+266,(vlSelfRef.testbench__DOT__dut__DOT__input_vec[31]),8);
+        bufp->chgCData(oldp+267,(vlSelfRef.testbench__DOT__dut__DOT__weight[0]),8);
+        bufp->chgCData(oldp+268,(vlSelfRef.testbench__DOT__dut__DOT__weight[1]),8);
+        bufp->chgCData(oldp+269,(vlSelfRef.testbench__DOT__dut__DOT__weight[2]),8);
+        bufp->chgCData(oldp+270,(vlSelfRef.testbench__DOT__dut__DOT__weight[3]),8);
+        bufp->chgCData(oldp+271,(vlSelfRef.testbench__DOT__dut__DOT__weight[4]),8);
+        bufp->chgCData(oldp+272,(vlSelfRef.testbench__DOT__dut__DOT__weight[5]),8);
+        bufp->chgCData(oldp+273,(vlSelfRef.testbench__DOT__dut__DOT__weight[6]),8);
+        bufp->chgCData(oldp+274,(vlSelfRef.testbench__DOT__dut__DOT__weight[7]),8);
+        bufp->chgCData(oldp+275,(vlSelfRef.testbench__DOT__dut__DOT__weight[8]),8);
+        bufp->chgCData(oldp+276,(vlSelfRef.testbench__DOT__dut__DOT__weight[9]),8);
+        bufp->chgCData(oldp+277,(vlSelfRef.testbench__DOT__dut__DOT__weight[10]),8);
+        bufp->chgCData(oldp+278,(vlSelfRef.testbench__DOT__dut__DOT__weight[11]),8);
+        bufp->chgCData(oldp+279,(vlSelfRef.testbench__DOT__dut__DOT__weight[12]),8);
+        bufp->chgCData(oldp+280,(vlSelfRef.testbench__DOT__dut__DOT__weight[13]),8);
+        bufp->chgCData(oldp+281,(vlSelfRef.testbench__DOT__dut__DOT__weight[14]),8);
+        bufp->chgCData(oldp+282,(vlSelfRef.testbench__DOT__dut__DOT__weight[15]),8);
+        bufp->chgCData(oldp+283,(vlSelfRef.testbench__DOT__dut__DOT__weight[16]),8);
+        bufp->chgCData(oldp+284,(vlSelfRef.testbench__DOT__dut__DOT__weight[17]),8);
+        bufp->chgCData(oldp+285,(vlSelfRef.testbench__DOT__dut__DOT__weight[18]),8);
+        bufp->chgCData(oldp+286,(vlSelfRef.testbench__DOT__dut__DOT__weight[19]),8);
+        bufp->chgCData(oldp+287,(vlSelfRef.testbench__DOT__dut__DOT__weight[20]),8);
+        bufp->chgCData(oldp+288,(vlSelfRef.testbench__DOT__dut__DOT__weight[21]),8);
+        bufp->chgCData(oldp+289,(vlSelfRef.testbench__DOT__dut__DOT__weight[22]),8);
+        bufp->chgCData(oldp+290,(vlSelfRef.testbench__DOT__dut__DOT__weight[23]),8);
+        bufp->chgCData(oldp+291,(vlSelfRef.testbench__DOT__dut__DOT__weight[24]),8);
+        bufp->chgCData(oldp+292,(vlSelfRef.testbench__DOT__dut__DOT__weight[25]),8);
+        bufp->chgCData(oldp+293,(vlSelfRef.testbench__DOT__dut__DOT__weight[26]),8);
+        bufp->chgCData(oldp+294,(vlSelfRef.testbench__DOT__dut__DOT__weight[27]),8);
+        bufp->chgCData(oldp+295,(vlSelfRef.testbench__DOT__dut__DOT__weight[28]),8);
+        bufp->chgCData(oldp+296,(vlSelfRef.testbench__DOT__dut__DOT__weight[29]),8);
+        bufp->chgCData(oldp+297,(vlSelfRef.testbench__DOT__dut__DOT__weight[30]),8);
+        bufp->chgCData(oldp+298,(vlSelfRef.testbench__DOT__dut__DOT__weight[31]),8);
+    }
+    if (VL_UNLIKELY((vlSelfRef.__Vm_traceActivity[6U]))) {
+        bufp->chgBit(oldp+299,((1U & ((IData)(vlSelfRef.testbench__DOT__dut__DOT__valid_pipe) 
+                                      >> 5U))));
+        bufp->chgIData(oldp+300,(vlSelfRef.testbench__DOT__dut__DOT__soma[4U][0U]),21);
+        bufp->chgIData(oldp+301,(vlSelfRef.testbench__DOT__dut__DOT__mult[0]),21);
+        bufp->chgIData(oldp+302,(vlSelfRef.testbench__DOT__dut__DOT__mult[1]),21);
+        bufp->chgIData(oldp+303,(vlSelfRef.testbench__DOT__dut__DOT__mult[2]),21);
+        bufp->chgIData(oldp+304,(vlSelfRef.testbench__DOT__dut__DOT__mult[3]),21);
+        bufp->chgIData(oldp+305,(vlSelfRef.testbench__DOT__dut__DOT__mult[4]),21);
+        bufp->chgIData(oldp+306,(vlSelfRef.testbench__DOT__dut__DOT__mult[5]),21);
+        bufp->chgIData(oldp+307,(vlSelfRef.testbench__DOT__dut__DOT__mult[6]),21);
+        bufp->chgIData(oldp+308,(vlSelfRef.testbench__DOT__dut__DOT__mult[7]),21);
+        bufp->chgIData(oldp+309,(vlSelfRef.testbench__DOT__dut__DOT__mult[8]),21);
+        bufp->chgIData(oldp+310,(vlSelfRef.testbench__DOT__dut__DOT__mult[9]),21);
+        bufp->chgIData(oldp+311,(vlSelfRef.testbench__DOT__dut__DOT__mult[10]),21);
+        bufp->chgIData(oldp+312,(vlSelfRef.testbench__DOT__dut__DOT__mult[11]),21);
+        bufp->chgIData(oldp+313,(vlSelfRef.testbench__DOT__dut__DOT__mult[12]),21);
+        bufp->chgIData(oldp+314,(vlSelfRef.testbench__DOT__dut__DOT__mult[13]),21);
+        bufp->chgIData(oldp+315,(vlSelfRef.testbench__DOT__dut__DOT__mult[14]),21);
+        bufp->chgIData(oldp+316,(vlSelfRef.testbench__DOT__dut__DOT__mult[15]),21);
+        bufp->chgIData(oldp+317,(vlSelfRef.testbench__DOT__dut__DOT__mult[16]),21);
+        bufp->chgIData(oldp+318,(vlSelfRef.testbench__DOT__dut__DOT__mult[17]),21);
+        bufp->chgIData(oldp+319,(vlSelfRef.testbench__DOT__dut__DOT__mult[18]),21);
+        bufp->chgIData(oldp+320,(vlSelfRef.testbench__DOT__dut__DOT__mult[19]),21);
+        bufp->chgIData(oldp+321,(vlSelfRef.testbench__DOT__dut__DOT__mult[20]),21);
+        bufp->chgIData(oldp+322,(vlSelfRef.testbench__DOT__dut__DOT__mult[21]),21);
+        bufp->chgIData(oldp+323,(vlSelfRef.testbench__DOT__dut__DOT__mult[22]),21);
+        bufp->chgIData(oldp+324,(vlSelfRef.testbench__DOT__dut__DOT__mult[23]),21);
+        bufp->chgIData(oldp+325,(vlSelfRef.testbench__DOT__dut__DOT__mult[24]),21);
+        bufp->chgIData(oldp+326,(vlSelfRef.testbench__DOT__dut__DOT__mult[25]),21);
+        bufp->chgIData(oldp+327,(vlSelfRef.testbench__DOT__dut__DOT__mult[26]),21);
+        bufp->chgIData(oldp+328,(vlSelfRef.testbench__DOT__dut__DOT__mult[27]),21);
+        bufp->chgIData(oldp+329,(vlSelfRef.testbench__DOT__dut__DOT__mult[28]),21);
+        bufp->chgIData(oldp+330,(vlSelfRef.testbench__DOT__dut__DOT__mult[29]),21);
+        bufp->chgIData(oldp+331,(vlSelfRef.testbench__DOT__dut__DOT__mult[30]),21);
+        bufp->chgIData(oldp+332,(vlSelfRef.testbench__DOT__dut__DOT__mult[31]),21);
+        bufp->chgCData(oldp+333,(vlSelfRef.testbench__DOT__dut__DOT__valid_pipe),6);
+        bufp->chgIData(oldp+334,(vlSelfRef.testbench__DOT__dut__DOT__v),32);
+        bufp->chgIData(oldp+335,(vlSelfRef.testbench__DOT__dut__DOT__m),32);
+    }
+    bufp->chgBit(oldp+336,(vlSelfRef.testbench__DOT__clk));
+    bufp->chgIData(oldp+337,(vlSelfRef.testbench__DOT__i),32);
+    bufp->chgIData(oldp+338,(vlSelfRef.testbench__DOT__j),32);
+}
+
+void Vtestbench___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtestbench___024root__trace_cleanup\n"); );
+    // Body
+    Vtestbench___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vtestbench___024root*>(voidSelf);
+    Vtestbench__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    vlSymsp->__Vm_activity = false;
+    vlSymsp->TOP.__Vm_traceActivity[0U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[2U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[3U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[4U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[5U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[6U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[7U] = 0U;
+}

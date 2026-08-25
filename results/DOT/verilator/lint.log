@@ -1,0 +1,151 @@
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:108:21: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  108 |         cycle_count = cycle_count + 1;
+      |                     ^
+                 ... For warning description see https://verilator.org/warn/BLKSEQ?v=5.047
+                 ... Use "/* verilator lint_off BLKSEQ */" and lint_on around source to disable this message.
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:111:49: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  111 |                 if (exp_valid[j]) total_flushed = total_flushed + 1;
+      |                                                 ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:112:30: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  112 |                 exp_valid[j] = 0;
+      |                              ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:113:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  113 |                 exp_pipe[j] = '0;
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:114:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  114 |                 exp_test[j] = 0;
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:115:27: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  115 |                 exp_tx[j] = 0;
+      |                           ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:119:30: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  119 |                 exp_valid[j] = exp_valid[j-1];
+      |                              ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:120:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  120 |                 exp_pipe[j] = exp_pipe[j-1];
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:121:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  121 |                 exp_test[j] = exp_test[j-1];
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:122:27: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  122 |                 exp_tx[j] = exp_tx[j-1];
+      |                           ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:124:26: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  124 |             exp_valid[0] = valid_in;
+      |                          ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:126:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  126 |                 exp_pipe[0] = reference_dot();
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:127:29: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  127 |                 exp_test[0] = current_test;
+      |                             ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:128:27: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  128 |                 exp_tx[0] = tx_count;
+      |                           ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:129:28: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  129 |                 total_sent = total_sent + 1;
+      |                            ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:130:41: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  130 |                 test_sent[current_test] = test_sent[current_test] + 1;
+      |                                         ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:136:24: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  136 |             total_fail = total_fail + 1;
+      |                        ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:137:24: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  137 |             valid_fail = valid_fail + 1;
+      |                        ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:138:26: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  138 |             latency_fail = latency_fail + 1;
+      |                          ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:140:48: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  140 |                 test_fail[exp_test[LATENCY-1]] = test_fail[exp_test[LATENCY-1]] + 1;
+      |                                                ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:144:24: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  144 |             total_recv = total_recv + 1;
+      |                        ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:145:26: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  145 |             latency_pass = latency_pass + 1;
+      |                          ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:147:28: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  147 |                 total_pass = total_pass + 1;
+      |                            ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:148:48: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  148 |                 test_pass[exp_test[LATENCY-1]] = test_pass[exp_test[LATENCY-1]] + 1;
+      |                                                ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:153:28: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  153 |                 total_fail = total_fail + 1;
+      |                            ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:154:27: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  154 |                 data_fail = data_fail + 1;
+      |                           ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:155:48: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  155 |                 test_fail[exp_test[LATENCY-1]] = test_fail[exp_test[LATENCY-1]] + 1;
+      |                                                ^
+%Warning-BLKSEQ: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:156:67: Blocking assignment '=' in sequential logic process
+                                                                                    : ... note: In instance 'testbench'
+                                                                                    : ... Suggest using delayed assignment '<='
+  156 |                 if ($isunknown(exp_pipe[LATENCY-1])) unknown_fail = unknown_fail + 1;
+      |                                                                   ^
+%Warning-UNUSEDSIGNAL: /home/matheus/Documentos/CNN/CNN/testbenchs/DOT/testbench.sv:31:25: Signal is not driven, nor used: 'seed_dummy'
+                                                                                         : ... note: In instance 'testbench'
+   31 |     integer i, j, r, c, seed_dummy;
+      |                         ^~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/UNUSEDSIGNAL?v=5.047
+                       ... Use "/* verilator lint_off UNUSEDSIGNAL */" and lint_on around source to disable this message.
+- V e r i l a t i o n   R e p o r t: Verilator 5.047 devel rev v5.046-75-ga7a5c9f54
+- Verilator: Built from 0.062 MB sources in 3 modules, into 0.337 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.107 s (elab=0.008, cvt=0.079, bld=0.000); cpu 0.115 s on 4 threads; allocated 45.699 MB

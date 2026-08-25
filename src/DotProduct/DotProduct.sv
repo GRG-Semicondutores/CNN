@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module DotProduct #(
     parameter DATA_WIDTH = 8,
     parameter N_INPUTS = 32,
@@ -19,7 +21,7 @@ localparam LATENCY = STAGES + 1;
 
 logic signed [ACC_WIDTH-1:0] soma [0:STAGES][0:N_INPUTS-1];
 logic signed [ACC_WIDTH-1:0] mult [0:N_INPUTS-1];
-logic [LATENCY:0] valid_pipe;
+logic [LATENCY-1:0] valid_pipe;
 
 genvar s; //estágios
 genvar n; //número de somadores por estágio
@@ -72,7 +74,7 @@ always @(posedge clk) begin
         valid_pipe <= '0;
     end else begin
         valid_pipe[0] <= valid_in;
-        for (v = 1; v <= LATENCY; v = v  + 1) begin
+        for (v = 1; v < LATENCY; v = v  + 1) begin
             valid_pipe[v] <= valid_pipe[v - 1];
         end
     end
@@ -80,6 +82,6 @@ end
 
 assign out = soma[STAGES-1][0];
 //saída válida corresponde ao último índice do pipeline de saída
-assign valid_out = valid_pipe[LATENCY];
+assign valid_out = valid_pipe[LATENCY-1];
 
 endmodule

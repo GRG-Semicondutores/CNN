@@ -1,11 +1,10 @@
 # ==============================================================================
-# Makefile - ReLU com Verilator + cobertura LCOV/HTML
+# Makefile - DotProduct / Verilator + cobertura LCOV/HTML
 # Projeto: CNN
 # ==============================================================================
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := all
-
 
 # ==============================================================================
 # FERRAMENTAS
@@ -18,62 +17,71 @@ GENHTML             ?= genhtml
 GTKWAVE             ?= gtkwave
 SURFER              ?= surfer
 
-
 # ==============================================================================
 # DIRETÓRIOS
 # ==============================================================================
 
-# Este Makefile é esperado em:
-#   <projeto>/scripts/makefiles/Makefile_relu_VERILATOR
-MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-PROJECT_ROOT := $(abspath $(MAKEFILE_DIR)/../..)
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+MAKEFILE_DIR  := $(dir $(THIS_MAKEFILE))
+PROJECT_ROOT  := $(abspath $(MAKEFILE_DIR)/../..)
 
-RTL_DIR := $(PROJECT_ROOT)/src/ReLU
-TB_DIR  := $(PROJECT_ROOT)/testbenchs/ReLU
+RTL_DIR := $(PROJECT_ROOT)/src/DotProduct
+TB_DIR  := $(PROJECT_ROOT)/testbenchs/DOT
 
-RESULTS_DIR := $(PROJECT_ROOT)/results/ReLU
+RESULTS_DIR := $(PROJECT_ROOT)/results/DOT/verilator
 
-# Builds do Verilator separados para execução normal e cobertura
 OBJ_DIR     := $(RESULTS_DIR)/obj_dir
 OBJ_DIR_COV := $(RESULTS_DIR)/obj_dir_cov
 
-# Waveform
-WAVE := $(RESULTS_DIR)/dump.fst
+# ==============================================================================
+# ARQUIVOS
+# ==============================================================================
+
+RTL := $(RTL_DIR)/DotProduct.sv
+TB  := $(TB_DIR)/testbench.sv
+
+# O testbench define esse nome em $dumpfile().
+WAVE := $(RESULTS_DIR)/DotProduct_tb.vcd
+
+# Logs
+LINT_LOG        := $(RESULTS_DIR)/lint.log
+COMPILE_LOG     := $(RESULTS_DIR)/compile.log
+SIM_LOG         := $(RESULTS_DIR)/simulation.log
+COMPILE_COV_LOG := $(RESULTS_DIR)/compile_coverage.log
+SIM_COV_LOG     := $(RESULTS_DIR)/simulation_coverage.log
 
 # Cobertura
 COV_DIR      := $(RESULTS_DIR)/coverage
-COV_DAT      := $(COV_DIR)/relu_coverage.dat
-COV_INFO_RAW := $(COV_DIR)/relu_coverage_raw.info
-COV_INFO_RTL := $(COV_DIR)/relu_coverage.info
+COV_DAT      := $(COV_DIR)/dotproduct_coverage.dat
+COV_INFO_RAW := $(COV_DIR)/dotproduct_coverage_raw.info
+COV_INFO_RTL := $(COV_DIR)/dotproduct_coverage.info
 COV_HTML     := $(COV_DIR)/html
+COV_SUMMARY  := $(COV_DIR)/coverage_summary.log
 
-# Lint
+# Lint waiver
 LINT_WAIVER     ?=
 LINT_WAIVER_OPT := $(if $(strip $(LINT_WAIVER)),$(LINT_WAIVER),)
 LINT_WAIVER_OUT ?= $(RESULTS_DIR)/verilator_lint.vlt
 
-
 # ==============================================================================
-# PROJETO ReLU
+# PROJETO DOTPRODUCT
 # ==============================================================================
 
-# Nome do módulo declarado dentro de testbench.sv
-TOP := testbench
+TOP     := testbench
+RTL_TOP := DotProduct
 
-# Nome do módulo RTL declarado dentro de ReLU.sv
-RTL_TOP := ReLU
-
-RTL := $(RTL_DIR)/ReLU.sv
-TB  := $(TB_DIR)/testbench.sv
-
-# Argumentos opcionais passados ao executável da simulação.
-# Exemplo:
-#   make -f scripts/makefiles/Makefile_relu_VERILATOR run RUN_ARGS="+ALGUM_ARG"
+# Argumentos opcionais enviados ao executável.
 RUN_ARGS ?=
 
-# Argumento necessário para o Verilator salvar a cobertura.
-COV_RUN_ARGS := $(RUN_ARGS) +verilator+coverage+file+$(COV_DAT)
+# Parâmetros existentes no testbench.
+ENABLE_WAVEFORM ?= 0
+ENABLE_MONITOR  ?= 0
 
+TB_PARAM_FLAGS := \
+	-GENABLE_WAVEFORM=$(ENABLE_WAVEFORM) \
+	-GENABLE_MONITOR=$(ENABLE_MONITOR)
+
+COV_RUN_ARGS := $(RUN_ARGS) +verilator+coverage+file+$(COV_DAT)
 
 # ==============================================================================
 # PARALELISMO
@@ -81,22 +89,20 @@ COV_RUN_ARGS := $(RUN_ARGS) +verilator+coverage+file+$(COV_DAT)
 
 JOBS ?= $(shell nproc 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
 
-
 # ==============================================================================
 # INCLUDES
 # ==============================================================================
 
-INC = \
+INC := \
 	+incdir+$(TB_DIR) \
 	+incdir+$(RTL_DIR) \
 	+incdir+$(PROJECT_ROOT)/src
-
 
 # ==============================================================================
 # FLAGS DO VERILATOR
 # ==============================================================================
 
-VFLAGS_COMMON = \
+VFLAGS_COMMON := \
 	-sv \
 	--binary \
 	--timing \
@@ -104,23 +110,21 @@ VFLAGS_COMMON = \
 	-Wno-fatal \
 	-Wno-WIDTHTRUNC \
 	-Wno-WIDTHEXPAND \
-	--trace-fst \
+	--trace \
 	$(INC) \
-	--top-module $(TOP)
+	--top-module $(TOP) \
+	$(TB_PARAM_FLAGS)
 
-# Build normal
-VFLAGS = \
+VFLAGS := \
 	$(VFLAGS_COMMON) \
 	--Mdir $(OBJ_DIR)
 
-# Build instrumentado para cobertura
-VFLAGS_COV = \
+VFLAGS_COV := \
 	$(VFLAGS_COMMON) \
 	--coverage \
 	--Mdir $(OBJ_DIR_COV)
 
-# Lint da bancada + RTL
-LINT_FLAGS = \
+LINT_FLAGS := \
 	-sv \
 	--lint-only \
 	--timing \
@@ -130,10 +134,10 @@ LINT_FLAGS = \
 	-Wno-WIDTHTRUNC \
 	-Wno-WIDTHEXPAND \
 	$(INC) \
-	--top-module $(TOP)
+	--top-module $(TOP) \
+	$(TB_PARAM_FLAGS)
 
-# Lint apenas do RTL ReLU
-LINT_RTL_FLAGS = \
+LINT_RTL_FLAGS := \
 	-sv \
 	--lint-only \
 	--timing \
@@ -144,7 +148,6 @@ LINT_RTL_FLAGS = \
 	-Wno-WIDTHEXPAND \
 	+incdir+$(RTL_DIR) \
 	--top-module $(RTL_TOP)
-
 
 # ==============================================================================
 # TARGETS
@@ -157,9 +160,7 @@ LINT_RTL_FLAGS = \
 	lcov_raw lcov_rtl coverage_summary html_rtl coverage \
 	waves surf clean help
 
-# Mantém o mesmo comportamento do modelo: make gera o relatório completo.
 all: coverage
-
 
 # ==============================================================================
 # VERIFICAÇÕES
@@ -167,25 +168,25 @@ all: coverage
 
 check_verilator:
 	@command -v $(VERILATOR) >/dev/null 2>&1 || \
-	( echo "ERRO: verilator nao encontrado no PATH"; exit 1 )
+		( echo "ERRO: verilator nao encontrado no PATH"; exit 1 )
 
 check_tools:
 	@command -v $(VERILATOR) >/dev/null 2>&1 || \
-	( echo "ERRO: verilator nao encontrado no PATH"; exit 1 )
+		( echo "ERRO: verilator nao encontrado no PATH"; exit 1 )
 	@command -v $(VERILATOR_COVERAGE) >/dev/null 2>&1 || \
-	( echo "ERRO: verilator_coverage nao encontrado no PATH"; exit 1 )
+		( echo "ERRO: verilator_coverage nao encontrado no PATH"; exit 1 )
 	@command -v $(LCOV) >/dev/null 2>&1 || \
-	( echo "ERRO: lcov nao encontrado no PATH"; exit 1 )
+		( echo "ERRO: lcov nao encontrado no PATH"; exit 1 )
 
 check_html_tools:
 	@command -v $(GENHTML) >/dev/null 2>&1 || \
-	( echo "ERRO: genhtml nao encontrado no PATH (instale o pacote lcov)"; exit 1 )
+		( echo "ERRO: genhtml nao encontrado no PATH (instale o pacote lcov)"; exit 1 )
 
 check_files:
 	@test -f "$(RTL)" || \
-	( echo "ERRO: RTL da ReLU nao encontrado:"; echo "$(RTL)"; exit 1 )
+		( echo "ERRO: RTL do DotProduct nao encontrado:"; echo "$(RTL)"; exit 1 )
 	@test -f "$(TB)" || \
-	( echo "ERRO: testbench da ReLU nao encontrado:"; echo "$(TB)"; exit 1 )
+		( echo "ERRO: testbench do DotProduct nao encontrado:"; echo "$(TB)"; exit 1 )
 
 check_lint_waiver:
 	@if [ -n "$(LINT_WAIVER)" ]; then \
@@ -193,42 +194,53 @@ check_lint_waiver:
 		( echo "ERRO: arquivo de waiver nao encontrado: $(LINT_WAIVER)"; exit 1 ); \
 	fi
 
-
 # ==============================================================================
 # LINT
 # ==============================================================================
 
 lint: check_verilator check_files check_lint_waiver
 	@mkdir -p "$(RESULTS_DIR)"
-	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_FLAGS) $(RTL) $(TB)
+	@set -o pipefail; \
+	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_FLAGS) "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(LINT_LOG)"
 
 lint_rtl: check_verilator check_files check_lint_waiver
 	@mkdir -p "$(RESULTS_DIR)"
-	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_RTL_FLAGS) $(RTL)
+	@set -o pipefail; \
+	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_RTL_FLAGS) "$(RTL)" \
+		2>&1 | tee "$(LINT_LOG)"
 
 lint_waiver: check_verilator check_files
 	@mkdir -p "$(RESULTS_DIR)"
-	$(VERILATOR) $(LINT_FLAGS) --waiver-output "$(LINT_WAIVER_OUT)" $(RTL) $(TB)
+	$(VERILATOR) $(LINT_FLAGS) --waiver-output "$(LINT_WAIVER_OUT)" "$(RTL)" "$(TB)"
 	@echo "Waiver inicial gerado em: $(LINT_WAIVER_OUT)"
-
 
 # ==============================================================================
 # SIMULAÇÃO NORMAL
 # ==============================================================================
 
-compile: lint check_tools
+compile: lint check_verilator
 	@mkdir -p "$(RESULTS_DIR)"
-	$(VERILATOR) $(VFLAGS) $(RTL) $(TB)
+	@echo ""
+	@echo "========================================"
+	@echo "[VERILATOR] Compilando DotProduct..."
+	@echo "========================================"
+	@echo ""
+	@set -o pipefail; \
+	$(VERILATOR) $(VFLAGS) "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(COMPILE_LOG)"
 
 run: compile
 	@mkdir -p "$(RESULTS_DIR)"
 	@echo ""
 	@echo "========================================"
-	@echo "[VERILATOR] Executando ReLU..."
+	@echo "[VERILATOR] Executando DotProduct..."
 	@echo "========================================"
 	@echo ""
-	@cd "$(RESULTS_DIR)" && "$(OBJ_DIR)/V$(TOP)" $(RUN_ARGS)
-
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && \
+	"$(OBJ_DIR)/V$(TOP)" $(RUN_ARGS) \
+		2>&1 | tee "$(SIM_LOG)"
 
 # ==============================================================================
 # SIMULAÇÃO COM COBERTURA
@@ -236,40 +248,47 @@ run: compile
 
 compile_cov: check_tools check_files
 	@mkdir -p "$(RESULTS_DIR)" "$(COV_DIR)"
-	$(VERILATOR) $(VFLAGS_COV) $(RTL) $(TB)
+	@echo ""
+	@echo "========================================"
+	@echo "[VERILATOR] Compilando cobertura..."
+	@echo "========================================"
+	@echo ""
+	@set -o pipefail; \
+	$(VERILATOR) $(VFLAGS_COV) "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(COMPILE_COV_LOG)"
 
 run_cov: compile_cov
 	@mkdir -p "$(RESULTS_DIR)" "$(COV_DIR)"
-	@rm -f "$(COV_DAT)" "$(COV_INFO_RAW)" "$(COV_INFO_RTL)"
+	@rm -f "$(COV_DAT)" "$(COV_INFO_RAW)" "$(COV_INFO_RTL)" "$(COV_SUMMARY)"
 	@echo ""
 	@echo "========================================"
-	@echo "[VERILATOR] Executando ReLU com cobertura..."
+	@echo "[VERILATOR] Executando cobertura..."
 	@echo "========================================"
 	@echo ""
-	@cd "$(RESULTS_DIR)" && "$(OBJ_DIR_COV)/V$(TOP)" $(COV_RUN_ARGS)
-
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && \
+	"$(OBJ_DIR_COV)/V$(TOP)" $(COV_RUN_ARGS) \
+		2>&1 | tee "$(SIM_COV_LOG)"
 
 # ==============================================================================
 # RELATÓRIO DE COBERTURA
 # ==============================================================================
 
-# Converte o arquivo nativo do Verilator para LCOV.
 lcov_raw: run_cov
 	$(VERILATOR_COVERAGE) --write-info "$(COV_INFO_RAW)" "$(COV_DAT)"
-	@echo "LCOV bruto gerado em: $(COV_INFO_RAW)"
+	@echo "LCOV bruto: $(COV_INFO_RAW)"
 
-# Mantém no relatório somente o RTL da ReLU.
 lcov_rtl: lcov_raw
 	$(LCOV) \
 		--extract "$(COV_INFO_RAW)" "$(RTL_DIR)/*" \
 		-o "$(COV_INFO_RTL)"
-	@echo "LCOV RTL-only gerado em: $(COV_INFO_RTL)"
+	@echo "LCOV RTL-only: $(COV_INFO_RTL)"
 
-# Resumo de cobertura no terminal.
 coverage_summary: lcov_rtl
-	$(LCOV) --summary "$(COV_INFO_RTL)"
+	@set -o pipefail; \
+	$(LCOV) --summary "$(COV_INFO_RTL)" \
+		2>&1 | tee "$(COV_SUMMARY)"
 
-# Relatório HTML navegável.
 html_rtl: coverage_summary check_html_tools
 	@rm -rf "$(COV_HTML)"
 	@mkdir -p "$(COV_HTML)"
@@ -282,21 +301,20 @@ html_rtl: coverage_summary check_html_tools
 		"$(COV_INFO_RTL)"
 	@echo ""
 	@echo "========================================"
-	@echo "[OK] Relatorio de cobertura da ReLU"
+	@echo "[OK] Relatorio de cobertura DotProduct"
 	@echo "========================================"
-	@echo ""
-	@echo "HTML:"
-	@echo "$(COV_HTML)/index.html"
+	@echo "HTML: $(COV_HTML)/index.html"
+	@echo "Resumo: $(COV_SUMMARY)"
 	@echo ""
 
 coverage: html_rtl
-
 
 # ==============================================================================
 # WAVEFORM
 # ==============================================================================
 
-waves: run
+waves:
+	@$(MAKE) -f "$(THIS_MAKEFILE)" run ENABLE_WAVEFORM=1 ENABLE_MONITOR=$(ENABLE_MONITOR)
 	@if [ -f "$(WAVE)" ]; then \
 		$(GTKWAVE) "$(WAVE)"; \
 	else \
@@ -305,7 +323,8 @@ waves: run
 		exit 1; \
 	fi
 
-surf: run
+surf:
+	@$(MAKE) -f "$(THIS_MAKEFILE)" run ENABLE_WAVEFORM=1 ENABLE_MONITOR=$(ENABLE_MONITOR)
 	@if [ -f "$(WAVE)" ]; then \
 		$(SURFER) "$(WAVE)"; \
 	else \
@@ -314,16 +333,14 @@ surf: run
 		exit 1; \
 	fi
 
-
 # ==============================================================================
 # LIMPEZA
 # ==============================================================================
 
 clean:
-	@echo "[CLEAN] Removendo resultados Verilator da ReLU..."
+	@echo "[CLEAN] Removendo resultados Verilator do DotProduct..."
 	@rm -rf "$(RESULTS_DIR)"
 	@echo "[OK] Resultados removidos."
-
 
 # ==============================================================================
 # AJUDA
@@ -331,31 +348,30 @@ clean:
 
 help:
 	@echo ""
-	@echo "Makefile - ReLU / Verilator"
+	@echo "Makefile - DotProduct / Verilator"
 	@echo ""
 	@echo "Comandos:"
-	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR"
 	@echo "      Executa cobertura completa e gera HTML"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR lint"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR lint"
 	@echo "      Lint da bancada + RTL"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR lint_rtl"
-	@echo "      Lint apenas de src/ReLU/ReLU.sv"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR lint_rtl"
+	@echo "      Lint apenas de src/DotProduct/DotProduct.sv"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR run"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR run"
 	@echo "      Compila e executa sem cobertura"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR coverage"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR coverage"
 	@echo "      Gera cobertura LCOV + HTML"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR waves"
-	@echo "      Executa e abre dump.fst no GTKWave"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR waves"
+	@echo "      Executa com waveform e abre GTKWave"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR surf"
-	@echo "      Executa e abre dump.fst no Surfer"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR surf"
+	@echo "      Executa com waveform e abre Surfer"
 	@echo ""
-	@echo "  make -f scripts/makefiles/Makefile_relu_VERILATOR clean"
-	@echo "      Remove results/ReLU"
+	@echo "  make -f scripts/makefiles/Makefile_dot_VERILATOR clean"
+	@echo "      Remove results/DOT/verilator"
 	@echo ""
