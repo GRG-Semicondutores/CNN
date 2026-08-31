@@ -1,0 +1,20 @@
+# Resultados gerados pelas bancadas tradicionais e UVM
+/results_tb/
+/results_uvm/
+
+# Diretorios de compilacao do Verilator fora das pastas de resultados
+obj_dir/
+obj_dir_cov/
+
+# Artefatos comuns de simulacao e cobertura
+*.vvp
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+*.vpd
+*.wlf
+*.ucdb
+*.dat
+*.info
+
