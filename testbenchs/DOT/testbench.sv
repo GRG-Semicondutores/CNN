@@ -9,7 +9,7 @@ module testbench #(
     localparam ACC_WIDTH = 2*DATA_WIDTH + $clog2(N_INPUTS);
     localparam LATENCY = $clog2(N_INPUTS) + 1;
     localparam CLK_PERIOD = 10;
-    localparam N_TESTS = 26;
+    localparam N_TESTS = 29;
 
     logic clk, rst, valid_in, valid_out;
     logic signed [DATA_WIDTH-1:0] input_vec [0:N_INPUTS-1];
@@ -78,6 +78,9 @@ module testbench #(
                 23: test_name = "Impulso unico";
                 24: test_name = "Padrao conhecido de valid";
                 25: test_name = "Latencia apos reset";
+                26: test_name = "Latencia - pacotes em zero";
+                27: test_name = "Latencia - pacotes em um";
+                28: test_name = "Latencia - pacotes alternados";
                 default: test_name = "Caso desconhecido";
             endcase
         end
@@ -133,6 +136,70 @@ module testbench #(
             for (k=0; k<LATENCY; k=k+1) begin
                 exp_valid[k] = 0;
                 exp_pipe[k] = '0;
+            end
+        end
+    endtask
+
+    // Carrega um dos tres padroes dirigidos usados na varredura dedicada de latencia.
+    // pattern_kind = 0 -> todos os bits em 0
+    // pattern_kind = 1 -> todos os bits em 1
+    // pattern_kind = 2 -> bits alternados 0/1 (010101... em cada elemento)
+    task automatic load_latency_pattern;
+        input integer pattern_kind;
+        integer k, b;
+        begin
+            clear_vectors();
+            case (pattern_kind)
+                0: begin
+                    // clear_vectors() ja produz o pacote totalmente zerado.
+                end
+                1: begin
+                    for (k=0; k<N_INPUTS; k=k+1) begin
+                        input_vec[k] = '1;
+                        weight[k]    = '1;
+                    end
+                end
+                2: begin
+                    for (k=0; k<N_INPUTS; k=k+1) begin
+                        for (b=0; b<DATA_WIDTH; b=b+1) begin
+                            input_vec[k][b] = (b % 2 == 0) ? 1'b1 : 1'b0;
+                            weight[k][b]    = (b % 2 == 0) ? 1'b1 : 1'b0;
+                        end
+                    end
+                end
+                default: begin
+                    $fatal(1, "Padrao de latencia invalido: %0d", pattern_kind);
+                end
+            endcase
+        end
+    endtask
+
+    // Exercita todas as ocupacoes do pipeline: 1, 2, ... LATENCY pacotes preenchidos.
+    // Cada subcaso envia exatamente LATENCY pacotes validos. Os slots ainda nao
+    // preenchidos pelo padrao sao completados com zero, permitindo observar cada
+    // posicao temporal sem deixar valores residuais do subcaso anterior.
+    task automatic run_latency_fill_test;
+        input integer test_id;
+        input integer pattern_kind;
+        integer fill_count, slot;
+        begin
+            start_test(test_id);
+            for (fill_count=1; fill_count<=LATENCY; fill_count=fill_count+1) begin
+                // Comeca cada ocupacao com o pipeline vazio para tornar o caso isolado.
+                pulse_reset();
+
+                for (slot=0; slot<LATENCY; slot=slot+1) begin
+                    if (slot < fill_count)
+                        load_latency_pattern(pattern_kind);
+                    else
+                        clear_vectors();
+
+                    apply_transaction();
+                end
+
+                // O scoreboard temporal confere, para todos os pacotes, tanto
+                // o resultado do produto escalar quanto o ciclo de valid_out.
+                drain_and_report(test_id);
             end
         end
     endtask
@@ -359,6 +426,14 @@ module testbench #(
 
         // T25 - latência preservada após novo reset.
         start_test(25); pulse_reset(); clear_vectors(); input_vec[0]=13; weight[0]=-5; apply_transaction(); drain_and_report(25);
+
+        // T26--T28 - varredura dirigida de todas as ocupacoes do pipeline.
+        // Para cada padrao sao executados LATENCY subcasos. No subcaso n,
+        // n pacotes recebem o padrao e os LATENCY-n restantes sao zerados.
+        // Todos os pacotes permanecem validos e sao conferidos pelo scoreboard.
+        run_latency_fill_test(26, 0); // todos os bits em 0
+        run_latency_fill_test(27, 1); // todos os bits em 1
+        run_latency_fill_test(28, 2); // bits 0/1 alternados
 
         $display("");
         $display("=========================================================================================");
