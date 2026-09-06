@@ -1047,6 +1047,98 @@ O reset não deverá modificar permanentemente a latência do pipeline.
 
 ---
 
+## T26 — Varredura de latência com pacotes zerados
+
+### Objetivo
+
+Exercitar, de forma dirigida, todas as ocupações possíveis do pipeline até `LATENCY`, utilizando pacotes em que todos os bits de `input_vec` e `weight` estejam em `0`.
+
+### Procedimento
+
+Para cada quantidade de pacotes preenchidos entre `1` e `LATENCY`:
+
+1. iniciar com o pipeline vazio;
+2. aplicar exatamente `LATENCY` pacotes válidos;
+3. considerar preenchidos os pacotes correspondentes ao subcaso;
+4. completar com zero todos os slots ainda não preenchidos;
+5. drenar completamente o pipeline antes do próximo subcaso.
+
+Como o próprio padrão deste teste é zero, todos os pacotes produzirão:
+
+$$
+out=0
+$$
+
+### Verificação
+
+Para cada pacote válido deverão ser conferidos simultaneamente:
+
+* resultado matemático;
+* ciclo esperado de saída;
+* `valid_out`;
+* latência nominal.
+
+---
+
+## T27 — Varredura de latência com pacotes em um
+
+### Objetivo
+
+Repetir a mesma varredura de ocupação do pipeline utilizando pacotes em que todos os bits de `input_vec` e `weight` estejam em `1`.
+
+### Procedimento
+
+Serão executados `LATENCY` subcasos. No subcaso `n`:
+
+1. os primeiros `n` pacotes receberão o padrão de todos os bits em `1`;
+2. os `LATENCY-n` pacotes restantes serão completados com zero;
+3. todos os pacotes serão aplicados com `valid_in = 1`;
+4. o pipeline será completamente drenado antes do próximo subcaso.
+
+### Verificação
+
+O scoreboard deverá calcular o produto escalar signed correspondente para cada pacote e exigir que o resultado apareça exatamente no ciclo previsto.
+
+Um resultado correto fora do ciclo nominal continuará sendo classificado como falha de latência.
+
+---
+
+## T28 — Varredura de latência com bits alternados
+
+### Objetivo
+
+Exercitar todas as ocupações do pipeline utilizando, em cada elemento de `input_vec` e `weight`, um padrão de bits alternados entre `0` e `1`.
+
+Para `DATA_WIDTH = 8`, o padrão utilizado será equivalente a:
+
+```text
+01010101
+```
+
+### Procedimento
+
+Assim como em T27, serão executados `LATENCY` subcasos. No subcaso `n`:
+
+1. `n` pacotes receberão o padrão alternado;
+2. os demais pacotes até completar `LATENCY` serão zerados;
+3. todos permanecerão válidos;
+4. o pipeline será drenado antes do subcaso seguinte.
+
+### Verificação
+
+Cada transação deverá satisfazer simultaneamente:
+
+```text
+DATA_OK
+LATENCY_OK
+VALID_OK
+ORDER_OK
+```
+
+Dessa forma, T26, T27 e T28 verificam o preenchimento progressivo de todos os ciclos do pipeline com padrões determinísticos e reproduzíveis.
+
+---
+
 # 15. Scoreboard
 
 O scoreboard deverá utilizar uma estrutura temporal, e não apenas uma fila de valores.
@@ -1447,6 +1539,9 @@ para todas as operações válidas.
 | T23 | Impulso único           |       Sim |      Sim |
 | T24 | Padrão de validade      |       Sim |      Sim |
 | T25 | Latência pós-reset      |       Sim |      Sim |
+| T26 | Latência / pacotes zero |       Sim |      Sim |
+| T27 | Latência / pacotes um   |       Sim |      Sim |
+| T28 | Latência / alternados   |       Sim |      Sim |
 
 ---
 
@@ -1472,8 +1567,11 @@ A regressão será considerada aprovada somente quando:
 16. a presença de gaps não modificar a latência das transações válidas;
 17. a primeira operação após reset apresentar a latência nominal;
 18. o caminho dos dados e o caminho de validade estiverem temporalmente alinhados;
-19. as assertions não apresentarem violações não justificadas;
-20. qualquer falha puder ser reproduzida por ID, rodada e seed.
+19. T26, T27 e T28 exercitarem todas as ocupações de `1` até `LATENCY` pacotes;
+20. os slots não preenchidos nesses testes forem completados com zero;
+21. cada pacote desses testes apresentar simultaneamente resultado e latência corretos;
+22. as assertions não apresentarem violações não justificadas;
+23. qualquer falha puder ser reproduzida por ID, rodada e seed.
 
 ---
 
@@ -1554,3 +1652,38 @@ Dessa forma, uma operação somente será considerada correta se:
 4. preservar a ordem da operação dentro do pipeline.
 
 Essa abordagem permite verificar de maneira ampla o DotProduct sem exigir uma simulação exaustiva do espaço completo de estados, que é computacionalmente inviável.
+
+---
+
+# 31. Resultado da execução da bancada UVM no Verilator
+
+Após o fim dos testes, a regressão terminou com status **INCOMPLETE**. A causa
+desse encerramento foi a limitação do simulador SystemVerilog utilizado,
+**Verilator**, para os testes de quatro estados. Essa limitação não deve ser
+confundida com a falha de latência identificada separadamente em T23.
+
+O erro final ocorre porque **cinco testes obrigatórios, T07–T11, verificam
+estados `X` e `Z`**. Como o Verilator simula apenas dois estados, esses testes
+são pulados (`SKIP`). A bancada segue o critério do testbench original:
+testes obrigatórios não executados tornam a regressão **INCOMPLETE**, com
+retorno de erro.
+
+Além disso, existe uma falha separada em **T23**:
+
+- Latência nominal: **5 ciclos**.
+- Primeira aparição do dado: **4 ciclos**.
+- Aparição de `valid_out`: **5 ciclos**.
+
+Isso também acontece no testbench original. Ele prepara os vetores antes do
+ciclo em que ativa `valid_in`, e o DUT processa os dados a cada clock,
+inclusive quando `valid_in=0`. Por isso, o dado pode aparecer antecipadamente
+nessa medição.
+
+Portanto, temos **uma limitação do simulador para X/Z** e **uma divergência
+entre o estímulo de T23 e o critério de alinhamento exigido**. A cobertura de
+**96,7% das linhas do RTL**, obtida nessa execução, indica linhas exercitadas;
+não significa que a regressão foi aprovada.
+
+Para executar T07–T11, é necessário utilizar um simulador com suporte a UVM e
+à simulação de quatro estados. A divergência de T23 deve ser analisada
+separadamente; não foi demonstrado que ela seja um defeito do simulador.

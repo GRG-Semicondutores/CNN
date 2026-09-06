@@ -1,0 +1,243 @@
+SHELL := /bin/bash
+.DEFAULT_GOAL := all
+
+VERILATOR          ?= verilator
+VERILATOR_COVERAGE ?= verilator_coverage
+LCOV                ?= lcov
+GENHTML             ?= genhtml
+GTKWAVE             ?= gtkwave
+SURFER              ?= surfer
+
+UVM_HOME ?= /home/matheus/tools/1800.2-2017-1.0/src
+
+# Este Makefile pode ser chamado de qualquer diretorio.
+MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+PROJECT_ROOT := $(abspath $(MAKEFILE_DIR)/../../..)
+RTL_DIR      := $(PROJECT_ROOT)/src/DotProduct
+TB_DIR       := $(PROJECT_ROOT)/UVM/DOT
+RESULTS_ROOT ?= $(PROJECT_ROOT)/results_uvm
+RESULTS_DIR  := $(RESULTS_ROOT)/DOT
+
+TOP     := tb_dot
+RTL_TOP := DotProduct
+RTL     := $(RTL_DIR)/DotProduct.sv
+TB      := $(TB_DIR)/testbench.sv
+
+TB_INCLUDES := \
+	$(TB_DIR)/UVM_tb_params.svh \
+	$(TB_DIR)/UVM_seq_item.sv \
+	$(TB_DIR)/UVM_sequencer.sv \
+	$(TB_DIR)/UVM_random.sv \
+	$(TB_DIR)/UVM_sequence.sv \
+	$(TB_DIR)/UVM_driver.sv \
+	$(TB_DIR)/UVM_monitor.sv \
+	$(TB_DIR)/UVM_scoreboard.sv \
+	$(TB_DIR)/UVM_agent.sv \
+	$(TB_DIR)/UVM_env.sv
+
+OBJ_DIR     := $(RESULTS_DIR)/obj_dir
+OBJ_DIR_COV := $(RESULTS_DIR)/obj_dir_cov
+WAVE        := $(RESULTS_DIR)/DOT_UVM.vcd
+
+LOG_DIR         := $(RESULTS_DIR)/logs
+LINT_LOG        := $(LOG_DIR)/lint.log
+COMPILE_LOG     := $(LOG_DIR)/compile.log
+SIM_LOG         := $(LOG_DIR)/simulation.log
+COMPILE_COV_LOG := $(LOG_DIR)/compile_coverage.log
+SIM_COV_LOG     := $(LOG_DIR)/simulation_coverage.log
+
+COV_DIR      := $(RESULTS_DIR)/coverage
+COV_DAT      := $(COV_DIR)/dot_uvm_coverage.dat
+COV_INFO_RAW := $(COV_DIR)/dot_uvm_coverage_raw.info
+COV_INFO_RTL := $(COV_DIR)/dot_uvm_coverage.info
+COV_HTML     := $(COV_DIR)/html
+COV_SUMMARY  := $(COV_DIR)/coverage_summary.log
+SIM_COV_STATUS := $(LOG_DIR)/simulation_coverage.exitcode
+DEFER_SIM_STATUS ?= 0
+
+LINT_WAIVER     ?=
+LINT_WAIVER_OPT := $(if $(strip $(LINT_WAIVER)),$(LINT_WAIVER),)
+LINT_WAIVER_OUT ?= $(RESULTS_DIR)/verilator_lint.vlt
+
+RUN_ARGS     ?= +UVM_TESTNAME=dot_test +UVM_VERBOSITY=UVM_LOW +UVM_NO_RELNOTES
+COV_RUN_ARGS  = $(RUN_ARGS) +verilator+coverage+file+$(COV_DAT)
+# A elaboracao da biblioteca UVM consome bastante memoria. Um job e uma escolha
+# segura por padrao; use JOBS=N explicitamente em maquinas com mais recursos.
+JOBS         ?= 1
+
+# Evita que builds executados em ambientes restritos dependam de um cache global gravavel.
+BUILD_ENV := CCACHE_DISABLE=1
+
+INC := \
+	+incdir+$(TB_DIR) \
+	+incdir+$(RTL_DIR) \
+	+incdir+$(UVM_HOME)
+
+VFLAGS_COMMON := \
+	-sv --binary --timing -j $(JOBS) \
+	-Wno-fatal -Wno-WIDTHTRUNC -Wno-WIDTHEXPAND \
+	--output-split 5000 --output-split-cfuncs 5000 \
+	-CFLAGS -O0 \
+	--trace-vcd +define+UVM_NO_DPI \
+	$(INC) --top-module $(TOP)
+
+VFLAGS     := $(VFLAGS_COMMON) --Mdir $(OBJ_DIR)
+VFLAGS_COV := $(VFLAGS_COMMON) --coverage --Mdir $(OBJ_DIR_COV)
+
+LINT_FLAGS := \
+	-sv --lint-only --timing -j $(JOBS) -Wall -Wno-fatal \
+	-Wno-WIDTHTRUNC -Wno-WIDTHEXPAND +define+UVM_NO_DPI \
+	$(INC) --top-module $(TOP)
+
+LINT_RTL_FLAGS := \
+	-sv --lint-only --timing -j $(JOBS) -Wall -Wno-fatal \
+	-Wno-WIDTHTRUNC -Wno-WIDTHEXPAND \
+	+incdir+$(RTL_DIR) --top-module $(RTL_TOP)
+
+.PHONY: all check_uvm check_files check_verilator check_tools check_html_tools \
+	check_lint_waiver lint lint_rtl lint_waiver compile run compile_cov run_cov \
+	lcov_raw lcov_rtl coverage_summary html_rtl coverage waves surf clean help
+
+all: coverage
+
+check_uvm:
+	@test -f "$(UVM_HOME)/uvm_pkg.sv" || \
+	( echo "ERRO: uvm_pkg.sv nao encontrado em $(UVM_HOME)"; \
+	  echo "Informe UVM_HOME=<diretorio>/src"; exit 1 )
+	@test -f "$(UVM_HOME)/uvm_macros.svh" || \
+	( echo "ERRO: uvm_macros.svh nao encontrado em $(UVM_HOME)"; exit 1 )
+
+check_files:
+	@test -f "$(RTL)" || ( echo "ERRO: RTL nao encontrado: $(RTL)"; exit 1 )
+	@test -f "$(TB)" || ( echo "ERRO: testbench UVM nao encontrado: $(TB)"; exit 1 )
+	@for f in $(TB_INCLUDES); do \
+		test -f "$$f" || \
+		{ echo "ERRO: include UVM nao encontrado: $$f"; exit 1; }; \
+	done
+
+check_verilator:
+	@command -v $(VERILATOR) >/dev/null 2>&1 || \
+	( echo "ERRO: verilator nao encontrado no PATH"; exit 1 )
+
+check_tools: check_verilator
+	@command -v $(VERILATOR_COVERAGE) >/dev/null 2>&1 || \
+	( echo "ERRO: verilator_coverage nao encontrado no PATH"; exit 1 )
+	@command -v $(LCOV) >/dev/null 2>&1 || \
+	( echo "ERRO: lcov nao encontrado no PATH"; exit 1 )
+
+check_html_tools:
+	@command -v $(GENHTML) >/dev/null 2>&1 || \
+	( echo "ERRO: genhtml nao encontrado no PATH"; exit 1 )
+
+check_lint_waiver:
+	@if [ -n "$(LINT_WAIVER)" ]; then \
+		test -f "$(LINT_WAIVER)" || \
+		( echo "ERRO: waiver nao encontrado: $(LINT_WAIVER)"; exit 1 ); \
+	fi
+
+lint: check_verilator check_uvm check_files check_lint_waiver
+	@mkdir -p "$(RESULTS_DIR)" "$(LOG_DIR)"
+	@set -o pipefail; \
+	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_FLAGS) \
+		"$(UVM_HOME)/uvm_pkg.sv" "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(LINT_LOG)"
+
+lint_rtl: check_verilator check_files check_lint_waiver
+	@mkdir -p "$(RESULTS_DIR)" "$(LOG_DIR)"
+	@set -o pipefail; \
+	$(VERILATOR) $(LINT_WAIVER_OPT) $(LINT_RTL_FLAGS) "$(RTL)" \
+		2>&1 | tee "$(LINT_LOG)"
+
+lint_waiver: check_verilator check_uvm check_files
+	@mkdir -p "$(RESULTS_DIR)"
+	$(VERILATOR) $(LINT_FLAGS) --waiver-output "$(LINT_WAIVER_OUT)" \
+		"$(UVM_HOME)/uvm_pkg.sv" "$(RTL)" "$(TB)"
+
+compile: lint
+	@mkdir -p "$(RESULTS_DIR)" "$(LOG_DIR)"
+	@rm -rf "$(OBJ_DIR)"
+	@rm -f "$(SIM_LOG)"
+	@set -o pipefail; \
+	$(BUILD_ENV) $(VERILATOR) $(VFLAGS) "$(UVM_HOME)/uvm_pkg.sv" "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(COMPILE_LOG)"
+
+run: compile
+	@mkdir -p "$(LOG_DIR)"
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && "$(OBJ_DIR)/V$(TOP)" $(RUN_ARGS) +DOT_REPORT_FILE=$(LOG_DIR)/report.log \
+		2>&1 | tee "$(SIM_LOG)"
+	@if grep -Eq '^UVM_(ERROR|FATAL)[[:space:]]+[^:]' "$(SIM_LOG)"; then \
+		echo "ERRO: a simulacao UVM reportou UVM_ERROR/UVM_FATAL"; exit 1; \
+	fi
+
+compile_cov: check_tools check_uvm check_files
+	@mkdir -p "$(RESULTS_DIR)" "$(COV_DIR)" "$(LOG_DIR)"
+	@rm -rf "$(OBJ_DIR_COV)"
+	@rm -f "$(SIM_COV_LOG)"
+	@set -o pipefail; \
+	$(BUILD_ENV) $(VERILATOR) $(VFLAGS_COV) "$(UVM_HOME)/uvm_pkg.sv" "$(RTL)" "$(TB)" \
+		2>&1 | tee "$(COMPILE_COV_LOG)"
+
+run_cov: compile_cov
+	@mkdir -p "$(COV_DIR)" "$(LOG_DIR)"
+	@rm -f "$(COV_DAT)" "$(COV_INFO_RAW)" "$(COV_INFO_RTL)" "$(SIM_COV_STATUS)"
+	@cd "$(RESULTS_DIR)" || exit 1; \
+	"$(OBJ_DIR_COV)/V$(TOP)" $(COV_RUN_ARGS) +DOT_REPORT_FILE=$(LOG_DIR)/report.log \
+		2>&1 | tee "$(SIM_COV_LOG)"; \
+	codes=("$${PIPESTATUS[@]}"); status=$${codes[0]}; \
+	if [ "$${codes[1]}" -ne 0 ]; then status=$${codes[1]}; fi; \
+	if grep -Eq '^UVM_(ERROR|FATAL)[[:space:]]+[^:]|RESULTADO FINAL[[:space:]]*:[[:space:]]*(FAIL|INCOMPLETE)' "$(SIM_COV_LOG)"; then status=1; fi; \
+	printf '%s\n' "$$status" > "$(SIM_COV_STATUS)"; \
+	if [ "$(DEFER_SIM_STATUS)" != 1 ]; then exit "$$status"; fi
+	@test -s "$(COV_DAT)" || ( echo "ERRO: simulacao nao gerou cobertura: $(COV_DAT)"; exit 1 )
+
+lcov_raw: run_cov
+	$(VERILATOR_COVERAGE) --write-info "$(COV_INFO_RAW)" "$(COV_DAT)"
+
+lcov_rtl: lcov_raw
+	$(LCOV) --extract "$(COV_INFO_RAW)" "$(RTL_DIR)/*" -o "$(COV_INFO_RTL)"
+
+coverage_summary: lcov_rtl
+	@set -o pipefail; $(LCOV) --summary "$(COV_INFO_RTL)" 2>&1 | tee "$(COV_SUMMARY)"
+
+# Gera os artefatos antes de devolver a falha da regressao ao chamador.
+html_rtl: DEFER_SIM_STATUS=1
+html_rtl: coverage_summary check_html_tools
+	@rm -rf "$(COV_HTML)"
+	@mkdir -p "$(COV_HTML)"
+	$(GENHTML) --title "DotProduct UVM (consulte logs/report.log para o resultado da regressao)" --flat --legend --prefix "$(PROJECT_ROOT)/" \
+		--source-directory "$(PROJECT_ROOT)" -o "$(COV_HTML)" "$(COV_INFO_RTL)"
+	@echo "HTML RTL gerado em: $(COV_HTML)/index.html"
+	@status=$$(cat "$(SIM_COV_STATUS)"); \
+	if [ "$$status" -ne 0 ]; then \
+		echo "Relatorio gerado; regressao com falha ou incompleta. Consulte $(LOG_DIR)/report.log"; \
+	fi; exit "$$status"
+
+coverage: html_rtl
+
+waves: RUN_ARGS += +waveform
+waves: run
+	@test -f "$(WAVE)" || ( echo "ERRO: waveform nao encontrada: $(WAVE)"; exit 1 )
+	$(GTKWAVE) "$(WAVE)"
+
+surf: RUN_ARGS += +waveform
+surf: run
+	@test -f "$(WAVE)" || ( echo "ERRO: waveform nao encontrada: $(WAVE)"; exit 1 )
+	$(SURFER) "$(WAVE)"
+
+clean:
+	@rm -rf "$(RESULTS_DIR)"
+	@echo "Resultados UVM da DOT removidos: $(RESULTS_DIR)"
+
+help:
+	@echo "Makefile - DOT UVM / Verilator"
+	@echo ""
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot run"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot coverage"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot lint"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot lint_rtl"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot waves"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot surf"
+	@echo "  make -f scripts/UVM/makefiles/Makefile_UVM_dot clean"
+	@echo ""
+	@echo "Use UVM_HOME=/caminho/uvm/src para sobrescrever a biblioteca."
