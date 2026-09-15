@@ -1,0 +1,13 @@
+arithmetic/Adder_CSA.sv
+arithmetic/Multiplier_WTM.sv
+convolution/DotProduct.sv
+convolution/Convolution.sv
+convolution/FeatureMap.sv
+convolution/ConvLayer.sv
+top/ReLU.sv
+top/Quantizer.sv
+fully_connected/Neuron.sv
+fully_connected/FCLayer.sv
+pooling/MaxPooling.sv
+reshape/Flatten.sv
+top/CNN.sv
