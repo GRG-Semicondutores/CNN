@@ -1,0 +1,74 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.6 -pad_left 0 -pad_right 0
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          5.832 um^2
+[INFO GPL-0037] Total instances area:            6.590 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:               106
+[INFO GPL-0007] Movable instances:                  80
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                    160
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          5.832 um^2
+[INFO GPL-0019] Utilization:                    47.337 %
+[INFO GPL-0020] Standard cells area:             5.832 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 80	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.6000
+[INFO GPL-0024] Movable insts average area:      0.073 um^2
+[INFO GPL-0025] Ideal bin area:                  0.121 um^2
+[INFO GPL-0026] Ideal bin count:                   107
+[INFO GPL-0027] Total bin area:                 13.078 um^2
+[INFO GPL-0028] Bin count (X, Y):           8 ,      8
+[INFO GPL-0029] Bin size (W * H):       0.466 *  0.439 um
+[INFO GPL-0030] Number of bins:                     64
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9066 |  0.000000e+00 |   +0.00% |  8.00e-05 |      
+        5 |   0.0981 |  0.000000e+00 |          |  1.06e-04 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 5
+[INFO GPL-1002] Placed Cell Area                5.8320
+[INFO GPL-1003] Available Free Area            12.3201
+[INFO GPL-1004] Minimum Feasible Density        0.4800 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5260
+[INFO GPL-1008]     - For 80% usage of free space: 0.5917
+[INFO GPL-1009]     - For 50% usage of free space: 0.9467
+[INFO GPL-1014] Final placement area: 5.83 (+0.00%)
+[INFO GPL-1018] Final HPWL (um): 0.00
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:01.16[h:]min:sec. CPU time: user 1.08 sys 0.10 (101%). Peak memory: 197400KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb            1            192 f854647be289225156d5

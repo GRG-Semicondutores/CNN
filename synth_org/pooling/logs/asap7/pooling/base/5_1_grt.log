@@ -1,0 +1,513 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/4_cts.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/4_cts.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       14
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+
+Design:                   MaxPooling
+Die area:                 ( 0 0 ) ( 15863 15863 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     965
+Number of terminals:      162
+Number of snets:          2
+Number of nets:           1115
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 107.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 12538.
+[INFO DRT-0033] V1 shape region query size = 14388.
+[INFO DRT-0033] M2 shape region query size = 220.
+[INFO DRT-0033] V2 shape region query size = 396.
+[INFO DRT-0033] M3 shape region query size = 396.
+[INFO DRT-0033] V3 shape region query size = 264.
+[INFO DRT-0033] M4 shape region query size = 344.
+[INFO DRT-0033] V4 shape region query size = 264.
+[INFO DRT-0033] M5 shape region query size = 233.
+[INFO DRT-0033] V5 shape region query size = 30.
+[INFO DRT-0033] M6 shape region query size = 25.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0078]   Complete 564 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0081]   Complete 107 unique inst patterns.
+[INFO DRT-0084]   Complete 476 groups.
+#scanned instances     = 965
+#unique  instances     = 107
+#stdCellGenAp          = 2775
+#stdCellValidPlanarAp  = 0
+#stdCellValidViaAp     = 2251
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 2616
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:00:10, elapsed time = 00:00:00, memory = 202.53 (MB), peak = 201.52 (MB)
+global_route -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/reports/asap7/pooling/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 0
+[INFO GRT-0019] Found 0 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 11
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal      10010          7166          28.41%
+M3         Vertical        11106          8256          25.66%
+M4         Horizontal       8486          6302          25.74%
+M5         Vertical         8221          6098          25.82%
+M6         Horizontal       5923          4074          31.22%
+M7         Vertical         6448          4368          32.26%
+---------------------------------------------------------------
+
+[INFO GRT-0197] Via related to pin nodes: 6133
+[INFO GRT-0198] Via related Steiner nodes: 24
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 8024
+[INFO GRT-0112] Final usage 3D: 26605
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Congestion
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2                7166           601            8.39%             0 /  0 /  0
+M3                8256           659            7.98%             0 /  0 /  0
+M4                6302           163            2.59%             0 /  0 /  0
+M5                6098           189            3.10%             0 /  0 /  0
+M6                4074           505           12.40%             0 /  0 /  0
+M7                4368           416            9.52%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total            36264          2533            6.98%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 2420 um
+[INFO GRT-0014] Routed nets: 1091
+[INFO GRT-0303] Global routing runtime = 00:00:00
+[WARNING STA-0450] virtual clock virtual_clk can not be propagated.
+estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |      1115
+       10 |     +0.0% |       0 |       0 |             0 |      1105
+       20 |     +0.0% |       0 |       0 |             0 |      1095
+       30 |     +0.0% |       0 |       0 |             0 |      1085
+       40 |     +0.0% |       0 |       0 |             0 |      1075
+       50 |     +0.0% |       0 |       0 |             0 |      1065
+       60 |     +0.0% |       0 |       0 |             0 |      1055
+       70 |     +0.0% |       0 |       0 |             0 |      1045
+       80 |     +0.0% |       0 |       0 |             0 |      1035
+       90 |     +0.0% |       0 |       0 |             0 |      1025
+      100 |     +0.0% |       0 |       0 |             0 |      1015
+      110 |     +0.0% |       0 |       0 |             0 |      1005
+      120 |     +0.0% |       0 |       0 |             0 |       995
+      130 |     +0.0% |       0 |       0 |             0 |       985
+[WARNING RSZ-0104] Net _0676_ only has one pin. Check if it is intended to be dangling.
+      140 |     +0.0% |       0 |       0 |             0 |       975
+      150 |     +0.0% |       0 |       0 |             0 |       965
+[WARNING RSZ-0104] Net _0674_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0672_ only has one pin. Check if it is intended to be dangling.
+      160 |     +0.0% |       0 |       0 |             0 |       955
+      170 |     +0.0% |       0 |       0 |             0 |       945
+[WARNING RSZ-0104] Net _0675_ only has one pin. Check if it is intended to be dangling.
+      180 |     +0.0% |       0 |       0 |             0 |       935
+      190 |     +0.0% |       0 |       0 |             0 |       925
+[WARNING RSZ-0104] Net _0664_ only has one pin. Check if it is intended to be dangling.
+      200 |     +0.0% |       0 |       0 |             0 |       915
+      210 |     +0.0% |       0 |       0 |             0 |       905
+[WARNING RSZ-0104] Net _0673_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0671_ only has one pin. Check if it is intended to be dangling.
+      220 |     +0.0% |       0 |       0 |             0 |       895
+      230 |     +0.0% |       0 |       0 |             0 |       885
+      240 |     +0.0% |       0 |       0 |             0 |       875
+      250 |     +0.0% |       0 |       0 |             0 |       865
+      260 |     +0.0% |       0 |       0 |             0 |       855
+      270 |     +0.0% |       0 |       0 |             0 |       845
+[WARNING RSZ-0104] Net _0663_ only has one pin. Check if it is intended to be dangling.
+      280 |     +0.0% |       0 |       0 |             0 |       835
+      290 |     +0.0% |       0 |       0 |             0 |       825
+      300 |     +0.0% |       0 |       0 |             0 |       815
+      310 |     +0.0% |       0 |       0 |             0 |       805
+      320 |     +0.0% |       0 |       0 |             0 |       795
+      330 |     +0.0% |       0 |       0 |             0 |       785
+      340 |     +0.0% |       0 |       0 |             0 |       775
+      350 |     +0.0% |       0 |       0 |             0 |       765
+      360 |     +0.0% |       0 |       0 |             0 |       755
+      370 |     +0.0% |       0 |       0 |             0 |       745
+      380 |     +0.0% |       0 |       0 |             0 |       735
+      390 |     +0.0% |       0 |       0 |             0 |       725
+      400 |     +0.0% |       0 |       0 |             0 |       715
+      410 |     +0.0% |       0 |       0 |             0 |       705
+      420 |     +0.0% |       0 |       0 |             0 |       695
+      430 |     +0.0% |       0 |       0 |             0 |       685
+      440 |     +0.0% |       0 |       0 |             0 |       675
+      450 |     +0.0% |       0 |       0 |             0 |       665
+      460 |     +0.0% |       0 |       0 |             0 |       655
+      470 |     +0.0% |       0 |       0 |             0 |       645
+      480 |     +0.0% |       0 |       0 |             0 |       635
+      490 |     +0.0% |       0 |       0 |             0 |       625
+      500 |     +0.0% |       0 |       0 |             0 |       615
+      510 |     +0.0% |       0 |       0 |             0 |       605
+      520 |     +0.0% |       0 |       0 |             0 |       595
+      530 |     +0.0% |       0 |       0 |             0 |       585
+      540 |     +0.0% |       0 |       0 |             0 |       575
+      550 |     +0.0% |       0 |       0 |             0 |       565
+[WARNING RSZ-0104] Net _0670_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0668_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0666_ only has one pin. Check if it is intended to be dangling.
+      560 |     +0.0% |       0 |       0 |             0 |       555
+[WARNING RSZ-0104] Net _0658_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0656_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0654_ only has one pin. Check if it is intended to be dangling.
+      570 |     +0.0% |       0 |       0 |             0 |       545
+      580 |     +0.0% |       0 |       0 |             0 |       535
+      590 |     +0.0% |       0 |       0 |             0 |       525
+      600 |     +0.0% |       0 |       0 |             0 |       515
+      610 |     +0.0% |       0 |       0 |             0 |       505
+      620 |     +0.0% |       0 |       0 |             0 |       495
+      630 |     +0.0% |       0 |       0 |             0 |       485
+      640 |     +0.0% |       0 |       0 |             0 |       475
+      650 |     +0.0% |       0 |       0 |             0 |       465
+[WARNING RSZ-0104] Net _0662_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0660_ only has one pin. Check if it is intended to be dangling.
+      660 |     +0.0% |       0 |       0 |             0 |       455
+      670 |     +0.0% |       0 |       0 |             0 |       445
+      680 |     +0.0% |       0 |       0 |             0 |       435
+      690 |     +0.0% |       0 |       0 |             0 |       425
+      700 |     +0.0% |       0 |       0 |             0 |       415
+      710 |     +0.0% |       0 |       0 |             0 |       405
+[WARNING RSZ-0104] Net _0669_ only has one pin. Check if it is intended to be dangling.
+      720 |     +0.0% |       0 |       0 |             0 |       395
+[WARNING RSZ-0104] Net _0667_ only has one pin. Check if it is intended to be dangling.
+      730 |     +0.0% |       0 |       0 |             0 |       385
+[WARNING RSZ-0104] Net _0665_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0661_ only has one pin. Check if it is intended to be dangling.
+      740 |     +0.0% |       0 |       0 |             0 |       375
+[WARNING RSZ-0104] Net _0659_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0657_ only has one pin. Check if it is intended to be dangling.
+      750 |     +0.0% |       0 |       0 |             0 |       365
+[WARNING RSZ-0104] Net _0655_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _0653_ only has one pin. Check if it is intended to be dangling.
+      760 |     +0.0% |       0 |       0 |             0 |       355
+      770 |     +0.0% |       0 |       0 |             0 |       345
+      780 |     +0.0% |       0 |       0 |             0 |       335
+      790 |     +0.0% |       0 |       0 |             0 |       325
+      800 |     +0.0% |       0 |       0 |             0 |       315
+      810 |     +0.0% |       0 |       0 |             0 |       305
+      820 |     +0.0% |       0 |       0 |             0 |       295
+      830 |     +0.0% |       0 |       0 |             0 |       285
+      840 |     +0.0% |       0 |       0 |             0 |       275
+      850 |     +0.0% |       0 |       0 |             0 |       265
+      860 |     +0.0% |       0 |       0 |             0 |       255
+      870 |     +0.0% |       0 |       0 |             0 |       245
+      880 |     +0.0% |       0 |       0 |             0 |       235
+      890 |     +0.0% |       0 |       0 |             0 |       225
+      900 |     +0.0% |       0 |       0 |             0 |       215
+      910 |     +0.0% |       0 |       0 |             0 |       205
+      920 |     +0.0% |       0 |       0 |             0 |       195
+      930 |     +0.0% |       0 |       0 |             0 |       185
+      940 |     +0.0% |       0 |       0 |             0 |       175
+      950 |     +0.0% |       0 |       0 |             0 |       165
+      960 |     +0.0% |       0 |       0 |             0 |       155
+      970 |     +0.0% |       0 |       0 |             0 |       145
+      980 |     +0.0% |       0 |       0 |             0 |       135
+      990 |     +0.0% |       0 |       0 |             0 |       125
+     1000 |     +0.0% |       0 |       0 |             0 |       115
+     1010 |     +0.0% |       0 |       0 |             0 |       105
+     1020 |     +0.0% |       0 |       0 |             0 |        95
+     1030 |     +0.0% |       0 |       0 |             0 |        85
+     1040 |     +0.0% |       0 |       0 |             0 |        75
+     1050 |     +0.0% |       0 |       0 |             0 |        65
+     1060 |     +0.0% |       0 |       0 |             0 |        55
+     1070 |     +0.0% |       0 |       0 |             0 |        45
+     1080 |     +0.0% |       0 |       0 |             0 |        35
+     1090 |     +0.0% |       0 |       0 |             0 |        25
+     1100 |     +0.0% |       0 |       0 |             0 |        15
+     1110 |     +0.0% |       0 |       0 |             0 |         5
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.07s
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 136.67 um^2
+[INFO DPL-0007] Movable instances area: 81.37 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.51 um^2
+[INFO DPL-0009] Utilization: 61.4%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 965 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL            1481.6 u
+legalized HPWL           1481.6 u
+delta HPWL                    0 %
+
+global_route -end_incremental -resistance_aware -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/reports/asap7/pooling/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 32 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 32 out of 32 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -369.024 |   -43596.2 |   -11484.5 |     32 | imagem_out[21]
+      10* |       1 |       0 |        0 |      0 |     8 |    -0.1% | -368.569 |   -43578.7 |   -11482.8 |     32 | imagem_out[21]
+      20* |       1 |       0 |        0 |      1 |    17 |    -0.0% | -366.768 |   -43456.0 |   -11461.6 |     32 | imagem_out[31]
+      30* |       1 |       1 |        0 |      1 |    26 |    +0.0% | -374.042 |   -43694.7 |   -11521.8 |     32 | imagem_out[31]
+      31* |       1 |       0 |        0 |      0 |    15 |    -0.1% | -364.723 |   -43411.9 |   -11446.1 |     32 | imagem_out[31]
+      36* |       1 |       3 |        0 |      0 |    16 |    -0.0% | -364.723 |   -43409.3 |   -11425.8 |     32 | imagem_out[31]
+      38* |       1 |       3 |        0 |      0 |    17 |    -0.0% | -364.723 |   -43409.3 |   -11425.9 |     32 | imagem_out[31]
+      40* |       1 |       3 |        0 |      0 |    18 |    -0.0% | -364.723 |   -43409.3 |   -11426.3 |     32 | imagem_out[31]
+      42* |       1 |       3 |        0 |      0 |    20 |    -0.0% | -364.723 |   -43397.6 |   -11423.0 |     32 | imagem_out[31]
+      44* |       1 |       3 |        0 |      0 |    21 |    -0.0% | -364.723 |   -43400.4 |   -11423.3 |     32 | imagem_out[31]
+      46* |       1 |       3 |        0 |      0 |    22 |    -0.0% | -364.723 |   -43401.9 |   -11423.3 |     32 | imagem_out[31]
+      48* |       1 |       3 |        0 |      0 |    23 |    -0.0% | -364.723 |   -43398.6 |   -11422.3 |     32 | imagem_out[31]
+      50* |       1 |       3 |        0 |      0 |    24 |    -0.0% | -364.723 |   -43398.6 |   -11422.1 |     32 | imagem_out[31]
+      51* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      54* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      58* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      60* |       1 |       3 |        0 |      1 |    25 |    +0.1% | -365.441 |   -43413.1 |   -11428.3 |     32 | imagem_out[31]
+      62* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      66* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      70* |       1 |       4 |        0 |      1 |    26 |    +0.1% | -364.913 |   -43412.2 |   -11423.8 |     32 | imagem_out[31]
+      70* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      74* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      78* |       1 |       3 |        0 |      0 |    25 |    -0.0% | -364.723 |   -43401.6 |   -11422.6 |     32 | imagem_out[31]
+      80* |       1 |       3 |        0 |      0 |    26 |    -0.0% | -364.723 |   -43397.3 |   -11423.3 |     32 | imagem_out[31]
+      90* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43292.6 |   -11379.4 |     32 | imagem_out[31]
+      95* |       1 |       4 |        0 |      0 |    32 |    +0.1% | -364.723 |   -43242.5 |   -11374.1 |     32 | imagem_out[31]
+     100* |       1 |       4 |        0 |      1 |    35 |    +0.1% | -365.227 |   -43247.1 |   -11378.9 |     32 | imagem_out[31]
+     103* |       1 |       4 |        0 |      0 |    32 |    +0.1% | -364.723 |   -43242.5 |   -11374.1 |     32 | imagem_out[31]
+     106* |       1 |       4 |        0 |      0 |    34 |    +0.1% | -364.723 |   -43216.8 |   -11365.5 |     32 | imagem_out[31]
+     109* |       1 |       4 |        0 |      0 |    34 |    +0.1% | -364.723 |   -43216.8 |   -11365.5 |     32 | imagem_out[31]
+     110* |       1 |       4 |        0 |      0 |    34 |    +0.1% | -364.723 |   -43216.8 |   -11365.5 |     32 | imagem_out[31]
+     111* |       1 |       4 |        0 |      0 |    34 |    +0.1% | -364.723 |   -43216.8 |   -11365.5 |     32 | imagem_out[31]
+     113* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43215.2 |   -11364.6 |     32 | imagem_out[31]
+     115* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43215.2 |   -11364.6 |     32 | imagem_out[31]
+     117* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43215.2 |   -11364.6 |     32 | imagem_out[31]
+     119* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43215.2 |   -11364.6 |     32 | imagem_out[31]
+     120* |       1 |       4 |        0 |      0 |    35 |    +0.1% | -364.723 |   -43215.2 |   -11364.6 |     32 | imagem_out[31]
+     130* |       1 |       4 |        0 |      0 |    45 |    +0.1% | -364.723 |   -43209.2 |   -11358.4 |     32 | imagem_out[31]
+     131* |       1 |       4 |        0 |      0 |    44 |    +0.1% | -364.723 |   -43200.4 |   -11356.5 |     32 | imagem_out[31]
+     135* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     137* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     139* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     140* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     141* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     143* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     145* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     147* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     147* |       1 |       4 |        0 |      0 |    47 |    +0.1% | -364.723 |   -43192.3 |   -11350.1 |     32 | imagem_out[31]
+     150+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     150+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     151+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     152+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     153+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     154+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     155+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     156+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     157+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     158+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     159+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     160+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     160+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     161+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     162+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     163+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     164+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     165+ |       1 |       6 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43181.4 |   -11340.3 |     32 | imagem_out[31]
+     167+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     168+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     169+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     170+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     170+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     171+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     172+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     173+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     174+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     175+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     176+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     177+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     178+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     179+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     180+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     180+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     181+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+     182+ |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+    final |       1 |       7 |        0 |      0 |    47 |    +0.2% | -363.503 |   -43169.2 |   -11340.0 |     32 | imagem_out[31]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0059] Removed 1 buffers.
+[INFO RSZ-0051] Resized 7 instances: 7 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 47 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 1.82s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.00s
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 136.67 um^2
+[INFO DPL-0007] Movable instances area: 81.52 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.51 um^2
+[INFO DPL-0009] Utilization: 61.5%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 964 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         18 |         4 |        14
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.5 u
+average displacement        0.0 u
+max displacement            0.2 u
+original HPWL            1482.0 u
+legalized HPWL           1482.6 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -resistance_aware -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/reports/asap7/pooling/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
+[INFO RSZ-0100] Repair move sequence: RerouteMove 
+[INFO RSZ-0094] Found 32 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 1 out of 32 (0.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -363.503 |   -43174.1 |   -11340.1 |     32 | imagem_out[31]
+       1* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -363.503 |   -43174.1 |   -11340.1 |     32 | imagem_out[31]
+       1* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -363.503 |   -43174.1 |   -11340.1 |     32 | imagem_out[31]
+    final |       0 |       0 |        0 |      0 |     0 |    +0.0% | -363.503 |   -43174.1 |   -11340.1 |     32 | imagem_out[31]
+------------------------------------------------------------------------------------------------------------------------------
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 0.04s
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+No registers in design
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 84 um^2 61% utilization.
+[INFO FLW-0007] clock virtual_clk period 10.000000
+[INFO FLW-0008] Clock virtual_clk period 354.828
+[INFO FLW-0009] Clock virtual_clk slack -363.503
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/updated_clks.sdc
+[WARNING STA-0450] virtual clock virtual_clk can not be propagated.
+[INFO FLW-0011] Path endpoint path count 44
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/5_1_grt.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/5_1_grt.sdc
+Elapsed time: 0:04.68[h:]min:sec. CPU time: user 28.14 sys 0.30 (607%). Peak memory: 358996KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb            4            350 9044e2db205ce54e3bee
+5_1_grt                   .sdc                             d92a38ce241bac97179e

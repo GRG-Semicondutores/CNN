@@ -1,0 +1,80 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/ics55/lib/ics55_LLSC_H7CR_tt.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/ics55/WTM/base/1_synth.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/ics55/WTM/base/1_synth.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/ics55/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+number instances in verilog is 733
+initialize_floorplan -utilization 40 -aspect_ratio 1.0 -core_space 1.0 -site core7
+[INFO IFP-0107] Defining die area using utilization: 40.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (1.000, 1.000) snapped to (1.000, 1.400).
+[INFO IFP-0001] Added 43 rows of 305 site core7.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 63.053 63.053 ) um
+[INFO IFP-0101] Core BBox: (  1.000  1.400 ) ( 62.000 61.600 ) um
+[INFO IFP-0102] Core area:                         3672.200 um^2
+[INFO IFP-0103] Total instances area:              1491.000 um^2
+[INFO IFP-0104] Effective utilization:                0.406
+[INFO IFP-0105] Number of instances:                    733
+make_tracks
+set_global_routing_layer_adjustment MET1-RDL 0.3
+set_routing_layers -signal MET1-RDL
+set_dont_use "FILLCAP* FILLTAP* ANT*"
+[WARNING STA-0122] cell 'FILLTAP*' not found.
+[WARNING STA-0122] cell 'ANT*' not found.
+repair_tie_fanout -separation 0 ics55_LLSC_H7CR_typ_tt_1p2_25/TIELOH7R/Z
+[INFO RSZ-0042] Inserted 1 tie TIELOH7R instances.
+repair_tie_fanout -separation 0 ics55_LLSC_H7CR_typ_tt_1p2_25/TIEHIH7R/Z
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 0.10s
+Default units for flow
+ time 1ns
+ capacitance 1pF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1nW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (pF/um)
+------------------------------------------------
+      MET1 |        1.00e-01 |         1.00e-01
+      MET2 |        1.00e-01 |         1.00e-01
+      MET3 |        1.00e-01 |         1.00e-01
+      MET4 |        1.00e-01 |         1.00e-01
+      MET5 |        1.00e-01 |         1.00e-01
+      T4M2 |        1.00e-01 |         1.00e-01
+       RDL |        1.00e-01 |         1.00e-01
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+      VIA1 |       0.00e+00 
+      VIA2 |       0.00e+00 
+      VIA3 |       0.00e+00 
+      VIA4 |       0.00e+00 
+      T4V2 |       0.00e+00 
+        RV |       0.00e+00 
+----------------------------
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 1491 um^2 41% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/ics55/WTM/base/2_1_floorplan.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/ics55/WTM/base/2_1_floorplan.sdc
+Elapsed time: 0:01.81[h:]min:sec. CPU time: user 1.67 sys 0.16 (100%). Peak memory: 249912KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb            1            244 8861ca3c57bc92a469f2
+2_1_floorplan             .sdc                             ef230bbea1108ad0217b

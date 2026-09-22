@@ -1,0 +1,1440 @@
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+DESIGN Flatten ;
+UNITS DISTANCE MICRONS 1000 ;
+DIEAREA ( 0 0 ) ( 7818 7818 ) ;
+ROW ROW_0 asap7sc7p5t 2052 2160 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_1 asap7sc7p5t 2052 2430 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_2 asap7sc7p5t 2052 2700 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_3 asap7sc7p5t 2052 2970 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_4 asap7sc7p5t 2052 3240 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_5 asap7sc7p5t 2052 3510 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_6 asap7sc7p5t 2052 3780 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_7 asap7sc7p5t 2052 4050 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_8 asap7sc7p5t 2052 4320 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_9 asap7sc7p5t 2052 4590 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_10 asap7sc7p5t 2052 4860 N DO 69 BY 1 STEP 54 0 ;
+ROW ROW_11 asap7sc7p5t 2052 5130 FS DO 69 BY 1 STEP 54 0 ;
+ROW ROW_12 asap7sc7p5t 2052 5400 N DO 69 BY 1 STEP 54 0 ;
+TRACKS X 116 DO 97 STEP 80 LAYER Pad ;
+TRACKS Y 116 DO 97 STEP 80 LAYER Pad ;
+TRACKS X 116 DO 97 STEP 80 LAYER M9 ;
+TRACKS Y 116 DO 97 STEP 80 LAYER M9 ;
+TRACKS X 116 DO 97 STEP 80 LAYER M8 ;
+TRACKS Y 116 DO 97 STEP 80 LAYER M8 ;
+TRACKS X 16 DO 122 STEP 64 LAYER M7 ;
+TRACKS Y 16 DO 122 STEP 64 LAYER M7 ;
+TRACKS X 60 DO 162 STEP 48 LAYER M6 ;
+TRACKS Y 16 DO 122 STEP 64 LAYER M6 ;
+TRACKS X 12 DO 163 STEP 48 LAYER M5 ;
+TRACKS Y 12 DO 163 STEP 48 LAYER M5 ;
+TRACKS X 45 DO 216 STEP 36 LAYER M4 ;
+TRACKS Y 12 DO 163 STEP 48 LAYER M4 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M3 ;
+TRACKS Y 9 DO 217 STEP 36 LAYER M3 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M2 ;
+TRACKS Y 45 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 81 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 117 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 153 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 189 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 225 DO 29 STEP 270 LAYER M2 ;
+TRACKS Y 270 DO 28 STEP 270 LAYER M2 ;
+TRACKS X 9 DO 217 STEP 36 LAYER M1 ;
+TRACKS Y 9 DO 217 STEP 36 LAYER M1 ;
+GCELLGRID X 0 DO 13 STEP 570 ;
+GCELLGRID Y 0 DO 13 STEP 570 ;
+VIAS 5 ;
+    - via1_2_3726_18_1_103_36_36 + VIARULE M2_M1 + CUTSIZE 18 18  + LAYERS M1 V1 M2  + CUTSPACING 18 18  + ENCLOSURE 0 0 2 0  + ROWCOL 1 103  ;
+    - VIA23_1_3_36_36 + RECT M2 ( -50 -9 ) ( 50 9 ) + RECT M3 ( -45 -14 ) ( 45 14 ) + RECT V2 ( 27 -9 ) ( 45 9 ) + RECT V2 ( -9 -9 ) ( 9 9 ) + RECT V2 ( -45 -9 ) ( -27 9 ) ;
+    - VIA34_1_2_58_52 + RECT M3 ( -40 -17 ) ( 40 17 ) + RECT M4 ( -46 -12 ) ( 46 12 ) + RECT V3 ( 17 -12 ) ( 35 12 ) + RECT V3 ( -35 -12 ) ( -17 12 ) ;
+    - VIA45_1_2_58_58 + RECT M4 ( -52 -12 ) ( 52 12 ) + RECT M5 ( -60 -23 ) ( 60 23 ) + RECT V4 ( 17 -12 ) ( 41 12 ) + RECT V4 ( -41 -12 ) ( -17 12 ) ;
+    - via5_6_120_288_1_2_58_322 + VIARULE M6_M5widePWR1p152 + CUTSIZE 24 288  + LAYERS M5 V5 M6  + CUTSPACING 34 34  + ENCLOSURE 19 0 0 0  + ROWCOL 1 2  ;
+END VIAS
+COMPONENTS 91 ;
+    - FILLER_0_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 2160 ) N ;
+    - FILLER_0_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 2160 ) N ;
+    - FILLER_0_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 2160 ) N ;
+    - FILLER_0_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 2160 ) N ;
+    - FILLER_0_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 2160 ) N ;
+    - FILLER_10_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 4860 ) N ;
+    - FILLER_10_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 4860 ) N ;
+    - FILLER_10_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 4860 ) N ;
+    - FILLER_10_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 4860 ) N ;
+    - FILLER_10_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 4860 ) N ;
+    - FILLER_11_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 5130 ) FS ;
+    - FILLER_11_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 5130 ) FS ;
+    - FILLER_11_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 5130 ) FS ;
+    - FILLER_11_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 5130 ) FS ;
+    - FILLER_11_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 5130 ) FS ;
+    - FILLER_12_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 5400 ) N ;
+    - FILLER_12_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 5400 ) N ;
+    - FILLER_12_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 5400 ) N ;
+    - FILLER_12_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 5400 ) N ;
+    - FILLER_12_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 5400 ) N ;
+    - FILLER_1_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 2430 ) FS ;
+    - FILLER_1_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 2430 ) FS ;
+    - FILLER_1_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 2430 ) FS ;
+    - FILLER_1_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 2430 ) FS ;
+    - FILLER_1_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 2430 ) FS ;
+    - FILLER_2_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 2700 ) N ;
+    - FILLER_2_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 2700 ) N ;
+    - FILLER_2_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 2700 ) N ;
+    - FILLER_2_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 2700 ) N ;
+    - FILLER_2_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 2700 ) N ;
+    - FILLER_3_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 2970 ) FS ;
+    - FILLER_3_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 2970 ) FS ;
+    - FILLER_3_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 2970 ) FS ;
+    - FILLER_3_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 2970 ) FS ;
+    - FILLER_3_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 2970 ) FS ;
+    - FILLER_4_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 3240 ) N ;
+    - FILLER_4_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 3240 ) N ;
+    - FILLER_4_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 3240 ) N ;
+    - FILLER_4_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 3240 ) N ;
+    - FILLER_4_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 3240 ) N ;
+    - FILLER_5_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 3510 ) FS ;
+    - FILLER_5_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 3510 ) FS ;
+    - FILLER_5_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 3510 ) FS ;
+    - FILLER_5_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 3510 ) FS ;
+    - FILLER_5_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 3510 ) FS ;
+    - FILLER_6_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 3780 ) N ;
+    - FILLER_6_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 3780 ) N ;
+    - FILLER_6_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 3780 ) N ;
+    - FILLER_6_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 3780 ) N ;
+    - FILLER_6_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 3780 ) N ;
+    - FILLER_7_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 4050 ) FS ;
+    - FILLER_7_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 4050 ) FS ;
+    - FILLER_7_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 4050 ) FS ;
+    - FILLER_7_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 4050 ) FS ;
+    - FILLER_7_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 4050 ) FS ;
+    - FILLER_8_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 4320 ) N ;
+    - FILLER_8_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 4320 ) N ;
+    - FILLER_8_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 4320 ) N ;
+    - FILLER_8_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 4320 ) N ;
+    - FILLER_8_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 4320 ) N ;
+    - FILLER_9_2 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 2160 4590 ) FS ;
+    - FILLER_9_24 DECAPx10_ASAP7_75t_R + SOURCE DIST + PLACED ( 3348 4590 ) FS ;
+    - FILLER_9_46 DECAPx6_ASAP7_75t_R + SOURCE DIST + PLACED ( 4536 4590 ) FS ;
+    - FILLER_9_60 DECAPx2_ASAP7_75t_R + SOURCE DIST + PLACED ( 5292 4590 ) FS ;
+    - FILLER_9_66 FILLERxp5_ASAP7_75t_R + SOURCE DIST + PLACED ( 5616 4590 ) FS ;
+    - PHY_EDGE_ROW_0_Left_13 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 2160 ) N ;
+    - PHY_EDGE_ROW_0_Right_0 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 2160 ) FN ;
+    - PHY_EDGE_ROW_10_Left_23 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 4860 ) N ;
+    - PHY_EDGE_ROW_10_Right_10 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 4860 ) FN ;
+    - PHY_EDGE_ROW_11_Left_24 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 5130 ) FS ;
+    - PHY_EDGE_ROW_11_Right_11 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 5130 ) S ;
+    - PHY_EDGE_ROW_12_Left_25 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 5400 ) N ;
+    - PHY_EDGE_ROW_12_Right_12 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 5400 ) FN ;
+    - PHY_EDGE_ROW_1_Left_14 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 2430 ) FS ;
+    - PHY_EDGE_ROW_1_Right_1 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 2430 ) S ;
+    - PHY_EDGE_ROW_2_Left_15 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 2700 ) N ;
+    - PHY_EDGE_ROW_2_Right_2 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 2700 ) FN ;
+    - PHY_EDGE_ROW_3_Left_16 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 2970 ) FS ;
+    - PHY_EDGE_ROW_3_Right_3 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 2970 ) S ;
+    - PHY_EDGE_ROW_4_Left_17 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 3240 ) N ;
+    - PHY_EDGE_ROW_4_Right_4 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 3240 ) FN ;
+    - PHY_EDGE_ROW_5_Left_18 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 3510 ) FS ;
+    - PHY_EDGE_ROW_5_Right_5 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 3510 ) S ;
+    - PHY_EDGE_ROW_6_Left_19 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 3780 ) N ;
+    - PHY_EDGE_ROW_6_Right_6 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 3780 ) FN ;
+    - PHY_EDGE_ROW_7_Left_20 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 4050 ) FS ;
+    - PHY_EDGE_ROW_7_Right_7 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 4050 ) S ;
+    - PHY_EDGE_ROW_8_Left_21 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 4320 ) N ;
+    - PHY_EDGE_ROW_8_Right_8 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 4320 ) FN ;
+    - PHY_EDGE_ROW_9_Left_22 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 2052 4590 ) FS ;
+    - PHY_EDGE_ROW_9_Right_9 TAPCELL_ASAP7_75t_R + SOURCE DIST + FIXED ( 5670 4590 ) S ;
+END COMPONENTS
+PINS 162 ;
+    - VDD + NET VDD + SPECIAL + DIRECTION INOUT + USE POWER
+      + PORT
+        + LAYER M6 ( -1863 -144 ) ( 1863 144 )
+        + FIXED ( 3915 3057 ) N ;
+    - VSS + NET VSS + SPECIAL + DIRECTION INOUT + USE GROUND
+      + PORT
+        + LAYER M6 ( -1863 -144 ) ( 1863 144 )
+        + FIXED ( 3915 2673 ) N ;
+    - features_in[0] + NET features_in[0] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3468 ) N ;
+    - features_in[10] + NET features_in[10] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 6156 7776 ) N ;
+    - features_in[11] + NET features_in[11] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5484 ) N ;
+    - features_in[12] + NET features_in[12] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 1932 7776 ) N ;
+    - features_in[13] + NET features_in[13] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2412 7776 ) N ;
+    - features_in[14] + NET features_in[14] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2124 42 ) N ;
+    - features_in[15] + NET features_in[15] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5388 42 ) N ;
+    - features_in[16] + NET features_in[16] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4332 7776 ) N ;
+    - features_in[17] + NET features_in[17] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5868 ) N ;
+    - features_in[18] + NET features_in[18] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2028 ) N ;
+    - features_in[19] + NET features_in[19] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3372 42 ) N ;
+    - features_in[1] + NET features_in[1] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2124 7776 ) N ;
+    - features_in[20] + NET features_in[20] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5388 ) N ;
+    - features_in[21] + NET features_in[21] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2604 7776 ) N ;
+    - features_in[22] + NET features_in[22] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 1836 ) N ;
+    - features_in[23] + NET features_in[23] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5292 42 ) N ;
+    - features_in[24] + NET features_in[24] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2028 7776 ) N ;
+    - features_in[25] + NET features_in[25] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5004 42 ) N ;
+    - features_in[26] + NET features_in[26] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3276 42 ) N ;
+    - features_in[27] + NET features_in[27] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5868 7776 ) N ;
+    - features_in[28] + NET features_in[28] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3852 42 ) N ;
+    - features_in[29] + NET features_in[29] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2412 42 ) N ;
+    - features_in[2] + NET features_in[2] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2316 7776 ) N ;
+    - features_in[30] + NET features_in[30] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4236 7776 ) N ;
+    - features_in[31] + NET features_in[31] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4812 42 ) N ;
+    - features_in[32] + NET features_in[32] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2316 42 ) N ;
+    - features_in[33] + NET features_in[33] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3948 42 ) N ;
+    - features_in[34] + NET features_in[34] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5484 7776 ) N ;
+    - features_in[35] + NET features_in[35] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3852 7776 ) N ;
+    - features_in[36] + NET features_in[36] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3852 ) N ;
+    - features_in[37] + NET features_in[37] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5772 7776 ) N ;
+    - features_in[38] + NET features_in[38] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4716 ) N ;
+    - features_in[39] + NET features_in[39] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2124 ) N ;
+    - features_in[3] + NET features_in[3] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4524 ) N ;
+    - features_in[40] + NET features_in[40] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4524 ) N ;
+    - features_in[41] + NET features_in[41] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4044 ) N ;
+    - features_in[42] + NET features_in[42] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2796 7776 ) N ;
+    - features_in[43] + NET features_in[43] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2604 ) N ;
+    - features_in[44] + NET features_in[44] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2316 ) N ;
+    - features_in[45] + NET features_in[45] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2700 42 ) N ;
+    - features_in[46] + NET features_in[46] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5484 ) N ;
+    - features_in[47] + NET features_in[47] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3660 ) N ;
+    - features_in[48] + NET features_in[48] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5964 7776 ) N ;
+    - features_in[49] + NET features_in[49] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2604 ) N ;
+    - features_in[4] + NET features_in[4] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4620 42 ) N ;
+    - features_in[50] + NET features_in[50] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4620 ) N ;
+    - features_in[51] + NET features_in[51] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4332 ) N ;
+    - features_in[52] + NET features_in[52] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4140 ) N ;
+    - features_in[53] + NET features_in[53] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4332 42 ) N ;
+    - features_in[54] + NET features_in[54] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3180 ) N ;
+    - features_in[55] + NET features_in[55] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3756 7776 ) N ;
+    - features_in[56] + NET features_in[56] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4716 42 ) N ;
+    - features_in[57] + NET features_in[57] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3372 7776 ) N ;
+    - features_in[58] + NET features_in[58] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4620 7776 ) N ;
+    - features_in[59] + NET features_in[59] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4812 ) N ;
+    - features_in[5] + NET features_in[5] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 1932 ) N ;
+    - features_in[60] + NET features_in[60] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5196 ) N ;
+    - features_in[61] + NET features_in[61] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5100 ) N ;
+    - features_in[62] + NET features_in[62] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2892 ) N ;
+    - features_in[63] + NET features_in[63] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5100 42 ) N ;
+    - features_in[64] + NET features_in[64] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2220 7776 ) N ;
+    - features_in[65] + NET features_in[65] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2796 42 ) N ;
+    - features_in[66] + NET features_in[66] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5292 7776 ) N ;
+    - features_in[67] + NET features_in[67] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5388 7776 ) N ;
+    - features_in[68] + NET features_in[68] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4428 ) N ;
+    - features_in[69] + NET features_in[69] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2220 ) N ;
+    - features_in[6] + NET features_in[6] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3372 ) N ;
+    - features_in[70] + NET features_in[70] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2796 ) N ;
+    - features_in[71] + NET features_in[71] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5292 ) N ;
+    - features_in[72] + NET features_in[72] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2988 42 ) N ;
+    - features_in[73] + NET features_in[73] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4908 ) N ;
+    - features_in[74] + NET features_in[74] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3468 42 ) N ;
+    - features_in[75] + NET features_in[75] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3276 ) N ;
+    - features_in[76] + NET features_in[76] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2412 ) N ;
+    - features_in[77] + NET features_in[77] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2124 ) N ;
+    - features_in[78] + NET features_in[78] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5580 ) N ;
+    - features_in[79] + NET features_in[79] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3948 ) N ;
+    - features_in[7] + NET features_in[7] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2892 ) N ;
+    - features_in[8] + NET features_in[8] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 6060 7776 ) N ;
+    - features_in[9] + NET features_in[9] + DIRECTION INPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2316 ) N ;
+    - flat_out[0] + NET features_in[0] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3564 ) N ;
+    - flat_out[10] + NET features_in[10] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5580 7776 ) N ;
+    - flat_out[11] + NET features_in[11] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4812 ) N ;
+    - flat_out[12] + NET features_in[12] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3276 7776 ) N ;
+    - flat_out[13] + NET features_in[13] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3468 7776 ) N ;
+    - flat_out[14] + NET features_in[14] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3660 42 ) N ;
+    - flat_out[15] + NET features_in[15] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3084 ) N ;
+    - flat_out[16] + NET features_in[16] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5676 7776 ) N ;
+    - flat_out[17] + NET features_in[17] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2508 7776 ) N ;
+    - flat_out[18] + NET features_in[18] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3468 ) N ;
+    - flat_out[19] + NET features_in[19] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2220 42 ) N ;
+    - flat_out[1] + NET features_in[1] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3660 7776 ) N ;
+    - flat_out[20] + NET features_in[20] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5004 ) N ;
+    - flat_out[21] + NET features_in[21] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3084 7776 ) N ;
+    - flat_out[22] + NET features_in[22] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2508 ) N ;
+    - flat_out[23] + NET features_in[23] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3660 ) N ;
+    - flat_out[24] + NET features_in[24] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3948 7776 ) N ;
+    - flat_out[25] + NET features_in[25] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2796 ) N ;
+    - flat_out[26] + NET features_in[26] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3756 42 ) N ;
+    - flat_out[27] + NET features_in[27] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5100 7776 ) N ;
+    - flat_out[28] + NET features_in[28] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4044 42 ) N ;
+    - flat_out[29] + NET features_in[29] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2892 42 ) N ;
+    - flat_out[2] + NET features_in[2] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2892 7776 ) N ;
+    - flat_out[30] + NET features_in[30] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4428 7776 ) N ;
+    - flat_out[31] + NET features_in[31] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3276 ) N ;
+    - flat_out[32] + NET features_in[32] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4236 42 ) N ;
+    - flat_out[33] + NET features_in[33] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4140 42 ) N ;
+    - flat_out[34] + NET features_in[34] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5004 7776 ) N ;
+    - flat_out[35] + NET features_in[35] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4140 7776 ) N ;
+    - flat_out[36] + NET features_in[36] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3756 ) N ;
+    - flat_out[37] + NET features_in[37] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5196 7776 ) N ;
+    - flat_out[38] + NET features_in[38] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4620 ) N ;
+    - flat_out[39] + NET features_in[39] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3948 ) N ;
+    - flat_out[3] + NET features_in[3] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5292 ) N ;
+    - flat_out[40] + NET features_in[40] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4236 ) N ;
+    - flat_out[41] + NET features_in[41] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4140 ) N ;
+    - flat_out[42] + NET features_in[42] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2700 7776 ) N ;
+    - flat_out[43] + NET features_in[43] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3564 ) N ;
+    - flat_out[44] + NET features_in[44] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2412 ) N ;
+    - flat_out[45] + NET features_in[45] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3084 42 ) N ;
+    - flat_out[46] + NET features_in[46] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4716 ) N ;
+    - flat_out[47] + NET features_in[47] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3852 ) N ;
+    - flat_out[48] + NET features_in[48] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4428 ) N ;
+    - flat_out[49] + NET features_in[49] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2700 ) N ;
+    - flat_out[4] + NET features_in[4] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 5196 42 ) N ;
+    - flat_out[50] + NET features_in[50] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5772 ) N ;
+    - flat_out[51] + NET features_in[51] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5388 ) N ;
+    - flat_out[52] + NET features_in[52] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4044 ) N ;
+    - flat_out[53] + NET features_in[53] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4428 42 ) N ;
+    - flat_out[54] + NET features_in[54] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2028 ) N ;
+    - flat_out[55] + NET features_in[55] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4044 7776 ) N ;
+    - flat_out[56] + NET features_in[56] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4908 42 ) N ;
+    - flat_out[57] + NET features_in[57] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3564 7776 ) N ;
+    - flat_out[58] + NET features_in[58] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4812 7776 ) N ;
+    - flat_out[59] + NET features_in[59] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5100 ) N ;
+    - flat_out[5] + NET features_in[5] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 3372 ) N ;
+    - flat_out[60] + NET features_in[60] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4908 ) N ;
+    - flat_out[61] + NET features_in[61] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 5004 ) N ;
+    - flat_out[62] + NET features_in[62] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2988 ) N ;
+    - flat_out[63] + NET features_in[63] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4524 42 ) N ;
+    - flat_out[64] + NET features_in[64] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3180 7776 ) N ;
+    - flat_out[65] + NET features_in[65] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2508 42 ) N ;
+    - flat_out[66] + NET features_in[66] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4908 7776 ) N ;
+    - flat_out[67] + NET features_in[67] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4716 7776 ) N ;
+    - flat_out[68] + NET features_in[68] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 4332 ) N ;
+    - flat_out[69] + NET features_in[69] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3180 ) N ;
+    - flat_out[6] + NET features_in[6] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3756 ) N ;
+    - flat_out[70] + NET features_in[70] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2700 ) N ;
+    - flat_out[71] + NET features_in[71] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5196 ) N ;
+    - flat_out[72] + NET features_in[72] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3180 42 ) N ;
+    - flat_out[73] + NET features_in[73] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2988 7776 ) N ;
+    - flat_out[74] + NET features_in[74] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 3564 42 ) N ;
+    - flat_out[75] + NET features_in[75] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2988 ) N ;
+    - flat_out[76] + NET features_in[76] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 2508 ) N ;
+    - flat_out[77] + NET features_in[77] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 2220 ) N ;
+    - flat_out[78] + NET features_in[78] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 5676 ) N ;
+    - flat_out[79] + NET features_in[79] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 7776 4236 ) N ;
+    - flat_out[7] + NET features_in[7] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M4 ( -42 -12 ) ( 42 12 )
+        + PLACED ( 42 3084 ) N ;
+    - flat_out[8] + NET features_in[8] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 4524 7776 ) N ;
+    - flat_out[9] + NET features_in[9] + DIRECTION OUTPUT + USE SIGNAL
+      + PORT
+        + LAYER M5 ( -12 -42 ) ( 12 42 )
+        + PLACED ( 2604 42 ) N ;
+END PINS
+SPECIALNETS 2 ;
+    - VDD ( PIN VDD ) ( * VDD ) + USE POWER
+      + ROUTED M6 288 + SHAPE STRIPE ( 2052 3057 ) ( 5778 3057 )
+      NEW M5 120 + SHAPE STRIPE ( 2544 2407 ) ( 2544 5693 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 5670 ) ( 5778 5670 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 5130 ) ( 5778 5130 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 4590 ) ( 5778 4590 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 4050 ) ( 5778 4050 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 3510 ) ( 5778 3510 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 2970 ) ( 5778 2970 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 2430 ) ( 5778 2430 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 5670 ) ( 5778 5670 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 5130 ) ( 5778 5130 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 4590 ) ( 5778 4590 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 4050 ) ( 5778 4050 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 3510 ) ( 5778 3510 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 2970 ) ( 5778 2970 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 2430 ) ( 5778 2430 )
+      NEW M5 0 + SHAPE STRIPE ( 2544 3057 ) via5_6_120_288_1_2_58_322
+      NEW M4 0 + SHAPE STRIPE ( 2544 5670 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 5670 ) ( 2589 5670 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 5670 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 5670 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 5130 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 5130 ) ( 2589 5130 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 5130 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 5130 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 4590 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 4590 ) ( 2589 4590 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 4590 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 4590 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 4050 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 4050 ) ( 2589 4050 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 4050 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 4050 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 3510 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 3510 ) ( 2589 3510 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 3510 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 3510 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 2970 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 2970 ) ( 2589 2970 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 2970 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 2970 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2544 2430 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2499 2430 ) ( 2589 2430 )
+      NEW M3 0 + SHAPE STRIPE ( 2544 2430 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2544 2430 ) VIA23_1_3_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 5670 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 5130 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 4590 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 4050 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 3510 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 2970 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 2430 ) via1_2_3726_18_1_103_36_36 ;
+    - VSS ( PIN VSS ) ( * VSS ) + USE GROUND
+      + ROUTED M6 288 + SHAPE STRIPE ( 2052 2673 ) ( 5778 2673 )
+      NEW M5 120 + SHAPE STRIPE ( 2352 2137 ) ( 2352 5423 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 5400 ) ( 5778 5400 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 4860 ) ( 5778 4860 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 4320 ) ( 5778 4320 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 3780 ) ( 5778 3780 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 3240 ) ( 5778 3240 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 2700 ) ( 5778 2700 )
+      NEW M2 18 + SHAPE FOLLOWPIN ( 2052 2160 ) ( 5778 2160 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 5400 ) ( 5778 5400 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 4860 ) ( 5778 4860 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 4320 ) ( 5778 4320 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 3780 ) ( 5778 3780 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 3240 ) ( 5778 3240 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 2700 ) ( 5778 2700 )
+      NEW M1 18 + SHAPE FOLLOWPIN ( 2052 2160 ) ( 5778 2160 )
+      NEW M5 0 + SHAPE STRIPE ( 2352 2673 ) via5_6_120_288_1_2_58_322
+      NEW M4 0 + SHAPE STRIPE ( 2352 5400 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 5400 ) ( 2397 5400 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 5400 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 5400 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 4860 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 4860 ) ( 2397 4860 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 4860 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 4860 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 4320 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 4320 ) ( 2397 4320 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 4320 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 4320 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 3780 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 3780 ) ( 2397 3780 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 3780 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 3780 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 3240 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 3240 ) ( 2397 3240 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 3240 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 3240 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 2700 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 2700 ) ( 2397 2700 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 2700 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 2700 ) VIA23_1_3_36_36
+      NEW M4 0 + SHAPE STRIPE ( 2352 2160 ) VIA45_1_2_58_58
+      NEW M3 34 + SHAPE DRCFILL ( 2307 2160 ) ( 2397 2160 )
+      NEW M3 0 + SHAPE STRIPE ( 2352 2160 ) VIA34_1_2_58_52
+      NEW M2 0 + SHAPE STRIPE ( 2352 2160 ) VIA23_1_3_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 5400 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 4860 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 4320 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 3780 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 3240 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 2700 ) via1_2_3726_18_1_103_36_36
+      NEW M1 0 + SHAPE FOLLOWPIN ( 3915 2160 ) via1_2_3726_18_1_103_36_36 ;
+END SPECIALNETS
+NETS 80 ;
+    - features_in[0] ( PIN flat_out[0] ) ( PIN features_in[0] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 3468 ) ( 7788 * 0 )
+      NEW M3 ( 7713 3468 ) ( * 3564 )
+      NEW M4 ( 7713 3564 ) ( 7788 * 0 )
+      NEW M3 ( 7713 3468 ) VIA34
+      NEW M3 ( 7713 3564 ) VIA34 ;
+    - features_in[10] ( PIN flat_out[10] ) ( PIN features_in[10] ) + USE SIGNAL
+      + ROUTED M5 ( 6156 7696 ) ( * 7760 0 )
+      NEW M6 ( 5580 7696 ) ( 6156 * )
+      NEW M5 ( 5580 7696 ) ( * 7760 0 )
+      NEW M5 ( 6156 7696 ) VIA56
+      NEW M5 ( 5580 7696 ) VIA56 ;
+    - features_in[11] ( PIN flat_out[11] ) ( PIN features_in[11] ) + USE SIGNAL
+      + ROUTED M4 ( 7692 5484 ) ( 7788 * 0 )
+      NEW M5 ( 7692 4812 ) ( * 5484 )
+      NEW M4 ( 7692 4812 ) ( 7788 * 0 )
+      NEW M4 ( 7692 5484 ) VIA45
+      NEW M4 ( 7692 4812 ) VIA45 ;
+    - features_in[12] ( PIN flat_out[12] ) ( PIN features_in[12] ) + USE SIGNAL
+      + ROUTED M5 ( 1932 7696 ) ( * 7760 0 )
+      NEW M6 ( 1932 7696 ) ( 3276 * )
+      NEW M5 ( 3276 7696 ) ( * 7760 0 )
+      NEW M5 ( 1932 7696 ) VIA56
+      NEW M5 ( 3276 7696 ) VIA56 ;
+    - features_in[13] ( PIN flat_out[13] ) ( PIN features_in[13] ) + USE SIGNAL
+      + ROUTED M5 ( 2412 7568 ) ( * 7760 0 )
+      NEW M6 ( 2412 7568 ) ( 3468 * )
+      NEW M5 ( 3468 7568 ) ( * 7760 0 )
+      NEW M5 ( 2412 7568 ) VIA56
+      NEW M5 ( 3468 7568 ) VIA56 ;
+    - features_in[14] ( PIN flat_out[14] ) ( PIN features_in[14] ) + USE SIGNAL
+      + ROUTED M5 ( 2124 16 0 ) ( * 144 )
+      NEW M6 ( 2124 144 ) ( 3660 * )
+      NEW M5 ( 3660 16 0 ) ( * 144 )
+      NEW M5 ( 2124 144 ) VIA56
+      NEW M5 ( 3660 144 ) VIA56 ;
+    - features_in[15] ( PIN flat_out[15] ) ( PIN features_in[15] ) + USE SIGNAL
+      + ROUTED M5 ( 5388 16 0 ) ( * 108 )
+      NEW M4 ( 5388 108 ) ( 6876 * )
+      NEW M5 ( 6876 108 ) ( * 3084 )
+      NEW M4 ( 6876 3084 ) ( 7788 * 0 )
+      NEW M4 ( 5388 108 ) VIA45
+      NEW M4 ( 6876 108 ) VIA45
+      NEW M4 ( 6876 3084 ) VIA45 ;
+    - features_in[16] ( PIN flat_out[16] ) ( PIN features_in[16] ) + USE SIGNAL
+      + ROUTED M5 ( 4332 7568 ) ( * 7760 0 )
+      NEW M6 ( 4332 7568 ) ( 5676 * )
+      NEW M5 ( 5676 7568 ) ( * 7760 0 )
+      NEW M5 ( 4332 7568 ) VIA56
+      NEW M5 ( 5676 7568 ) VIA56 ;
+    - features_in[17] ( PIN flat_out[17] ) ( PIN features_in[17] ) + USE SIGNAL
+      + ROUTED M4 ( 60 5868 0 ) ( 2508 * )
+      NEW M5 ( 2508 5868 ) ( * 7760 0 )
+      NEW M4 ( 2508 5868 ) VIA45 ;
+    - features_in[18] ( PIN flat_out[18] ) ( PIN features_in[18] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2028 0 ) ( 108 * )
+      NEW M5 ( 108 2028 ) ( * 3468 )
+      NEW M4 ( 60 3468 0 ) ( 108 * )
+      NEW M4 ( 108 2028 ) VIA45
+      NEW M4 ( 108 3468 ) VIA45 ;
+    - features_in[19] ( PIN flat_out[19] ) ( PIN features_in[19] ) + USE SIGNAL
+      + ROUTED M5 ( 3372 16 0 ) ( * 208 )
+      NEW M6 ( 2220 208 ) ( 3372 * )
+      NEW M5 ( 2220 16 0 ) ( * 208 )
+      NEW M5 ( 3372 208 ) VIA56
+      NEW M5 ( 2220 208 ) VIA56 ;
+    - features_in[1] ( PIN flat_out[1] ) ( PIN features_in[1] ) + USE SIGNAL
+      + ROUTED M5 ( 2124 7440 ) ( * 7760 0 )
+      NEW M6 ( 2124 7440 ) ( 3660 * )
+      NEW M5 ( 3660 7440 ) ( * 7760 0 )
+      NEW M5 ( 2124 7440 ) VIA56
+      NEW M5 ( 3660 7440 ) VIA56 ;
+    - features_in[20] ( PIN flat_out[20] ) ( PIN features_in[20] ) + USE SIGNAL
+      + ROUTED M4 ( 60 5388 0 ) ( 108 * )
+      NEW M5 ( 108 5004 ) ( * 5388 )
+      NEW M4 ( 60 5004 0 ) ( 108 * )
+      NEW M4 ( 108 5388 ) VIA45
+      NEW M4 ( 108 5004 ) VIA45 ;
+    - features_in[21] ( PIN flat_out[21] ) ( PIN features_in[21] ) + USE SIGNAL
+      + ROUTED M5 ( 2604 7632 ) ( * 7760 0 )
+      NEW M6 ( 2604 7632 ) ( 3084 * )
+      NEW M5 ( 3084 7632 ) ( * 7760 0 )
+      NEW M5 ( 2604 7632 ) VIA56
+      NEW M5 ( 3084 7632 ) VIA56 ;
+    - features_in[22] ( PIN flat_out[22] ) ( PIN features_in[22] ) + USE SIGNAL
+      + ROUTED M4 ( 7692 1836 ) ( 7788 * 0 )
+      NEW M5 ( 7692 1836 ) ( * 2508 )
+      NEW M4 ( 7692 2508 ) ( 7788 * 0 )
+      NEW M4 ( 7692 1836 ) VIA45
+      NEW M4 ( 7692 2508 ) VIA45 ;
+    - features_in[23] ( PIN flat_out[23] ) ( PIN features_in[23] ) + USE SIGNAL
+      + ROUTED M5 ( 5292 16 0 ) ( * 156 )
+      NEW M4 ( 5292 156 ) ( 6972 * )
+      NEW M5 ( 6972 156 ) ( * 3660 )
+      NEW M4 ( 6972 3660 ) ( 7788 * 0 )
+      NEW M4 ( 5292 156 ) VIA45
+      NEW M4 ( 6972 156 ) VIA45
+      NEW M4 ( 6972 3660 ) VIA45 ;
+    - features_in[24] ( PIN flat_out[24] ) ( PIN features_in[24] ) + USE SIGNAL
+      + ROUTED M5 ( 2028 7312 ) ( * 7760 0 )
+      NEW M6 ( 2028 7312 ) ( 3948 * )
+      NEW M5 ( 3948 7312 ) ( * 7760 0 )
+      NEW M5 ( 2028 7312 ) VIA56
+      NEW M5 ( 3948 7312 ) VIA56 ;
+    - features_in[25] ( PIN flat_out[25] ) ( PIN features_in[25] ) + USE SIGNAL
+      + ROUTED M5 ( 5004 16 0 ) ( * 204 )
+      NEW M4 ( 5004 204 ) ( 7068 * )
+      NEW M5 ( 7068 204 ) ( * 2796 )
+      NEW M4 ( 7068 2796 ) ( 7788 * 0 )
+      NEW M4 ( 5004 204 ) VIA45
+      NEW M4 ( 7068 204 ) VIA45
+      NEW M4 ( 7068 2796 ) VIA45 ;
+    - features_in[26] ( PIN flat_out[26] ) ( PIN features_in[26] ) + USE SIGNAL
+      + ROUTED M5 ( 3276 16 0 ) ( * 336 )
+      NEW M6 ( 3276 336 ) ( 3756 * )
+      NEW M5 ( 3756 16 0 ) ( * 336 )
+      NEW M5 ( 3276 336 ) VIA56
+      NEW M5 ( 3756 336 ) VIA56 ;
+    - features_in[27] ( PIN flat_out[27] ) ( PIN features_in[27] ) + USE SIGNAL
+      + ROUTED M5 ( 5868 7440 ) ( * 7760 0 )
+      NEW M6 ( 5100 7440 ) ( 5868 * )
+      NEW M5 ( 5100 7440 ) ( * 7760 0 )
+      NEW M5 ( 5868 7440 ) VIA56
+      NEW M5 ( 5100 7440 ) VIA56 ;
+    - features_in[28] ( PIN flat_out[28] ) ( PIN features_in[28] ) + USE SIGNAL
+      + ROUTED M5 ( 3852 16 0 ) ( * 144 )
+      NEW M5 ( 4044 16 0 ) ( * 336 )
+      NEW M6 ( 4044 336 ) ( 4112 * )
+      NEW M7 ( 4112 144 ) ( * 336 )
+      NEW M6 ( 3852 144 ) ( 4112 * )
+      NEW M5 ( 3852 144 ) VIA56
+      NEW M5 ( 4044 336 ) VIA56
+      NEW M6 ( 4112 336 ) VIA67
+      NEW M6 ( 4112 144 ) VIA67 ;
+    - features_in[29] ( PIN flat_out[29] ) ( PIN features_in[29] ) + USE SIGNAL
+      + ROUTED M5 ( 2412 16 0 ) ( * 272 )
+      NEW M6 ( 2412 272 ) ( 2892 * )
+      NEW M5 ( 2892 16 0 ) ( * 272 )
+      NEW M5 ( 2412 272 ) VIA56
+      NEW M5 ( 2892 272 ) VIA56 ;
+    - features_in[2] ( PIN flat_out[2] ) ( PIN features_in[2] ) + USE SIGNAL
+      + ROUTED M5 ( 2316 7376 ) ( * 7760 0 )
+      NEW M6 ( 2316 7376 ) ( 2892 * )
+      NEW M5 ( 2892 7376 ) ( * 7760 0 )
+      NEW M5 ( 2316 7376 ) VIA56
+      NEW M5 ( 2892 7376 ) VIA56 ;
+    - features_in[30] ( PIN flat_out[30] ) ( PIN features_in[30] ) + USE SIGNAL
+      + ROUTED M5 ( 4236 7692 ) ( * 7760 0 )
+      NEW M4 ( 4236 7692 ) ( 4428 * )
+      NEW M5 ( 4428 7692 ) ( * 7760 0 )
+      NEW M4 ( 4236 7692 ) VIA45
+      NEW M4 ( 4428 7692 ) VIA45 ;
+    - features_in[31] ( PIN flat_out[31] ) ( PIN features_in[31] ) + USE SIGNAL
+      + ROUTED M5 ( 4812 16 0 ) ( * 252 )
+      NEW M4 ( 4812 252 ) ( 6924 * )
+      NEW M5 ( 6924 252 ) ( * 3276 )
+      NEW M4 ( 6924 3276 ) ( 7788 * 0 )
+      NEW M4 ( 4812 252 ) VIA45
+      NEW M4 ( 6924 252 ) VIA45
+      NEW M4 ( 6924 3276 ) VIA45 ;
+    - features_in[32] ( PIN flat_out[32] ) ( PIN features_in[32] ) + USE SIGNAL
+      + ROUTED M5 ( 2316 16 0 ) ( * 464 )
+      NEW M6 ( 2316 464 ) ( 3856 * )
+      NEW M7 ( 3856 208 ) ( * 464 )
+      NEW M5 ( 4236 16 0 ) ( * 208 )
+      NEW M6 ( 3856 208 ) ( 4236 * )
+      NEW M5 ( 2316 464 ) VIA56
+      NEW M6 ( 3856 464 ) VIA67
+      NEW M6 ( 3856 208 ) VIA67
+      NEW M5 ( 4236 208 ) VIA56 ;
+    - features_in[33] ( PIN flat_out[33] ) ( PIN features_in[33] ) + USE SIGNAL
+      + ROUTED M5 ( 3948 16 0 ) ( * 272 )
+      NEW M6 ( 3920 272 ) ( 3948 * )
+      NEW M7 ( 3920 80 ) ( * 272 )
+      NEW M5 ( 4140 16 0 ) ( * 464 )
+      NEW M6 ( 4140 464 ) ( 4240 * )
+      NEW M7 ( 4240 80 ) ( * 464 )
+      NEW M6 ( 3920 80 ) ( 4240 * )
+      NEW M5 ( 3948 272 ) VIA56
+      NEW M6 ( 3920 272 ) VIA67
+      NEW M6 ( 3920 80 ) VIA67
+      NEW M5 ( 4140 464 ) VIA56
+      NEW M6 ( 4240 464 ) VIA67
+      NEW M6 ( 4240 80 ) VIA67 ;
+    - features_in[34] ( PIN flat_out[34] ) ( PIN features_in[34] ) + USE SIGNAL
+      + ROUTED M5 ( 5484 7696 ) ( * 7760 0 )
+      NEW M6 ( 5004 7696 ) ( 5484 * )
+      NEW M5 ( 5004 7696 ) ( * 7760 0 )
+      NEW M5 ( 5484 7696 ) VIA56
+      NEW M5 ( 5004 7696 ) VIA56 ;
+    - features_in[35] ( PIN flat_out[35] ) ( PIN features_in[35] ) + USE SIGNAL
+      + ROUTED M5 ( 3852 7440 ) ( * 7760 0 )
+      NEW M6 ( 3852 7440 ) ( 3856 * )
+      NEW M7 ( 3856 7440 ) ( * 7760 )
+      NEW M5 ( 4140 7632 ) ( * 7760 0 )
+      NEW M6 ( 4140 7632 ) ( 4176 * )
+      NEW M7 ( 4176 7632 ) ( * 7760 )
+      NEW M6 ( 3856 7760 ) ( 4176 * )
+      NEW M5 ( 3852 7440 ) VIA56
+      NEW M6 ( 3856 7440 ) VIA67
+      NEW M6 ( 3856 7760 ) VIA67
+      NEW M5 ( 4140 7632 ) VIA56
+      NEW M6 ( 4176 7632 ) VIA67
+      NEW M6 ( 4176 7760 ) VIA67
+      NEW M6 ( 3852 7440 ) RECT ( -42 -16 0 16 )  ;
+    - features_in[36] ( PIN flat_out[36] ) ( PIN features_in[36] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 3852 ) ( 7788 * 0 )
+      NEW M3 ( 7713 3756 ) ( * 3852 )
+      NEW M4 ( 7713 3756 ) ( 7788 * 0 )
+      NEW M3 ( 7713 3852 ) VIA34
+      NEW M3 ( 7713 3756 ) VIA34 ;
+    - features_in[37] ( PIN flat_out[37] ) ( PIN features_in[37] ) + USE SIGNAL
+      + ROUTED M5 ( 5772 7376 ) ( * 7760 0 )
+      NEW M6 ( 5196 7376 ) ( 5772 * )
+      NEW M5 ( 5196 7376 ) ( * 7760 0 )
+      NEW M5 ( 5772 7376 ) VIA56
+      NEW M5 ( 5196 7376 ) VIA56 ;
+    - features_in[38] ( PIN flat_out[38] ) ( PIN features_in[38] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 4716 ) ( 7788 * 0 )
+      NEW M3 ( 7713 4620 ) ( * 4716 )
+      NEW M4 ( 7713 4620 ) ( 7788 * 0 )
+      NEW M3 ( 7713 4716 ) VIA34
+      NEW M3 ( 7713 4620 ) VIA34 ;
+    - features_in[39] ( PIN flat_out[39] ) ( PIN features_in[39] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2124 0 ) ( 156 * )
+      NEW M5 ( 156 2124 ) ( * 3948 )
+      NEW M4 ( 60 3948 0 ) ( 156 * )
+      NEW M4 ( 156 2124 ) VIA45
+      NEW M4 ( 156 3948 ) VIA45 ;
+    - features_in[3] ( PIN flat_out[3] ) ( PIN features_in[3] ) + USE SIGNAL
+      + ROUTED M4 ( 7644 4524 ) ( 7788 * 0 )
+      NEW M5 ( 7644 4524 ) ( * 5292 )
+      NEW M4 ( 7644 5292 ) ( 7788 * 0 )
+      NEW M4 ( 7644 4524 ) VIA45
+      NEW M4 ( 7644 5292 ) VIA45 ;
+    - features_in[40] ( PIN flat_out[40] ) ( PIN features_in[40] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4524 0 ) ( 108 * )
+      NEW M5 ( 108 4236 ) ( * 4524 )
+      NEW M4 ( 60 4236 0 ) ( 108 * )
+      NEW M4 ( 108 4524 ) VIA45
+      NEW M4 ( 108 4236 ) VIA45 ;
+    - features_in[41] ( PIN flat_out[41] ) ( PIN features_in[41] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4044 0 ) ( 108 * )
+      NEW M5 ( 108 4044 ) ( * 4140 )
+      NEW M4 ( 60 4140 0 ) ( 108 * )
+      NEW M4 ( 108 4044 ) VIA45
+      NEW M4 ( 108 4140 ) VIA45 ;
+    - features_in[42] ( PIN flat_out[42] ) ( PIN features_in[42] ) + USE SIGNAL
+      + ROUTED M5 ( 2796 7692 ) ( * 7760 0 )
+      NEW M4 ( 2700 7692 ) ( 2796 * )
+      NEW M5 ( 2700 7692 ) ( * 7760 0 )
+      NEW M4 ( 2796 7692 ) VIA45
+      NEW M4 ( 2700 7692 ) VIA45 ;
+    - features_in[43] ( PIN flat_out[43] ) ( PIN features_in[43] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2604 0 ) ( 204 * )
+      NEW M5 ( 204 2604 ) ( * 3564 )
+      NEW M4 ( 60 3564 0 ) ( 204 * )
+      NEW M4 ( 204 2604 ) VIA45
+      NEW M4 ( 204 3564 ) VIA45 ;
+    - features_in[44] ( PIN flat_out[44] ) ( PIN features_in[44] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 2316 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2316 ) ( * 2412 )
+      NEW M4 ( 7713 2412 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2316 ) VIA34
+      NEW M3 ( 7713 2412 ) VIA34 ;
+    - features_in[45] ( PIN flat_out[45] ) ( PIN features_in[45] ) + USE SIGNAL
+      + ROUTED M5 ( 2700 16 0 ) ( * 108 )
+      NEW M4 ( 2700 108 ) ( 3084 * )
+      NEW M5 ( 3084 16 0 ) ( * 108 )
+      NEW M4 ( 2700 108 ) VIA45
+      NEW M4 ( 3084 108 ) VIA45 ;
+    - features_in[46] ( PIN flat_out[46] ) ( PIN features_in[46] ) + USE SIGNAL
+      + ROUTED M4 ( 60 5484 0 ) ( 156 * )
+      NEW M5 ( 156 4716 ) ( * 5484 )
+      NEW M4 ( 60 4716 0 ) ( 156 * )
+      NEW M4 ( 156 5484 ) VIA45
+      NEW M4 ( 156 4716 ) VIA45 ;
+    - features_in[47] ( PIN flat_out[47] ) ( PIN features_in[47] ) + USE SIGNAL
+      + ROUTED M4 ( 60 3660 0 ) ( 108 * )
+      NEW M5 ( 108 3660 ) ( * 3852 )
+      NEW M4 ( 60 3852 0 ) ( 108 * )
+      NEW M4 ( 108 3660 ) VIA45
+      NEW M4 ( 108 3852 ) VIA45 ;
+    - features_in[48] ( PIN flat_out[48] ) ( PIN features_in[48] ) + USE SIGNAL
+      + ROUTED M5 ( 5964 7692 ) ( * 7760 0 )
+      NEW M4 ( 5964 7692 ) ( 6876 * )
+      NEW M5 ( 6876 4428 ) ( * 7692 )
+      NEW M4 ( 6876 4428 ) ( 7788 * 0 )
+      NEW M4 ( 5964 7692 ) VIA45
+      NEW M4 ( 6876 7692 ) VIA45
+      NEW M4 ( 6876 4428 ) VIA45 ;
+    - features_in[49] ( PIN flat_out[49] ) ( PIN features_in[49] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 2604 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2604 ) ( * 2700 )
+      NEW M4 ( 7713 2700 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2604 ) VIA34
+      NEW M3 ( 7713 2700 ) VIA34 ;
+    - features_in[4] ( PIN flat_out[4] ) ( PIN features_in[4] ) + USE SIGNAL
+      + ROUTED M5 ( 4620 16 0 ) ( * 144 )
+      NEW M6 ( 4620 144 ) ( 5196 * )
+      NEW M5 ( 5196 16 0 ) ( * 144 )
+      NEW M5 ( 4620 144 ) VIA56
+      NEW M5 ( 5196 144 ) VIA56 ;
+    - features_in[50] ( PIN flat_out[50] ) ( PIN features_in[50] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4620 0 ) ( 204 * )
+      NEW M5 ( 204 4620 ) ( * 5772 )
+      NEW M4 ( 60 5772 0 ) ( 204 * )
+      NEW M4 ( 204 4620 ) VIA45
+      NEW M4 ( 204 5772 ) VIA45 ;
+    - features_in[51] ( PIN flat_out[51] ) ( PIN features_in[51] ) + USE SIGNAL
+      + ROUTED M4 ( 7596 4332 ) ( 7788 * 0 )
+      NEW M5 ( 7596 4332 ) ( * 5388 )
+      NEW M4 ( 7596 5388 ) ( 7788 * 0 )
+      NEW M4 ( 7596 4332 ) VIA45
+      NEW M4 ( 7596 5388 ) VIA45 ;
+    - features_in[52] ( PIN flat_out[52] ) ( PIN features_in[52] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 4140 ) ( 7788 * 0 )
+      NEW M3 ( 7713 4044 ) ( * 4140 )
+      NEW M4 ( 7713 4044 ) ( 7788 * 0 )
+      NEW M3 ( 7713 4140 ) VIA34
+      NEW M3 ( 7713 4044 ) VIA34 ;
+    - features_in[53] ( PIN flat_out[53] ) ( PIN features_in[53] ) + USE SIGNAL
+      + ROUTED M5 ( 4332 16 0 ) ( * 108 )
+      NEW M4 ( 4332 108 ) ( 4428 * )
+      NEW M5 ( 4428 16 0 ) ( * 108 )
+      NEW M4 ( 4332 108 ) VIA45
+      NEW M4 ( 4428 108 ) VIA45 ;
+    - features_in[54] ( PIN flat_out[54] ) ( PIN features_in[54] ) + USE SIGNAL
+      + ROUTED M4 ( 7644 3180 ) ( 7788 * 0 )
+      NEW M5 ( 7644 2028 ) ( * 3180 )
+      NEW M4 ( 7644 2028 ) ( 7788 * 0 )
+      NEW M4 ( 7644 3180 ) VIA45
+      NEW M4 ( 7644 2028 ) VIA45 ;
+    - features_in[55] ( PIN flat_out[55] ) ( PIN features_in[55] ) + USE SIGNAL
+      + ROUTED M5 ( 3756 7632 ) ( * 7760 0 )
+      NEW M5 ( 4044 7632 ) ( * 7760 0 )
+      NEW M6 ( 3756 7632 ) ( 4044 * )
+      NEW M5 ( 3756 7632 ) VIA56
+      NEW M5 ( 4044 7632 ) VIA56 ;
+    - features_in[56] ( PIN flat_out[56] ) ( PIN features_in[56] ) + USE SIGNAL
+      + ROUTED M5 ( 4716 16 0 ) ( * 108 )
+      NEW M4 ( 4716 108 ) ( 4908 * )
+      NEW M5 ( 4908 16 0 ) ( * 108 )
+      NEW M4 ( 4716 108 ) VIA45
+      NEW M4 ( 4908 108 ) VIA45 ;
+    - features_in[57] ( PIN flat_out[57] ) ( PIN features_in[57] ) + USE SIGNAL
+      + ROUTED M5 ( 3372 7696 ) ( * 7760 0 )
+      NEW M6 ( 3372 7696 ) ( 3564 * )
+      NEW M5 ( 3564 7696 ) ( * 7760 0 )
+      NEW M5 ( 3372 7696 ) VIA56
+      NEW M5 ( 3564 7696 ) VIA56 ;
+    - features_in[58] ( PIN flat_out[58] ) ( PIN features_in[58] ) + USE SIGNAL
+      + ROUTED M5 ( 4620 7692 ) ( * 7760 0 )
+      NEW M4 ( 4620 7692 ) ( 4812 * )
+      NEW M5 ( 4812 7692 ) ( * 7760 0 )
+      NEW M4 ( 4620 7692 ) VIA45
+      NEW M4 ( 4812 7692 ) VIA45 ;
+    - features_in[59] ( PIN flat_out[59] ) ( PIN features_in[59] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4812 0 ) ( 117 * )
+      NEW M3 ( 117 4812 ) ( * 5100 )
+      NEW M4 ( 60 5100 0 ) ( 117 * )
+      NEW M3 ( 117 4812 ) VIA34
+      NEW M3 ( 117 5100 ) VIA34 ;
+    - features_in[5] ( PIN flat_out[5] ) ( PIN features_in[5] ) + USE SIGNAL
+      + ROUTED M4 ( 7596 1932 ) ( 7788 * 0 )
+      NEW M5 ( 7596 1932 ) ( * 3372 )
+      NEW M4 ( 7596 3372 ) ( 7788 * 0 )
+      NEW M4 ( 7596 1932 ) VIA45
+      NEW M4 ( 7596 3372 ) VIA45 ;
+    - features_in[60] ( PIN flat_out[60] ) ( PIN features_in[60] ) + USE SIGNAL
+      + ROUTED M4 ( 7548 5196 ) ( 7788 * 0 )
+      NEW M5 ( 7548 4908 ) ( * 5196 )
+      NEW M4 ( 7548 4908 ) ( 7788 * 0 )
+      NEW M4 ( 7548 5196 ) VIA45
+      NEW M4 ( 7548 4908 ) VIA45 ;
+    - features_in[61] ( PIN flat_out[61] ) ( PIN features_in[61] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 5100 ) ( 7788 * 0 )
+      NEW M3 ( 7713 5004 ) ( * 5100 )
+      NEW M4 ( 7713 5004 ) ( 7788 * 0 )
+      NEW M3 ( 7713 5100 ) VIA34
+      NEW M3 ( 7713 5004 ) VIA34 ;
+    - features_in[62] ( PIN flat_out[62] ) ( PIN features_in[62] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 2892 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2892 ) ( * 2988 )
+      NEW M4 ( 7713 2988 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2892 ) VIA34
+      NEW M3 ( 7713 2988 ) VIA34 ;
+    - features_in[63] ( PIN flat_out[63] ) ( PIN features_in[63] ) + USE SIGNAL
+      + ROUTED M5 ( 5100 16 0 ) ( * 272 )
+      NEW M6 ( 4524 272 ) ( 5100 * )
+      NEW M5 ( 4524 16 0 ) ( * 272 )
+      NEW M5 ( 5100 272 ) VIA56
+      NEW M5 ( 4524 272 ) VIA56 ;
+    - features_in[64] ( PIN flat_out[64] ) ( PIN features_in[64] ) + USE SIGNAL
+      + ROUTED M5 ( 2220 7504 ) ( * 7760 0 )
+      NEW M6 ( 2220 7504 ) ( 3180 * )
+      NEW M5 ( 3180 7504 ) ( * 7760 0 )
+      NEW M5 ( 2220 7504 ) VIA56
+      NEW M5 ( 3180 7504 ) VIA56 ;
+    - features_in[65] ( PIN flat_out[65] ) ( PIN features_in[65] ) + USE SIGNAL
+      + ROUTED M5 ( 2796 16 0 ) ( * 156 )
+      NEW M4 ( 2508 156 ) ( 2796 * )
+      NEW M5 ( 2508 16 0 ) ( * 156 )
+      NEW M4 ( 2796 156 ) VIA45
+      NEW M4 ( 2508 156 ) VIA45 ;
+    - features_in[66] ( PIN flat_out[66] ) ( PIN features_in[66] ) + USE SIGNAL
+      + ROUTED M5 ( 5292 7692 ) ( * 7760 0 )
+      NEW M4 ( 4908 7692 ) ( 5292 * )
+      NEW M5 ( 4908 7692 ) ( * 7760 0 )
+      NEW M4 ( 5292 7692 ) VIA45
+      NEW M4 ( 4908 7692 ) VIA45 ;
+    - features_in[67] ( PIN flat_out[67] ) ( PIN features_in[67] ) + USE SIGNAL
+      + ROUTED M5 ( 5388 7632 ) ( * 7760 0 )
+      NEW M6 ( 4716 7632 ) ( 5388 * )
+      NEW M5 ( 4716 7632 ) ( * 7760 0 )
+      NEW M5 ( 5388 7632 ) VIA56
+      NEW M5 ( 4716 7632 ) VIA56 ;
+    - features_in[68] ( PIN flat_out[68] ) ( PIN features_in[68] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4428 0 ) ( 117 * )
+      NEW M3 ( 117 4332 ) ( * 4428 )
+      NEW M4 ( 60 4332 0 ) ( 117 * )
+      NEW M3 ( 117 4428 ) VIA34
+      NEW M3 ( 117 4332 ) VIA34 ;
+    - features_in[69] ( PIN flat_out[69] ) ( PIN features_in[69] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2220 0 ) ( 252 * )
+      NEW M5 ( 252 2220 ) ( * 3180 )
+      NEW M4 ( 60 3180 0 ) ( 252 * )
+      NEW M4 ( 252 2220 ) VIA45
+      NEW M4 ( 252 3180 ) VIA45 ;
+    - features_in[6] ( PIN flat_out[6] ) ( PIN features_in[6] ) + USE SIGNAL
+      + ROUTED M4 ( 60 3372 0 ) ( 252 * )
+      NEW M5 ( 252 3372 ) ( * 3756 )
+      NEW M4 ( 60 3756 0 ) ( 252 * )
+      NEW M4 ( 252 3372 ) VIA45
+      NEW M4 ( 252 3756 ) VIA45 ;
+    - features_in[70] ( PIN flat_out[70] ) ( PIN features_in[70] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2796 0 ) ( 117 * )
+      NEW M3 ( 117 2700 ) ( * 2796 )
+      NEW M4 ( 60 2700 0 ) ( 117 * )
+      NEW M3 ( 117 2796 ) VIA34
+      NEW M3 ( 117 2700 ) VIA34 ;
+    - features_in[71] ( PIN flat_out[71] ) ( PIN features_in[71] ) + USE SIGNAL
+      + ROUTED M4 ( 60 5292 0 ) ( 117 * )
+      NEW M3 ( 117 5196 ) ( * 5292 )
+      NEW M4 ( 60 5196 0 ) ( 117 * )
+      NEW M3 ( 117 5292 ) VIA34
+      NEW M3 ( 117 5196 ) VIA34 ;
+    - features_in[72] ( PIN flat_out[72] ) ( PIN features_in[72] ) + USE SIGNAL
+      + ROUTED M5 ( 2988 16 0 ) ( * 156 )
+      NEW M4 ( 2988 156 ) ( 3180 * )
+      NEW M5 ( 3180 16 0 ) ( * 156 )
+      NEW M4 ( 2988 156 ) VIA45
+      NEW M4 ( 3180 156 ) VIA45 ;
+    - features_in[73] ( PIN flat_out[73] ) ( PIN features_in[73] ) + USE SIGNAL
+      + ROUTED M4 ( 60 4908 0 ) ( 333 * )
+      NEW M3 ( 333 4908 ) ( * 5004 )
+      NEW M4 ( 333 5004 ) ( 2988 * )
+      NEW M5 ( 2988 5004 ) ( * 7760 0 )
+      NEW M3 ( 333 4908 ) VIA34
+      NEW M3 ( 333 5004 ) VIA34
+      NEW M4 ( 2988 5004 ) VIA45 ;
+    - features_in[74] ( PIN flat_out[74] ) ( PIN features_in[74] ) + USE SIGNAL
+      + ROUTED M5 ( 3468 16 0 ) ( * 108 )
+      NEW M4 ( 3468 108 ) ( 3564 * )
+      NEW M5 ( 3564 16 0 ) ( * 108 )
+      NEW M4 ( 3468 108 ) VIA45
+      NEW M4 ( 3564 108 ) VIA45 ;
+    - features_in[75] ( PIN flat_out[75] ) ( PIN features_in[75] ) + USE SIGNAL
+      + ROUTED M4 ( 60 3276 0 ) ( 117 * )
+      NEW M3 ( 117 2988 ) ( * 3276 )
+      NEW M4 ( 60 2988 0 ) ( 117 * )
+      NEW M3 ( 117 3276 ) VIA34
+      NEW M3 ( 117 2988 ) VIA34 ;
+    - features_in[76] ( PIN flat_out[76] ) ( PIN features_in[76] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2412 0 ) ( 117 * )
+      NEW M3 ( 117 2412 ) ( * 2508 )
+      NEW M4 ( 60 2508 0 ) ( 117 * )
+      NEW M3 ( 117 2412 ) VIA34
+      NEW M3 ( 117 2508 ) VIA34 ;
+    - features_in[77] ( PIN flat_out[77] ) ( PIN features_in[77] ) + USE SIGNAL
+      + ROUTED M4 ( 7713 2124 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2124 ) ( * 2220 )
+      NEW M4 ( 7713 2220 ) ( 7788 * 0 )
+      NEW M3 ( 7713 2124 ) VIA34
+      NEW M3 ( 7713 2220 ) VIA34 ;
+    - features_in[78] ( PIN flat_out[78] ) ( PIN features_in[78] ) + USE SIGNAL
+      + ROUTED M4 ( 60 5580 0 ) ( 108 * )
+      NEW M5 ( 108 5580 ) ( * 5676 )
+      NEW M4 ( 60 5676 0 ) ( 108 * )
+      NEW M4 ( 108 5580 ) VIA45
+      NEW M4 ( 108 5676 ) VIA45 ;
+    - features_in[79] ( PIN flat_out[79] ) ( PIN features_in[79] ) + USE SIGNAL
+      + ROUTED M4 ( 7692 3948 ) ( 7788 * 0 )
+      NEW M5 ( 7692 3948 ) ( * 3984 )
+      NEW M6 ( 7692 3984 ) ( 7788 * )
+      NEW M4 ( 7692 4236 ) ( 7788 * 0 )
+      NEW M5 ( 7692 4176 ) ( * 4236 )
+      NEW M6 ( 7692 4176 ) ( 7788 * )
+      NEW M5 ( 7788 3984 ) ( * 4176 )
+      NEW M4 ( 7692 3948 ) VIA45
+      NEW M5 ( 7692 3984 ) VIA56
+      NEW M5 ( 7788 3984 ) VIA56
+      NEW M4 ( 7692 4236 ) VIA45
+      NEW M5 ( 7692 4176 ) VIA56
+      NEW M5 ( 7788 4176 ) VIA56
+      NEW M5 ( 7788 3984 ) RECT ( -12 -78 12 0 )  ;
+    - features_in[7] ( PIN flat_out[7] ) ( PIN features_in[7] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2892 0 ) ( 153 * )
+      NEW M3 ( 153 2892 ) ( * 3084 )
+      NEW M4 ( 60 3084 0 ) ( 153 * )
+      NEW M3 ( 153 2892 ) VIA34
+      NEW M3 ( 153 3084 ) VIA34 ;
+    - features_in[8] ( PIN flat_out[8] ) ( PIN features_in[8] ) + USE SIGNAL
+      + ROUTED M5 ( 6060 7248 ) ( * 7760 0 )
+      NEW M6 ( 4524 7248 ) ( 6060 * )
+      NEW M5 ( 4524 7248 ) ( * 7760 0 )
+      NEW M5 ( 6060 7248 ) VIA56
+      NEW M5 ( 4524 7248 ) VIA56 ;
+    - features_in[9] ( PIN flat_out[9] ) ( PIN features_in[9] ) + USE SIGNAL
+      + ROUTED M4 ( 60 2316 0 ) ( 2700 * )
+      NEW M5 ( 2700 2220 ) ( * 2316 )
+      NEW M4 ( 2604 2220 ) ( 2700 * )
+      NEW M5 ( 2604 16 0 ) ( * 2220 )
+      NEW M4 ( 2700 2316 ) VIA45
+      NEW M4 ( 2700 2220 ) VIA45
+      NEW M4 ( 2604 2220 ) VIA45 ;
+END NETS
+END DESIGN

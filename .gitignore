@@ -2,6 +2,21 @@
 /results_tb/
 /results_uvm/
 
+# Arquivos GDS gerados pela sintese de convolution
+/synth_org/convolution/results/**/*.gds
+
+# Artefatos de sintese grandes (acima de 50 MiB)
+/synth_org/convolution/results/**/*.odb
+/synth_org/convolution/results/**/6_final.spef
+/synth_org/convolution/results/**/6_final.def
+/synth_org/convolution/results/**/route.guide
+/synth_org/convolution/results/**/1_2_yosys.v
+/synth_org/top/results/**/6_final.odb
+/synth_org/top/results/**/6_1_fill.odb
+/synth_org/top/results/**/5_route.odb
+/synth_org/top/results/**/5_3_fillcell.odb
+/synth_org/top/results/**/5_2_route.odb
+
 # Diretorios de compilacao do Verilator fora das pastas de resultados
 obj_dir/
 obj_dir_cov/
@@ -17,4 +32,3 @@ obj_dir_cov/
 *.ucdb
 *.dat
 *.info
-

@@ -1,0 +1,957 @@
+============================================================
+ 5 - Routing
+============================================================
+Design:  top
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/top
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_cts.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_cts.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       14
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+
+Design:                   CNN
+Die area:                 ( 0 0 ) ( 118662 118662 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     49145
+Number of terminals:      710
+Number of snets:          2
+Number of nets:           55129
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 239.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 822256.
+[INFO DRT-0033] V1 shape region query size = 1412953.
+[INFO DRT-0033] M2 shape region query size = 31169.
+[INFO DRT-0033] V2 shape region query size = 28050.
+[INFO DRT-0033] M3 shape region query size = 28050.
+[INFO DRT-0033] V3 shape region query size = 18700.
+[INFO DRT-0033] M4 shape region query size = 19150.
+[INFO DRT-0033] V4 shape region query size = 18700.
+[INFO DRT-0033] M5 shape region query size = 10620.
+[INFO DRT-0033] V5 shape region query size = 1936.
+[INFO DRT-0033] M6 shape region query size = 1056.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0078]   Complete 1395 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 239 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0084]   Complete 32120 groups.
+#scanned instances     = 49145
+#unique  instances     = 239
+#stdCellGenAp          = 6581
+#stdCellValidPlanarAp  = 50
+#stdCellValidViaAp     = 5374
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 154922
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:10:32, elapsed time = 00:00:53, memory = 429.75 (MB), peak = 451.95 (MB)
+Took 54 seconds: pin_access
+global_route -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 10056
+[INFO GRT-0019] Found 213 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 51
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal     568109        404234          28.85%
+M3         Vertical       657682        489275          25.61%
+M4         Horizontal     505036        375661          25.62%
+M5         Vertical       487314        361761          25.76%
+M6         Horizontal     339156        230202          32.13%
+M7         Vertical       383778        258543          32.63%
+---------------------------------------------------------------
+
+[INFO GRT-0197] Via related to pin nodes: 266225
+[INFO GRT-0198] Via related Steiner nodes: 3745
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 336111
+[INFO GRT-0112] Final usage 3D: 1218686
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Congestion
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2              404234         85565           21.17%             0 /  0 /  0
+M3              489275        100331           20.51%             0 /  0 /  0
+M4              375661         11811            3.14%             0 /  0 /  0
+M5              361761          5982            1.65%             0 /  0 /  0
+M6              230202          3336            1.45%             0 /  0 /  0
+M7              258543          3328            1.29%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          2119676        210353            9.92%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 176092 um
+[INFO GRT-0014] Routed nets: 55046
+[INFO GRT-0303] Global routing runtime = 00:00:11
+Took 11 seconds: global_route -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
+estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     55296
+     1000 |     +0.0% |       0 |       0 |             0 |     54296
+     2000 |     +0.0% |       0 |       0 |             0 |     53296
+     3000 |     +0.0% |       0 |       0 |             0 |     52296
+     4000 |     +0.0% |       0 |       0 |             0 |     51296
+     5000 |     +0.0% |       0 |       0 |             0 |     50296
+     6000 |     +0.0% |       0 |       0 |             0 |     49296
+     7000 |     +0.0% |       0 |       0 |             0 |     48296
+     8000 |     +0.0% |       0 |       0 |             0 |     47296
+     9000 |     +0.0% |       0 |       0 |             0 |     46296
+    10000 |     +0.0% |       0 |       0 |             0 |     45296
+    11000 |     +0.0% |       0 |       0 |             0 |     44296
+    12000 |     +0.0% |       0 |       0 |             0 |     43296
+    13000 |     +0.0% |       0 |       0 |             0 |     42296
+    14000 |     +0.0% |       0 |       0 |             0 |     41296
+    15000 |     +0.0% |       0 |       2 |             2 |     40296
+    16000 |     +0.0% |       0 |       2 |             2 |     39296
+    17000 |     +0.0% |       0 |       2 |             2 |     38296
+    18000 |     +0.0% |       0 |       2 |             2 |     37296
+    19000 |     +0.0% |       0 |       2 |             2 |     36296
+    20000 |     +0.0% |       0 |       2 |             2 |     35296
+    21000 |     +0.0% |       0 |       2 |             2 |     34296
+    22000 |     +0.0% |       0 |       2 |             2 |     33296
+    23000 |     +0.0% |       0 |       2 |             2 |     32296
+    24000 |     +0.0% |       0 |       2 |             2 |     31296
+    25000 |     +0.0% |       0 |       2 |             2 |     30296
+    26000 |     +0.0% |       0 |       2 |             2 |     29296
+    27000 |     +0.0% |       0 |       2 |             2 |     28296
+    28000 |     +0.0% |       0 |       2 |             2 |     27296
+    29000 |     +0.0% |       0 |       2 |             2 |     26296
+    30000 |     +0.0% |       0 |       2 |             2 |     25296
+    31000 |     +0.0% |       0 |       2 |             2 |     24296
+    32000 |     +0.0% |       0 |       2 |             2 |     23296
+    33000 |     +0.0% |       0 |       2 |             2 |     22296
+[WARNING RSZ-0104] Net _51223_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51181_ only has one pin. Check if it is intended to be dangling.
+    34000 |     +0.0% |       0 |       2 |             2 |     21296
+[WARNING RSZ-0104] Net _51222_ only has one pin. Check if it is intended to be dangling.
+    35000 |     +0.0% |       0 |       2 |             2 |     20296
+    36000 |     +0.0% |       0 |       2 |             2 |     19296
+[WARNING RSZ-0104] Net _51185_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51180_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51256_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51148_ only has one pin. Check if it is intended to be dangling.
+    37000 |     +0.0% |       0 |       2 |             2 |     18296
+    38000 |     +0.0% |       0 |       2 |             2 |     17296
+[WARNING RSZ-0104] Net _51270_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51213_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51208_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51105_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51204_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51174_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51173_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51172_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51110_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51111_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51141_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51106_ only has one pin. Check if it is intended to be dangling.
+    39000 |     +0.0% |       0 |       2 |             2 |     16296
+    40000 |     +0.0% |       0 |       2 |             2 |     15296
+[WARNING RSZ-0104] Net _51103_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51104_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51205_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51266_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51260_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51259_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51258_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51234_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51233_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51232_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51220_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51203_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51202_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51169_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51108_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51112_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51113_ only has one pin. Check if it is intended to be dangling.
+    41000 |     +0.0% |       0 |       2 |             2 |     14296
+    42000 |     +0.0% |       0 |       2 |             2 |     13296
+[WARNING RSZ-0104] Net _51219_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51217_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51168_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51155_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51119_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51271_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51269_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51268_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51265_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51263_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51262_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51261_ only has one pin. Check if it is intended to be dangling.
+    43000 |     +0.0% |       0 |       2 |             2 |     12296
+[WARNING RSZ-0104] Net _51228_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51227_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51216_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51215_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51214_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51211_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51210_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51209_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _26780_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51107_ only has one pin. Check if it is intended to be dangling.
+    44000 |     +0.0% |       0 |       2 |             2 |     11296
+[WARNING RSZ-0104] Net _51109_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51161_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51151_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51150_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51149_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51144_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51143_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51142_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51128_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51127_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51126_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _19152_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51246_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51245_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51243_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51240_ only has one pin. Check if it is intended to be dangling.
+    45000 |     +0.0% |       0 |       2 |             2 |     10296
+[WARNING RSZ-0104] Net _51212_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51178_ only has one pin. Check if it is intended to be dangling.
+    46000 |     +0.0% |       0 |       2 |             2 |      9296
+[WARNING RSZ-0104] Net _51132_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51267_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51264_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51226_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51160_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51242_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _51241_ only has one pin. Check if it is intended to be dangling.
+    47000 |     +0.0% |       0 |       2 |             2 |      8296
+    48000 |     +0.0% |       0 |       2 |             2 |      7296
+    49000 |     +0.0% |       0 |       2 |             2 |      6296
+    50000 |     +0.0% |       0 |       2 |             2 |      5296
+    51000 |     +0.0% |       0 |       2 |             2 |      4296
+    52000 |     +0.0% |       0 |       2 |             2 |      3296
+    53000 |     +0.0% |       0 |       2 |             2 |      2296
+    54000 |     +0.0% |       0 |       2 |             2 |      1296
+    55000 |     +0.0% |       0 |       2 |             2 |       296
+    final |     +0.0% |       0 |       2 |             2 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0036] Found 2 capacitance violations.
+[INFO RSZ-0038] Inserted 2 buffers in 2 nets.
+[INFO RSZ-0504] Runtime: 4.69s
+Took 5 seconds: repair_design -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 13118.03 um^2
+[INFO DPL-0007] Movable instances area: 5358.03 um^2
+[INFO DPL-0008] Fixed instances area within core: 49.57 um^2
+[INFO DPL-0009] Utilization: 41.2%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 49147 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 0.
+[INFO DPL-0500] Runtime: 0.28s
+Placement Analysis
+---------------------------------
+total displacement          1.0 u
+average displacement        0.0 u
+max displacement            0.5 u
+original HPWL          104561.5 u
+legalized HPWL         104561.7 u
+delta HPWL                    0 %
+
+global_route -end_incremental -resistance_aware -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 1.05s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.35s
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 13118.03 um^2
+[INFO DPL-0007] Movable instances area: 5358.03 um^2
+[INFO DPL-0008] Fixed instances area within core: 49.57 um^2
+[INFO DPL-0009] Utilization: 41.2%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 49147 cells
+[INFO DPL-0500] Runtime: 0.26s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          104561.7 u
+legalized HPWL         104561.7 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -resistance_aware -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
+[INFO RSZ-0100] Repair move sequence: RerouteMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 1.06s
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 5408 um^2 41% utilization.
+[INFO FLW-0007] clock core_clk period 10000.000000
+[INFO FLW-0008] Clock core_clk period 4293.518
+[INFO FLW-0009] Clock core_clk slack 5480.507
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/updated_clks.sdc
+[INFO FLW-0011] Path endpoint path count 3598
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.sdc
+Elapsed time: 1:33.57[h:]min:sec. CPU time: user 761.01 sys 10.11 (824%). Peak memory: 1106288KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb           93           1080 5943904c9dc127ee767c
+5_1_grt                   .sdc                             92671cc5e77142235d49
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_2_route detail_route
+Running detail_route.tcl, stage 5_2_route
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_route -output_drc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/5_route_drc.rpt -output_maze /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/maze.log -droute_end_iter 64 -verbose 1 -drc_report_iter_step 5
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       14
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+
+Design:                   CNN
+Die area:                 ( 0 0 ) ( 118662 118662 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     49147
+Number of terminals:      710
+Number of snets:          2
+Number of nets:           55131
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 240.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 822278.
+[INFO DRT-0033] V1 shape region query size = 1412953.
+[INFO DRT-0033] M2 shape region query size = 31169.
+[INFO DRT-0033] V2 shape region query size = 28050.
+[INFO DRT-0033] M3 shape region query size = 28050.
+[INFO DRT-0033] V3 shape region query size = 18700.
+[INFO DRT-0033] M4 shape region query size = 19150.
+[INFO DRT-0033] V4 shape region query size = 18700.
+[INFO DRT-0033] M5 shape region query size = 10620.
+[INFO DRT-0033] V5 shape region query size = 1936.
+[INFO DRT-0033] M6 shape region query size = 1056.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0078]   Complete 1399 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 240 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0084]   Complete 32121 groups.
+#scanned instances     = 49147
+#unique  instances     = 240
+#stdCellGenAp          = 6627
+#stdCellValidPlanarAp  = 50
+#stdCellValidViaAp     = 5420
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 154926
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:10:34, elapsed time = 00:00:53, memory = 713.81 (MB), peak = 735.97 (MB)
+[INFO DRT-0156] guideIn read 100000 guides.
+[INFO DRT-0156] guideIn read 200000 guides.
+[INFO DRT-0156] guideIn read 300000 guides.
+
+[INFO DRT-0157] Number of guides:     346418
+
+[INFO DRT-0169] Post process guides.
+[INFO DRT-0176] GCELLGRID X 0 DO 208 STEP 570 ;
+[INFO DRT-0177] GCELLGRID Y 0 DO 208 STEP 570 ;
+[INFO DRT-0026]   Complete 100000 origin guides.
+[INFO DRT-0026]   Complete 200000 origin guides.
+[INFO DRT-0026]   Complete 300000 origin guides.
+[INFO DRT-0028]   Complete Active.
+[INFO DRT-0028]   Complete V0.
+[INFO DRT-0028]   Complete M1.
+[INFO DRT-0028]   Complete V1.
+[INFO DRT-0028]   Complete M2.
+[INFO DRT-0028]   Complete V2.
+[INFO DRT-0028]   Complete M3.
+[INFO DRT-0028]   Complete V3.
+[INFO DRT-0028]   Complete M4.
+[INFO DRT-0028]   Complete V4.
+[INFO DRT-0028]   Complete M5.
+[INFO DRT-0028]   Complete V5.
+[INFO DRT-0028]   Complete M6.
+[INFO DRT-0028]   Complete V6.
+[INFO DRT-0028]   Complete M7.
+[INFO DRT-0028]   Complete V7.
+[INFO DRT-0028]   Complete M8.
+[INFO DRT-0028]   Complete V8.
+[INFO DRT-0028]   Complete M9.
+[INFO DRT-0028]   Complete V9.
+[INFO DRT-0028]   Complete Pad.
+[INFO DRT-0178] Init guide query.
+[INFO DRT-0035]   Complete Active (guide).
+[INFO DRT-0035]   Complete V0 (guide).
+[INFO DRT-0035]   Complete M1 (guide).
+[INFO DRT-0035]   Complete V1 (guide).
+[INFO DRT-0035]   Complete M2 (guide).
+[INFO DRT-0035]   Complete V2 (guide).
+[INFO DRT-0035]   Complete M3 (guide).
+[INFO DRT-0035]   Complete V3 (guide).
+[INFO DRT-0035]   Complete M4 (guide).
+[INFO DRT-0035]   Complete V4 (guide).
+[INFO DRT-0035]   Complete M5 (guide).
+[INFO DRT-0035]   Complete V5 (guide).
+[INFO DRT-0035]   Complete M6 (guide).
+[INFO DRT-0035]   Complete V6 (guide).
+[INFO DRT-0035]   Complete M7 (guide).
+[INFO DRT-0035]   Complete V7 (guide).
+[INFO DRT-0035]   Complete M8 (guide).
+[INFO DRT-0035]   Complete V8 (guide).
+[INFO DRT-0035]   Complete M9 (guide).
+[INFO DRT-0035]   Complete V9 (guide).
+[INFO DRT-0035]   Complete Pad (guide).
+[INFO DRT-0036] Active guide region query size = 0.
+[INFO DRT-0036] V0 guide region query size = 0.
+[INFO DRT-0036] M1 guide region query size = 117782.
+[INFO DRT-0036] V1 guide region query size = 0.
+[INFO DRT-0036] M2 guide region query size = 98718.
+[INFO DRT-0036] V2 guide region query size = 0.
+[INFO DRT-0036] M3 guide region query size = 46383.
+[INFO DRT-0036] V3 guide region query size = 0.
+[INFO DRT-0036] M4 guide region query size = 3744.
+[INFO DRT-0036] V4 guide region query size = 0.
+[INFO DRT-0036] M5 guide region query size = 2270.
+[INFO DRT-0036] V5 guide region query size = 0.
+[INFO DRT-0036] M6 guide region query size = 1168.
+[INFO DRT-0036] V6 guide region query size = 0.
+[INFO DRT-0036] M7 guide region query size = 572.
+[INFO DRT-0036] V7 guide region query size = 0.
+[INFO DRT-0036] M8 guide region query size = 0.
+[INFO DRT-0036] V8 guide region query size = 0.
+[INFO DRT-0036] M9 guide region query size = 0.
+[INFO DRT-0036] V9 guide region query size = 0.
+[INFO DRT-0036] Pad guide region query size = 0.
+[INFO DRT-0179] Init gr pin query.
+[INFO DRT-0267] cpu time = 00:00:01, elapsed time = 00:00:00, memory = 826.39 (MB), peak = 825.33 (MB)
+[INFO DRT-0245] skipped writing guide updates to database.
+[INFO DRT-0181] Start track assignment.
+[INFO DRT-0184] Done with 167007 vertical wires in 5 frboxes and 103630 horizontal wires in 5 frboxes.
+[INFO DRT-0186] Done with 13806 vertical wires in 5 frboxes and 21419 horizontal wires in 5 frboxes.
+[INFO DRT-0182] Complete track assignment.
+[INFO DRT-0267] cpu time = 00:00:12, elapsed time = 00:00:03, memory = 1563.11 (MB), peak = 1562.25 (MB)
+[INFO DRT-0187] Start routing data preparation.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 1563.11 (MB), peak = 1562.25 (MB)
+[INFO DRT-0194] Start detail routing.
+[INFO DRT-0195] Start 0th optimization iteration.
+    Completing 10% with 0 violations.
+    elapsed time = 00:00:06, memory = 2916.93 (MB).
+    Completing 20% with 0 violations.
+    elapsed time = 00:00:12, memory = 4433.55 (MB).
+    Completing 30% with 1347 violations.
+    elapsed time = 00:00:18, memory = 4902.29 (MB).
+    Completing 40% with 1347 violations.
+    elapsed time = 00:00:25, memory = 4939.02 (MB).
+    Completing 50% with 1347 violations.
+    elapsed time = 00:00:29, memory = 4910.13 (MB).
+    Completing 60% with 2756 violations.
+    elapsed time = 00:00:39, memory = 5516.69 (MB).
+    Completing 70% with 2756 violations.
+    elapsed time = 00:00:46, memory = 5631.60 (MB).
+    Completing 80% with 3995 violations.
+    elapsed time = 00:00:53, memory = 5916.80 (MB).
+    Completing 90% with 3995 violations.
+    elapsed time = 00:01:02, memory = 5953.15 (MB).
+    Completing 100% with 5273 violations.
+    elapsed time = 00:01:08, memory = 5722.62 (MB).
+[INFO DRT-0199]   Number of violations = 7265.
+Viol/Layer          M1     M2     V2     M3     V3     M4     V4     M5     V5     M6     V6     M7
+CutSpcTbl            0      0      0      0     22      0     11      0      8      0     12      0
+EOL                  0    272      0     32      0      9      0      0      0      0      0      0
+Metal Spacing     1600    122      0    322      0      3      0      0      0     12      0      2
+Recheck              3   1079      0    619      0    166      0     83      0     37      0      5
+Short              385    348      2     65      1      2      3     11      3     27      1      0
+eolKeepOut           0   1833      0    127      0     38      0      0      0      0      0      0
+[INFO DRT-0267] cpu time = 00:12:24, elapsed time = 00:01:09, memory = 5819.36 (MB), peak = 6152.51 (MB)
+Total wire length = 119628 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 43617 um.
+Total wire length on LAYER M3 = 58297 um.
+Total wire length on LAYER M4 = 11948 um.
+Total wire length on LAYER M5 = 3026 um.
+Total wire length on LAYER M6 = 1364 um.
+Total wire length on LAYER M7 = 1373 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 372402.
+Up-via summary (total 372402):
+
+-----------------
+ Active         0
+     M1    144126
+     M2    206316
+     M3     17521
+     M4      2472
+     M5      1073
+     M6       894
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       372402
+
+
+[INFO DRT-0195] Start 1st optimization iteration.
+    Completing 10% with 7265 violations.
+    elapsed time = 00:00:06, memory = 6221.31 (MB).
+    Completing 20% with 7265 violations.
+    elapsed time = 00:00:13, memory = 6284.02 (MB).
+    Completing 30% with 5414 violations.
+    elapsed time = 00:00:20, memory = 6349.97 (MB).
+    Completing 40% with 5414 violations.
+    elapsed time = 00:00:27, memory = 6351.01 (MB).
+    Completing 50% with 5414 violations.
+    elapsed time = 00:00:32, memory = 6031.36 (MB).
+    Completing 60% with 3857 violations.
+    elapsed time = 00:00:42, memory = 6493.30 (MB).
+    Completing 70% with 3857 violations.
+    elapsed time = 00:00:48, memory = 6510.32 (MB).
+    Completing 80% with 2285 violations.
+    elapsed time = 00:00:55, memory = 6518.46 (MB).
+    Completing 90% with 2285 violations.
+    elapsed time = 00:01:03, memory = 6540.45 (MB).
+    Completing 100% with 701 violations.
+    elapsed time = 00:01:08, memory = 6196.52 (MB).
+[INFO DRT-0199]   Number of violations = 710.
+Viol/Layer          M1     M2     M3     V3     M4     V4     M6     V6     M7
+CutSpcTbl            0      0      0     11      0      5      0      4      0
+EOL                  0     57      1      0      0      0      0      0      0
+Metal Spacing      183      9     83      0      0      0      2      0      1
+Recheck              0      2      6      0      1      0      0      0      0
+Short               45     24     19      0      0      0      0      0      0
+eolKeepOut           0    252      5      0      0      0      0      0      0
+[INFO DRT-0267] cpu time = 00:12:22, elapsed time = 00:01:09, memory = 6132.23 (MB), peak = 6666.06 (MB)
+Total wire length = 118499 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 43086 um.
+Total wire length on LAYER M3 = 57810 um.
+Total wire length on LAYER M4 = 12070 um.
+Total wire length on LAYER M5 = 2932 um.
+Total wire length on LAYER M6 = 1320 um.
+Total wire length on LAYER M7 = 1279 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 358185.
+Up-via summary (total 358185):
+
+-----------------
+ Active         0
+     M1    144037
+     M2    194947
+     M3     15534
+     M4      2078
+     M5       881
+     M6       708
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       358185
+
+
+[INFO DRT-0195] Start 2nd optimization iteration.
+    Completing 10% with 710 violations.
+    elapsed time = 00:00:01, memory = 6636.93 (MB).
+    Completing 20% with 710 violations.
+    elapsed time = 00:00:05, memory = 6625.19 (MB).
+    Completing 30% with 643 violations.
+    elapsed time = 00:00:07, memory = 6639.11 (MB).
+    Completing 40% with 643 violations.
+    elapsed time = 00:00:11, memory = 6528.00 (MB).
+    Completing 50% with 643 violations.
+    elapsed time = 00:00:13, memory = 6584.11 (MB).
+    Completing 60% with 593 violations.
+    elapsed time = 00:00:17, memory = 6597.58 (MB).
+    Completing 70% with 593 violations.
+    elapsed time = 00:00:19, memory = 6585.08 (MB).
+    Completing 80% with 503 violations.
+    elapsed time = 00:00:22, memory = 6638.67 (MB).
+    Completing 90% with 503 violations.
+    elapsed time = 00:00:25, memory = 6576.55 (MB).
+    Completing 100% with 421 violations.
+    elapsed time = 00:00:29, memory = 6091.32 (MB).
+[INFO DRT-0199]   Number of violations = 421.
+Viol/Layer          M1     M2     M3     V3     V4     M6     V6
+CutSpcTbl            0      0      0     15      4      0      3
+EOL                  0     35      2      0      0      0      0
+Metal Spacing       96      5     53      0      0      1      0
+Short               25     11     14      0      0      0      0
+eolKeepOut           0    153      4      0      0      0      0
+[INFO DRT-0267] cpu time = 00:05:02, elapsed time = 00:00:29, memory = 6091.32 (MB), peak = 6699.56 (MB)
+Total wire length = 118411 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 43071 um.
+Total wire length on LAYER M3 = 57818 um.
+Total wire length on LAYER M4 = 12034 um.
+Total wire length on LAYER M5 = 2911 um.
+Total wire length on LAYER M6 = 1311 um.
+Total wire length on LAYER M7 = 1264 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 357084.
+Up-via summary (total 357084):
+
+-----------------
+ Active         0
+     M1    144036
+     M2    194303
+     M3     15200
+     M4      1999
+     M5       856
+     M6       690
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       357084
+
+
+[INFO DRT-0195] Start 3rd optimization iteration.
+    Completing 10% with 421 violations.
+    elapsed time = 00:00:01, memory = 6635.87 (MB).
+    Completing 20% with 421 violations.
+    elapsed time = 00:00:02, memory = 6570.70 (MB).
+    Completing 30% with 287 violations.
+    elapsed time = 00:00:03, memory = 6094.23 (MB).
+    Completing 40% with 287 violations.
+    elapsed time = 00:00:04, memory = 6638.36 (MB).
+    Completing 50% with 287 violations.
+    elapsed time = 00:00:06, memory = 6091.32 (MB).
+    Completing 60% with 202 violations.
+    elapsed time = 00:00:07, memory = 6561.47 (MB).
+    Completing 70% with 202 violations.
+    elapsed time = 00:00:08, memory = 6592.09 (MB).
+    Completing 80% with 85 violations.
+    elapsed time = 00:00:09, memory = 6091.32 (MB).
+    Completing 90% with 85 violations.
+    elapsed time = 00:00:09, memory = 6516.32 (MB).
+    Completing 100% with 1 violations.
+    elapsed time = 00:00:11, memory = 6091.32 (MB).
+[INFO DRT-0199]   Number of violations = 1.
+Viol/Layer          M2
+Short                1
+[INFO DRT-0267] cpu time = 00:01:36, elapsed time = 00:00:11, memory = 6091.32 (MB), peak = 6699.56 (MB)
+Total wire length = 118396 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 42879 um.
+Total wire length on LAYER M3 = 57775 um.
+Total wire length on LAYER M4 = 12238 um.
+Total wire length on LAYER M5 = 2930 um.
+Total wire length on LAYER M6 = 1308 um.
+Total wire length on LAYER M7 = 1262 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 357212.
+Up-via summary (total 357212):
+
+-----------------
+ Active         0
+     M1    144036
+     M2    193902
+     M3     15675
+     M4      2041
+     M5       869
+     M6       689
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       357212
+
+
+[INFO DRT-0195] Start 4th guides tiles iteration.
+    Completing 50% with 1 violations.
+    elapsed time = 00:00:00, memory = 6091.38 (MB).
+    Completing 100% with 0 violations.
+    elapsed time = 00:00:00, memory = 6091.38 (MB).
+[INFO DRT-0199]   Number of violations = 0.
+[INFO DRT-0267] cpu time = 00:00:00, elapsed time = 00:00:00, memory = 6091.38 (MB), peak = 6699.56 (MB)
+Total wire length = 118396 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 42878 um.
+Total wire length on LAYER M3 = 57775 um.
+Total wire length on LAYER M4 = 12238 um.
+Total wire length on LAYER M5 = 2930 um.
+Total wire length on LAYER M6 = 1308 um.
+Total wire length on LAYER M7 = 1262 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 357214.
+Up-via summary (total 357214):
+
+-----------------
+ Active         0
+     M1    144036
+     M2    193904
+     M3     15675
+     M4      2041
+     M5       869
+     M6       689
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       357214
+
+
+[INFO DRT-0198] Complete detail routing.
+Total wire length = 118396 um.
+Total wire length on LAYER M1 = 0 um.
+Total wire length on LAYER M2 = 42878 um.
+Total wire length on LAYER M3 = 57775 um.
+Total wire length on LAYER M4 = 12238 um.
+Total wire length on LAYER M5 = 2930 um.
+Total wire length on LAYER M6 = 1308 um.
+Total wire length on LAYER M7 = 1262 um.
+Total wire length on LAYER M8 = 0 um.
+Total wire length on LAYER M9 = 0 um.
+Total wire length on LAYER Pad = 0 um.
+Total number of vias = 357214.
+Up-via summary (total 357214):
+
+-----------------
+ Active         0
+     M1    144036
+     M2    193904
+     M3     15675
+     M4      2041
+     M5       869
+     M6       689
+     M7         0
+     M8         0
+     M9         0
+-----------------
+       357214
+
+
+[INFO DRT-0267] cpu time = 00:31:26, elapsed time = 00:03:00, memory = 6091.50 (MB), peak = 6699.56 (MB)
+
+[INFO DRT-0180] Post processing.
+[INFO DRT-0501] Runtime: 239.82s
+Took 240 seconds: detailed_route -output_drc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/5_route_drc.rpt -output_maze /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/maze.log -droute_end_iter 64 -verbose 1 -drc_report_iter_step 5
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Design area 5408 um^2 41% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_2_route.odb
+Elapsed time: 4:07.76[h:]min:sec. CPU time: user 2545.12 sys 45.54 (1045%). Peak memory: 6860348KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_2_route                 .odb          247           6699 014e2c7fbc44ec51de8a
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_3_fillcell fillcell
+Running fillcell.tcl, stage 5_3_fillcell
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_2_route.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+filler_placement "FILLERxp5_ASAP7_75t_R FILLER_ASAP7_75t_R DECAPx1_ASAP7_75t_R DECAPx2_ASAP7_75t_R DECAPx4_ASAP7_75t_R DECAPx6_ASAP7_75t_R DECAPx10_ASAP7_75t_R"
+[INFO DPL-0001] Placed 67857 filler instances.
+Design area 5408 um^2 41% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_3_fillcell.odb
+Elapsed time: 0:01.97[h:]min:sec. CPU time: user 1.77 sys 0.19 (99%). Peak memory: 428004KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_3_fillcell              .odb            1            417 850d9356bb4f63b04dd7
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_3_fillcell.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.odb
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.sdc

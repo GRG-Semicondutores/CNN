@@ -1,14 +1,14 @@
 module CNN #(
     parameter DATA_WIDTH = 8, //largura do barramento de dados, utilizado em pesos e entradas
-    parameter IMG_SIZE_1 = 32, //tamanho do lado da imagem
+    parameter IMG_SIZE_1 = 4, //tamanho do lado da imagem
     parameter KERNEL_SIZE = 3, //tamanho do lado dos kernels
-    parameter N_CHANNELS = 3, //número de canais iniciais da imagem
+    parameter N_CHANNELS = 1, //número de canais iniciais da imagem
     parameter N_FILTERS_LAYER_1 = 2, //número de filtros da primeira camada
-    parameter N_FILTERS_LAYER_2 = 4, //número de filtros da segunda camada
+    parameter N_FILTERS_LAYER_2 = 2, //número de filtros da segunda camada
     parameter PADDING_1 = 1, //padding da primeira camada
     parameter PADDING_2 = 1, //padding da segunda camada
-    parameter N_NEURONS_1 = 8, //número de neurônios da primeira camada Fully Connected
-    parameter N_NEURONS_2 = 10, //número de neurônios da última camada (classes finais)
+    parameter N_NEURONS_1 = 2, //número de neurônios da primeira camada Fully Connected
+    parameter N_NEURONS_2 = 2, //número de neurônios da última camada (classes finais)
     parameter SHIFT_1 = 1, //shift do Quantizer (ver arquivo para mais detalhes). Deve vir de um script externo, que indica o formato de ponto fixo adotado para a rede
     parameter SHIFT_2 = 1, //idem, para camada 2
     parameter SHIFT_3 = 1, //camada FC1

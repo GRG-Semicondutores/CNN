@@ -2,7 +2,7 @@
   "include": [
     "*.vhd",
     "*.vhdl",
-    "*.v",
+    "*src/.v",
     "*.vcd",
     "vhdl_ls.toml",
     "*.pcf"

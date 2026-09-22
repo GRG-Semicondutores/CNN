@@ -1,0 +1,16 @@
+============================================================
+ Gerando scripts ORFS
+============================================================
+Design:  reshape
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/config.mk
+ORFS:    /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts
+Criado: 1_synth.sh
+Criado: 2_floorplan.sh
+Criado: 3_place.sh
+Criado: 4_cts.sh
+Criado: 5_route.sh
+Criado: 6_finish.sh
+Criado: 7_clean.sh
+
+Scripts gerados para /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
