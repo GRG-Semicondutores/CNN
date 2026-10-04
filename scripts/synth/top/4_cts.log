@@ -1,0 +1,149 @@
+============================================================
+ 4 - Clock Tree Synthesis
+============================================================
+Design:  top
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/top
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_place.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_place.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx24_ASAP7_75t_R
+[INFO CTS-0049] Characterization buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0007] Net "clk" found for clock "core_clk".
+[INFO CTS-0010]  Clock net "clk" has 3352 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 3352.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 1350  dbu (1 um).
+[INFO CTS-0206] Best clustering solution was found from max clustering size of 25 and max clustering diameter of 27.
+[INFO CTS-0019]  Total number of sinks after clustering: 183.
+[INFO CTS-0024]  Normalized sink region: [(2.83435, 5.56667), (84.6574, 83.2333)].
+[INFO CTS-0025]     Width:  81.8231.
+[INFO CTS-0026]     Height: 77.6667.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 92
+    Sub-region size: 40.9115 X 77.6667
+[INFO CTS-0034]     Segment length (rounded): 20.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 46
+    Sub-region size: 40.9115 X 38.8333
+[INFO CTS-0034]     Segment length (rounded): 20.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 23
+    Sub-region size: 20.4558 X 38.8333
+[INFO CTS-0034]     Segment length (rounded): 10.
+ Level 4
+    Direction: Vertical
+    Sinks per sub-region: 12
+    Sub-region size: 20.4558 X 19.4167
+[INFO CTS-0034]     Segment length (rounded): 10.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (137.460 um) and max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 183.
+[INFO CTS-0018]     Created 212 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 5.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 5.
+[INFO CTS-0015]     Created 212 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 8:1, 9:6, 10:1, 11:5, 12:9, 13:8, 14:8, 15:16, 16:17, 17:20, 18:14, 19:19, 20:22, 21:17, 22:15, 23:13, 24:7, 25:1..
+[INFO CTS-0017]     Max level of the clock tree: 4.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 3519
+[INFO CTS-0100]  Leaf buffers 183
+[INFO CTS-0101]  Average sink wire length 205.22 um
+[INFO CTS-0102]  Path depth 4 - 5
+[INFO CTS-0207]  Dummy loads inserted 167
+[INFO CTS-0500] Runtime: 2.65s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 13118.03 um^2
+[INFO DPL-0007] Movable instances area: 5357.51 um^2
+[INFO DPL-0008] Fixed instances area within core: 49.57 um^2
+[INFO DPL-0009] Utilization: 41.2%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 49145 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |       1390 |       238 |      1152
+        1 |        131 |        17 |       114
+        2 |         83 |         7 |        76
+        3 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 3.
+[INFO DPL-0500] Runtime: 0.45s
+Placement Analysis
+---------------------------------
+total displacement       4625.6 u
+average displacement        0.1 u
+max displacement            2.2 u
+original HPWL          102404.0 u
+legalized HPWL         104559.4 u
+delta HPWL                    2 %
+
+estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 1.16s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.19s
+Repair timing output passed lec test
+detailed_placement
+[INFO DPL-0006] Core area: 13118.03 um^2
+[INFO DPL-0007] Movable instances area: 5357.51 um^2
+[INFO DPL-0008] Fixed instances area within core: 49.57 um^2
+[INFO DPL-0009] Utilization: 41.2%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 49145 cells
+[INFO DPL-0500] Runtime: 0.25s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          104559.4 u
+legalized HPWL         104559.4 u
+delta HPWL                    0 %
+
+estimate_parasitics -placement
+Report metrics stage 4, cts final...
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 5407 um^2 41% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_1_cts.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_cts.sdc
+Elapsed time: 0:23.06[h:]min:sec. CPU time: user 55.11 sys 5.38 (262%). Peak memory: 691492KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb           23            675 d28bc4f8c1dbe5140986
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_1_cts.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_cts.odb

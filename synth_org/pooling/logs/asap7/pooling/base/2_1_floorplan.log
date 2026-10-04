@@ -1,0 +1,147 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/1_synth.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/1_synth.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+number instances in verilog is 601
+initialize_floorplan -utilization 40 -aspect_ratio 1 -core_space 2 -site asap7sc7p5t
+[INFO IFP-0107] Defining die area using utilization: 40.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.052, 2.160).
+[INFO IFP-0001] Added 43 rows of 218 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 15.863 15.863 ) um
+[INFO IFP-0101] Core BBox: (  2.052  2.160 ) ( 13.824 13.770 ) um
+[INFO IFP-0102] Core area:                          136.673 um^2
+[INFO IFP-0103] Total instances area:                56.293 um^2
+[INFO IFP-0104] Effective utilization:                0.412
+[INFO IFP-0105] Number of instances:                    601
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/openRoad/make_tracks.tcl
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/fastroute.tcl
+set_dont_use "*x1p*_ASAP7* *xp*_ASAP7* SDF* ICG*"
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIELOx1_ASAP7_75t_R/L
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIEHIx1_ASAP7_75t_R/H
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
+[INFO RSZ-0094] Found 32 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 32 out of 32 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -359.768 |   -39359.0 |   -10970.5 |     32 | imagem_out[5]
+      10* |       0 |       5 |        0 |      0 |     4 |    +0.2% | -348.755 |   -38700.3 |   -10775.5 |     32 | imagem_out[5]
+      20* |       0 |       6 |        0 |      0 |    13 |    +0.2% | -347.528 |   -38567.4 |   -10738.6 |     32 | imagem_out[29]
+      30* |       0 |       6 |        0 |      0 |    23 |    +0.2% | -348.941 |   -38576.2 |   -10751.3 |     32 | imagem_out[18]
+      40* |       0 |       9 |        0 |      0 |    30 |    +0.3% | -345.125 |   -38558.2 |   -10681.2 |     32 | imagem_out[16]
+      50* |       0 |      14 |        0 |      0 |    35 |    +0.7% | -340.204 |   -38215.6 |   -10583.7 |     32 | imagem_out[25]
+      60* |       0 |      23 |        0 |      0 |    36 |    +1.1% | -338.538 |   -38114.9 |   -10540.2 |     32 | imagem_out[25]
+      60* |       0 |      22 |        0 |      0 |    36 |    +1.1% | -338.351 |   -38114.7 |   -10538.7 |     32 | imagem_out[25]
+      70* |       0 |      26 |        0 |      0 |    41 |    +1.3% | -338.351 |   -37893.9 |   -10485.0 |     32 | imagem_out[25]
+      75* |       0 |      26 |        0 |      0 |    40 |    +1.3% | -338.351 |   -37839.2 |   -10471.4 |     32 | imagem_out[25]
+      80* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      80* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      82* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      84* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      86* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      88* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      90* |       0 |      31 |        0 |      0 |    40 |    +1.5% | -338.538 |   -37836.1 |   -10446.8 |     32 | imagem_out[25]
+      90* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      92* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+      94* |       0 |      30 |        0 |      0 |    40 |    +1.4% | -338.351 |   -37835.9 |   -10445.3 |     32 | imagem_out[25]
+     100* |       0 |      33 |        0 |      0 |    42 |    +1.5% | -338.351 |   -37827.7 |   -10432.6 |     32 | imagem_out[25]
+     104* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     106* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     108* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     110* |       0 |      37 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.5 |   -10427.5 |     32 | imagem_out[25]
+     110* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     112* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     114* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     116* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     118* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     120* |       0 |      36 |        0 |      0 |    43 |    +1.6% | -338.356 |   -37815.4 |   -10426.1 |     32 | imagem_out[25]
+     122* |       0 |      36 |        0 |      0 |    42 |    +1.6% | -338.351 |   -37815.3 |   -10426.0 |     32 | imagem_out[25]
+     124* |       0 |      36 |        0 |      0 |    43 |    +1.6% | -338.351 |   -37813.5 |   -10425.0 |     32 | imagem_out[25]
+     126* |       0 |      36 |        0 |      0 |    44 |    +1.6% | -338.351 |   -37811.8 |   -10424.0 |     32 | imagem_out[25]
+     128* |       0 |      36 |        0 |      0 |    44 |    +1.6% | -338.351 |   -37811.8 |   -10424.0 |     32 | imagem_out[25]
+     130* |       0 |      36 |        0 |      0 |    45 |    +1.6% | -338.351 |   -37813.5 |   -10425.0 |     32 | imagem_out[25]
+     130* |       0 |      36 |        0 |      0 |    44 |    +1.6% | -338.351 |   -37811.8 |   -10424.0 |     32 | imagem_out[25]
+     132* |       0 |      36 |        0 |      0 |    44 |    +1.6% | -338.351 |   -37811.8 |   -10424.0 |     32 | imagem_out[25]
+     140* |       0 |      37 |        0 |      0 |    50 |    +1.6% | -338.351 |   -37680.0 |   -10366.0 |     32 | imagem_out[25]
+     150* |       0 |      40 |        0 |      0 |    57 |    +1.9% | -338.351 |   -37725.5 |   -10380.0 |     32 | imagem_out[25]
+     157* |       0 |      44 |        0 |      0 |    60 |    +2.0% | -338.351 |   -37707.5 |   -10346.4 |     32 | imagem_out[25]
+     159* |       0 |      44 |        0 |      0 |    61 |    +2.0% | -338.351 |   -37709.7 |   -10345.9 |     32 | imagem_out[25]
+     160* |       0 |      44 |        0 |      0 |    61 |    +2.0% | -338.351 |   -37709.7 |   -10345.9 |     32 | imagem_out[25]
+     161* |       0 |      44 |        0 |      0 |    62 |    +2.0% | -338.351 |   -37711.9 |   -10345.2 |     32 | imagem_out[25]
+     163* |       0 |      44 |        0 |      0 |    63 |    +2.0% | -338.351 |   -37714.1 |   -10344.4 |     32 | imagem_out[25]
+     165* |       0 |      44 |        0 |      0 |    64 |    +2.0% | -338.351 |   -37716.3 |   -10343.5 |     32 | imagem_out[25]
+     167* |       0 |      44 |        0 |      0 |    65 |    +2.0% | -338.351 |   -37718.6 |   -10342.5 |     32 | imagem_out[25]
+     169* |       0 |      44 |        0 |      0 |    66 |    +2.0% | -338.351 |   -37720.8 |   -10341.4 |     32 | imagem_out[25]
+     170* |       0 |      44 |        0 |      0 |    66 |    +2.0% | -338.351 |   -37720.8 |   -10341.4 |     32 | imagem_out[25]
+     171* |       0 |      44 |        0 |      0 |    67 |    +2.0% | -338.351 |   -37678.8 |   -10340.3 |     32 | imagem_out[25]
+     171* |       0 |      44 |        0 |      0 |    67 |    +2.0% | -338.351 |   -37678.8 |   -10340.3 |     32 | imagem_out[25]
+    final |       0 |      44 |        0 |      0 |    67 |    +2.0% | -338.351 |   -37678.8 |   -10340.3 |     32 | imagem_out[25]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0051] Resized 44 instances: 44 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 67 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 0.40s
+Default units for flow
+ time 1ps
+ capacitance 1fF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1pW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (fF/um)
+------------------------------------------------
+        M1 |        7.04e-02 |         1.00e-10
+        M2 |        2.97e-02 |         1.75e-01
+        M3 |        3.13e-02 |         1.56e-01
+        M4 |        1.80e-02 |         1.78e-01
+        M5 |        1.90e-02 |         1.64e-01
+        M6 |        1.19e-02 |         1.87e-01
+        M7 |        1.25e-02 |         1.63e-01
+        M8 |        8.45e-03 |         1.04e-01
+        M9 |        8.90e-03 |         9.28e-02
+       Pad |        0.00e+00 |         0.00e+00
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+        V1 |       1.72e-02 
+        V2 |       1.72e-02 
+        V3 |       1.72e-02 
+        V4 |       1.18e-02 
+        V5 |       1.18e-02 
+        V6 |       8.20e-03 
+        V7 |       8.20e-03 
+        V8 |       6.30e-03 
+        V9 |       6.30e-03 
+----------------------------
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 57 um^2 42% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/2_1_floorplan.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/2_1_floorplan.sdc
+Elapsed time: 0:01.59[h:]min:sec. CPU time: user 1.55 sys 0.18 (109%). Peak memory: 219128KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb            1            213 ae70060a9e2b8b958d75
+2_1_floorplan             .sdc                             d92a38ce241bac97179e

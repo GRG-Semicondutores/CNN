@@ -1,0 +1,18 @@
+{
+  "include": [
+    "*.vhd",
+    "*.vhdl",
+    "*src/.v",
+    "*.vcd",
+    "vhdl_ls.toml",
+    "*.pcf"
+  ],
+  "exclude": [
+    "build"
+  ],
+  "loader": "openFpgaLoader",
+  "toolchain": "yosys",
+  "ossCad": {
+    "constraintFile": null
+  }
+}

@@ -1,0 +1,11 @@
+format: verilog
+input_paths:
+  - /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/1_synth_lec.v
+  - /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/6_final_lec.v
+liberty_files:
+ - /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+ - /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+ - /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+ - /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+ - /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+log_file: /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/logs/asap7/pooling/base/6_final_lec_check.log

@@ -1,0 +1,34 @@
+============================================================
+ Gerando scripts ORFS
+============================================================
+
+Design:      convolution
+CNN root:    /home/matheus-grossi/Projects/CNN/CNN
+Projeto:     /home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution
+Config:      /home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution/config.mk
+ORFS:        /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts
+
+Criado: 1_synth.sh
+Criado: 2_floorplan.sh
+Criado: 3_place.sh
+Criado: 4_cts.sh
+Criado: 5_route.sh
+Criado: 6_finish.sh
+Criado: 7_clean.sh
+
+============================================================
+ Scripts gerados
+============================================================
+
+1_synth.sh
+2_floorplan.sh
+3_place.sh
+4_cts.sh
+5_route.sh
+6_finish.sh
+7_clean.sh
+
+Projeto associado:
+
+  /home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution
+

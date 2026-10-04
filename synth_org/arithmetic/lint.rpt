@@ -1,0 +1,46 @@
+matheus-grossi@matheus-grossi-MS-7C96:~/Projects/CNN/CNN/synth_org/arithmetic$ \
+> verilator \
+    --lint-only \
+    --Wall \
+    --top-module Multiplier_WTM \
+    Adder_CSA.sv \
+    Multiplier_WTM.sv
+%Warning-WIDTHEXPAND: Multiplier_WTM.sv:48:92: Operator SHIFTL expects 23 bits on the LHS, but LHS's REPLICATE generates 22 bits.
+                                             : ... note: In instance 'Multiplier_WTM'
+   48 |             assign partial[i] = {{LENGTH{1'b0}}, (multiplicand & {LENGTH{multiplier[i]}})} << i;
+      |                                                                                            ^~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.052
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-UNOPTFLAT: Multiplier_WTM.sv:56:24: Signal unoptimizable: Circular combinational logic: 'Multiplier_WTM.stage'
+   56 |     logic [LENGTH*2:0] stage [0:MAX_STAGES][0:MAX_LINES-1];
+      |                        ^~~~~
+                    ... For warning description see https://verilator.org/warn/UNOPTFLAT?v=5.052
+                    ... Use "/* verilator lint_off UNOPTFLAT */" and lint_on around source to disable this message.
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+                    Multiplier_WTM.sv:105:52:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+%Warning-UNOPTFLAT: Adder_CSA.sv:2:32: Signal unoptimizable: Circular combinational logic: 'Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__A'
+    2 |     input [ADD_LENGTH - 1 : 0] A,
+      |                                ^
+                    Adder_CSA.sv:2:32:      Example path: Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__A
+                    Multiplier_WTM.sv:98:44:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+                    Multiplier_WTM.sv:105:52:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+%Warning-UNOPTFLAT: Adder_CSA.sv:3:32: Signal unoptimizable: Circular combinational logic: 'Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__B'
+    3 |     input [ADD_LENGTH - 1 : 0] B,
+      |                                ^
+                    Adder_CSA.sv:3:32:      Example path: Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__B
+                    Multiplier_WTM.sv:98:44:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+                    Multiplier_WTM.sv:105:52:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+%Warning-UNOPTFLAT: Adder_CSA.sv:4:32: Signal unoptimizable: Circular combinational logic: 'Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__Cin'
+    4 |     input [ADD_LENGTH - 1 : 0] Cin,
+      |                                ^~~
+                    Adder_CSA.sv:4:32:      Example path: Multiplier_WTM.__Vcellinp__gen_stages[0].gen_csa[0].csa_mult__Cin
+                    Multiplier_WTM.sv:98:44:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+                    Multiplier_WTM.sv:105:52:      Example path: ASSIGNW
+                    Multiplier_WTM.sv:56:24:      Example path: Multiplier_WTM.stage
+%Error: Exiting due to 5 warning(s)

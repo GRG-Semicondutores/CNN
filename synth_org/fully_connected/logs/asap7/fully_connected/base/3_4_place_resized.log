@@ -1,0 +1,48 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/3_3_place_gp.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     12770
+     1000 |     +0.0% |       0 |       0 |             0 |     11770
+     2000 |     +0.0% |       0 |       0 |             0 |     10770
+     3000 |     +0.0% |       0 |       0 |             0 |      9770
+     4000 |     +0.0% |       0 |       0 |             0 |      8770
+     5000 |     +0.0% |       0 |       0 |             0 |      7770
+     6000 |     +0.0% |       0 |       0 |             0 |      6770
+     7000 |     +0.0% |       0 |       0 |             0 |      5770
+     8000 |     +0.0% |       0 |       0 |             0 |      4770
+     9000 |     +0.0% |       0 |       0 |             0 |      3770
+    10000 |     +0.0% |       0 |       0 |             0 |      2770
+    11000 |     +0.0% |       0 |       0 |             0 |      1770
+    12000 |     +0.0% |       0 |       0 |             0 |       770
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.86s
+Floating nets: 
+Report metrics stage 3, resizer...
+
+==========================================================================
+resizer report_design_area
+--------------------------------------------------------------------------
+Design area 1133 um^2 41% utilization.
+Instance count before 11065, after 11065
+Pin count before 32923, after 32923
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/3_4_place_resized.odb
+Elapsed time: 0:03.75[h:]min:sec. CPU time: user 5.89 sys 0.59 (172%). Peak memory: 260032KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb            3            253 25046569a7fe06509159

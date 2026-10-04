@@ -1,0 +1,77 @@
+[2026-09-15 19:58:42.745] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-15 19:58:42.745] [miter_logger] [info] Collecting POs for design 0: ConvLayer
+
+[2026-09-15 19:58:43.176] [miter_logger] [info] Collected 19253 PIs for design 0
+
+[2026-09-15 19:58:43.176] [miter_logger] [info] Collected 34711 POs for design 0
+
+[2026-09-15 19:58:43.177] [miter_logger] [info] design 0 PI summary by model/term (19253 total terminals, 8 unique rows):
+| Model                | Term   | Count |
+|----------------------|--------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN     | 16409 |
+| ConvLayer            | kernel |  2160 |
+| ConvLayer            | imagem |   600 |
+| ConvLayer            | bias   |    80 |
+| ConvLayer            | clk    |     1 |
+| ConvLayer            | rst    |     1 |
+| ConvLayer            | start  |     1 |
+| DFFHQNx2_ASAP7_75t_R | QN     |     1 |
+
+[2026-09-15 19:58:43.178] [miter_logger] [info] design 0 PO summary by model/term (34711 total terminals, 6 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       | 16409 |
+| DFFHQNx1_ASAP7_75t_R | D         | 16409 |
+| ConvLayer            | result    |  1890 |
+| ConvLayer            | valid_out |     1 |
+| DFFHQNx2_ASAP7_75t_R | CLK       |     1 |
+| DFFHQNx2_ASAP7_75t_R | D         |     1 |
+
+[2026-09-15 19:58:43.187] [miter_logger] [info] Collecting POs for design 1: ConvLayer
+
+[2026-09-15 19:58:43.611] [miter_logger] [info] size of common inputs: 19253
+[2026-09-15 19:58:43.611] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-15 19:58:43.611] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-15 19:58:43.613] [miter_logger] [info] Collected 19253 PIs for design 1
+
+[2026-09-15 19:58:43.613] [miter_logger] [info] Collected 34711 POs for design 1
+
+[2026-09-15 19:58:43.614] [miter_logger] [info] design 1 PI summary by model/term (19253 total terminals, 8 unique rows):
+| Model                | Term   | Count |
+|----------------------|--------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN     | 16409 |
+| ConvLayer            | kernel |  2160 |
+| ConvLayer            | imagem |   600 |
+| ConvLayer            | bias   |    80 |
+| ConvLayer            | clk    |     1 |
+| ConvLayer            | rst    |     1 |
+| ConvLayer            | start  |     1 |
+| DFFHQNx2_ASAP7_75t_R | QN     |     1 |
+
+[2026-09-15 19:58:43.616] [miter_logger] [info] design 1 PO summary by model/term (34711 total terminals, 6 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       | 16409 |
+| DFFHQNx1_ASAP7_75t_R | D         | 16409 |
+| ConvLayer            | result    |  1890 |
+| ConvLayer            | valid_out |     1 |
+| DFFHQNx2_ASAP7_75t_R | CLK       |     1 |
+| DFFHQNx2_ASAP7_75t_R | D         |     1 |
+
+[2026-09-15 19:58:43.617] [miter_logger] [info] normalizeInputs: starting
+[2026-09-15 19:58:43.642] [miter_logger] [info] size of common inputs: 19253
+[2026-09-15 19:58:43.642] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-15 19:58:43.642] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-15 19:58:43.646] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-15 19:58:43.684] [miter_logger] [info] size of common outputs: 34711
+[2026-09-15 19:58:43.684] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-15 19:58:43.684] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-15 19:58:43.689] [miter_logger] [info] size of PIs in circuit 0: 19253
+[2026-09-15 19:58:43.689] [miter_logger] [info] size of PIs in circuit 1: 19253
+[2026-09-15 19:58:43.689] [miter_logger] [info] size of POs in circuit 0: 34711
+[2026-09-15 19:58:43.689] [miter_logger] [info] size of POs in circuit 1: 34711
+[2026-09-15 19:58:45.147] [miter_logger] [info] Building miter expression
+[2026-09-15 19:58:45.150] [miter_logger] [info] Finished building miter expression
+[2026-09-15 19:58:45.153] [miter_logger] [info] Starting solver
+[2026-09-15 19:58:45.153] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-15 19:58:45.153] [miter_logger] [info] Circuits are IDENTICAL

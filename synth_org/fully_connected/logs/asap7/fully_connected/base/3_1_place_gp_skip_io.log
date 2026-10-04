@@ -1,0 +1,115 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/2_floorplan.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.6 -pad_left 0 -pad_right 0
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) ( 54.540 54.540 ) um
+[INFO GPL-0016] Core area:                    2749.321 um^2
+[INFO GPL-0036] Movable instances area:       1104.581 um^2
+[INFO GPL-0037] Total instances area:         1121.610 um^2
+[INFO GPL-0035] Pin density area adjust:        33.032 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:             10913
+[INFO GPL-0007] Movable instances:               10329
+[INFO GPL-0008] Fixed instances:                   584
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                  12618
+[INFO GPL-0011] Number of pins:                  32619
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) ( 56.540 56.540 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) ( 54.540 54.540 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                  2749.321 um^2
+[INFO GPL-0017] Fixed instances area:           17.029 um^2
+[INFO GPL-0018] Movable instances area:       1137.613 um^2
+[INFO GPL-0019] Utilization:                    41.636 %
+[INFO GPL-0020] Standard cells area:          1137.613 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 10329	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.6000
+[INFO GPL-0024] Movable insts average area:      0.110 um^2
+[INFO GPL-0025] Ideal bin area:                  0.184 um^2
+[INFO GPL-0026] Ideal bin count:                 14977
+[INFO GPL-0027] Total bin area:               2749.321 um^2
+[INFO GPL-0028] Bin count (X, Y):          64 ,     64
+[INFO GPL-0029] Bin size (W * H):       0.820 *  0.818 um
+[INFO GPL-0030] Number of bins:                   4096
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9957 |  2.515584e+03 |   +0.00% |  1.69e-13 |      
+       10 |   0.9944 |  1.517595e+03 |  -39.67% |  2.75e-13 |      
+       20 |   0.9944 |  1.398874e+03 |   -7.82% |  4.48e-13 |      
+       30 |   0.9940 |  1.266743e+03 |   -9.45% |  7.30e-13 |      
+       40 |   0.9937 |  1.131938e+03 |  -10.64% |  1.19e-12 |      
+       50 |   0.9932 |  1.004278e+03 |  -11.28% |  1.94e-12 |      
+       60 |   0.9927 |  9.076270e+02 |   -9.62% |  3.16e-12 |      
+       70 |   0.9922 |  8.755730e+02 |   -3.53% |  5.14e-12 |      
+       80 |   0.9919 |  8.898650e+02 |   +1.63% |  8.37e-12 |      
+       90 |   0.9915 |  9.265880e+02 |   +4.13% |  1.36e-11 |      
+      100 |   0.9915 |  9.903140e+02 |   +6.88% |  2.22e-11 |      
+      110 |   0.9915 |  1.104060e+03 |  +11.49% |  3.62e-11 |      
+      120 |   0.9914 |  1.318281e+03 |  +19.40% |  5.90e-11 |      
+      130 |   0.9899 |  1.694944e+03 |  +28.57% |  9.60e-11 |      
+      140 |   0.9880 |  2.314912e+03 |  +36.58% |  1.56e-10 |      
+      150 |   0.9800 |  3.199428e+03 |  +38.21% |  2.55e-10 |      
+      160 |   0.9643 |  4.573705e+03 |  +42.95% |  4.15e-10 |      
+      170 |   0.9327 |  6.311862e+03 |  +38.00% |  6.76e-10 |      
+      180 |   0.8842 |  7.714470e+03 |  +22.22% |  1.10e-09 |      
+      190 |   0.8419 |  8.510545e+03 |  +10.32% |  1.79e-09 |      
+      200 |   0.8171 |  9.065789e+03 |   +6.52% |  2.92e-09 |      
+      210 |   0.7811 |  9.880209e+03 |   +8.98% |  4.75e-09 |      
+      220 |   0.7376 |  1.078654e+04 |   +9.17% |  7.74e-09 |      
+      230 |   0.7012 |  1.176847e+04 |   +9.10% |  1.26e-08 |      
+      240 |   0.6634 |  1.278935e+04 |   +8.67% |  2.05e-08 |      
+      250 |   0.6114 |  1.350338e+04 |   +5.58% |  3.35e-08 |      
+      260 |   0.5765 |  1.421159e+04 |   +5.24% |  5.45e-08 |      
+      270 |   0.5320 |  1.452891e+04 |   +2.23% |  8.88e-08 |      
+      280 |   0.5094 |  1.486759e+04 |   +2.33% |  1.45e-07 |      
+      290 |   0.4750 |  1.507276e+04 |   +1.38% |  2.36e-07 |      
+      300 |   0.4222 |  1.514922e+04 |   +0.51% |  3.84e-07 |      
+      310 |   0.3960 |  1.514546e+04 |   -0.02% |  6.25e-07 |      
+      320 |   0.3482 |  1.522658e+04 |   +0.54% |  1.02e-06 |      
+      330 |   0.3143 |  1.498719e+04 |   -1.57% |  1.51e-06 |      
+      340 |   0.2849 |  1.486645e+04 |   -0.81% |  2.23e-06 |      
+      350 |   0.2526 |  1.481121e+04 |   -0.37% |  3.29e-06 |      
+      360 |   0.2215 |  1.483310e+04 |   +0.15% |  4.84e-06 |      
+      370 |   0.1946 |  1.484430e+04 |   +0.08% |  7.13e-06 |      
+      380 |   0.1690 |  1.492067e+04 |   +0.51% |  1.05e-05 |      
+      390 |   0.1467 |  1.498529e+04 |   +0.43% |  1.55e-05 |      
+      400 |   0.1246 |  1.501569e+04 |   +0.20% |  2.28e-05 |      
+      410 |   0.1055 |  1.503777e+04 |   +0.15% |  3.36e-05 |      
+      414 |   0.0997 |  1.505658e+04 |          |  4.08e-05 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 414
+[INFO GPL-1002] Placed Cell Area             1137.6132
+[INFO GPL-1003] Available Free Area          2732.2920
+[INFO GPL-1004] Minimum Feasible Density        0.4200 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.4626
+[INFO GPL-1008]     - For 80% usage of free space: 0.5204
+[INFO GPL-1009]     - For 50% usage of free space: 0.8327
+[INFO GPL-1014] Final placement area: 1137.61 (+0.00%)
+[INFO GPL-1018] Final HPWL (um): 15076.74
+Design area 1122 um^2 41% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:01.84[h:]min:sec. CPU time: user 4.85 sys 0.10 (269%). Peak memory: 225864KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb            1            220 f3b1ab835fdf4fab0286
