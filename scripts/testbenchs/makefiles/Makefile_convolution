@@ -1,0 +1,217 @@
+# ==============================================================================
+# Makefile - Convolution / Icarus Verilog
+# Projeto: CNN
+# ==============================================================================
+
+SHELL := /bin/bash
+.DEFAULT_GOAL := all
+
+# ==============================================================================
+# DIRETÓRIOS
+# ==============================================================================
+
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+MAKEFILE_DIR  := $(dir $(THIS_MAKEFILE))
+PROJECT_ROOT  := $(abspath $(MAKEFILE_DIR)/../../..)
+
+RTL_DIR := $(PROJECT_ROOT)/src/Convolution
+TB_DIR  := $(PROJECT_ROOT)/testbenchs/Convolution
+
+RESULTS_ROOT ?= $(PROJECT_ROOT)/results_tb
+RESULTS_DIR  := $(RESULTS_ROOT)/Convolution/icarus
+
+# ==============================================================================
+# ARQUIVOS
+# ==============================================================================
+
+RTL_1 := $(RTL_DIR)/DotProduct.sv
+RTL_2 := $(RTL_DIR)/Convolution.sv
+TB    := $(TB_DIR)/testbench.sv
+
+VVP_FILE := $(RESULTS_DIR)/convolution.vvp
+
+LOG_DIR     := $(RESULTS_DIR)/logs
+COMPILE_LOG := $(LOG_DIR)/compile.log
+SIM_LOG     := $(LOG_DIR)/simulation.log
+WAVE        := $(RESULTS_DIR)/convolution.vcd
+
+# ==============================================================================
+# TOP LEVEL
+# ==============================================================================
+
+TOP := tb_convolution
+
+# ==============================================================================
+# FERRAMENTAS
+# ==============================================================================
+
+IVERILOG ?= iverilog
+VVP      ?= vvp
+GTKWAVE  ?= gtkwave
+SURFER   ?= surfer
+
+# ==============================================================================
+# CONTROLE DO TESTBENCH
+# ==============================================================================
+
+# O testbench da Convolution ativa a dump de waveform com o plusarg +VCD.
+# O módulo usa $test$plusargs("VCD") em vez de parâmetro de instância.
+VVP_FLAGS ?=
+
+# ==============================================================================
+# FLAGS
+# ==============================================================================
+
+IVERILOG_FLAGS := \
+	-Wall \
+	-g2012 \
+	-I"$(RTL_DIR)" \
+	-I"$(PROJECT_ROOT)/src" \
+	-s $(TOP)
+
+# ==============================================================================
+# TARGETS
+# ==============================================================================
+
+.PHONY: all icarus check_tools check_files compile run wave gtk surf clean help
+
+all: icarus
+
+icarus: run
+
+# ==============================================================================
+# VERIFICAÇÕES
+# ==============================================================================
+
+check_tools:
+	@command -v $(IVERILOG) >/dev/null 2>&1 || \
+		( echo "ERRO: iverilog nao encontrado no PATH"; exit 1 )
+	@command -v $(VVP) >/dev/null 2>&1 || \
+		( echo "ERRO: vvp nao encontrado no PATH"; exit 1 )
+
+check_files:
+	@test -f "$(RTL_1)" || \
+		( echo "ERRO: RTL do DotProduct nao encontrado:"; echo "$(RTL_1)"; exit 1 )
+	@test -f "$(RTL_2)" || \
+		( echo "ERRO: RTL da Convolution nao encontrado:"; echo "$(RTL_2)"; exit 1 )
+	@test -f "$(TB)" || \
+		( echo "ERRO: testbench da Convolution nao encontrado:"; echo "$(TB)"; exit 1 )
+
+# ==============================================================================
+# COMPILAÇÃO
+# ==============================================================================
+
+compile: check_tools check_files
+	@mkdir -p "$(RESULTS_DIR)" "$(LOG_DIR)"
+	@echo ""
+	@echo "========================================"
+	@echo "[IVERILOG] Compilando Convolution..."
+	@echo "========================================"
+	@echo ""
+
+	@set -o pipefail; \
+	$(IVERILOG) \
+		$(IVERILOG_FLAGS) \
+		-o "$(VVP_FILE)" \
+		"$(RTL_1)" \
+		"$(RTL_2)" \
+		"$(TB)" \
+		2>&1 | tee "$(COMPILE_LOG)"
+
+	@echo ""
+	@echo "[OK] Compilacao concluida"
+	@echo "VVP : $(VVP_FILE)"
+	@echo "LOG : $(COMPILE_LOG)"
+	@echo ""
+
+# ==============================================================================
+# SIMULAÇÃO
+# ==============================================================================
+
+run: compile
+	@mkdir -p "$(LOG_DIR)"
+	@echo ""
+	@echo "========================================"
+	@echo "[VVP] Executando Convolution..."
+	@echo "========================================"
+	@echo ""
+
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && \
+	$(VVP) "$(VVP_FILE)" $(VVP_FLAGS) \
+		2>&1 | tee "$(SIM_LOG)"
+
+	@echo ""
+	@echo "========================================"
+	@echo "[OK] Simulacao concluida"
+	@echo "========================================"
+	@echo "LOG : $(SIM_LOG)"
+	@echo ""
+
+# ==============================================================================
+# WAVEFORM
+# ==============================================================================
+
+wave:
+	@$(MAKE) -f "$(THIS_MAKEFILE)" run VVP_FLAGS="+VCD"
+	@echo "WAVE: $(WAVE)"
+
+gtk: wave
+	@echo ""
+	@if [ -f "$(WAVE)" ]; then \
+		$(GTKWAVE) "$(WAVE)"; \
+	else \
+		echo "ERRO: waveform nao encontrada:"; \
+		echo "$(WAVE)"; \
+		exit 1; \
+	fi
+
+surf: wave
+	@echo ""
+	@if [ -f "$(WAVE)" ]; then \
+		$(SURFER) "$(WAVE)"; \
+	else \
+		echo "ERRO: waveform nao encontrada:"; \
+		echo "$(WAVE)"; \
+		exit 1; \
+	fi
+
+# ==============================================================================
+# LIMPEZA
+# ==============================================================================
+
+clean:
+	@echo "[CLEAN] Removendo resultados Icarus da Convolution..."
+	@rm -rf "$(RESULTS_DIR)"
+	@echo "[OK] Resultados removidos."
+
+# ==============================================================================
+# AJUDA
+# ==============================================================================
+
+help:
+	@echo ""
+	@echo "Makefile - Convolution / Icarus"
+	@echo ""
+	@echo "Comandos:"
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution"
+	@echo "      Compila e executa o testbench"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution compile"
+	@echo "      Apenas compila"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution run"
+	@echo "      Compila e executa"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution wave"
+	@echo "      Executa com +VCD e gera waveform"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution gtk"
+	@echo "      Executa com waveform e abre GTKWave"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution surf"
+	@echo "      Executa com waveform e abre Surfer"
+	@echo ""
+	@echo "  make -f scripts/testbenchs/makefiles/Makefile_convolution clean"
+	@echo "      Remove results_tb/Convolution/icarus"
+	@echo ""
