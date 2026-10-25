@@ -1,294 +1,348 @@
 # CNN em Verilog/SystemVerilog
 
-Este repositório apresenta uma implementação de uma rede neural convolucional (CNN) em Verilog/SystemVerilog, voltada para processamento de imagens, extração de características e classificação por meio de camadas convolucionais, de pooling, flatten e totalmente conectadas. A arquitetura foi organizada para suportar simulação funcional, validação e síntese, além de registrar relatórios e resultados obtidos em diferentes etapas do fluxo de projeto.
+<div align="justify">
 
-## Objetivo do sistema
+Implementação de uma rede neural convolucional em hardware, com duas camadas
+convolucionais, quantização, ativação ReLU, max pooling e duas camadas totalmente
+conectadas. O repositório reúne os módulos SystemVerilog, as bancadas de
+verificação, os scripts de simulação e os resultados de implementação física.
 
-A CNN implementada processa imagens de entrada, aplicando uma sequência de operações clássicas de redes neurais:
+O módulo de topo é `CNN`; `CNN_top` identifica suas bancadas e pastas de
+resultados. Os pesos e os biases são fornecidos pelas entradas do topo.
 
-- convolução para extração de características;
-- quantização para representar valores em ponto fixo;
-- ativação ReLU para introduzir não-linearidade;
-- max pooling para reduzir dimensionalidade;
-- flatten para transformar mapas de características em vetor;
-- camadas totalmente conectadas para gerar a saída final da rede.
+## Arquitetura
 
-A estrutura principal do módulo de topologia está em `src/CNN.sv`, onde a rede é montada com duas camadas convolucionais, operações de pooling, flatten e duas camadas fully connected. O fluxo principal da arquitetura segue a sequência abaixo:
+```text
+Imagem → Conv1 → Quantização → ReLU → MaxPool
+       → Conv2 → Quantização → ReLU → MaxPool
+       → Flatten → FC1 → FC2 → Vetor de saída
+```
 
-1. entrada da imagem;
-2. primeira camada convolucional;
-3. quantização e ReLU;
-4. max pooling;
-5. segunda camada convolucional;
-6. quantização e ReLU;
-7. max pooling;
-8. flatten;
-9. camada fully connected 1;
-10. camada fully connected 2.
+Cada filtro convolucional usa um kernel por canal de entrada. Os produtos
+calculados nas janelas são somados entre os canais, juntamente com o bias,
+para formar um mapa de características. Filtros diferentes produzem mapas
+diferentes, que constituem os canais de entrada da próxima camada.
 
-O módulo final produz um vetor de saídas correspondente às classes ou valores de classificação do sistema.
-
-### Visão geral da arquitetura
+O max pooling seleciona o maior valor de cada região 2 × 2. O flatten reorganiza
+os mapas em um vetor, usado pelas camadas totalmente conectadas. Cada neurônio
+calcula uma soma ponderada com bias e ativação.
 
 <p align="center">
   <img src="images/neural_draw.png" alt="Arquitetura geral da CNN" />
 </p>
 
-A imagem resume a ideia principal da rede: a entrada da imagem passa por uma sequência de blocos de convolução, extração de características, pooling e classificação final, com o processamento distribuído por camadas que evoluem em abstração e complexidade.
+<table align="center">
+<thead>
+<tr>
+<th>Bloco</th>
+<th>Função</th>
+<th>Arquivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DotProduct</td>
+<td>Produto interno entre vetores de entradas e pesos</td>
+<td><code>src/DotProduct/DotProduct.sv</code></td>
+</tr>
+<tr>
+<td>Convolution</td>
+<td>Somas de produtos entre um kernel e as janelas de um canal</td>
+<td><code>src/Convolution/Convolution.sv</code></td>
+</tr>
+<tr>
+<td>FeatureMap</td>
+<td>Combinação das contribuições dos canais e do bias de um filtro</td>
+<td><code>src/FeatureMap.sv</code></td>
+</tr>
+<tr>
+<td>ConvLayer</td>
+<td>Organização dos filtros de uma camada</td>
+<td><code>src/ConvLayer.sv</code></td>
+</tr>
+<tr>
+<td>Quantizer</td>
+<td>Reescala e redução da largura dos resultados aritméticos</td>
+<td><code>src/Quantizer.sv</code></td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td>Substituição de valores negativos por zero</td>
+<td><code>src/ReLU/ReLU.sv</code></td>
+</tr>
+<tr>
+<td>MaxPooling</td>
+<td>Redução espacial por seleção do máximo</td>
+<td><code>src/MaxPooling.sv</code></td>
+</tr>
+<tr>
+<td>Flatten</td>
+<td>Reorganização dos mapas em vetor</td>
+<td><code>src/Flatten.sv</code></td>
+</tr>
+<tr>
+<td>Neuron / FCLayer</td>
+<td>Neurônios e camada totalmente conectada</td>
+<td><code>src/Neuron.sv</code>, <code>src/FCLayer.sv</code></td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>Conexão das camadas e interface do topo</td>
+<td><code>src/CNN.sv</code></td>
+</tr>
+</tbody>
+</table>
+
+A descrição funcional está em [Notas do bloco CNN](docs/CNN_block_notes.pdf).
+O [guia de referências](docs/README.md) organiza os materiais de apoio e
+explica como eles se relacionam com o projeto.
 
 ## Organização do repositório
 
-A estrutura do projeto foi organizada para separar código-fonte, síntese, testes, resultados e validação:
-
 ```text
 CNN/
-├── README.md
-├── script.bat
-├── docs/
-├── images/
-├── oneware_project_folder/
-│   └── CNN/
-│       └── CNN.fpgaproj
-├── src/
-│   ├── CNN.sv
-│   ├── ConvLayer.sv
-│   ├── Convolution.sv
-│   ├── FCLayer.sv
-│   ├── FeatureMap.sv
-│   ├── Flatten.sv
-│   ├── MaxPooling.sv
-│   ├── Neuron.sv
-│   ├── Quantizer.sv
-│   ├── logic_filelist.txt
-│   ├── DotProduct/
-│   ├── Multiplier&Adder/
-│   └── ReLU/
-├── synth_org/
-│   ├── README.md
-│   ├── logic_filelist.txt
-│   ├── arithmetic/
-│   ├── convolution/
-│   ├── fully_connected/
-│   ├── pooling/
-│   ├── reshape/
-│   └── top/
+├── src/                       # Módulos SystemVerilog
+├── docs/                      # Notas de arquitetura e bibliografia
+├── images/                    # Diagramas e imagens do projeto
+├── oneware_project_folder/    # Projeto para o ambiente OneWare
+├── synth_org/                 # Fluxo e resultados de síntese por bloco
 ├── scripts/
 │   ├── synth/
 │   ├── testbenchs/
-│   ├── bash/
-│   ├── makefiles/
 │   └── UVM/
-├── testbenchs/
-│   ├── arithmetic/
-│   ├── DOT/
-│   └── ReLU/
-├── UVM/
-│   ├── DOT/
-│   └── ReLU/
-├── results_tb/
-│   ├── DOT/
-│   ├── ReLU/
-│   └── coverage/
-├── results_uvm/
-│   ├── DOT/
-│   ├── ReLU/
-│   ├── coverage/
-│   └── logs/
-└── out/
+├── testbenchs/                # Bancadas de simulação sem UVM
+├── UVM/                       # Ambientes UVM e relatórios de verificação
+├── results_tb/                # Saídas geradas pelas bancadas sem UVM
+├── results_uvm/               # Saídas geradas pelas bancadas UVM
+└── waveform/                  # Formas de onda do topo UVM em FST
 ```
 
-### Principais diretórios
+Os diretórios de resultados são gerados pelos scripts e podem não existir em
+um checkout novo. `synth_org/` contém as pastas `arithmetic`, `convolution`,
+`fully_connected`, `pooling`, `reshape` e `top`.
 
-- `src/`: módulos principais da CNN, incluindo camadas convolucionais, pooling, flatten, quantização, ReLU e capacidade de produção do output final.
-- `synth_org/`: estrutura organizada para síntese lógica e relatórios de implementação, incluindo diretórios por bloco funcional e por topologia do projeto.
-- `scripts/`: automações, arquivos de suporte, makefiles e rotinas para síntese e testes.
-- `testbenchs/`: ambientes de simulação para verificar componentes específicos da arquitetura.
-- `UVM/`: infraestrutura de verificação em UVM para validação comportamental e regressão.
-- `results_tb/` e `results_uvm/`: resultados de simulação, logs, relatórios de cobertura e artefatos gerados.
-- `docs/` e `images/`: materiais documentais e recursos visuais do projeto.
+## Verificação do topo
 
-<p align="center">
-  <img src="images/organization.png" alt="Organização do projeto" />
-</p>
+A campanha usa uma configuração reduzida, com imagem 4 × 4 de um canal,
+operandos signed de 8 bits, kernels 3 × 3, dois filtros por camada
+convolucional e dois neurônios em cada FC. Padding e shifts são iguais a 1.
+Essa configuração permite verificar a cadeia completa com estímulos sintéticos;
+ela não estabelece os valores padrão de todas as versões do projeto.
 
-A figura reforça a organização funcional do repositório, conectando a entrada visual, a camada convolucional, os blocos de processamento e a classificação final por neurônios e dot products.
+O modelo de referência calcula as duas saídas esperadas a partir das entradas.
+O scoreboard compara o vetor quando `valid_out4` está ativo. A observação
+funcional é limitada às portas públicas; a cobertura estrutural do RTL é
+instrumentada automaticamente pelo simulador.
 
-## Componentes principais da arquitetura
+Os testes verificam a aritmética e o protocolo da configuração executada.
+Não medem a acurácia de um modelo treinado: os valores de `result_FC2` não são
+tratados como probabilidades ou rótulos de um conjunto de imagens reais.
 
-A implementação segue a organização funcional típica de uma CNN:
+### Executar a bancada UVM
 
-- `ConvLayer.sv`: camada convolucional que aplica os filtros sobre a entrada.
-- `Convolution.sv`: operação matemática de convolução.
-- `Quantizer.sv`: conversão de valores de soma do produto para faixa de ponto fixo.
-- `ReLU/`: bloco de ativação não linear.
-- `MaxPooling.sv`: redução espacial da feature map.
-- `Flatten.sv`: transformação da estrutura multidimensional em vetor unidimensional.
-- `FCLayer.sv`: camada totalmente conectada.
-- `Neuron.sv`: bloco neuronal usado na etapa de classificação.
-- `DotProduct/`: implementações de multiplicação e soma para processamento de matrizes/neurônios.
+A partir da raiz do repositório, com Verilator, compilador C++, Make, Python 3
+e LCOV instalados:
 
-Essa composição permite que a rede realize processamento de imagem em uma escala reduzida, mantendo o comportamento de redes de classificação orientadas por convolução.
+```bash
+# Instalar a biblioteca UVM usada pelo projeto.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh setup_uvm
 
-### Fluxo funcional do bloco CNN
+# Simular um cenário.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh run TEST=IMG-01
 
-<p align="center">
-  <img src="images/sheet_diagram.png" alt="Fluxo funcional da CNN" />
-</p>
+# Executar a campanha completa e gerar os relatórios de cobertura.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh coverage
+```
 
-A ilustração representa o encadeamento conceitual da CNN: imagem de entrada, operação de convolução, processamento por blocos de dot product e neurônios, até a camada de decisão final. Essa visão complementa a descrição textual do fluxo da arquitetura e facilita a compreensão dos módulos implementados.
+O fluxo foi validado com Verilator 5.052 e UVM 2017-1.0. O dump é gerado em
+`waveform/CNN_top_UVM.fst`, com profundidade 1 e as IOs públicas do topo.
+O [guia da bancada UVM](UVM/CNN_top/README_UVM.md) descreve as dependências,
+os controles de execução e os arquivos de saída. A
+[bancada sem UVM](testbenchs/CNN_top/README.md) possui fluxos para Icarus e
+Verilator.
 
-## Notas do bloco CNN e materiais da documentação
+### Resultado registrado em 25/10/2026
 
-Além dos módulos RTL e dos relatórios de síntese, o repositório também inclui material documental em [docs/CNN_block_notes.pdf](docs/CNN_block_notes.pdf). Esse PDF reúne textos explicativos e diagramas do bloco CNN, com descrições dos principais elementos da arquitetura. A seguir, destacamos os trechos e imagens mais relevantes dessa documentação, sem incluir cortes do RTL em si.
+<table align="center">
+<thead>
+<tr>
+<th>Indicador</th>
+<th align="right">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cenários executados</td>
+<td align="right">22, de IMG-00 a IMG-21</td>
+</tr>
+<tr>
+<td>Transações iniciadas</td>
+<td align="right">1.100</td>
+</tr>
+<tr>
+<td>PASS / FAIL</td>
+<td align="right">1.083 / 2</td>
+</tr>
+<tr>
+<td>Canceladas intencionalmente por reset</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td>INCOMPLETE, por sobreposição exploratória</td>
+<td align="right">12</td>
+</tr>
+<tr>
+<td>Latência observada das 1.085 respostas comparadas</td>
+<td align="right">37 ciclos</td>
+</tr>
+<tr>
+<td>Resultado global</td>
+<td align="right"><strong>FAIL</strong></td>
+</tr>
+</tbody>
+</table>
 
-### Bloco DotProduct
+As divergências ocorreram no IMG-00 com W03 e no IMG-16 com
+`ConvBias2[0] = -45`. Os incompletos pertencem ao IMG-19, para o qual ainda
+não há contrato de aceitação de imagens sobrepostas.
 
-O bloco DotProduct é responsável pela multiplicação e soma entre dois vetores. De acordo com a documentação do projeto, "o produto interno entre eles é igual a (x1 * y1 + x2 * y2 + x3 * y3)". Essa operação fundamenta tanto a convolução quanto as camadas totalmente conectadas.
+O [relatório de verificação](UVM/CNN_top/doc_verif/doc_verificacao_CNN_top.pdf)
+contém a análise dos casos e da cobertura. O
+[plano de verificação](UVM/CNN_top/req_verif_CNN_top.md) define os critérios;
+as [evidências da campanha](UVM/CNN_top/doc_verif/evidencias/README.md)
+registram os resultados. O clock da bancada tem período de 10 ns; os 37 ciclos
+medidos correspondem a 370 ns e não representam uma exigência temporal já
+confirmada para todas as configurações da CNN.
 
-O material do PDF também ressalta que a soma é feita em estágios e que a saída válida só aparece após a latência necessária para atravessar a árvore de somadores. Isso deixa claro o papel do pipeline e do sinal `valid_out` na geração do resultado final.
+### Formas de onda da simulação
 
-<p align="center">
-  <img src="images/dot_product_example.jpg" alt="Exemplo de operação Dot Product" />
-</p>
-
-### Bloco Convolution
-
-A documentação descreve o bloco de convolução como uma operação em que um kernel é deslocado sobre uma imagem, produzindo uma nova matriz de saída, frequentemente chamada de feature map. A lógica do bloco permite que o kernel percorra a imagem, varrendo linhas e colunas, e gere os valores de saída correspondentes a cada janela de entrada.
-
-<p align="center">
-  <img src="docs/CNN_block_notes/convolution_diagram.png" alt="Convolução e feature map" />
-</p>
-
-A explicação também enfatiza que cada valor da saída é obtido pela multiplicação dos elementos da janela com os pesos do kernel e pela soma dos produtos. Essa visualização matemática representa o comportamento conceitual da operação e não um corte do RTL.
-
-### Bloco FeatureMap e ConvLayer
-
-A feature map é a saída gerada pela convolução. Cada filtro produz uma resposta espacial sobre a entrada e, quando vários filtros são aplicados, o resultado passa a representar diferentes características extraídas da imagem, como bordas, texturas ou padrões locais.
-
-Em uma imagem RGB, por exemplo, cada canal pode ser processado por filtros específicos, e os resultados são combinados para formar a feature map final. A camada ConvLayer organiza esses filtros em conjunto, permitindo extrair múltiplas características ao mesmo tempo e manter a relação entre canais e profundidade da representação.
-
-Em termos práticos, a ConvLayer funciona como a estrutura que empilha filtros para transformar a entrada em uma nova representação mais rica, pronta para ser processada pelas etapas seguintes da CNN.
-
-### Tradução dos conceitos do PDF para a arquitetura do projeto
-
-A documentação do bloco CNN reúne os seguintes conceitos fundamentais:
-
-- `DotProduct`: operação de produto interno e soma acumulada entre entradas e pesos.
-- `Convolution`: operação de sliding window sobre a imagem para geração da feature map.
-- `FeatureMap`: combinação dos resultados parciais dos canais em uma saída final.
-- `ConvLayer`: conjunto de feature maps com múltiplos filtros e múltiplos canais.
-- `Neuron`: bloco equivalente a um neurônio com multiplicação, soma e função de ativação.
-- `FCLayer`: camada totalmente conectada, com todos os neurônios conectados às entradas.
-- `MaxPooling`: seleção do maior valor em regiões 2x2 para reduzir a dimensionalidade.
-- `ReLU`: ativação que anula valores negativos e mantém positivos.
-- `Quantizer`: conversão de valores para o formato de ponto fixo utilizado.
-- `Flatten`: reorganização das feature maps em vetor unidimensional.
-- `CNN`: top module que monta todos os blocos em sequência.
-
-Esses textos e imagens complementam a implementação do RTL e ajudam a compreender a lógica funcional da arquitetura, a forma de operar cada bloco e a relação entre os módulos do sistema.
-
-## Resultados de síntese
-
-Os relatórios de síntese disponibilizados em `synth_org/top/reports/asap7/top/base/` contêm representações visuais do layout, congestionamento, roteamento e análise de timing. A seguir, alguns exemplos dos arquivos `.webp` gerados:
-
-### Visão geral do layout e da implementação
-
-<p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/final_all.webp" alt="Layout final" />
-</p>
-
-### Posicionamento e roteamento
-
-<p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/final_placement.webp" alt="Posicionamento final" />
-  <img src="synth_org/top/reports/asap7/top/base/final_routing.webp" alt="Roteamento final" />
-</p>
-
-### Análise de congestionamento e potência
+As capturas abaixo foram obtidas no GTKWave a partir de
+`waveform/CNN_top_UVM.fst`, com observação das IOs públicas da bancada.
+Os barramentos aparecem em hexadecimal: por exemplo, `7F` representa 127 e
+`80` representa −128 para um operando signed de 8 bits. A aprovação dos
+resultados é registrada pelo scoreboard nos logs e no CSV.
+Clique nas capturas para abri-las no tamanho original.
 
 <p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/final_congestion.webp" alt="Congestionamento final" />
-  <img src="synth_org/top/reports/asap7/top/base/final_ir_drop.webp" alt="IR drop final" />
+  <a href="images/wav1.png"><img src="images/wav1.png" alt="Waveform 1: Primeiros estímulos e respostas" width="1100" /></a>
+  <br />
+  <em>Waveform 1 — Primeiros estímulos e respostas. Trecho inicial com pixels, kernels, pesos das FCs e biases. Na parte inferior, aparecem as duas saídas e os pulsos de valid_out4.</em>
 </p>
-
-### Relatórios de clock e timing
 
 <p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/final_clocks.webp" alt="Clocks finais" />
-  <img src="synth_org/top/reports/asap7/top/base/final_worst_path.webp" alt="Worst path" />
+  <a href="images/wav2.png"><img src="images/wav2.png" alt="Waveform 2: Ampliação dos estímulos de imagem" width="1100" /></a>
+  <br />
+  <em>Waveform 2 — Ampliação dos estímulos de imagem. Intervalo em torno de 52–57 µs, com clock, start e os 16 pixels da entrada. Os kernels e pesos exibidos permanecem estáveis nesse trecho.</em>
 </p>
-
-### Análise de potência e report_power
-
-O relatório gerado pelo OpenROAD inclui o resumo do `report_power` em `synth_org/top/reports/asap7/top/base/6_finish.rpt`. Esse trecho resume a distribuição da potência por grupo lógico do circuito e é uma referência importante para avaliar a eficiência energética da CNN sintetizada.
-
-| Grupo | Internal (W) | Switching (W) | Leakage (W) | Total (W) | Participação |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Sequential | 1.13e-03 | 7.18e-05 | 5.11e-07 | 1.21e-03 | 11.4% |
-| Combinational | 4.51e-03 | 4.28e-03 | 3.07e-06 | 8.80e-03 | 83.4% |
-| Clock | 3.42e-04 | 2.04e-04 | 1.23e-07 | 5.46e-04 | 5.2% |
-| Macro | 0.00e+00 | 0.00e+00 | 0.00e+00 | 0.00e+00 | 0.0% |
-| Pad | 0.00e+00 | 0.00e+00 | 0.00e+00 | 0.00e+00 | 0.0% |
-| Total | 5.98e-03 | 4.56e-03 | 3.71e-06 | 1.05e-02 | 100.0% |
 
 <p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/final_ir_drop.webp" alt="IR drop final" />
+  <a href="images/wav3.png"><img src="images/wav3.png" alt="Waveform 3: Panorama da sequência de imagens" width="1100" /></a>
+  <br />
+  <em>Waveform 3 — Panorama da sequência de imagens. Visão em escala de centenas de microssegundos, destacando a sucessão de starts e as alterações dos pixels ao longo da campanha.</em>
 </p>
 
-A imagem acima complementa o relatório de potência e mostra a análise de distribuição de tensão e quedas no grid de alimentação, o que é relevante para verificar a robustez da implementação física.
+<p align="center">
+  <a href="images/wav4.png"><img src="images/wav4.png" alt="Waveform 4: Controles no trecho final da campanha" width="1100" /></a>
+  <br />
+  <em>Waveform 4 — Controles no trecho final da campanha. Clock, reset, start e pixels no trecho final. A captura permite localizar pulsos de reset e mudanças dos conjuntos de pesos.</em>
+</p>
 
-### Tabela de células utilizadas na síntese
+<p align="center">
+  <a href="images/wav5.png"><img src="images/wav5.png" alt="Waveform 5: Pesos, biases e saídas no trecho final" width="1100" /></a>
+  <br />
+  <em>Waveform 5 — Pesos, biases e saídas no trecho final. Detalhe dos pesos, biases, result_FC2 e valid_out4, útil para relacionar a configuração aplicada com os eventos de resposta válida.</em>
+</p>
 
-O arquivo `synth_org/top/reports/asap7/top/base/synth_stat.txt` registra as células efetivamente inseridas no design após a síntese lógica. A tabela abaixo resume as principais células e sua contagem/área no módulo `CNN`.
+## Síntese e implementação física
 
-| Célula | Contagem | Área |
-| --- | ---: | ---: |
-| AND2x2_ASAP7_75t_R | 3039 | 265.852 |
-| AND2x4_ASAP7_75t_R | 15 | 2.187 |
-| AND3x1_ASAP7_75t_R | 1183 | 103.489 |
-| AND4x1_ASAP7_75t_R | 260 | 26.536 |
-| AND5x1_ASAP7_75t_R | 109 | 12.714 |
-| AO211x2_ASAP7_75t_R | 159 | 37.092 |
-| AO21x1_ASAP7_75t_R | 1205 | 105.413 |
-| AO221x1_ASAP7_75t_R | 197 | 28.723 |
-| AO222x2_ASAP7_75t_R | 22 | 3.849 |
-| AO22x1_ASAP7_75t_R | 81 | 10.629 |
-| AO31x2_ASAP7_75t_R | 86 | 20.062 |
-| AO32x1_ASAP7_75t_R | 103 | 12.014 |
-| AOI211x1_ASAP7_75t_R | 259 | 45.315 |
-| AOI21x1_ASAP7_75t_R | 339 | 39.541 |
-| AOI221x1_ASAP7_75t_R | 87 | 17.758 |
-| AOI22x1_ASAP7_75t_R | 76 | 11.081 |
-| BUFx2_ASAP7_75t_R | 1242 | 90.542 |
-| BUFx3_ASAP7_75t_R | 65 | 5.686 |
-| DFFHQNx1_ASAP7_75t_R | 3352 | 977.443 |
-| FAx1_ASAP7_75t_R | 2728 | 556.839 |
-| HAxp5_ASAP7_75t_R | 4432 | 581.567 |
-| INVx1_ASAP7_75t_R | 12883 | 563.502 |
-| NAND2x1_ASAP7_75t_R | 1931 | 168.924 |
-| NAND3x1_ASAP7_75t_R | 136 | 21.812 |
-| NOR2x1_ASAP7_75t_R | 1364 | 119.323 |
-| NOR3x1_ASAP7_75t_R | 204 | 32.718 |
-| OA211x2_ASAP7_75t_R | 1088 | 126.904 |
-| OA21x2_ASAP7_75t_R | 4915 | 501.625 |
-| OA22x2_ASAP7_75t_R | 34 | 4.957 |
-| OA31x2_ASAP7_75t_R | 151 | 33.024 |
-| OAI21x1_ASAP7_75t_R | 472 | 55.054 |
-| OAI22x1_ASAP7_75t_R | 71 | 10.352 |
-| OR2x2_ASAP7_75t_R | 756 | 66.135 |
-| OR3x1_ASAP7_75t_R | 1131 | 98.94 |
-| OR4x1_ASAP7_75t_R | 376 | 38.375 |
-| OR5x1_ASAP7_75t_R | 148 | 17.263 |
-| XNOR2x2_ASAP7_75t_R | 1007 | 161.503 |
-| XOR2x2_ASAP7_75t_R | 1674 | 268.476 |
+Os resultados do topo para a biblioteca ASAP7 estão em
+`synth_org/top/reports/asap7/top/base/`. As métricas abaixo foram conferidas
+nos arquivos `synth_stat.txt` e `6_finish.rpt` desse diretório.
 
-> Resumo adicional: o módulo `CNN` sintetizado possui 47.470 células e área total de 5.259.006, com 18.59% da área dedicada a elementos sequenciais.
+<table align="center">
+<thead>
+<tr>
+<th>Indicador</th>
+<th align="right">Valor no relatório</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Células após síntese lógica</td>
+<td align="right">47.470</td>
+</tr>
+<tr>
+<td>Área de células, campo <code>Chip area</code></td>
+<td align="right"><code>5259.006000</code></td>
+</tr>
+<tr>
+<td>Violações de setup / hold</td>
+<td align="right">0 / 0</td>
+</tr>
+<tr>
+<td>Potência total estimada</td>
+<td align="right"><code>1.05e-02 W</code> — aproximadamente 10,5 mW</td>
+</tr>
+</tbody>
+</table>
 
-### Trecho de STA do OpenROAD
+### Tipos e quantidade de células
 
-O processo de síntese também executa análise de timing no final da etapa de implementação. O trecho abaixo foi extraído do relatório final `synth_org/top/reports/asap7/top/base/6_finish.rpt` e mostra a saída típica da STA do OpenROAD:
+O trecho a seguir foi extraído de
+[synth_stat.txt](synth_org/top/reports/asap7/top/base/synth_stat.txt).
+Ele apresenta o total de células, alguns tipos representativos e a área
+reportada pelo Yosys. Os marcadores `[...]` indicam linhas omitidas; o arquivo
+completo contém os demais tipos.
+As áreas mantêm o formato e as unidades do relatório de síntese.
 
 ```text
+=== CNN ===
+
+        +----------------------------Count including submodules.
+        |        +-------------------Area including submodules.
+        |        |        +----------Local count, excluding submodules.
+        |        |        |        +-Local area, excluding submodules.
+        |        |        |        |
+[...]
+    47470 5.26E+03    47470 5.26E+03 cells
+     3039  265.852     3039  265.852   AND2x2_ASAP7_75t_R
+[...]
+     1242   90.542     1242   90.542   BUFx2_ASAP7_75t_R
+[...]
+     3352  977.443     3352  977.443   DFFHQNx1_ASAP7_75t_R
+     2728  556.839     2728  556.839   FAx1_ASAP7_75t_R
+     4432  581.567     4432  581.567   HAxp5_ASAP7_75t_R
+    12883  563.502    12883  563.502   INVx1_ASAP7_75t_R
+     1931  168.924     1931  168.924   NAND2x1_ASAP7_75t_R
+[...]
+     1364  119.323     1364  119.323   NOR2x1_ASAP7_75t_R
+[...]
+     4915  501.625     4915  501.625   OA21x2_ASAP7_75t_R
+[...]
+     1674  268.476     1674  268.476   XOR2x2_ASAP7_75t_R
+[...]
+   Chip area for module '\CNN': 5259.006000
+     of which used for sequential elements: 977.443200 (18.59%)
+```
+
+As células `DFF` são elementos sequenciais; `FA` e `HA` são somadores
+completos e meios somadores. `INV` e `BUF` são inversores e buffers, enquanto
+`AND`, `NAND`, `NOR`, `OA` e `XOR` implementam funções combinacionais.
+A participação dos elementos sequenciais na área reportada é de 18,59%.
+
+### Fechamento de timing
+
+O relatório final do OpenROAD registra TNS e WNS iguais a zero e folga
+positiva na análise de atraso máximo. Os contadores de violações de setup
+e hold também são zero. Abaixo estão os trechos correspondentes de
+[6_finish.rpt](synth_org/top/reports/asap7/top/base/6_finish.rpt):
+
+```text
+==========================================================================
+finish report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
 ==========================================================================
 finish report_wns
 --------------------------------------------------------------------------
@@ -298,20 +352,7 @@ wns max 0.00
 finish report_worst_slack
 --------------------------------------------------------------------------
 worst slack max 5497.88
-
-==========================================================================
-finish report_checks -path_delay min
---------------------------------------------------------------------------
-Startpoint: ConvLayer2.gen_feature_maps[1].filter.gen_channels[0].filters.convolve.soma[0][146]$_DFF_P_
-Endpoint: ConvLayer2.gen_feature_maps[1].filter.gen_channels[0].filters.convolve.soma[0][266]$_DFF_P_
-Path Group: core_clk
-Path Type: min
-...
-                                149.37   data required time
-                               -167.08   data arrival time
------------------------------------------------------------------------------
-                                 17.71   slack (MET)
-
+[...]
 ==========================================================================
 finish setup_violation_count
 --------------------------------------------------------------------------
@@ -323,38 +364,161 @@ finish hold_violation_count
 hold violation count 0
 ```
 
-Esse trecho indica que o relatório final não reporta violações de setup nem de hold. O `worst slack` do caminho crítico permanece positivo (`5497.88`), e os contadores de violação de timing aparecem como `0`, o que demonstra que a síntese foi concluída sem violações de timing no conjunto de relatórios avaliados.
+TNS resume a soma das folgas negativas e WNS indica a pior folga negativa;
+ambos aparecem zerados nesta execução. O valor de `worst slack max` é
+reproduzido na unidade temporal adotada pelo fluxo. Esses indicadores
+documentam o atendimento às restrições de timing avaliadas; o resultado
+funcional da campanha UVM permanece apresentado na seção de verificação.
 
-### Relatórios de CTS e layout associado
+### Estimativa de potência
 
-<p align="center">
-  <img src="synth_org/top/reports/asap7/top/base/cts_default_core_clk.webp" alt="CTS default core clk" />
-  <img src="synth_org/top/reports/asap7/top/base/cts_default_core_clk_layout.webp" alt="CTS layout" />
-</p>
+O resumo de potência do OpenROAD distribui a estimativa assim:
 
-Esses artefatos são fundamentais para avaliar a qualidade da implementação física da CNN, incluindo:
+<table align="center">
+<thead>
+<tr>
+<th>Grupo</th>
+<th align="right">Internal (W)</th>
+<th align="right">Switching (W)</th>
+<th align="right">Leakage (W)</th>
+<th align="right">Total (W)</th>
+<th align="right">Participação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequential</td>
+<td align="right">1.13e-03</td>
+<td align="right">7.18e-05</td>
+<td align="right">5.11e-07</td>
+<td align="right">1.21e-03</td>
+<td align="right">11,4%</td>
+</tr>
+<tr>
+<td>Combinational</td>
+<td align="right">4.51e-03</td>
+<td align="right">4.28e-03</td>
+<td align="right">3.07e-06</td>
+<td align="right">8.80e-03</td>
+<td align="right">83,4%</td>
+</tr>
+<tr>
+<td>Clock</td>
+<td align="right">3.42e-04</td>
+<td align="right">2.04e-04</td>
+<td align="right">1.23e-07</td>
+<td align="right">5.46e-04</td>
+<td align="right">5,2%</td>
+</tr>
+<tr>
+<td>Total</td>
+<td align="right">5.98e-03</td>
+<td align="right">4.56e-03</td>
+<td align="right">3.71e-06</td>
+<td align="right">1.05e-02</td>
+<td align="right">100,0%</td>
+</tr>
+</tbody>
+</table>
 
-- posicionamento dos módulos;
-- distribuição dos clocks;
-- roteamento final;
-- congestionamento de interconexões;
-- análise de potência e queda de tensão;
-- caminho crítico e timing.
+Os valores de potência dependem das condições e da atividade adotadas no fluxo;
+são estimativas da implementação, não medições de um dispositivo fabricado.
 
-## Fluxo de uso do projeto
+### Imagens da implementação física
 
-O projeto foi pensado para suportar três grandes frentes:
+A tabela reúne as visualizações da execução ASAP7 e uma breve descrição de
+cada imagem. Clique nas miniaturas para abri-las no tamanho original.
 
-1. desenvolvimento da arquitetura em RTL;
-2. simulação funcional e verificação comportamental;
-3. síntese e análise de implementação física.
+<table align="center">
+<thead>
+<tr>
+<th align="center">Imagem</th>
+<th align="center">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_all.webp"><img src="synth_org/top/reports/asap7/top/base/final_all.webp" alt="Visão geral do layout final" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Visão geral do layout final</strong><br />
+  Sobreposição das células, interconexões e estruturas de alimentação, mostrando a ocupação do núcleo e as conexões com os terminais externos.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_placement.webp"><img src="synth_org/top/reports/asap7/top/base/final_placement.webp" alt="Posicionamento das células" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Posicionamento das células</strong><br />
+  Distribuição das células padrão na área do núcleo. Permite observar regiões ocupadas e espaços disponíveis entre os agrupamentos.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_routing.webp"><img src="synth_org/top/reports/asap7/top/base/final_routing.webp" alt="Roteamento final" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Roteamento final</strong><br />
+  Interconexões entre as células e os terminais, representadas pelas cores das camadas de roteamento habilitadas na visualização.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_congestion.webp"><img src="synth_org/top/reports/asap7/top/base/final_congestion.webp" alt="Congestionamento de roteamento" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Congestionamento de roteamento</strong><br />
+  Mapa da distribuição espacial de congestionamento, útil para localizar regiões de maior demanda por recursos de interconexão.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_ir_drop.webp"><img src="synth_org/top/reports/asap7/top/base/final_ir_drop.webp" alt="Queda de tensão na alimentação" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Queda de tensão na alimentação</strong><br />
+  Mapa da queda de tensão estimada na rede de alimentação. A escala da própria figura está em milivolts.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_clocks.webp"><img src="synth_org/top/reports/asap7/top/base/final_clocks.webp" alt="Rede de distribuição de clock" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Rede de distribuição de clock</strong><br />
+  Células e conexões da rede de clock destacadas no núcleo, permitindo acompanhar sua distribuição espacial.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/final_worst_path.webp"><img src="synth_org/top/reports/asap7/top/base/final_worst_path.webp" alt="Caminho de timing destacado" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Caminho de timing destacado</strong><br />
+  Trajeto selecionado pela análise temporal sobre o layout, com destaque para os trechos de lançamento, sinal e captura indicados na legenda.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/cts_default_core_clk.webp"><img src="synth_org/top/reports/asap7/top/base/cts_default_core_clk.webp" alt="Árvore de clock core_clk" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Árvore de clock core_clk</strong><br />
+  Representação da ramificação da árvore de clock, com escala temporal em picosegundos para visualizar os níveis de distribuição.
+</td>
+</tr>
+<tr>
+<td align="center" valign="middle" width="45%">
+  <a href="synth_org/top/reports/asap7/top/base/cts_default_core_clk_layout.webp"><img src="synth_org/top/reports/asap7/top/base/cts_default_core_clk_layout.webp" alt="Árvore de clock no layout" width="420" /></a>
+</td>
+<td align="justify" valign="middle">
+  <strong>Árvore de clock no layout</strong><br />
+  Distribuição física dos ramos da árvore de clock; as cores diferenciam os agrupamentos mostrados pela ferramenta.
+</td>
+</tr>
+</tbody>
+</table>
 
-A organização por diretórios facilita a evolução do projeto sem misturar componentes funcionais, artefatos de validação e resultados de execução.
-
-## Observações finais
-
-Este repositório reúne um conjunto de blocos que modelam uma CNN de referência em hardware, com foco em eficiência de implementação e verificabilidade do comportamento em diferentes etapas do fluxo de design. A separação entre RTL, scripts, resultados, UVM e relatórios de síntese torna o projeto adequado para estudo, desenvolvimento e extensão em futuras versões da arquitetura.
-
----
-
-Desenvolvido para estudo e implementação de redes neurais convolucionais em hardware, com foco em RTL, simulação e síntese física.
+</div>

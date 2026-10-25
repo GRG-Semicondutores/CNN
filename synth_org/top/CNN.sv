@@ -1,3 +1,5 @@
+// Configuração padrão usada na síntese: imagem 4x4x1, 2 filtros por camada,
+// 2 neurônios por FC e dados de 8 bits. As dimensões abaixo são derivadas dos parâmetros.
 module CNN #(
     parameter DATA_WIDTH = 8, //largura do barramento de dados, utilizado em pesos e entradas
     parameter IMG_SIZE_1 = 4, //tamanho do lado da imagem
@@ -65,11 +67,11 @@ logic valid_out2;
 logic valid_out3;
 
 ConvLayer #(
-    .DATA_WIDTH(DATA_WIDTH), //8 bits
-    .IMG_SIZE(IMG_SIZE_1), //imagem 5x5
-    .KERNEL_SIZE(KERNEL_SIZE), //kernel 3x3
-    .N_CHANNELS(N_CHANNELS), //3 canais
-    .N_FILTERS(N_FILTERS_LAYER_1), //16 filtros
+    .DATA_WIDTH(DATA_WIDTH),
+    .IMG_SIZE(IMG_SIZE_1),
+    .KERNEL_SIZE(KERNEL_SIZE),
+    .N_CHANNELS(N_CHANNELS),
+    .N_FILTERS(N_FILTERS_LAYER_1),
     .PADDING(PADDING_1)
 ) ConvLayer1 (
     .clk(clk),
@@ -87,7 +89,11 @@ genvar pos1;
 
 generate
     for (layer1 = 0; layer1 < N_FILTERS_LAYER_1; layer1 = layer1 + 1) begin :gen_layer1
+        // Arrays locais evitam fatias de arrays nas portas, nao suportadas pelo Icarus.
+        wire signed [DATA_WIDTH-1:0] pool_input [0:N_OUT-1];
+        wire signed [DATA_WIDTH-1:0] pool_output [0:N_OUT_POOLED-1];
         for (pos1 = 0; pos1 < N_OUT; pos1 = pos1 + 1) begin :gen_pos1
+            assign pool_input[pos1] = result1_relu[layer1][pos1];
             Quantizer #(
                 .SIZE_IN(ACC_WIDTH_1),
                 .SIZE_OUT(DATA_WIDTH),
@@ -105,12 +111,16 @@ generate
             );
         end
 
+        for (genvar p = 0; p < N_OUT_POOLED; p = p + 1) begin :gen_pool_output
+            assign result1_pooled[layer1][p] = pool_output[p];
+        end
+
         MaxPooling #(
             .DATA_WIDTH(DATA_WIDTH),
             .SIDE(OUT_SIZE_1) //imagem de entrada do tamanho da saída da primeira convolução
         ) maxPoolLayer1 (
-            .imagem_in(result1_relu[layer1]),
-            .imagem_out(result1_pooled[layer1])
+            .imagem_in(pool_input),
+            .imagem_out(pool_output)
         );
     end
 endgenerate
@@ -119,8 +129,8 @@ ConvLayer #(
     .DATA_WIDTH(DATA_WIDTH),
     .IMG_SIZE(IMG_SIZE_2),
     .KERNEL_SIZE(KERNEL_SIZE),
-    .N_CHANNELS(N_CHANNELS_2), //16 canais
-    .N_FILTERS(N_FILTERS_LAYER_2), //32 filtros
+    .N_CHANNELS(N_CHANNELS_2), //um canal por filtro da primeira camada
+    .N_FILTERS(N_FILTERS_LAYER_2),
     .PADDING(PADDING_2)
 ) ConvLayer2(
     .clk(clk),
@@ -138,7 +148,10 @@ genvar pos2;
 
 generate
     for (layer2 = 0; layer2 < N_FILTERS_LAYER_2; layer2 = layer2 + 1) begin :gen_layer2
+        wire signed [DATA_WIDTH-1:0] pool_input [0:N_OUT_2-1];
+        wire signed [DATA_WIDTH-1:0] pool_output [0:N_OUT_POOLED_2-1];
         for (pos2 = 0; pos2 < N_OUT_2; pos2 = pos2 + 1) begin :gen_pos2
+            assign pool_input[pos2] = result2_relu[layer2][pos2];
             Quantizer #(
                 .SIZE_IN(ACC_WIDTH_2),
                 .SIZE_OUT(DATA_WIDTH),
@@ -156,12 +169,16 @@ generate
             );
         end
 
+        for (genvar p = 0; p < N_OUT_POOLED_2; p = p + 1) begin :gen_pool_output
+            assign result2_pooled[layer2][p] = pool_output[p];
+        end
+
         MaxPooling #(
             .DATA_WIDTH(DATA_WIDTH),
             .SIDE(OUT_SIZE_2) //imagem de entrada do tamanho da saída da segunda convolução
         ) maxPoolLayer2 (
-            .imagem_in(result2_relu[layer2]),
-            .imagem_out(result2_pooled[layer2])
+            .imagem_in(pool_input),
+            .imagem_out(pool_output)
         );
     end
 endgenerate

@@ -1,0 +1,8 @@
+`verilator_config
+// Bibliotecas de infraestrutura ficam fora da instrumentacao estrutural.
+coverage_off -file "*/uvm_*.sv*"
+// Tracar a interface publica sem expor a hierarquia RTL.
+tracing_off -file "*/src/*"
+tracing_off -file "*/UVM_tb_params.svh"
+lint_off -file "*"
+lint_on -file "*/UVM/CNN_top/*"

@@ -1,0 +1,409 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{landscape, margin=2.2cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\emergencystretch}{2em}
+% Parágrafos justificados e tabelas longas centralizadas na área de texto.
+\setlength{\leftskip}{0pt}
+\setlength{\rightskip}{0pt}
+\setlength{\parfillskip}{0pt plus 1fil}
+\setlength{\LTleft}{\fill}
+\setlength{\LTright}{\fill}
+\widowpenalty=10000
+\clubpenalty=10000
+\lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,
+  keepspaces=true,frame=single,backgroundcolor=\color{gray!5}}
+\renewcommand{\lstlistingname}{Listagem}
+\newcommand{\arquivo}[1]{\texttt{\detokenize{#1}}}
+
+\title{Relatório de Verificação -- Topo CNN}
+\author{Matheus Grossi}
+\date{25 de outubro de 2026}
+\hypersetup{pdftitle={Relatório de Verificação -- CNN Top},pdfauthor={Matheus Grossi}}
+
+\begin{document}
+\maketitle
+\vspace{0.6cm}
+
+\section{Identificação do Bloco}
+\begin{itemize}[label=\textbullet]
+\item \textbf{1.1. Nome do bloco:} \texttt{CNN}, módulo de topo da rede convolucional do projeto GRG-Semicondutores/CNN.
+\item \textbf{1.2. Configuração:} rede reduzida com imagem $4\times4\times1$, dois filtros por camada convolucional e dois neurônios por camada totalmente conectada.
+\item \textbf{1.3. Documento:} relatório de verificação, versão 1.1, referente à campanha de 25/10/2026.
+\item \textbf{1.4. Responsável pela verificação:} Matheus Grossi.
+\item \textbf{1.5. Escopo:} comparação do resultado final e verificação de controle, reset e latência pelas portas públicas. A cobertura de código é obtida pela instrumentação automática do simulador.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{7.8cm}X}\toprule
+\textbf{Configuração da campanha} & \textbf{Valor registrado}\\\midrule
+Largura e representação dos operandos & 8 bits signed; intervalo $[-128,127]$.\\
+Imagem / kernel / canais de entrada & $4\times4$ / $3\times3$ / 1.\\
+Filtros das convoluções 1 e 2 & 2 / 2.\\
+Padding das convoluções 1 e 2 & 1 / 1; preenchimento matemático com zero.\\
+Neurônios das FCs 1 e 2 & 2 / 2.\\
+Shifts de quantização 1, 2, 3 e 4 & 1 / 1 / 1 / 1.\\
+Dimensões do modelo & Conv1: $2\times4\times4$; pool1: $2\times2\times2$; Conv2: $2\times2\times2$; pool2/flatten: 2 elementos; FC1/FC2: 2 elementos.\\
+Clock da bancada & Período de 10 ns, equivalente a 100 MHz na simulação; não constitui evidência de frequência máxima pós-síntese.\\
+Simulador / biblioteca & Verilator 5.052, revisão v5.052; UVM Accellera 2017-1.0.\\
+Seleção / aleatórios / seed & \texttt{TEST=ALL}, \texttt{RANDOM\_COUNT=1000}, \texttt{SEED=20261025}.\\
+Janela de observação / contrato de latência & \texttt{OBS\_CYCLES=64}; \texttt{EXPECTED\_LATENCY=0}, caracterização sem imposição de número contratual.\\
+Resultado automatizado & \textbf{FAIL}: duas transações divergentes, com três diferenças de dados.\\\bottomrule
+\end{tabularx}
+\caption{Parâmetros públicos e condições da regressão documentada.}
+\end{table}
+
+\section{Objetivo da Verificação}
+Verificar se as imagens, kernels, pesos e biases aplicados pelas portas públicas produzem os dois resultados finais previstos por um modelo aritmético independente. A cadeia de referência compreende duas camadas convolucionais com padding, quantização, ReLU e max pooling $2\times2$, seguidas de flatten e duas camadas totalmente conectadas (FCs).
+
+Cada filtro combina os produtos das janelas de todos os canais de entrada e adiciona seu bias uma vez. Filtros diferentes produzem mapas distintos, que formam os canais da camada seguinte. O modelo percorre as janelas com passo unitário, sem inverter o kernel. A quantização é:
+\[
+Q_s(a)=\operatorname{sat}_{[-128,127]}
+\left((a+2^{s-1})\mathbin{\texttt{>>>}}s\right),\qquad s=1.
+\]
+O deslocamento é aritmético, com arredondamento ao mais próximo e empate para $+\infty$. Nas convoluções, a quantização antecede a ReLU; nas FCs, a ordem é inversa. O flatten ordena por filtro e por posição row-major.
+
+As regras acima definem os cálculos usados para avaliar esta campanha. A documentação do projeto descreve as funções dos blocos, mas não estabelece todos os detalhes de arredondamento e saturação. A confirmação desses detalhes na especificação é necessária para decidir se uma divergência requer correção no DUT ou no modelo.
+
+A campanha também verifica a associação entre imagem e resposta, os pulsos de controle, o cancelamento por reset e a recuperação. Os testes usam pesos sintéticos e não medem acurácia de classificação de imagens reais. Os dois valores de saída são avaliados numericamente, sem interpretação como probabilidades.
+
+\subsection{Base documental}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{7.2cm}>{\raggedright\arraybackslash}X}\toprule
+\textbf{Referência do projeto} & \textbf{Contribuição para a descrição e os critérios}\\\midrule
+\href{../../../docs/CNN_block_notes.pdf}{Notas do bloco CNN} & Produto interno e validade, pp. 1--2; composição de canais e filtros, pp. 3--5; neurônios e FCs, pp. 6--7; pooling, ReLU, quantização e flatten, pp. 8--11; interface do topo, p. 12.\\
+\href{../../../docs/topico9_P2_IA353_1s2026.pdf}{IA353, tópico 9, parte 2} & Distinção entre convolução e correlação cruzada, pp. 11--12; camadas convolucionais e densas, a partir da p. 55; operadores de pooling, a partir da p. 61.\\
+\href{../../../docs/material_de_aula_cd_hbr_de_arquiteturas_para_redes_neurais.pdf}{A-408: arquiteturas de hardware para CNNs} & Organização da rede em camadas e cálculo de somas ponderadas com bias. Os exemplos didáticos de treinamento e classificação não constituem resultados desta campanha.\\\bottomrule
+\end{tabularx}
+\caption{Referências consultadas; as páginas indicam posições nos PDFs.}
+\end{table}
+
+\section{Estratégia de Verificação}
+A metodologia combina testes dirigidos, fronteiras signed, estímulos pseudoaleatórios com seed registrada, scoreboard, assertions, contadores por cenário e cobertura separada da aprovação funcional.
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{5cm}X}\toprule
+\textbf{Componente UVM} & \textbf{Responsabilidade na bancada do topo}\\\midrule
+Sequence / sequencer & Executar IMG-00 a IMG-21, preparar pesos e imagens e controlar o estado próprio do gerador xorshift32.\\
+Driver / interface & Aplicar payloads, start e reset; os comandos não carregam resultados esperados.\\
+Monitor & Capturar as entradas na borda de subida e observar as saídas após 1 ps, depois das atualizações NBA. Publicar somente amostras dos pinos públicos.\\
+Modelo de referência & Calcular a rede a partir do payload observado no lançamento; usar acumuladores matemáticos \texttt{longint} na configuração reduzida.\\
+Scoreboard & Comparar bit a bit as duas saídas válidas, verificar watchdog, respostas inesperadas, contagens e cancelamentos; produzir o CSV.\\
+Verificações de protocolo & Conferir start e valid de um ciclo, validade após reset e resultado conhecido. Na UVM, essas verificações são procedurais no scoreboard.\\
+Subscriber de cobertura & Amostrar cenário/pesos, classes de pixels, posição de impulsos, bias e eventos de quantização do modelo.\\
+Test / env / agent & Configurar componentes, conectar os fluxos de análise, controlar a execução e preservar o resultado final no retorno ao shell.\\\bottomrule
+\end{tabularx}
+\caption{Arquitetura do ambiente UVM de verificação do topo CNN.}
+\end{table}
+
+As transações pontuadas são isoladas e dispõem de uma janela de observação de 64 ciclos. O sequenciamento prepara os dados antes do pulso de start e aguarda um intervalo fixo, sem usar \texttt{valid\_out4} para decidir o próximo lançamento. Há quatro ciclos de reset inicial, dois ciclos adicionais antes da sequence e dez ciclos finais de observação. IMG-18 aplica resets em voo; IMG-19 caracteriza starts próximos sem impor um contrato de sobreposição.
+
+O relatório estrutural considera os arquivos de \arquivo{src} elaborados na CNN e exclui a bancada, a biblioteca UVM e os covergroups do denominador.
+
+\section{Casos de Teste}
+Foram executados os 22 cenários descritos abaixo. A tabela apresenta a intenção dos estímulos; os resultados por cenário aparecem na seção de análise.
+
+\small
+\begin{longtable}{p{1.5cm}p{10.8cm}p{10.8cm}}
+\toprule\textbf{Caso} & \textbf{Condição e estímulo} & \textbf{Resultado esperado / finalidade}\\\midrule
+\endfirsthead
+\toprule\textbf{Caso} & \textbf{Condição e estímulo} & \textbf{Resultado esperado / finalidade}\\\midrule
+\endhead
+IMG-00 & Imagem nula, com W00, W01 e W03. & Verificar caminho zerado e efeito dos biases; uma imagem nula pode produzir resultado não nulo.\\
+IMG-01 & Imagens constantes positivas: $1$, $16$ e $127$, com W01. & Resultado final exato para pequenas amplitudes e extremo positivo.\\
+IMG-02 & Imagens constantes negativas: $-1$, $-16$ e $-128$, com W03. & Exercitar sinais negativos e sua propagação matemática no modelo completo.\\
+IMG-03 & Impulso positivo nas quatro posições internas e um impulso negativo. & Verificar sensibilidade espacial e polaridade das contribuições.\\
+IMG-04 & Impulso positivo nos quatro cantos e um negativo em um canto. & Exercitar fronteiras e padding por meio do resultado final.\\
+IMG-05 & Impulso positivo nos oito pixels das bordas sem cantos e um negativo. & Completar a cobertura das 16 posições em conjunto com IMG-03/04.\\
+IMG-06 & Gradiente horizontal com W02. & Verificar a resposta ao padrão orientado na horizontal.\\
+IMG-07 & Gradiente vertical com W02. & Verificar a resposta ao padrão orientado na vertical.\\
+IMG-08 & Xadrez com valores $+32/-32$. & Exercitar alternância espacial, sinais e seleção pelo maxpool.\\
+IMG-09 & Faixas horizontais nas duas polaridades. & Comparar respostas quando se inverte a polaridade das linhas.\\
+IMG-10 & Faixas verticais nas duas polaridades. & Comparar respostas quando se inverte a polaridade das colunas.\\
+IMG-11 & Diagonal principal positiva. & Exercitar orientação e posições específicas da imagem.\\
+IMG-12 & Diagonal secundária positiva. & Exercitar orientação complementar à diagonal principal.\\
+IMG-13 & Xadrez extremo, imagem toda $127$ e imagem toda $-128$. & Verificar fronteiras signed, quantização e saturação sob W03.\\
+IMG-14 & 1.000 imagens xorshift32, seed 20261025, com W03. & Amostrar o espaço de imagens com reprodução determinística e comparação exata.\\
+IMG-15 & Mesma imagem de gradiente com W01, W02 e W03. & Verificar a dependência do resultado em relação ao conjunto de pesos/bias.\\
+IMG-16 & Gradiente vertical e W01; alteração isolada do bias 0 de cada camada para $+45$ e $-45$. & Separar os efeitos de ConvBias1, ConvBias2, FCBias1 e FCBias2 em oito transações.\\
+IMG-17 & Imagens A, B e C em sequência isolada, sem sobreposição. & Preservar associação entre imagem e resultado, sem resíduo observável entre operações.\\
+IMG-18 & Reset em voo, com offsets de 1, 4 e 8 ciclos, seguido de uma imagem de recuperação em cada rodada. & Cancelar três pendências e aprovar as três respostas de recuperação; offsets não identificam estágios internos.\\
+IMG-19 & Três starts para cada intervalo entre inícios de 2, 3, 4 e 8 clocks. & Caracterizar a sobreposição; 12 transações exploratórias, sem aprovação funcional na ausência de contrato.\\
+IMG-20 & Gradiente-base e 16 variantes com incremento de um pixel. & Comparar exatamente a resposta à perturbação de cada posição.\\
+IMG-21 & Pesos/bias uniformes extremos e varredura de entrada de $-3$ a $3$. & Exercitar arredondamento e candidatos à saturação; os bins de quantização descrevem a referência.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Casos de Fronteira}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.8cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{7.6cm}}\toprule
+\textbf{Fronteira} & \textbf{Exercício realizado} & \textbf{Interpretação exigida}\\\midrule
+Zero e biases & IMG-00 e IMG-16. & Zero na imagem não anula contribuições de bias.\\
+Extremos signed & $-128$ e $127$ em imagens e em conjuntos dirigidos de pesos/bias. & Produtos, somas e quantização devem respeitar as premissas signed do modelo.\\
+Arredondamento & Entradas $-3$ a $3$ no IMG-21 e shifts iguais a 1. & Aplicar a regra de empate para $+\infty$ definida na referência.\\
+Saturação & WSAT\_POS/WSAT\_NEG, W03 e imagens extremas. & Limitar os resultados quantizados a $[-128,127]$; cobertura amostra eventos do modelo.\\
+Espaço / padding & Impulsos internos, cantos e bordas; gradientes e diagonais. & Comparação final coerente com índices row-major e padding zero.\\
+Reset em atividade & IMG-18 em três offsets. & Cancelamento esperado das pendências e recuperação correta.\\
+Sobreposição & IMG-19 com quatro espaçamentos. & Caracterização INCOMPLETE até existir contrato público de aceitação.\\
+Estados X/Z & Não validados por esta campanha de dois estados. & Avaliação em simulador de quatro estados permanece necessária se exigida pelo contrato.\\\bottomrule
+\end{tabularx}
+\caption{Fronteiras funcionais e limites de interpretação da campanha.}
+\end{table}
+
+\section{Resultados}
+A execução registrou 1.100 starts em 72.020 ciclos de simulação: 1.083 transações PASS, duas FAIL, três canceladas por reset e 12 INCOMPLETE. O resultado global é \textbf{FAIL}. As 1.085 respostas comparadas apresentaram latência de 37 ciclos, ou 370 ns com o clock da bancada.
+
+\subsection{Comportamentos esperados}
+Cada transação isolada aceita por start deve gerar uma resposta válida com os dois valores finais calculados a partir dos pinos no lançamento. Respostas sem pendência, ausência de resposta dentro da janela de observação e divergência em qualquer saída constituem falha. Reset cancela a pendência; as transações de recuperação devem voltar a produzir respostas corretas.
+
+A execução usa \texttt{EXPECTED\_LATENCY=0}: os 37 ciclos são uma medida observada. Uma exigência de latência exata precisa ser definida para então ser ativada como critério de comparação. O limite de espera por resposta é de 64 ciclos.
+
+\subsection{Critério de aprovação}
+A aprovação exige resultados corretos nos casos pontuados, contagens coerentes, cancelamento e recuperação por reset e ausência de falhas de protocolo. As regras aritméticas devem corresponder à especificação do projeto. Os critérios de latência exata e de aceitação de imagens sobrepostas permanecem pendentes.
+
+\textbf{PASS} representa uma transação pontuada sem erros. \textbf{FAIL} representa divergência comprovada em relação aos critérios executáveis da bancada. \textbf{ABORT} representa cancelamento intencional por reset. \textbf{INCOMPLETE} identifica uma exploração sem critério público suficiente para aprovação. Os abortos esperados de IMG-18 não são falhas do DUT; os incompletos de IMG-19 não são comparações aprovadas.
+
+O resultado global dá precedência às falhas: a campanha termina em \texttt{FAIL} e retorna erro ao shell. A cobertura é gravada e processada antes da devolução desse erro.
+
+\section{Análise dos Resultados}
+\subsection{Interpretação dos casos de sucesso/falha}
+A tabela relaciona os resultados dos 22 cenários. A coluna ABORT corresponde aos três registros de cancelamento do log. IMG-14 concentra as 1.000 imagens pseudoaleatórias da campanha.
+
+\small
+\begin{longtable}{l p{8.2cm} r r r r r l}
+\toprule\textbf{ID} & \textbf{Caso} & \textbf{Starts} & \textbf{PASS} & \textbf{FAIL} & \textbf{ABORT} & \textbf{INC.} & \textbf{Situação}\\\midrule
+\endfirsthead
+\toprule\textbf{ID} & \textbf{Caso} & \textbf{Starts} & \textbf{PASS} & \textbf{FAIL} & \textbf{ABORT} & \textbf{INC.} & \textbf{Situação}\\\midrule
+\endhead
+IMG-00 & Imagem nula / biases & 3 & 2 & 1 & 0 & 0 & FAIL\\
+IMG-01 & Constantes positivas & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-02 & Constantes negativas & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-03 & Impulsos internos & 5 & 5 & 0 & 0 & 0 & PASS\\
+IMG-04 & Impulsos nos cantos & 5 & 5 & 0 & 0 & 0 & PASS\\
+IMG-05 & Impulsos nas bordas & 9 & 9 & 0 & 0 & 0 & PASS\\
+IMG-06 & Gradiente horizontal & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-07 & Gradiente vertical & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-08 & Xadrez & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-09 & Faixas horizontais & 2 & 2 & 0 & 0 & 0 & PASS\\
+IMG-10 & Faixas verticais & 2 & 2 & 0 & 0 & 0 & PASS\\
+IMG-11 & Diagonal principal & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-12 & Diagonal secundária & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-13 & Fronteiras signed & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-14 & Imagens pseudoaleatórias & 1.000 & 1.000 & 0 & 0 & 0 & PASS\\
+IMG-15 & Troca de conjuntos de pesos & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-16 & Bias isolado por camada & 8 & 7 & 1 & 0 & 0 & FAIL\\
+IMG-17 & Sequência de imagens isoladas & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-18 & Reset em voo e recuperação & 6 & 3 & 0 & 3 & 0 & PASS (reset)\\
+IMG-19 & Starts sobrepostos & 12 & 0 & 0 & 0 & 12 & INCOMPLETE\\
+IMG-20 & Perturbação de um pixel & 17 & 17 & 0 & 0 & 0 & PASS\\
+IMG-21 & Quantização e saturação & 11 & 11 & 0 & 0 & 0 & PASS\\\midrule
+\textbf{Total} & & \textbf{1.100} & \textbf{1.083} & \textbf{2} & \textbf{3} & \textbf{12} & \textbf{FAIL}\\\bottomrule
+\end{longtable}
+\normalsize
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{12cm}X}\toprule
+\textbf{Indicador} & \textbf{Resultado registrado}\\\midrule
+Respostas finais comparadas & 1.085 = 1.083 PASS + 2 FAIL.\\
+Erros de dados / falhas de assertions & 3 / 0. O contador de assertions indica falhas, não o total de avaliações.\\
+Starts reconciliados & $1.100=1.083+2+3+12$.\\
+Linhas de transações no CSV & 1.097; os três abortos são contabilizados no log e no resumo.\\
+Latência mínima / máxima das respostas comparadas & 37 / 37 ciclos, equivalentes a 370 ns.\\
+Ciclos da simulação / seed & 72.020 / 20261025.\\
+Classificação dos 22 cenários & 19 sem falha funcional nos critérios executados, 2 com FAIL, 1 INCOMPLETE. IMG-18 inclui cancelamentos esperados.\\
+Retorno original da simulação / resultado & 1 / FAIL; o Make pode propagar código 2 ao reportar o alvo com erro.\\\bottomrule
+\end{tabularx}
+\caption{Reconciliação das contagens e status de encerramento.}
+\end{table}
+
+\subsubsection{Falha 1: IMG-00, imagem nula com W03}
+A transação 3, \arquivo{zero_com_bias_W03}, aplica imagem toda zero e os pesos/bias W03. As saídas esperadas são $[127,0]$; o DUT retorna $[0,127]$. As duas posições divergem. O lançamento ocorre no ciclo 140 e a resposta no ciclo 177, mantendo os 37 ciclos observados na campanha.
+
+Os biases W03 são: ConvBias1 $=[-3,3]$, ConvBias2 $=[-64,64]$, FCBias1 $=[-1,1]$ e FCBias2 $=[127,-64]$. Na primeira convolução, os produtos da imagem nula são zero; a quantização dos biases gera $[-1,2]$. Após ReLU e pool1, o filtro 0 contém somente zeros e o filtro 1 contém somente valores 2.
+
+\textbf{Cálculo do modelo, sem observação de estágios internos do DUT:}
+\[
+Q_{\mathrm{Conv2},0}=\begin{bmatrix}-128&29\\31&28\end{bmatrix},\qquad
+Q_{\mathrm{Conv2},1}=\begin{bmatrix}33&-95\\34&95\end{bmatrix}.
+\]
+ReLU e pool2 produzem o vetor flatten $[31,95]$. Na FC1, os acumuladores são $-2144$ e $193$; após ReLU e quantização, o resultado é $[0,97]$. Na FC2:
+\[
+a_0=127+0(-3)+97(3)=418,\qquad
+a_1=-64+0(3)+97(-1)=-161.
+\]
+O primeiro resultado satura em 127 e o segundo é zerado pela ReLU, justificando $[127,0]$ na referência.
+
+A resposta observada tem aparência de inversão das posições para esse vetor. Uma inversão fixa não é sustentada pela campanha: IMG-02, também com W03, espera e recebe $[0,127]$. A etapa interna que produz a divergência permanece indeterminada na análise em caixa preta.
+
+\subsubsection{Falha 2: IMG-16, ConvBias2[0] igual a -45}
+A transação 1047, \arquivo{bias_group_1_value_-45}, usa W01 e altera somente \texttt{ConvBias2[0]} para $-45$. Os demais biases são zero. A imagem é o gradiente vertical:
+\[
+I=\begin{bmatrix}
+-48&-48&-48&-48\\-16&-16&-16&-16\\16&16&16&16\\48&48&48&48
+\end{bmatrix}.
+\]
+W01 tem kernel central unitário na Conv1, preserva a correspondência dos filtros na Conv2 e usa pesos diagonais iguais a 2 nas FCs. Na referência, a Conv1 quantiza as linhas para $-24,-8,8,24$. ReLU e pool1 produzem, em cada filtro, a matriz $\begin{bmatrix}0&0\\24&24\end{bmatrix}$.
+
+Na Conv2 do filtro 0, o bias gera os acumuladores
+$\begin{bmatrix}-45&-45\\-21&-21\end{bmatrix}$,
+quantizados para $\begin{bmatrix}-22&-22\\-10&-10\end{bmatrix}$.
+A ReLU deve zerar todos os elementos e o pool2 deve produzir 0. O filtro 1 mantém bias zero e produz 12. O flatten esperado é, portanto, $[0,12]$. Os pesos diagonais 2, seguidos de shift 1, preservam esse vetor nas duas FCs.
+
+O DUT retorna $[127,12]$: apenas a saída 0 diverge, chegando ao máximo positivo quando a referência prevê zero. O lançamento está no ciclo 69.044 e a resposta no ciclo 69.081; a latência permanece 37 ciclos.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{p{9cm}ccc}\toprule
+\textbf{Alteração sobre W01} & \textbf{Esperado} & \textbf{Observado} & \textbf{Status}\\\midrule
+ConvBias2[0] $=+45$ & $[35,12]$ & $[35,12]$ & PASS\\
+ConvBias2[0] $=-45$ & $[0,12]$ & $[127,12]$ & FAIL\\
+FCBias1[0] $=-45$ & $[0,12]$ & $[0,12]$ & PASS\\
+FCBias2[0] $=-45$ & $[0,12]$ & $[0,12]$ & PASS\\\bottomrule
+\end{tabular}
+\caption{Comparações dirigidas que delimitam a segunda divergência.}
+\end{table}
+A evidência aponta dependência da camada e dos valores envolvidos. Tratamento de sinal, quantização, saturação e propagação das ativações são hipóteses a distinguir com novos estímulos; não foi demonstrada uma causa interna específica.
+
+\subsubsection{Três abortos esperados por reset}
+IMG-18 cancela intencionalmente três transações em voo. Os offsets de 1, 4 e 8 ciclos são parâmetros do sequenciamento de reset do teste e não identificam estágios internos. As pendências são descartadas e não entram como comparações aprovadas ou reprovadas no CSV.
+\begin{table}[H]\centering\small
+\begin{tabular}{rrrrp{8cm}}\toprule
+\textbf{Offset} & \textbf{Tx abortada} & \textbf{Ciclo do aborto} & \textbf{Tx de recuperação} & \textbf{Recuperação observada}\\\midrule
+1 & 1055 & 69.579 & 1056 & $[4,4]$, PASS, latência 37.\\
+4 & 1057 & 69.664 & 1058 & $[4,4]$, PASS, latência 37.\\
+8 & 1059 & 69.753 & 1060 & $[4,4]$, PASS, latência 37.\\\bottomrule
+\end{tabular}
+\caption{Cancelamentos intencionais e respostas posteriores ao reset.}
+\end{table}
+
+\subsubsection{Doze transações incompletas por sobreposição exploratória}
+IMG-19 aplica três starts em cada uma das quatro rodadas, com intervalos entre inícios de 2, 3, 4 e 8 clocks. As 12 transações são classificadas como INCOMPLETE, sem comparação matemática pontuada. A interface pública não fornece ready/busy nem um contrato de aceitação de imagens sobrepostas. Esses registros não demonstram aprovação ou defeito de throughput; o encerramento em FAIL decorre das duas divergências anteriores.
+
+\subsubsection{Validação dos verificadores}
+O ambiente foi submetido a oito verificações isoladas do scoreboard, todas aprovadas: resposta correta, dado incorreto, timeout, saída sem solicitação, sobreposição, reset/recuperação, latência divergente e duplicação. Os casos de erro exercitam a capacidade de detecção dos verificadores, enquanto os casos válidos conferem a aceitação de respostas corretas.
+
+Os erros esperados desses testes são capturados durante a validação do ambiente. Na campanha do DUT, os mesmos mecanismos permanecem ativos e qualquer erro detectado participa do resultado final.
+
+\subsection{Sumário da cobertura de verificação}
+\textbf{Cobertura estrutural nativa do Verilator.} Os contadores abaixo abrangem 11 arquivos de \arquivo{src} elaborados na CNN.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{p{8cm}rrr}\toprule
+\textbf{Métrica nativa} & \textbf{Exercitados} & \textbf{Total} & \textbf{Cobertura}\\\midrule
+Pontos de linha & 40 & 40 & 100,0\%\\
+Toggle & 11.330 & 11.822 & 95,8\%\\
+Branch & 62 & 70 & 88,6\%\\
+Expressões & 44 & 48 & 91,7\%\\
+Estado / arco de FSM & 0 / 0 & 0 / 0 & Sem pontos instrumentados\\\bottomrule
+\end{tabular}
+\caption{Cobertura estrutural do banco nativo filtrado para o RTL.}
+\end{table}
+
+\textbf{Cobertura LCOV/HTML.} A conversão para linhas físicas e ramos produz 75/75 linhas (100,0\%) e 199/211 ramos (94,3\%), em sete arquivos com dados de fluxo. O resumo não possui dados de funções. Os denominadores diferem dos contadores nativos porque são representações distintas; 40 pontos nativos de linha não devem ser comparados como se fossem 40 linhas físicas. Os outros arquivos continuam representados nas métricas nativas de toggle/expressão.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{p{8.5cm}rrrr}\toprule
+\textbf{Arquivo de src} & \textbf{Linha} & \textbf{Branch} & \textbf{Expressão} & \textbf{Toggle}\\\midrule
+CNN.sv & -- & -- & -- & 93,92\%\\
+ConvLayer.sv & -- & -- & 100,00\% & 99,30\%\\
+Convolution/Convolution.sv & 100,00\% & 89,29\% & 75,00\% & 97,81\%\\
+DotProduct/DotProduct.sv & 100,00\% & 71,43\% & -- & 89,61\%\\
+FCLayer.sv & -- & -- & 100,00\% & 94,74\%\\
+FeatureMap.sv & 100,00\% & -- & 100,00\% & 98,72\%\\
+Flatten.sv & 100,00\% & -- & -- & 87,50\%\\
+MaxPooling.sv & -- & 100,00\% & 100,00\% & 87,50\%\\
+Neuron.sv & -- & -- & -- & 95,79\%\\
+Quantizer.sv & -- & 91,67\% & 100,00\% & 95,71\%\\
+ReLU/ReLU.sv & -- & 100,00\% & 100,00\% & 94,00\%\\\bottomrule
+\end{tabular}
+\caption{Percentuais nativos por arquivo. Traço indica ausência dessa métrica no CSV, não uma taxa de zero.}
+\end{table}
+
+\textbf{Cobertura funcional.} Os covergroups registram classes dos estímulos e eventos aritméticos da referência; não observam resultados internos do DUT. O banco funcional está separado do banco estrutural.
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{6.2cm}rrrX}\toprule
+\textbf{Grupo} & \textbf{Atingidos} & \textbf{Total} & \textbf{Cobertura} & \textbf{Interpretação}\\\midrule
+Cenário / pesos / cruzamento & 57 & 183 & 31,15\% & Os 22 IDs foram atingidos; o cruzamento completo de pesos por cenário não foi executado.\\
+Classes de pixels & 5 & 5 & 100,00\% & Mínimo, negativos, zero, positivos e máximo.\\
+Posições de impulso & 24 & 24 & 100,00\% & Quatro linhas, quatro colunas e 16 combinações espaciais.\\
+Sinal do bias & 3 & 3 & 100,00\% & Bias negativo, zero e positivo.\\
+Quantização do modelo & 17 & 19 & 89,47\% & Estágios, classes de saturação e seu cruzamento.\\\midrule
+\textbf{Banco funcional agregado} & \textbf{106} & \textbf{234} & \textbf{45,3\%} & Razão global de bins; não é média simples dos percentuais por grupo.\\\bottomrule
+\end{tabularx}
+\caption{Bins funcionais e percentuais extraídos dos relatórios do Verilator.}
+\end{table}
+
+Os dois bins de quantização não atingidos são FC1 $\times$ saturação negativa e FC2 $\times$ saturação negativa. No modelo atual, a ReLU antecede a quantização das FCs e torna esses eventos inalcançáveis; ainda constam no denominador e precisam de revisão de alcançabilidade no plano de cobertura. O percentual registrado foi mantido sem exclusões retroativas.
+
+O grupo de cenários inclui combinações que a sequência não pretende exercitar e o rótulo \texttt{modified}, não atingido. Os subcasos de IMG-16 continuam rotulados W01 mesmo após alterar um bias; a alteração é rastreada pelo nome do subcaso e pelo grupo de bias. A taxa de 31,15\% não significa que apenas essa fração dos 22 cenários foi executada. Cobertura alcançada, seja de código ou funcional, não elimina as divergências observadas nas saídas.
+
+\subsubsection{Evidências e reprodução}
+Os números foram conferidos com o log de simulação, o CSV, os relatórios de cobertura e o registro dos testes do scoreboard. Uma cópia dessas evidências acompanha o documento no subdiretório \arquivo{evidencias}, com manifesto SHA-256 para conferência de integridade.
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{12cm}X}\toprule
+\textbf{Artefato relativo à raiz do repositório} & \textbf{Finalidade}\\\midrule
+\arquivo{results_uvm/CNN_top/logs/simulation_coverage.log} & Execução completa, falhas, abortos e incompletos.\\
+\arquivo{results_uvm/CNN_top/logs/report.log} & Resumo e contagens por cenário.\\
+\arquivo{results_uvm/CNN_top/cnn_verif_results.csv} & 1.097 registros de transações não abortadas.\\
+\arquivo{results_uvm/CNN_top/coverage/coverage_summary.log} & Contadores estruturais nativos.\\
+\arquivo{results_uvm/CNN_top/coverage/coverage_by_file.csv} & Pontos e percentuais nativos por arquivo.\\
+\arquivo{results_uvm/CNN_top/coverage/html/index.html} & Linhas físicas e ramos LCOV do RTL, sem exibição de fontes.\\
+\arquivo{results_uvm/CNN_top/coverage/functional_summary.log} & Agregado de bins funcionais.\\
+\arquivo{results_uvm/CNN_top/coverage/coverage_bins.log} & Detalhamento dos grupos, cruzamentos e lacunas funcionais.\\
+\arquivo{UVM/CNN_top/doc_verif/evidencias/scoreboard_checks.log} & Resultado das oito verificações isoladas do scoreboard.\\
+\arquivo{waveform/CNN_top_UVM.fst} & Dump nativo FST, profundidade 1, contendo somente as 92 IOs públicas; arrays mantêm agrupamentos próprios do formato.\\\bottomrule
+\end{tabularx}
+\caption{Rastreabilidade dos resultados e da forma de onda.}
+\end{table}
+
+O FST permite localizar as respostas divergentes em 1.765 ns (IMG-00) e 690.805 ns (IMG-16), com lançamentos em 1.395 ns e 690.435 ns, respectivamente. A amostragem do scoreboard ocorre 1 ps após a borda de clock.
+
+\begin{lstlisting}[caption={Reprodução da regressão e consulta dos relatórios a partir da raiz do repositório.}]
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh coverage UVM_VERBOSITY=UVM_NONE
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh report
+\end{lstlisting}
+O primeiro comando executa a campanha e retorna erro enquanto as divergências persistirem. O segundo processa o banco existente. A biblioteca UVM deve estar instalada conforme o README da bancada.
+
+\subsection{Comentários sobre limitações dos testes}
+\begin{itemize}
+\item A campanha cobre uma configuração reduzida e uma amostra de 1.000 imagens; não é exaustiva no espaço de imagens, kernels, pesos e biases.
+\item As comparações usam o resultado final. Novos vetores dirigidos podem distinguir hipóteses para as falhas; os dados disponíveis não localizam sua causa interna.
+\item Os detalhes de ponto fixo e a ordem das operações adotados pelo modelo precisam ser confirmados na especificação, conforme a seção de objetivo.
+\item A latência foi caracterizada em 37 ciclos com watchdog de 64; não foi confrontada com um número contratual positivo.
+\item O comportamento com imagens sobrepostas permanece INCOMPLETE, sem protocolo ready/busy ou contrato de aceitação.
+\item Verilator é um simulador de dois estados; ausência de falhas de assertions não comprova propagação de X/Z em quatro estados.
+\item Os bins inalcançáveis das FCs, os cruzamentos não planejados e a rotulagem dos biases modificados impedem interpretar o agregado funcional como percentual de requisitos aprovados.
+\item Existem lacunas de branch, expressão e toggle nos arquivos instrumentados; a campanha não cobre todas as condições possíveis de execução.
+\item Os registros não identificam automaticamente a revisão exata e o estado dos fontes usados na construção. Esse metadado deve ser incluído nas próximas campanhas para completar sua rastreabilidade.
+\end{itemize}
+
+\section{Conclusão}
+\textbf{A configuração reduzida do topo permanece com resultado FAIL.} As divergências de IMG-00/W03 e IMG-16/ConvBias2[0] $=-45$ totalizam três diferenças nas saídas de duas transações. Os cancelamentos por reset foram intencionais e as três recuperações passaram; os 12 casos de sobreposição continuam exploratórios.
+
+A campanha percorreu todos os cenários previstos, mas ainda há lacunas de cobertura e de especificação. O atingimento de pontos de código e de bins do modelo não elimina as divergências funcionais.
+
+O fechamento requer confirmar as regras matemáticas, tratar as duas divergências e repetir a regressão. A avaliação de sobreposição, de latência contratual e de X/Z depende dos critérios e das execuções específicos indicados no plano de verificação.
+
+\vfill
+\begin{center}\textbf{Bloco verificado:} CNN -- configuração reduzida, dados signed de 8 bits, imagem $4\times4\times1$.\end{center}
+\end{document}
