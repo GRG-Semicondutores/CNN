@@ -1,0 +1,512 @@
+Hierarchy Coverage Summary:
+  __vlAnonCG_cg_bias
+    covergroup : 100.0% (3/3)
+  __vlAnonCG_cg_bias.cp_bias
+    covergroup : 100.0% (3/3)
+  __vlAnonCG_cg_bias.cp_bias.negative
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_bias.cp_bias.positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_bias.cp_bias.zero
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_pixel
+    covergroup : 100.0% (5/5)
+  __vlAnonCG_cg_pixel.cp_pixel
+    covergroup : 100.0% (5/5)
+  __vlAnonCG_cg_pixel.cp_pixel.max_val
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_pixel.cp_pixel.min_val
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_pixel.cp_pixel.negative
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_pixel.cp_pixel.positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_pixel.cp_pixel.zero
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant
+    covergroup : 89.5% (17/19)
+  __vlAnonCG_cg_quant.cp_sat
+    covergroup : 100.0% (3/3)
+  __vlAnonCG_cg_quant.cp_sat.negative
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_sat.none
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_sat.positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_stage
+    covergroup : 100.0% (4/4)
+  __vlAnonCG_cg_quant.cp_stage.conv1
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_stage.conv2
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_stage.fc1
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cp_stage.fc2
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat
+    covergroup : 83.3% (10/12)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv1_x_negative
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv1_x_none
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv1_x_positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv2_x_negative
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv2_x_none
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.conv2_x_positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc1_x_negative
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc1_x_none
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc1_x_positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc2_x_negative
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc2_x_none
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_quant.cross_stage_sat.fc2_x_positive
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario
+    covergroup : 31.1% ( 57/183)
+  __vlAnonCG_cg_scenario.cp_test
+    covergroup : 100.0% (22/22)
+  __vlAnonCG_cg_scenario.cp_test.cases[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[10]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[11]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[12]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[13]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[14]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[15]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[16]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[17]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[18]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[19]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[20]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[21]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[4]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[5]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[6]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[7]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[8]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_test.cases[9]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight
+    covergroup : 85.7% (6/7)
+  __vlAnonCG_cg_scenario.cp_weight.modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cp_weight.w00
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight.w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight.w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight.w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight.wsat_minus
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cp_weight.wsat_plus
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight
+    covergroup : 18.8% ( 29/154)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_w00
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[0]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[10]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[11]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[12]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[13]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[14]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[15]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[16]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[17]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[18]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[19]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[1]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[20]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_w01
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_wsat_minus
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[21]_x_wsat_plus
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_w02
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_w03
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[2]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[3]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[4]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[5]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[6]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[7]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[8]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_modified
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_w00
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_w01
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_w02
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_w03
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_wsat_minus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_scenario.cross_test_weight.cases[9]_x_wsat_plus
+    covergroup : 0.0% (0/1)
+  __vlAnonCG_cg_spatial
+    covergroup : 100.0% (24/24)
+  __vlAnonCG_cg_spatial.cp_col
+    covergroup : 100.0% (4/4)
+  __vlAnonCG_cg_spatial.cp_col.cols[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_col.cols[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_col.cols[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_col.cols[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_row
+    covergroup : 100.0% (4/4)
+  __vlAnonCG_cg_spatial.cp_row.rows[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_row.rows[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_row.rows[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cp_row.rows[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location
+    covergroup : 100.0% (16/16)
+  __vlAnonCG_cg_spatial.cross_location.rows[0]_x_cols[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[0]_x_cols[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[0]_x_cols[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[0]_x_cols[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[1]_x_cols[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[1]_x_cols[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[1]_x_cols[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[1]_x_cols[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[2]_x_cols[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[2]_x_cols[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[2]_x_cols[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[2]_x_cols[3]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[3]_x_cols[0]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[3]_x_cols[1]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[3]_x_cols[2]
+    covergroup : 100.0% (1/1)
+  __vlAnonCG_cg_spatial.cross_location.rows[3]_x_cols[3]
+    covergroup : 100.0% (1/1)
+Design Unit Coverage Summary:
+  __vlAnonCG_cg_bias
+    covergroup : 100.0% (3/3)
+  __vlAnonCG_cg_pixel
+    covergroup : 100.0% (5/5)
+  __vlAnonCG_cg_quant
+    covergroup : 89.5% (17/19)
+  __vlAnonCG_cg_scenario
+    covergroup : 31.1% ( 57/183)
+  __vlAnonCG_cg_spatial
+    covergroup : 100.0% (24/24)

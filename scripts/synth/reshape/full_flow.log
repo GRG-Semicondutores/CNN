@@ -1,0 +1,687 @@
+========================================
+ ASAP7 - Fluxo completo RTL -> GDS
+ Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
+========================================
+mkdir -p /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/
+echo 10.0 > /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/clock_period.txt
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/synth_canonicalize.tcl /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/logs/asap7/reshape/base/1_1_yosys_canonicalize.log
+Using ABC speed script.
+Extracting clock period from SDC file: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/clock_period.txt
+Setting clock period to 10.0
+1. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+2. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+3. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+4. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+5. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+6. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+7. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+8. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+9. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+10. Executing Liberty frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+11. Executing SLANG frontend.
+11.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+11.2. Executing TRIBUF pass.
+11.3. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+11.4. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+11.5. Executing PROC_INIT pass (extract init attributes).
+11.6. Executing PROC_ROM pass (convert switches to ROMs).
+11.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+11.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+11.9. Executing OPT_EXPR pass (perform const folding).
+12. Executing HIERARCHY pass (managing design hierarchy).
+12.1. Analyzing design hierarchy..
+12.2. Analyzing design hierarchy..
+13. Executing OPT_CLEAN pass (remove unused cells and wires).
+14. Executing RTLIL backend.
+End of script. Logfile hash: 8439efffc5, time: 0.46s, user: 0.40s, system: 0.04s, MEM: 84.29 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 15.2.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 96% 12x read_liberty (0 sec), 1% 2x read_slang (0 sec), ...
+Elapsed time: 0:00.46[h:]min:sec. CPU time: user 0.42 sys 0.05 (100%). Peak memory: 89960KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil          0             87 0b3db2dd0a2fd3d1c263
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/synth.sh /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/synth.tcl /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/logs/asap7/reshape/base/1_2_yosys.log
+Using ABC speed script.
+Extracting clock period from SDC file: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/clock_period.txt
+Setting clock period to 10.0
+1. Executing RTLIL frontend.
+2. Executing HIERARCHY pass (managing design hierarchy).
+2.1. Analyzing design hierarchy..
+2.2. Analyzing design hierarchy..
+3. Executing SYNTH pass.
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+3.1.1. Analyzing design hierarchy..
+3.1.2. Analyzing design hierarchy..
+3.2. Executing PROC pass (convert processes to netlists).
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+3.3. Executing CHECK pass (checking for obvious problems).
+3.4. Executing FLATTEN pass (flatten design).
+3.5. Executing OPT_EXPR pass (perform const folding).
+3.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.7. Executing CHECK pass (checking for obvious problems).
+3.8. Executing OPT pass (performing simple optimizations).
+3.8.1. Executing OPT_EXPR pass (perform const folding).
+3.8.2. Executing OPT_MERGE pass (detect identical cells).
+3.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.8.5. Executing OPT_MERGE pass (detect identical cells).
+3.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.8.8. Executing OPT_EXPR pass (perform const folding).
+3.8.9. Finished fast OPT passes. (There is nothing left to do.)
+3.9. Executing FSM pass (extract and optimize FSM).
+3.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+3.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+3.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+3.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+3.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+3.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+3.10. Executing OPT pass (performing simple optimizations).
+3.10.1. Executing OPT_EXPR pass (perform const folding).
+3.10.2. Executing OPT_MERGE pass (detect identical cells).
+3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.10.5. Executing OPT_MERGE pass (detect identical cells).
+3.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.10.8. Executing OPT_EXPR pass (perform const folding).
+3.10.9. Finished fast OPT passes. (There is nothing left to do.)
+3.11. Executing WREDUCE pass (reducing word size of cells).
+3.12. Executing PEEPOPT pass (run peephole optimizers).
+3.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.14. Executing ALUMACC pass (create $alu and $macc cells).
+3.15. Executing SHARE pass (SAT-based resource sharing).
+3.16. Executing OPT pass (performing simple optimizations).
+3.16.1. Executing OPT_EXPR pass (perform const folding).
+3.16.2. Executing OPT_MERGE pass (detect identical cells).
+3.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+3.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+3.16.5. Executing OPT_MERGE pass (detect identical cells).
+3.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+3.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.16.8. Executing OPT_EXPR pass (perform const folding).
+3.16.9. Finished fast OPT passes. (There is nothing left to do.)
+3.17. Executing MEMORY pass.
+3.17.1. Executing OPT_MEM pass (optimize memories).
+3.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+3.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+3.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+3.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+3.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+3.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+3.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+3.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+3.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+4. Executing SYNTH pass.
+4.1. Executing OPT pass (performing simple optimizations).
+4.1.1. Executing OPT_EXPR pass (perform const folding).
+4.1.2. Executing OPT_MERGE pass (detect identical cells).
+4.1.3. Executing OPT_DFF pass (perform DFF optimizations).
+4.1.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.1.5. Finished fast OPT passes.
+4.2. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+4.3. Executing OPT pass (performing simple optimizations).
+4.3.1. Executing OPT_EXPR pass (perform const folding).
+4.3.2. Executing OPT_MERGE pass (detect identical cells).
+4.3.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+4.3.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+4.3.5. Executing OPT_MERGE pass (detect identical cells).
+4.3.6. Executing OPT_SHARE pass.
+4.3.7. Executing OPT_DFF pass (perform DFF optimizations).
+4.3.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.3.9. Executing OPT_EXPR pass (perform const folding).
+4.3.10. Finished fast OPT passes. (There is nothing left to do.)
+4.4. Executing TECHMAP pass (map to technology primitives).
+4.4.1. Executing Verilog-2005 frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+4.4.2. Executing Verilog-2005 frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/common/lcu_kogge_stone.v
+4.4.3. Continuing TECHMAP pass.
+4.5. Executing OPT pass (performing simple optimizations).
+4.5.1. Executing OPT_EXPR pass (perform const folding).
+4.5.2. Executing OPT_MERGE pass (detect identical cells).
+4.5.3. Executing OPT_DFF pass (perform DFF optimizations).
+4.5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+4.5.5. Finished fast OPT passes.
+4.6. Executing HIERARCHY pass (managing design hierarchy).
+4.6.1. Analyzing design hierarchy..
+4.6.2. Analyzing design hierarchy..
+4.7. Printing statistics.
+4.8. Executing CHECK pass (checking for obvious problems).
+5. Executing OPT pass (performing simple optimizations).
+5.1. Executing OPT_EXPR pass (perform const folding).
+5.2. Executing OPT_MERGE pass (detect identical cells).
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+5.5. Executing OPT_MERGE pass (detect identical cells).
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+5.8. Executing OPT_EXPR pass (perform const folding).
+5.9. Finished fast OPT passes. (There is nothing left to do.)
+6. Executing EXTRACT_FA pass (find and extract full/half adders).
+7. Executing TECHMAP pass (map to technology primitives).
+7.1. Executing Verilog-2005 frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/yoSys/cells_adders_R.v
+7.2. Continuing TECHMAP pass.
+8. Executing TECHMAP pass (map to technology primitives).
+8.1. Executing Verilog-2005 frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+8.2. Continuing TECHMAP pass.
+9. Executing OPT pass (performing simple optimizations).
+9.1. Executing OPT_EXPR pass (perform const folding).
+9.2. Executing OPT_MERGE pass (detect identical cells).
+9.3. Executing OPT_DFF pass (perform DFF optimizations).
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+9.5. Finished fast OPT passes.
+10. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+11. Executing TECHMAP pass (map to technology primitives).
+11.1. Executing Verilog-2005 frontend: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/yoSys/cells_latch_R.v
+11.2. Continuing TECHMAP pass.
+12. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+12.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+13. Executing OPT pass (performing simple optimizations).
+13.1. Executing OPT_EXPR pass (perform const folding).
+13.2. Executing OPT_MERGE pass (detect identical cells).
+13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+13.5. Executing OPT_MERGE pass (detect identical cells).
+13.6. Executing OPT_DFF pass (perform DFF optimizations).
+13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+13.8. Executing OPT_EXPR pass (perform const folding).
+13.9. Finished fast OPT passes. (There is nothing left to do.)
+14. Executing SETUNDEF pass (replace undef values with defined constants).
+abc -script /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib -dont_use *x1p*_ASAP7* -dont_use *xp*_ASAP7* -dont_use SDF* -dont_use ICG* -constr /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base/abc.constr -D 10.0
+15. Executing ABC pass (technology mapping using ABC).
+15.1. Extracting gate netlist of module `\Flatten' to `<abc-temp-dir>/input.blif'..
+15.1.1. Executed ABC.
+16. Executing SPLITNETS pass (splitting up multi-bit signals).
+17. Executing OPT_CLEAN pass (remove unused cells and wires).
+18. Executing HILOMAP pass (mapping to constant drivers).
+19. Executing INSBUF pass (insert buffer cells for connected wires).
+20. Executing CHECK pass (checking for obvious problems).
+21. Printing statistics.
+22. Executing CHECK pass (checking for obvious problems).
+23. Executing Verilog backend.
+23.1. Executing BMUXMAP pass.
+23.2. Executing DEMUXMAP pass.
+End of script. Logfile hash: 48bf7b28de, time: 0.72s, user: 0.48s, system: 0.19s, MEM: 145.30 MB peak
+Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 15.2.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
+Time spent: 38% 1x dfflibmap (0 sec), 29% 2x stat (0 sec), ...
+Elapsed time: 0:00.73[h:]min:sec. CPU time: user 0.52 sys 0.21 (99%). Peak memory: 150432KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_2_yosys                 .v              0            146 423c310d8b2b37c97d80
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/constraint.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_2_yosys.sdc
+touch -r /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/constraint.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_2_yosys.sdc
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+mkdir -p /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 1_synth synth_odb
+Running synth_odb.tcl, stage 1_synth
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+[INFO ODB-0227] LEF file: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7_tech_1x_201209.lef, created 30 layers, 9 vias
+[INFO ODB-0227] LEF file: /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7sc7p5t_28_R_1x_220121a.lef, created 212 library cells
+link_design Flatten
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_2_yosys.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+eliminate_dead_logic
+Removed 0 unused instances and 0 unused nets.
+Design area 6 um^2 100% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_synth.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_synth.sdc
+Elapsed time: 0:01.14[h:]min:sec. CPU time: user 1.05 sys 0.09 (99%). Peak memory: 198460KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_synth                   .odb            1            193 3d2bd02944e86bcebaf4
+1_synth                   .sdc                             47826fcce7e9dd2db460
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_1_floorplan floorplan
+Running floorplan.tcl, stage 2_1_floorplan
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_synth.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/1_synth.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+number instances in verilog is 80
+initialize_floorplan -utilization 40 -aspect_ratio 1 -core_space 2 -site asap7sc7p5t
+[INFO IFP-0107] Defining die area using utilization: 40.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.052, 2.160).
+[INFO IFP-0001] Added 13 rows of 69 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO IFP-0101] Core BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO IFP-0102] Core area:                           13.078 um^2
+[INFO IFP-0103] Total instances area:                 5.832 um^2
+[INFO IFP-0104] Effective utilization:                0.446
+[INFO IFP-0105] Number of instances:                     80
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/openRoad/make_tracks.tcl
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/fastroute.tcl
+set_dont_use "*x1p*_ASAP7* *xp*_ASAP7* SDF* ICG*"
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIELOx1_ASAP7_75t_R/L
+repair_tie_fanout -separation 0 asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/TIEHIx1_ASAP7_75t_R/H
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 0.08s
+Default units for flow
+ time 1ps
+ capacitance 1fF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1pW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (fF/um)
+------------------------------------------------
+        M1 |        7.04e-02 |         1.00e-10
+        M2 |        2.97e-02 |         1.75e-01
+        M3 |        3.13e-02 |         1.56e-01
+        M4 |        1.80e-02 |         1.78e-01
+        M5 |        1.90e-02 |         1.64e-01
+        M6 |        1.19e-02 |         1.87e-01
+        M7 |        1.25e-02 |         1.63e-01
+        M8 |        8.45e-03 |         1.04e-01
+        M9 |        8.90e-03 |         9.28e-02
+       Pad |        0.00e+00 |         0.00e+00
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+        V1 |       1.72e-02 
+        V2 |       1.72e-02 
+        V3 |       1.72e-02 
+        V4 |       1.18e-02 
+        V5 |       1.18e-02 
+        V6 |       8.20e-03 
+        V7 |       8.20e-03 
+        V8 |       6.30e-03 
+        V9 |       6.30e-03 
+----------------------------
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 6 um^2 45% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.sdc
+Elapsed time: 0:01.21[h:]min:sec. CPU time: user 1.08 sys 0.14 (100%). Peak memory: 218124KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb            1            213 7609d5aeed1009fb82c3
+2_1_floorplan             .sdc                             47826fcce7e9dd2db460
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_2_floorplan_macro macro_place
+Running macro_place.tcl, stage 2_2_floorplan_macro
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+No macros found: Skipping macro_placement
+Design area 6 um^2 45% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_2_floorplan_macro.odb
+Elapsed time: 0:01.13[h:]min:sec. CPU time: user 1.04 sys 0.10 (100%). Peak memory: 196340KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_2_floorplan_macro       .odb            1            191 7609d5aeed1009fb82c3
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_3_floorplan_tapcell tapcell
+Running tapcell.tcl, stage 2_3_floorplan_tapcell
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_2_floorplan_macro.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+Tap and End Cap cell insertion
+  TAP Cell          : TAPCELL_ASAP7_75t_R
+  ENDCAP Cell       : TAPCELL_ASAP7_75t_R
+  Halo Around Macro : 2 2
+  TAP Cell Distance : 25
+[INFO TAP-0004] Inserted 26 endcaps.
+[INFO TAP-0005] Inserted 0 tapcells.
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_3_floorplan_tapcell.odb
+Elapsed time: 0:01.13[h:]min:sec. CPU time: user 1.05 sys 0.07 (100%). Peak memory: 196544KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_3_floorplan_tapcell     .odb            1            191 52cfebc0e27b03228068
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 2_4_floorplan_pdn pdn
+Running pdn.tcl, stage 2_4_floorplan_pdn
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_3_floorplan_tapcell.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_1).
+[WARNING PDN-1051] No instances found for grid (CORE_macro_grid_2).
+[INFO PDN-0001] Inserting grid: top
+[INFO PDN-0500] Runtime: 0.00s
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:01.13[h:]min:sec. CPU time: user 1.05 sys 0.09 (100%). Peak memory: 198260KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            1            193 343d4c203b59ee45449c
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_4_floorplan_pdn.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.odb
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_1_floorplan.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_1_place_gp_skip_io global_place_skip_io
+Running global_place_skip_io.tcl, stage 3_1_place_gp_skip_io
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.6 -pad_left 0 -pad_right 0
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          5.832 um^2
+[INFO GPL-0037] Total instances area:            6.590 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:               106
+[INFO GPL-0007] Movable instances:                  80
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                    160
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          5.832 um^2
+[INFO GPL-0019] Utilization:                    47.337 %
+[INFO GPL-0020] Standard cells area:             5.832 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 80	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.6000
+[INFO GPL-0024] Movable insts average area:      0.073 um^2
+[INFO GPL-0025] Ideal bin area:                  0.121 um^2
+[INFO GPL-0026] Ideal bin count:                   107
+[INFO GPL-0027] Total bin area:                 13.078 um^2
+[INFO GPL-0028] Bin count (X, Y):           8 ,      8
+[INFO GPL-0029] Bin size (W * H):       0.466 *  0.439 um
+[INFO GPL-0030] Number of bins:                     64
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9066 |  0.000000e+00 |   +0.00% |  8.00e-05 |      
+        5 |   0.0981 |  0.000000e+00 |          |  1.06e-04 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 5
+[INFO GPL-1002] Placed Cell Area                5.8320
+[INFO GPL-1003] Available Free Area            12.3201
+[INFO GPL-1004] Minimum Feasible Density        0.4800 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5260
+[INFO GPL-1008]     - For 80% usage of free space: 0.5917
+[INFO GPL-1009]     - For 50% usage of free space: 0.9467
+[INFO GPL-1014] Final placement area: 5.83 (+0.00%)
+[INFO GPL-1018] Final HPWL (um): 0.00
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:01.14[h:]min:sec. CPU time: user 1.08 sys 0.08 (101%). Peak memory: 197644KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb            1            193 f854647be289225156d5
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_2_place_iop io_placement
+Running io_placement.tcl, stage 3_2_place_iop
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_1_place_gp_skip_io.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+place_pins -hor_layers M4 -ver_layers M5
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 264
+[INFO PPL-0002] Number of I/O             160
+[INFO PPL-0003] Number of I/O w/sink      160
+[INFO PPL-0004] Number of I/O w/o sink    0
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 502.99 um.
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_2_place_iop.odb
+Elapsed time: 0:01.13[h:]min:sec. CPU time: user 1.05 sys 0.08 (100%). Peak memory: 196960KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_2_place_iop             .odb            1            192 a0178f080ed43e4b9466
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_3_place_gp global_place
+Running global_place.tcl, stage 3_3_place_gp
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_2_place_iop.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO RSZ-0026] Removed 80 buffers.
+Perform port buffering...
+[INFO RSZ-0027] Inserted 0 BUFx2_ASAP7_75t_R input buffers.
+[INFO RSZ-0028] Inserted 0 BUFx2_ASAP7_75t_R output buffers.
+global_placement -density 0.6 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          0.000 um^2
+[INFO GPL-0037] Total instances area:            0.758 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:                26
+[INFO GPL-0007] Movable instances:                   0
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                     80
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          0.000 um^2
+[INFO GPL-0019] Utilization:                     0.000 %
+[INFO GPL-0020] Standard cells area:             0.000 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[WARNING GPL-0123] No placeable instances in the top-level region. Removing it.
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 0	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00000012 HPWL: 92784
+[WARNING GPL-0136] No placeable instances - skipping placement.
+estimate_parasitics -placement
+Report metrics stage 3, global place...
+
+==========================================================================
+global place report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_3_place_gp.odb
+Elapsed time: 0:01.14[h:]min:sec. CPU time: user 1.05 sys 0.10 (100%). Peak memory: 199396KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_3_place_gp              .odb            1            194 7efd8fd7e765c444f05e
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_4_place_resized resize
+Running resize.tcl, stage 3_4_place_resized
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_3_place_gp.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |        80
+       10 |     +0.0% |       0 |       0 |             0 |        70
+       20 |     +0.0% |       0 |       0 |             0 |        60
+       30 |     +0.0% |       0 |       0 |             0 |        50
+       40 |     +0.0% |       0 |       0 |             0 |        40
+       50 |     +0.0% |       0 |       0 |             0 |        30
+       60 |     +0.0% |       0 |       0 |             0 |        20
+       70 |     +0.0% |       0 |       0 |             0 |        10
+       80 |     +0.0% |       0 |       0 |             0 |         0
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.01s
+Floating nets: 
+Report metrics stage 3, resizer...
+No registers in design
+
+==========================================================================
+resizer report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+Instance count before 26, after 26
+Pin count before 0, after 0
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_4_place_resized.odb
+Elapsed time: 0:01.23[h:]min:sec. CPU time: user 1.10 sys 0.13 (100%). Peak memory: 216356KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb            1            211 7efd8fd7e765c444f05e
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_5_place_dp detail_place
+Running detail_place.tcl, stage 3_5_place_dp
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_4_place_resized.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_placement
+[INFO DPL-0006] Core area: 13.08 um^2
+[INFO DPL-0007] Movable instances area: 0.00 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.76 um^2
+[INFO DPL-0009] Utilization: 5.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 26 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL              84.1 u
+legalized HPWL             84.1 u
+delta HPWL                    0 %
+
+improve_placement -max_displacement "5 1"
+Detailed placement improvement.
+[INFO DPL-0401] Setting random seed to 1.
+[INFO DPL-0402] Setting maximum displacement 5 1 to 1350 270 units.
+[INFO DPL-0320] Collected 186 fixed cells.
+[INFO DPL-0318] Collected 0 single height cells.
+[INFO DPL-0321] Collected 0 wide cells.
+[INFO DPL-0322] Image (2052, 2160) - (5778, 5670)
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+[INFO DPL-0303] Running algorithm for independent set matching.
+[INFO DPL-0300] Set matching objective is wirelength.
+[INFO DPL-0202] No movable cells found
+[INFO DPL-0303] Running algorithm for global swaps.
+[INFO DPL-0306] Pass   1 of global swaps; hpwl is 8.420400e+04.
+[INFO DPL-0307] End of global swaps; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for vertical swaps.
+[INFO DPL-0308] Pass   1 of vertical swaps; hpwl is 8.420400e+04.
+[INFO DPL-0309] End of vertical swaps; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for reordering.
+[INFO DPL-0304] Pass   1 of reordering; objective is 8.420400e+04.
+[INFO DPL-0305] End of reordering; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for random improvement.
+[INFO DPL-0324] Random improver is using random generator.
+[INFO DPL-0325] Random improver is using hpwl objective.
+[INFO DPL-0326] Random improver cost string is (a).
+[INFO DPL-0203] No movable cells found
+[INFO DPL-0327] Pass   1 of random improver; improvement in cost is 0.00 percent.
+[INFO DPL-0328] End of random improver; improvement is 0.000000 percent.
+[INFO DPL-0380] Cell flipping.
+[INFO DPL-0382] Changed 0 cell orientations for row compatibility.
+[INFO DPL-0383] Performed 0 cell flips.
+[INFO DPL-0384] End of flipping; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+Detailed Improvement Results
+------------------------------------------
+Original HPWL               84.1 u (      44.2,       39.9)
+Final HPWL                  84.1 u (      44.2,       39.9)
+Delta HPWL                   0.0 % (       0.0,        0.0)
+
+optimize_mirroring
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+Report metrics stage 3, detailed place...
+Error: detail_place.tcl, 41 domain error: argument not in valid range
+Elapsed time: 0:01.14[h:]min:sec. CPU time: user 1.06 sys 0.08 (100%). Peak memory: 199824KB.
+make[1]: *** [/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/Makefile:531: do-3_5_place_dp] Error 1
+make: *** [/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/Makefile:531: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_5_place_dp.odb] Error 2

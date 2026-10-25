@@ -1,0 +1,149 @@
+============================================================
+ 6 - Finish / GDS
+============================================================
+Design:  top
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/top
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_1_fill density_fill
+Running density_fill.tcl, stage 6_1_fill
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+exec cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_fill.odb
+Elapsed time: 0:01.51[h:]min:sec. CPU time: user 1.33 sys 0.18 (99%). Peak memory: 328356KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_1_fill                  .odb            1            320 850d9356bb4f63b04dd7
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_route.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_fill.sdc
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_report final_report
+Running final_report.tcl, stage 6_report
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_fill.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_fill.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.sdc
+Deleted 0 routing obstructions
+Global output passed lec test
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation CNN (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 264247 rc segments
+[INFO RCX-0439] Coupling Cap extraction CNN ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 17% of 265127 wires extracted
+[INFO RCX-0442] 37% of 265127 wires extracted
+[INFO RCX-0442] 55% of 265127 wires extracted
+[INFO RCX-0442] 70% of 265127 wires extracted
+[INFO RCX-0442] 86% of 265127 wires extracted
+[INFO RCX-0442] 100% of 265127 wires extracted
+[INFO RCX-0045] Extract 55131 nets, 319291 rsegs, 319291 caps, 318299 ccs
+[INFO RCX-0443] 55131 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 1.05e-02 W
+Supply voltage   : 7.70e-01 V
+Worstcase voltage: 7.66e-01 V
+Average voltage  : 7.70e-01 V
+Average IR drop  : 1.50e-04 V
+Worstcase IR drop: 4.47e-03 V
+Percentage drop  : 0.58 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 1.05e-02 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 5.08e-03 V
+Average voltage  : 1.50e-04 V
+Average IR drop  : 1.50e-04 V
+Worstcase IR drop: 5.08e-03 V
+Percentage drop  : 0.66 %
+######################################
+Cell type report:                        Count       Area
+  Fill cell                              67857    7710.43
+  Tap cell                                1700      49.57
+  Tie cell                                  58       2.54
+  Clock buffer                             288     110.21
+  Timing Repair Buffer                     857      65.51
+  Inverter                               12883     563.52
+  Clock inverter                            91      18.20
+  Sequential cell                         3352     977.44
+  Multi-Input combinational cell         29918    3620.62
+  Total                                 117004   13118.03
+Report metrics stage 6, finish...
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 5408 um^2 41% utilization.
+[WARNING GUI-0076] Could not find the Qt platform plugin "wayland" in ""
+Elapsed time: 0:47.47[h:]min:sec. CPU time: user 70.55 sys 5.29 (159%). Peak memory: 1429896KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                 47           1396                  N/A
+cp /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7_tech_1x_201209.lef /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/klayout_tech.lef
+/usr/bin/python3 /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/util/generate_klayout_tech.py \
+	--template /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/KLayout/asap7.lyt \
+	--output /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/klayout.lyt \
+	--lef-files /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/klayout_tech.lef /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7sc7p5t_28_R_1x_220121a.lef   \
+	--map-files 
+/usr/bin/python3 /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/run_command.py --log /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/logs/asap7/top/base/6_1_merge.log --tee -- \
+        /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/klayout.sh -zz -rd design_name=CNN \
+        -rd in_def=/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.def \
+        -rd in_files="/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/gds/asap7sc7p5t_28_R_220121a.gds  " \
+        -rd seal_file="" \
+        -rd out_file=/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_merged.gds \
+        -rd tech_file=/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/klayout.lyt \
+        -rd layer_map= \
+        -r /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/util/def2stream.py
+KLayout 0.30.0
+Warning: DEF UNITS does not match reader DBU (DEF UNITS is 1000 and corresponds to a DBU of 0.001, but reader DBU is set to 0.00025) (line=5, cell=, file=6_final.def)
+[INFO] Reporting cells prior to loading DEF ...
+	/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/gds/asap7sc7p5t_28_R_220121a.gds
+[INFO] GDS_ALLOW_EMPTY=fakeram.*
+[INFO] All LEF cells have matching GDS/OAS cells
+[INFO] No orphan cells in the final layout
+Elapsed time: 0:03.40[h:]min:sec. CPU time: user 3.01 sys 0.30 (97%). Peak memory: 600540KB.
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_1_merged.gds /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.gds
+No elapsed time found in /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/logs/asap7/top/base/6_final_lec_check.log
+/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/logs/asap7/top/base
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil          0             85 4ef981a2cda760c98c3d
+1_2_yosys                 .v             63            589 a777e3c6aa8ed4fdc64d
+1_2_yosys                 .sdc                             cea570fc1bb4b984b8de
+1_synth                   .odb            2            306 1d6c9a5a8a858f708494
+1_synth                   .sdc                             1c7de0d010f23773960d
+2_1_floorplan             .odb            6            361 4d262188931b2d845489
+2_1_floorplan             .sdc                             1c7de0d010f23773960d
+2_2_floorplan_macro       .odb            1            241 4d262188931b2d845489
+2_3_floorplan_tapcell     .odb            1            237 01298dd51f088d39a1ef
+2_4_floorplan_pdn         .odb            1            250 27e106e06cc78a01d501
+3_1_place_gp_skip_io      .odb            8            339 ecf11cd02d3ce3bcbe8d
+3_2_place_iop             .odb            1            247 836a4bb94ed1f41d9abe
+3_3_place_gp              .odb           37            791 3bfa85fcb7f4aaeb332a
+3_4_place_resized         .odb           17            444 3391cafb5a59b5c583ed
+3_5_place_dp              .odb           20            521 8eb9cf20041201b70cc3
+4_1_cts                   .odb           23            675 d28bc4f8c1dbe5140986
+5_1_grt                   .odb           93           1080 5943904c9dc127ee767c
+5_1_grt                   .sdc                             92671cc5e77142235d49
+5_2_route                 .odb          247           6699 014e2c7fbc44ec51de8a
+5_3_fillcell              .odb            1            417 850d9356bb4f63b04dd7
+6_1_fill                  .odb            1            320 850d9356bb4f63b04dd7
+6_1_fill                  .sdc                             92671cc5e77142235d49
+6_1_merge                                 3            586                  N/A
+6_report                                 47           1396                  N/A
+Total                                   572           6699                     

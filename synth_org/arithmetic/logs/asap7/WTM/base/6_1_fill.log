@@ -1,0 +1,18 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/5_route.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/5_route.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+exec cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/5_route.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/6_1_fill.odb
+Elapsed time: 0:01.13[h:]min:sec. CPU time: user 1.04 sys 0.09 (99%). Peak memory: 197204KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_1_fill                  .odb            1            192 22a775ab02a959065b25

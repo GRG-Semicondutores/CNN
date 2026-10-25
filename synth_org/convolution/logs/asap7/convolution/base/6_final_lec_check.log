@@ -1,0 +1,74 @@
+[2026-09-15 22:31:40.297] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-15 22:31:40.297] [miter_logger] [info] Collecting POs for design 0: ConvLayer
+
+[2026-09-15 22:31:46.589] [miter_logger] [info] Collected 19253 PIs for design 0
+
+[2026-09-15 22:31:46.589] [miter_logger] [info] Collected 34711 POs for design 0
+
+[2026-09-15 22:31:46.590] [miter_logger] [info] design 0 PI summary by model/term (19253 total terminals, 7 unique rows):
+| Model                | Term   | Count |
+|----------------------|--------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN     | 16410 |
+| ConvLayer            | kernel |  2160 |
+| ConvLayer            | imagem |   600 |
+| ConvLayer            | bias   |    80 |
+| ConvLayer            | clk    |     1 |
+| ConvLayer            | rst    |     1 |
+| ConvLayer            | start  |     1 |
+
+[2026-09-15 22:31:46.591] [miter_logger] [info] design 0 PO summary by model/term (34711 total terminals, 4 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       | 16410 |
+| DFFHQNx1_ASAP7_75t_R | D         | 16410 |
+| ConvLayer            | result    |  1890 |
+| ConvLayer            | valid_out |     1 |
+
+[2026-09-15 22:31:46.600] [miter_logger] [info] Collecting POs for design 1: ConvLayer
+
+[2026-09-15 22:31:47.100] [miter_logger] [info] size of common inputs: 19253
+[2026-09-15 22:31:47.100] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-15 22:31:47.100] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-15 22:31:47.103] [miter_logger] [info] Collected 19253 PIs for design 1
+
+[2026-09-15 22:31:47.103] [miter_logger] [info] Collected 34711 POs for design 1
+
+[2026-09-15 22:31:47.104] [miter_logger] [info] design 1 PI summary by model/term (19253 total terminals, 8 unique rows):
+| Model                | Term   | Count |
+|----------------------|--------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN     | 16409 |
+| ConvLayer            | kernel |  2160 |
+| ConvLayer            | imagem |   600 |
+| ConvLayer            | bias   |    80 |
+| ConvLayer            | clk    |     1 |
+| ConvLayer            | rst    |     1 |
+| ConvLayer            | start  |     1 |
+| DFFHQNx2_ASAP7_75t_R | QN     |     1 |
+
+[2026-09-15 22:31:47.106] [miter_logger] [info] design 1 PO summary by model/term (34711 total terminals, 6 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       | 16409 |
+| DFFHQNx1_ASAP7_75t_R | D         | 16409 |
+| ConvLayer            | result    |  1890 |
+| ConvLayer            | valid_out |     1 |
+| DFFHQNx2_ASAP7_75t_R | CLK       |     1 |
+| DFFHQNx2_ASAP7_75t_R | D         |     1 |
+
+[2026-09-15 22:31:47.106] [miter_logger] [info] normalizeInputs: starting
+[2026-09-15 22:31:47.130] [miter_logger] [info] size of common inputs: 19253
+[2026-09-15 22:31:47.130] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-15 22:31:47.130] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-15 22:31:47.134] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-15 22:31:47.183] [miter_logger] [info] size of common outputs: 34711
+[2026-09-15 22:31:47.183] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-15 22:31:47.184] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-15 22:31:47.193] [miter_logger] [info] size of PIs in circuit 0: 19253
+[2026-09-15 22:31:47.193] [miter_logger] [info] size of PIs in circuit 1: 19253
+[2026-09-15 22:31:47.193] [miter_logger] [info] size of POs in circuit 0: 34711
+[2026-09-15 22:31:47.193] [miter_logger] [info] size of POs in circuit 1: 34711
+[2026-09-15 22:31:54.101] [miter_logger] [info] Building miter expression
+[2026-09-15 22:31:54.104] [miter_logger] [info] Finished building miter expression
+[2026-09-15 22:31:54.105] [miter_logger] [info] Starting solver
+[2026-09-15 22:31:54.105] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-15 22:31:54.105] [miter_logger] [info] Circuits are IDENTICAL

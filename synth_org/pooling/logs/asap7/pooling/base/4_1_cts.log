@@ -1,0 +1,204 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/3_place.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/3_place.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is BUFx4_ASAP7_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx8_ASAP7_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx4_ASAP7_75t_R
+                    BUFx10_ASAP7_75t_R
+[INFO CTS-0049] Characterization buffer is BUFx10_ASAP7_75t_R.
+[WARNING CTS-0083] No clock nets have been found.
+[INFO CTS-0008] TritonCTS found 0 clock nets.
+[WARNING CTS-0082] No valid clock nets in the design.
+[INFO CTS-0500] Runtime: 1.65s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 136.67 um^2
+[INFO DPL-0007] Movable instances area: 77.48 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.51 um^2
+[INFO DPL-0009] Utilization: 58.5%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 951 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement         92.7 u
+average displacement        0.1 u
+max displacement            0.5 u
+original HPWL            1370.9 u
+legalized HPWL           1443.4 u
+delta HPWL                    5 %
+
+estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 32 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 32 out of 32 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -375.557 |   -42482.8 |   -11640.1 |     32 | imagem_out[21]
+      10* |       0 |       4 |        2 |      0 |     3 |    +0.3% | -362.989 |   -42095.5 |   -11362.9 |     32 | imagem_out[28]
+      20* |       0 |       5 |        4 |      0 |    10 |    +0.6% | -365.377 |   -42101.8 |   -11382.8 |     32 | imagem_out[28]
+      30* |       0 |       6 |        5 |      0 |    18 |    +0.7% | -361.152 |   -41941.0 |   -11309.4 |     32 | imagem_out[21]
+      40* |       0 |       9 |       10 |      0 |    21 |    +1.5% | -355.852 |   -41533.6 |   -11168.6 |     32 | imagem_out[28]
+      50* |       0 |      13 |       10 |      0 |    27 |    +1.7% | -354.316 |   -41652.3 |   -11155.0 |     32 | imagem_out[21]
+      60* |       0 |      19 |       11 |      0 |    30 |    +2.0% | -353.120 |   -41624.3 |   -11134.9 |     32 | imagem_out[21]
+      60* |       0 |      19 |       11 |      0 |    30 |    +2.0% | -353.120 |   -41624.3 |   -11134.9 |     32 | imagem_out[21]
+      61* |       0 |      19 |       11 |      0 |    30 |    +2.0% | -353.120 |   -41624.3 |   -11134.9 |     32 | imagem_out[21]
+      62* |       0 |      19 |       11 |      0 |    30 |    +2.0% | -353.120 |   -41624.3 |   -11134.9 |     32 | imagem_out[21]
+      66* |       0 |      20 |       12 |      0 |    31 |    +2.1% | -352.786 |   -41617.5 |   -11132.0 |     32 | imagem_out[21]
+      69* |       0 |      21 |       12 |      0 |    32 |    +2.1% | -352.713 |   -41615.2 |   -11131.2 |     32 | imagem_out[21]
+      70* |       0 |      21 |       12 |      0 |    32 |    +2.1% | -352.713 |   -41615.2 |   -11131.2 |     32 | imagem_out[21]
+      72* |       0 |      22 |       12 |      0 |    33 |    +2.1% | -352.660 |   -41613.5 |   -11130.5 |     32 | imagem_out[21]
+      75* |       0 |      23 |       12 |      0 |    34 |    +2.1% | -352.606 |   -41611.8 |   -11129.9 |     32 | imagem_out[21]
+      78* |       0 |      24 |       12 |      0 |    35 |    +2.2% | -352.522 |   -41609.1 |   -11129.0 |     32 | imagem_out[21]
+      80* |       0 |      25 |       12 |      0 |    35 |    +2.2% | -352.522 |   -41606.8 |   -11127.6 |     32 | imagem_out[21]
+      90* |       0 |      33 |       13 |      0 |    36 |    +2.8% | -352.522 |   -41600.1 |   -11103.6 |     32 | imagem_out[21]
+      91* |       0 |      34 |       13 |      0 |    36 |    +2.8% | -352.522 |   -41599.7 |   -11103.2 |     32 | imagem_out[21]
+      94* |       0 |      35 |       13 |      0 |    37 |    +2.8% | -352.522 |   -41599.2 |   -11102.1 |     32 | imagem_out[21]
+      97* |       0 |      36 |       13 |      0 |    38 |    +2.8% | -352.522 |   -41596.9 |   -11101.3 |     32 | imagem_out[21]
+     100* |       0 |      37 |       13 |      0 |    39 |    +2.8% | -352.522 |   -41594.6 |   -11100.4 |     32 | imagem_out[21]
+     100* |       0 |      37 |       13 |      0 |    39 |    +2.8% | -352.522 |   -41594.6 |   -11100.4 |     32 | imagem_out[21]
+     103* |       0 |      38 |       13 |      0 |    40 |    +2.8% | -352.522 |   -41593.2 |   -11099.7 |     32 | imagem_out[21]
+     106* |       0 |      39 |       13 |      0 |    41 |    +2.9% | -352.522 |   -41591.5 |   -11099.1 |     32 | imagem_out[21]
+     109* |       0 |      40 |       13 |      0 |    42 |    +2.9% | -352.522 |   -41589.3 |   -11098.3 |     32 | imagem_out[21]
+     110* |       0 |      40 |       13 |      0 |    42 |    +2.9% | -352.522 |   -41589.3 |   -11098.3 |     32 | imagem_out[21]
+     115* |       0 |      40 |       13 |      0 |    43 |    +2.9% | -352.522 |   -41583.9 |   -11095.5 |     32 | imagem_out[21]
+     120* |       0 |      40 |       13 |      0 |    47 |    +2.9% | -353.914 |   -41787.7 |   -11155.5 |     32 | imagem_out[3]
+     130* |       0 |      44 |       13 |      0 |    53 |    +3.0% | -352.522 |   -41812.9 |   -11120.3 |     32 | imagem_out[21]
+     132* |       0 |      46 |       13 |      0 |    53 |    +3.2% | -352.522 |   -41810.3 |   -11099.4 |     32 | imagem_out[21]
+     136* |       0 |      48 |       13 |      0 |    54 |    +3.3% | -352.522 |   -41810.3 |   -11098.3 |     32 | imagem_out[21]
+     140* |       0 |      50 |       13 |      0 |    55 |    +3.4% | -352.522 |   -41810.3 |   -11099.6 |     32 | imagem_out[21]
+     140* |       0 |      49 |       13 |      0 |    54 |    +3.4% | -352.522 |   -41810.3 |   -11098.7 |     32 | imagem_out[21]
+     143* |       0 |      49 |       13 |      0 |    54 |    +3.4% | -352.522 |   -41810.3 |   -11098.7 |     32 | imagem_out[21]
+     148* |       0 |      50 |       13 |      0 |    54 |    +3.4% | -352.522 |   -41821.2 |   -11099.7 |     32 | imagem_out[21]
+     150* |       0 |      51 |       13 |      0 |    54 |    +3.5% | -352.522 |   -41851.7 |   -11100.6 |     32 | imagem_out[21]
+     151* |       0 |      52 |       13 |      0 |    54 |    +3.5% | -352.522 |   -41851.7 |   -11100.3 |     32 | imagem_out[21]
+     156* |       0 |      55 |       13 |      0 |    54 |    +3.7% | -352.522 |   -41864.4 |   -11104.0 |     32 | imagem_out[21]
+     158* |       0 |      56 |       13 |      0 |    54 |    +3.7% | -352.522 |   -41864.4 |   -11103.4 |     32 | imagem_out[21]
+     160* |       0 |      56 |       13 |      0 |    55 |    +3.7% | -352.522 |   -41859.5 |   -11101.0 |     32 | imagem_out[21]
+     170* |       0 |      57 |       13 |      0 |    64 |    +3.8% | -352.522 |   -41838.4 |   -11094.2 |     32 | imagem_out[21]
+     180* |       0 |      59 |       14 |      0 |    71 |    +3.9% | -352.522 |   -41737.9 |   -11043.1 |     32 | imagem_out[21]
+     190* |       0 |      63 |       14 |      0 |    77 |    +4.1% | -352.522 |   -41749.3 |   -11020.0 |     32 | imagem_out[21]
+     200* |       0 |      67 |       14 |      0 |    83 |    +4.2% | -352.522 |   -41717.8 |   -11011.1 |     32 | imagem_out[21]
+     210* |       0 |      75 |       14 |      0 |    85 |    +4.7% | -352.522 |   -41710.8 |   -10997.6 |     32 | imagem_out[21]
+     211* |       0 |      76 |       14 |      0 |    85 |    +4.7% | -352.522 |   -41708.8 |   -10997.2 |     32 | imagem_out[21]
+     214* |       0 |      77 |       14 |      0 |    86 |    +4.7% | -352.522 |   -41705.0 |   -10996.5 |     32 | imagem_out[21]
+     217* |       0 |      77 |       14 |      0 |    86 |    +4.7% | -352.522 |   -41705.0 |   -10996.5 |     32 | imagem_out[21]
+     220* |       0 |      77 |       14 |      0 |    88 |    +4.7% | -352.522 |   -41699.5 |   -10995.1 |     32 | imagem_out[21]
+     222* |       0 |      78 |       14 |      0 |    89 |    +4.7% | -352.522 |   -41711.1 |   -10997.3 |     32 | imagem_out[21]
+     225* |       0 |      79 |       14 |      0 |    90 |    +4.7% | -352.522 |   -41707.2 |   -10995.4 |     32 | imagem_out[21]
+     228* |       0 |      80 |       14 |      0 |    91 |    +4.8% | -352.522 |   -41708.4 |   -10995.1 |     32 | imagem_out[21]
+     230* |       0 |      80 |       14 |      0 |    92 |    +4.8% | -352.522 |   -41705.4 |   -10994.1 |     32 | imagem_out[21]
+     231* |       0 |      81 |       14 |      0 |    92 |    +4.8% | -352.522 |   -41705.4 |   -10993.5 |     32 | imagem_out[21]
+     234* |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     234* |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     235+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     236+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     237+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     238+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     239+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     240+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     240+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     241+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     242+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     243+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     244+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     245+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     246+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     247+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     248+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     249+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     250+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     250+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     251+ |       0 |      82 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.7 |     32 | imagem_out[21]
+     253+ |       0 |      83 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.3 |     32 | imagem_out[21]
+     254+ |       0 |      83 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.3 |     32 | imagem_out[21]
+     255+ |       0 |      83 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.3 |     32 | imagem_out[21]
+     257+ |       0 |      84 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10991.0 |     32 | imagem_out[21]
+     259+ |       0 |      85 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10990.7 |     32 | imagem_out[21]
+     260+ |       0 |      85 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10990.7 |     32 | imagem_out[21]
+     260+ |       0 |      85 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10990.7 |     32 | imagem_out[21]
+     261+ |       0 |      85 |       14 |      0 |    93 |    +4.8% | -352.522 |   -41701.6 |   -10990.7 |     32 | imagem_out[21]
+     263+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     264+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     265+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     266+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     267+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     268+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     269+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     270+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+     270+ |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+    final |       0 |      86 |       14 |      0 |    93 |    +4.9% | -352.522 |   -41684.5 |   -10990.1 |     32 | imagem_out[21]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0040] Inserted 14 buffers.
+[INFO RSZ-0051] Resized 86 instances: 86 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 93 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 0.73s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.00s
+Repair timing output passed lec test
+detailed_placement
+[INFO DPL-0006] Core area: 136.67 um^2
+[INFO DPL-0007] Movable instances area: 81.37 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.51 um^2
+[INFO DPL-0009] Utilization: 61.4%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 965 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        153 |        35 |       118
+        1 |         39 |         5 |        34
+        2 |         18 |         4 |        14
+        3 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 3.
+[INFO DPL-0500] Runtime: 0.01s
+Placement Analysis
+---------------------------------
+total displacement         26.5 u
+average displacement        0.0 u
+max displacement            1.1 u
+original HPWL            1454.8 u
+legalized HPWL           1481.6 u
+delta HPWL                    2 %
+
+estimate_parasitics -placement
+Report metrics stage 4, cts final...
+No registers in design
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 84 um^2 61% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/4_1_cts.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/pooling/results/asap7/pooling/base/4_cts.sdc
+Elapsed time: 0:04.59[h:]min:sec. CPU time: user 4.65 sys 0.24 (106%). Peak memory: 235304KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb            4            229 67dd786b36f2c45123db

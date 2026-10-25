@@ -1,0 +1,96 @@
+============================================================
+ 4 - Clock Tree Synthesis
+============================================================
+Design:  reshape
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_place.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_place.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is BUFx2_ASAP7_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx2_ASAP7_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx2_ASAP7_75t_R
+[INFO CTS-0049] Characterization buffer is BUFx2_ASAP7_75t_R.
+[WARNING CTS-0083] No clock nets have been found.
+[INFO CTS-0008] TritonCTS found 0 clock nets.
+[WARNING CTS-0082] No valid clock nets in the design.
+[INFO CTS-0500] Runtime: 0.69s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 13.08 um^2
+[INFO DPL-0007] Movable instances area: 0.00 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.76 um^2
+[INFO DPL-0009] Utilization: 5.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 26 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL              84.1 u
+legalized HPWL             84.1 u
+delta HPWL                    0 %
+
+estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 0.02s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.00s
+Repair timing output passed lec test
+detailed_placement
+[INFO DPL-0006] Core area: 13.08 um^2
+[INFO DPL-0007] Movable instances area: 0.00 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.76 um^2
+[INFO DPL-0009] Utilization: 5.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 26 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL              84.1 u
+legalized HPWL             84.1 u
+delta HPWL                    0 %
+
+estimate_parasitics -placement
+Report metrics stage 4, cts final...
+No registers in design
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/4_1_cts.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/4_cts.sdc
+Elapsed time: 0:02.63[h:]min:sec. CPU time: user 2.46 sys 0.18 (100%). Peak memory: 226860KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb            2            221 7efd8fd7e765c444f05e
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/4_1_cts.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/4_cts.odb

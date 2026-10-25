@@ -1,0 +1,225 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/3_place.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/3_place.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is BUFx4_ASAP7_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx8_ASAP7_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx4_ASAP7_75t_R
+                    BUFx10_ASAP7_75t_R
+[INFO CTS-0049] Characterization buffer is BUFx10_ASAP7_75t_R.
+[WARNING CTS-0083] No clock nets have been found.
+[INFO CTS-0008] TritonCTS found 0 clock nets.
+[WARNING CTS-0082] No valid clock nets in the design.
+[INFO CTS-0500] Runtime: 1.66s
+estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0006] Core area: 131.66 um^2
+[INFO DPL-0007] Movable instances area: 64.88 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.45 um^2
+[INFO DPL-0009] Utilization: 51.1%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 766 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement         71.0 u
+average displacement        0.1 u
+max displacement            0.8 u
+original HPWL             953.1 u
+legalized HPWL            975.0 u
+delta HPWL                    2 %
+
+estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 23 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 23 out of 23 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -433.242 |    -9190.3 |    -7674.0 |     23 | result[16]
+      10* |       0 |       2 |        0 |      0 |     7 |    +0.0% | -431.233 |    -9153.6 |    -7649.8 |     23 | result[15]
+      20* |       0 |       6 |        1 |      0 |    12 |    +0.3% | -426.068 |    -9105.6 |    -7590.8 |     23 | result[16]
+      30* |       0 |      12 |        1 |      0 |    16 |    +0.5% | -422.028 |    -9041.2 |    -7548.9 |     23 | result[16]
+      40* |       0 |      19 |        1 |      0 |    19 |    +0.7% | -419.493 |    -9012.9 |    -7509.4 |     23 | result[16]
+      50* |       0 |      27 |        1 |      0 |    21 |    +1.1% | -418.893 |    -9002.4 |    -7480.1 |     23 | result[16]
+      60* |       0 |      35 |        1 |      0 |    23 |    +1.5% | -417.191 |    -8981.5 |    -7455.3 |     23 | result[16]
+      70* |       0 |      42 |        1 |      2 |    24 |    +2.1% | -415.525 |    -8955.7 |    -7422.9 |     23 | result[16]
+      76* |       0 |      47 |        1 |      2 |    25 |    +2.6% | -415.068 |    -8943.6 |    -7411.2 |     23 | result[16]
+      80* |       0 |      47 |        1 |      2 |    28 |    +2.6% | -415.084 |    -8943.9 |    -7411.5 |     23 | result[16]
+      82* |       0 |      47 |        1 |      2 |    25 |    +2.6% | -415.068 |    -8943.6 |    -7411.2 |     23 | result[16]
+      90* |       0 |      47 |        2 |      2 |    31 |    +2.7% | -417.544 |    -8944.1 |    -7425.6 |     23 | result[18]
+     100* |       0 |      54 |        2 |      2 |    34 |    +3.1% | -415.068 |    -8933.8 |    -7411.8 |     23 | result[16]
+     110* |       0 |      59 |        6 |      2 |    35 |    +4.1% | -415.068 |    -8911.8 |    -7402.5 |     23 | result[16]
+     120* |       0 |      62 |        8 |      2 |    40 |    +4.5% | -415.474 |    -8906.5 |    -7393.5 |     23 | result[16]
+     123* |       0 |      64 |        9 |      2 |    40 |    +4.7% | -414.394 |    -8904.9 |    -7384.7 |     23 | result[16]
+     130* |       0 |      67 |        9 |      2 |    43 |    +4.8% | -414.399 |    -8901.4 |    -7373.8 |     23 | result[16]
+     131* |       0 |      68 |        9 |      2 |    43 |    +4.9% | -414.239 |    -8899.8 |    -7372.3 |     23 | result[16]
+     134* |       0 |      69 |        9 |      2 |    44 |    +4.9% | -414.239 |    -8899.8 |    -7371.4 |     23 | result[16]
+     137* |       0 |      70 |        9 |      2 |    44 |    +4.9% | -414.239 |    -8899.8 |    -7371.1 |     23 | result[16]
+     140* |       0 |      70 |        9 |      2 |    46 |    +4.9% | -414.239 |    -8899.2 |    -7370.3 |     23 | result[16]
+     142* |       0 |      70 |        9 |      2 |    45 |    +4.9% | -414.239 |    -8899.2 |    -7369.5 |     23 | result[16]
+     146* |       0 |      71 |        9 |      2 |    47 |    +4.9% | -414.239 |    -8899.2 |    -7369.8 |     23 | result[16]
+     150* |       0 |      72 |        9 |      2 |    49 |    +5.0% | -414.399 |    -8902.6 |    -7367.8 |     23 | result[16]
+     150* |       0 |      71 |        9 |      2 |    47 |    +4.9% | -414.239 |    -8899.2 |    -7369.8 |     23 | result[16]
+     160* |       0 |      72 |       10 |      2 |    54 |    +5.2% | -414.348 |    -8901.1 |    -7375.2 |     23 | result[16]
+     170* |       0 |      78 |       10 |      2 |    58 |    +5.6% | -414.239 |    -8900.0 |    -7370.0 |     23 | result[16]
+     170* |       0 |      78 |       10 |      2 |    58 |    +5.6% | -414.239 |    -8900.0 |    -7370.0 |     23 | result[16]
+     173* |       0 |      79 |       10 |      2 |    58 |    +5.6% | -414.239 |    -8900.0 |    -7369.5 |     23 | result[16]
+     180* |       0 |      79 |       11 |      2 |    63 |    +5.8% | -415.553 |    -8904.0 |    -7412.7 |     23 | result[16]
+     190* |       0 |      85 |       12 |      2 |    66 |    +6.2% | -415.759 |    -8917.6 |    -7429.2 |     23 | result[16]
+     200* |       0 |      92 |       13 |      2 |    68 |    +6.8% | -414.688 |    -8911.3 |    -7451.5 |     23 | result[16]
+     210* |       0 |     101 |       14 |      2 |    68 |    +7.5% | -414.534 |    -8903.8 |    -7432.0 |     23 | result[16]
+     220* |       0 |     107 |       14 |      2 |    72 |    +8.1% | -414.534 |    -8899.4 |    -7427.7 |     23 | result[16]
+     227* |       0 |      79 |       11 |      2 |    60 |    +5.8% | -414.239 |    -8900.0 |    -7391.5 |     23 | result[16]
+     230* |       0 |      81 |       11 |      2 |    60 |    +5.8% | -414.239 |    -8900.7 |    -7382.8 |     23 | result[16]
+     240* |       0 |      91 |       11 |      2 |    60 |    +6.4% | -414.688 |    -8903.8 |    -7373.1 |     23 | result[16]
+     250* |       0 |      95 |       11 |      2 |    66 |    +6.7% | -414.688 |    -8909.7 |    -7376.8 |     23 | result[16]
+     260* |       0 |      97 |       12 |      2 |    73 |    +6.9% | -414.688 |    -8906.7 |    -7377.7 |     23 | result[16]
+     270* |       0 |     102 |       12 |      2 |    78 |    +7.2% | -414.740 |    -8907.3 |    -7362.9 |     23 | result[16]
+     280* |       0 |     111 |       12 |      2 |    79 |    +8.1% | -414.865 |    -8901.3 |    -7354.2 |     23 | result[16]
+     281* |       0 |      82 |       11 |      2 |    60 |    +5.9% | -414.239 |    -8901.1 |    -7379.5 |     23 | result[16]
+     290* |       0 |      90 |       11 |      2 |    60 |    +6.3% | -414.688 |    -8903.8 |    -7373.7 |     23 | result[16]
+     300* |       1 |      98 |       11 |      2 |    61 |    +6.7% | -414.688 |    -8902.8 |    -7343.4 |     23 | result[16]
+     310* |       1 |     106 |       11 |      2 |    63 |    +7.2% | -414.740 |    -8901.7 |    -7336.5 |     23 | result[16]
+     320* |       1 |     113 |       12 |      2 |    65 |    +8.2% | -414.740 |    -8895.4 |    -7343.3 |     23 | result[16]
+     330* |       1 |     122 |       13 |      2 |    65 |    +9.0% | -414.865 |    -8893.4 |    -7334.9 |     23 | result[16]
+     330* |       0 |      82 |       11 |      2 |    60 |    +5.9% | -414.239 |    -8901.1 |    -7379.5 |     23 | result[16]
+     340* |       0 |      91 |       11 |      2 |    60 |    +6.4% | -414.688 |    -8903.8 |    -7373.1 |     23 | result[16]
+     350* |       1 |      99 |       12 |      2 |    60 |    +7.1% | -414.688 |    -8898.9 |    -7356.6 |     23 | result[16]
+     360* |       1 |     109 |       12 |      2 |    60 |    +8.1% | -414.534 |    -8893.9 |    -7343.1 |     23 | result[16]
+     364* |       0 |      82 |       11 |      2 |    60 |    +5.9% | -414.239 |    -8901.1 |    -7379.5 |     23 | result[16]
+     370* |       0 |      85 |       12 |      2 |    61 |    +6.1% | -414.688 |    -8902.3 |    -7373.6 |     23 | result[16]
+     380* |       0 |      95 |       12 |      2 |    61 |    +6.6% | -414.444 |    -8899.8 |    -7360.9 |     23 | result[16]
+     390* |       0 |     104 |       12 |      2 |    62 |    +7.2% | -414.569 |    -8897.3 |    -7357.1 |     23 | result[16]
+     400* |       0 |     113 |       13 |      2 |    62 |    +8.3% | -414.569 |    -8891.0 |    -7345.4 |     23 | result[16]
+     404* |       0 |      82 |       11 |      2 |    60 |    +5.9% | -414.239 |    -8901.1 |    -7379.5 |     23 | result[16]
+     410* |       0 |      86 |       12 |      2 |    60 |    +6.2% | -414.688 |    -8899.4 |    -7372.3 |     23 | result[16]
+     420* |       0 |      95 |       13 |      2 |    60 |    +6.7% | -414.444 |    -8900.6 |    -7361.6 |     23 | result[16]
+     430* |       0 |     105 |       13 |      2 |    60 |    +7.4% | -414.569 |    -8896.8 |    -7355.9 |     23 | result[16]
+     435* |       0 |      82 |       11 |      2 |    60 |    +5.9% | -414.239 |    -8901.1 |    -7379.5 |     23 | result[16]
+     440* |       0 |      86 |       11 |      2 |    60 |    +6.1% | -414.239 |    -8899.6 |    -7376.3 |     23 | result[16]
+     447* |       0 |      88 |       12 |      2 |    60 |    +6.4% | -414.239 |    -8897.7 |    -7378.8 |     23 | result[16]
+     450* |       0 |      88 |       12 |      2 |    62 |    +6.4% | -414.239 |    -8897.7 |    -7378.3 |     23 | result[16]
+     460* |       0 |      95 |       12 |      2 |    65 |    +6.7% | -414.688 |    -8899.1 |    -7371.5 |     23 | result[16]
+     470* |       0 |     101 |       16 |      2 |    65 |    +7.5% | -414.239 |    -8890.7 |    -7399.8 |     23 | result[16]
+     474* |       0 |     101 |       15 |      2 |    65 |    +7.4% | -414.239 |    -8890.7 |    -7357.8 |     23 | result[16]
+     480* |       0 |     103 |       15 |      2 |    68 |    +7.5% | -414.239 |    -8890.7 |    -7359.4 |     23 | result[16]
+     490* |       0 |     110 |       18 |      2 |    68 |    +8.3% | -414.239 |    -8888.9 |    -7404.0 |     23 | result[16]
+     500* |       0 |     118 |       19 |      2 |    69 |    +8.9% | -414.239 |    -8887.8 |    -7438.9 |     23 | result[16]
+     500* |       0 |     109 |       16 |      2 |    68 |    +7.9% | -414.239 |    -8888.9 |    -7358.6 |     23 | result[16]
+     510* |       0 |     115 |       18 |      2 |    69 |    +8.5% | -414.239 |    -8886.3 |    -7428.1 |     23 | result[16]
+     515* |       0 |     111 |       16 |      2 |    69 |    +8.0% | -414.239 |    -8886.3 |    -7353.9 |     23 | result[16]
+     520* |       0 |     113 |       17 |      2 |    70 |    +8.3% | -414.239 |    -8886.3 |    -7395.1 |     23 | result[16]
+     529* |       0 |     111 |       16 |      2 |    70 |    +8.0% | -414.239 |    -8886.3 |    -7353.9 |     23 | result[16]
+     530* |       0 |     111 |       16 |      2 |    70 |    +8.0% | -414.239 |    -8886.3 |    -7353.9 |     23 | result[16]
+     540* |       0 |     118 |       19 |      2 |    70 |    +8.7% | -414.239 |    -8883.7 |    -7391.8 |     23 | result[16]
+     547* |       0 |     115 |       16 |      2 |    70 |    +8.2% | -414.239 |    -8886.1 |    -7348.0 |     23 | result[16]
+     547* |       0 |     115 |       16 |      2 |    70 |    +8.2% | -414.239 |    -8886.1 |    -7348.0 |     23 | result[16]
+     548+ |       0 |     115 |       16 |      2 |    70 |    +8.2% | -414.239 |    -8886.1 |    -7348.0 |     23 | result[16]
+     550+ |       0 |     116 |       16 |      2 |    70 |    +8.2% | -414.239 |    -8886.1 |    -7347.5 |     23 | result[16]
+     550+ |       0 |     116 |       16 |      2 |    70 |    +8.2% | -414.239 |    -8886.1 |    -7347.5 |     23 | result[16]
+     552+ |       0 |     117 |       16 |      2 |    70 |    +8.3% | -414.239 |    -8886.6 |    -7347.3 |     23 | result[16]
+     553+ |       0 |     117 |       16 |      2 |    70 |    +8.3% | -414.239 |    -8886.6 |    -7347.3 |     23 | result[16]
+     555+ |       0 |     118 |       16 |      2 |    70 |    +8.3% | -414.239 |    -8886.6 |    -7346.9 |     23 | result[16]
+     556+ |       0 |     118 |       16 |      2 |    70 |    +8.3% | -414.239 |    -8886.6 |    -7346.9 |     23 | result[16]
+     557+ |       0 |     118 |       16 |      2 |    70 |    +8.3% | -414.239 |    -8886.6 |    -7346.9 |     23 | result[16]
+     559+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     560+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     560+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     561+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     562+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     563+ |       0 |     119 |       16 |      2 |    70 |    +8.4% | -414.239 |    -8886.6 |    -7346.4 |     23 | result[16]
+     570+ |       0 |     125 |       16 |      2 |    70 |    +8.7% | -414.239 |    -8888.3 |    -7341.6 |     23 | result[16]
+     570+ |       0 |     125 |       16 |      2 |    70 |    +8.7% | -414.239 |    -8888.3 |    -7341.6 |     23 | result[16]
+     571+ |       0 |     125 |       16 |      2 |    70 |    +8.7% | -414.239 |    -8888.3 |    -7341.6 |     23 | result[16]
+     572+ |       0 |     125 |       16 |      2 |    70 |    +8.7% | -414.239 |    -8888.3 |    -7341.6 |     23 | result[16]
+     574+ |       0 |     126 |       16 |      2 |    70 |    +8.7% | -414.239 |    -8888.6 |    -7340.5 |     23 | result[16]
+     576+ |       0 |     127 |       16 |      2 |    70 |    +8.8% | -414.239 |    -8888.9 |    -7340.4 |     23 | result[16]
+     579+ |       0 |     129 |       16 |      2 |    70 |    +9.0% | -414.239 |    -8889.6 |    -7339.7 |     23 | result[16]
+     580+ |       0 |     129 |       16 |      2 |    70 |    +9.0% | -414.239 |    -8889.6 |    -7339.7 |     23 | result[16]
+     586+ |       0 |     135 |       16 |      2 |    70 |    +9.9% | -414.239 |    -8888.4 |    -7336.2 |     23 | result[16]
+     590+ |       0 |     138 |       16 |      2 |    70 |   +10.2% | -414.239 |    -8887.3 |    -7333.5 |     23 | result[16]
+     592+ |       0 |     139 |       16 |      2 |    71 |   +10.3% | -414.239 |    -8885.7 |    -7332.3 |     23 | result[16]
+     596+ |       0 |     142 |       16 |      2 |    71 |   +10.4% | -414.239 |    -8885.7 |    -7330.4 |     23 | result[16]
+     599+ |       0 |     144 |       16 |      2 |    71 |   +10.5% | -414.239 |    -8885.7 |    -7329.3 |     23 | result[16]
+     600+ |       0 |     144 |       16 |      2 |    71 |   +10.5% | -414.239 |    -8885.7 |    -7329.3 |     23 | result[16]
+     601+ |       0 |     145 |       16 |      2 |    71 |   +10.5% | -414.239 |    -8883.3 |    -7326.9 |     23 | result[16]
+    final |       0 |     145 |       16 |      2 |    71 |   +10.5% | -414.239 |    -8883.3 |    -7326.9 |     23 | result[16]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0040] Inserted 16 buffers.
+[INFO RSZ-0051] Resized 145 instances: 145 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 71 instances.
+[INFO RSZ-0049] Cloned 2 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 3.28s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.00s
+Repair timing output passed lec test
+detailed_placement
+[INFO DPL-0006] Core area: 131.66 um^2
+[INFO DPL-0007] Movable instances area: 71.97 um^2
+[INFO DPL-0008] Fixed instances area within core: 2.45 um^2
+[INFO DPL-0009] Utilization: 56.5%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 784 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        287 |        55 |       232
+        1 |         98 |        18 |        80
+        2 |         10 |         4 |         6
+        3 |         18 |         2 |        16
+        4 |          6 |         2 |         4
+        5 |         16 |         2 |        14
+        6 |         23 |         3 |        20
+        7 |          6 |         2 |         4
+        8 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 8.
+[INFO DPL-0500] Runtime: 0.01s
+Placement Analysis
+---------------------------------
+total displacement         41.9 u
+average displacement        0.1 u
+max displacement            2.1 u
+original HPWL            1011.1 u
+legalized HPWL           1048.7 u
+delta HPWL                    4 %
+
+estimate_parasitics -placement
+Report metrics stage 4, cts final...
+No registers in design
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 74 um^2 57% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/4_1_cts.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/arithmetic/results/asap7/WTM/base/4_cts.sdc
+Elapsed time: 0:08.12[h:]min:sec. CPU time: user 8.38 sys 0.32 (107%). Peak memory: 233720KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb            8            228 90afa2f7941ac6f9fbcc

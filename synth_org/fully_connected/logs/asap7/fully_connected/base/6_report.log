@@ -1,0 +1,74 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/6_1_fill.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/6_1_fill.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/6_final.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/fully_connected/results/asap7/fully_connected/base/6_final.sdc
+Deleted 0 routing obstructions
+Global output passed lec test
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation FCLayer (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 52200 rc segments
+[INFO RCX-0439] Coupling Cap extraction FCLayer ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 55% of 52540 wires extracted
+[INFO RCX-0442] 100% of 52540 wires extracted
+[INFO RCX-0045] Extract 12801 nets, 64998 rsegs, 64998 caps, 58405 ccs
+[INFO RCX-0443] 12801 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 1.26e-03 W
+Supply voltage   : 7.70e-01 V
+Worstcase voltage: 7.70e-01 V
+Average voltage  : 7.70e-01 V
+Average IR drop  : 8.65e-05 V
+Worstcase IR drop: 3.09e-04 V
+Percentage drop  : 0.04 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 1.26e-03 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 2.97e-04 V
+Average voltage  : 8.68e-05 V
+Average IR drop  : 8.68e-05 V
+Worstcase IR drop: 2.97e-04 V
+Percentage drop  : 0.04 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                             13475    1598.06
+  Tap cell                                584      17.03
+  Tie cell                                 10       0.44
+  Clock buffer                             45      16.26
+  Timing Repair Buffer                    345      25.38
+  Inverter                               3523     154.10
+  Clock inverter                           12       2.19
+  Sequential cell                         492     143.47
+  Multi-Input combinational cell         6111     792.41
+  Total                                 24597    2749.32
+Report metrics stage 6, finish...
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 1151 um^2 42% utilization.
+[WARNING GUI-0076] Could not find the Qt platform plugin "wayland" in ""
+Elapsed time: 0:10.71[h:]min:sec. CPU time: user 12.75 sys 1.00 (128%). Peak memory: 546788KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                 10            533                  N/A

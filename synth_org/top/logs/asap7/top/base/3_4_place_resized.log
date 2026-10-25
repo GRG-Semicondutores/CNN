@@ -1,0 +1,94 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_3_place_gp.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |     54914
+     1000 |     +0.0% |       0 |       0 |             0 |     53914
+     2000 |     +0.0% |       0 |       0 |             0 |     52914
+     3000 |     +0.0% |       0 |       0 |             0 |     51914
+     4000 |     +0.0% |       0 |       0 |             0 |     50914
+     5000 |     +0.0% |       0 |       0 |             0 |     49914
+     6000 |     +0.0% |       0 |       0 |             0 |     48914
+     7000 |     +0.0% |       0 |       0 |             0 |     47914
+     8000 |     +0.0% |       0 |       0 |             0 |     46914
+     9000 |     +0.0% |       0 |       0 |             0 |     45914
+    10000 |     +0.0% |       0 |       0 |             0 |     44914
+    11000 |     +0.0% |       0 |       0 |             0 |     43914
+    12000 |     +0.0% |       0 |       0 |             0 |     42914
+    13000 |     +0.0% |       0 |       0 |             0 |     41914
+    14000 |     +0.0% |       0 |       0 |             0 |     40914
+    15000 |     +0.0% |       0 |       1 |             1 |     39914
+    16000 |     +0.0% |       0 |       1 |             1 |     38914
+    17000 |     +0.0% |       0 |       1 |             1 |     37914
+    18000 |     +0.0% |       0 |       1 |             1 |     36914
+    19000 |     +0.0% |       0 |       1 |             1 |     35914
+    20000 |     +0.0% |       0 |       1 |             1 |     34914
+    21000 |     +0.0% |       0 |       1 |             1 |     33914
+    22000 |     +0.0% |       0 |       1 |             1 |     32914
+    23000 |     +0.0% |       0 |       1 |             1 |     31914
+    24000 |     +0.0% |       0 |       1 |             1 |     30914
+    25000 |     +0.0% |       0 |       1 |             1 |     29914
+    26000 |     +0.0% |       0 |       1 |             1 |     28914
+    27000 |     +0.0% |       0 |       1 |             1 |     27914
+    28000 |     +0.0% |       0 |       1 |             1 |     26914
+    29000 |     +0.0% |       0 |       1 |             1 |     25914
+    30000 |     +0.0% |       0 |       1 |             1 |     24914
+    31000 |     +0.0% |       0 |       1 |             1 |     23914
+    32000 |     +0.0% |       0 |       1 |             1 |     22914
+    33000 |     +0.0% |       0 |       1 |             1 |     21914
+    34000 |     +0.0% |       0 |       1 |             1 |     20914
+    35000 |     +0.0% |       0 |       1 |             1 |     19914
+    36000 |     +0.0% |       0 |       1 |             1 |     18914
+    37000 |     +0.0% |       0 |       1 |             1 |     17914
+    38000 |     +0.0% |       0 |       1 |             1 |     16914
+    39000 |     +0.0% |       0 |       1 |             1 |     15914
+    40000 |     +0.0% |       0 |       1 |             1 |     14914
+    41000 |     +0.0% |       0 |       1 |             1 |     13914
+    42000 |     +0.0% |       0 |       1 |             1 |     12914
+    43000 |     +0.0% |       0 |       1 |             1 |     11914
+    44000 |     +0.0% |       0 |       1 |             1 |     10914
+    45000 |     +0.0% |       0 |       1 |             1 |      9914
+    46000 |     +0.0% |       0 |       1 |             1 |      8914
+    47000 |     +0.0% |       0 |       3 |             2 |      7914
+    48000 |     +0.0% |       0 |       3 |             2 |      6914
+    49000 |     +0.0% |       0 |       3 |             2 |      5914
+    50000 |     +0.0% |       0 |       3 |             2 |      4914
+    51000 |     +0.0% |       0 |       3 |             2 |      3914
+    52000 |     +0.0% |       0 |       3 |             2 |      2914
+    53000 |     +0.0% |       0 |       3 |             2 |      1914
+    54000 |     +0.0% |       0 |       3 |             2 |       914
+    final |     +0.0% |       0 |       3 |             2 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 1 slew violations.
+[INFO RSZ-0036] Found 1 capacitance violations.
+[INFO RSZ-0038] Inserted 3 buffers in 2 nets.
+[INFO RSZ-0504] Runtime: 4.34s
+Took 5 seconds: repair_design -verbose
+Floating nets: 
+Report metrics stage 3, resizer...
+
+==========================================================================
+resizer report_design_area
+--------------------------------------------------------------------------
+Design area 5279 um^2 40% utilization.
+Instance count before 48763, after 48766
+Pin count before 154383, after 154389
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_4_place_resized.odb
+Elapsed time: 0:17.29[h:]min:sec. CPU time: user 29.35 sys 2.86 (186%). Peak memory: 455020KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb           17            444 3391cafb5a59b5c583ed

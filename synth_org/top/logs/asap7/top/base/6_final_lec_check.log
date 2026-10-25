@@ -1,0 +1,144 @@
+[2026-09-21 21:05:57.191] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-21 21:05:57.191] [miter_logger] [info] Collecting POs for design 0: CNN
+
+[2026-09-21 21:05:57.487] [miter_logger] [info] Collected 4044 PIs for design 0
+
+[2026-09-21 21:05:57.487] [miter_logger] [info] Collected 6721 POs for design 0
+
+[2026-09-21 21:05:57.487] [miter_logger] [info] design 0 PI summary by model/term (4044 total terminals, 14 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN        |  3352 |
+| CNN                  | kernel2   |   288 |
+| CNN                  | kernel1   |   144 |
+| CNN                  | imagem    |   128 |
+| CNN                  | FCWeight1 |    32 |
+| CNN                  | FCWeight2 |    32 |
+| CNN                  | ConvBias1 |    16 |
+| CNN                  | ConvBias2 |    16 |
+| CNN                  | FCBias1   |    16 |
+| CNN                  | FCBias2   |    16 |
+| CNN                  | clk       |     1 |
+| CNN                  | rst       |     1 |
+| CNN                  | start     |     1 |
+| TIELOx1_ASAP7_75t_R  | L         |     1 |
+
+[2026-09-21 21:05:57.488] [miter_logger] [info] design 0 PO summary by model/term (6721 total terminals, 4 unique rows):
+| Model                | Term       | Count |
+|----------------------|------------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK        |  3352 |
+| DFFHQNx1_ASAP7_75t_R | D          |  3352 |
+| CNN                  | result_FC2 |    16 |
+| CNN                  | valid_out4 |     1 |
+
+[2026-09-21 21:05:57.490] [miter_logger] [info] Collecting POs for design 1: CNN
+
+[2026-09-21 21:05:57.556] [miter_logger] [info] size of common inputs: 4043
+[2026-09-21 21:05:57.556] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 21:05:57.556] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 21:05:57.557] [miter_logger] [info] Collected 4101 PIs for design 1
+
+[2026-09-21 21:05:57.557] [miter_logger] [info] Collected 6721 POs for design 1
+
+[2026-09-21 21:05:57.557] [miter_logger] [info] design 1 PI summary by model/term (4101 total terminals, 14 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN        |  3352 |
+| CNN                  | kernel2   |   288 |
+| CNN                  | kernel1   |   144 |
+| CNN                  | imagem    |   128 |
+| TIELOx1_ASAP7_75t_R  | L         |    58 |
+| CNN                  | FCWeight1 |    32 |
+| CNN                  | FCWeight2 |    32 |
+| CNN                  | ConvBias1 |    16 |
+| CNN                  | ConvBias2 |    16 |
+| CNN                  | FCBias1   |    16 |
+| CNN                  | FCBias2   |    16 |
+| CNN                  | clk       |     1 |
+| CNN                  | rst       |     1 |
+| CNN                  | start     |     1 |
+
+[2026-09-21 21:05:57.557] [miter_logger] [info] design 1 PO summary by model/term (6721 total terminals, 4 unique rows):
+| Model                | Term       | Count |
+|----------------------|------------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK        |  3352 |
+| DFFHQNx1_ASAP7_75t_R | D          |  3352 |
+| CNN                  | result_FC2 |    16 |
+| CNN                  | valid_out4 |     1 |
+
+[2026-09-21 21:05:57.558] [miter_logger] [info] normalizeInputs: starting
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff0 input: 102367.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103552.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103551.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103550.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103546.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103543.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103542.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103538.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103533.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103532.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103531.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103530.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103527.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103525.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103524.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103522.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103515.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103509.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103507.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103505.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103503.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103501.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103500.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103499.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103497.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103495.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103496.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103545.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103506.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103549.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103504.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103518.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103548.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103521.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103523.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103535.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103544.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103517.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103541.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103510.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103502.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103514.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103547.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103534.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103520.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103516.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103540.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103512.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103519.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103539.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103526.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103508.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103536.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103511.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103498.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103537.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103529.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103528.222.0.
+[2026-09-21 21:05:57.560] [miter_logger] [info] diff1 input: 103513.222.0.
+[2026-09-21 21:05:57.561] [miter_logger] [info] size of common inputs: 4043
+[2026-09-21 21:05:57.561] [miter_logger] [info] size of diff0 inputs: 1
+[2026-09-21 21:05:57.561] [miter_logger] [info] size of diff1 inputs: 58
+[2026-09-21 21:05:57.561] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-21 21:05:57.566] [miter_logger] [info] size of common outputs: 6721
+[2026-09-21 21:05:57.566] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-21 21:05:57.566] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-21 21:05:57.567] [miter_logger] [info] size of PIs in circuit 0: 4044
+[2026-09-21 21:05:57.567] [miter_logger] [info] size of PIs in circuit 1: 4101
+[2026-09-21 21:05:57.567] [miter_logger] [info] size of POs in circuit 0: 6721
+[2026-09-21 21:05:57.567] [miter_logger] [info] size of POs in circuit 1: 6721
+[2026-09-21 21:05:58.138] [miter_logger] [info] Building miter expression
+[2026-09-21 21:05:58.139] [miter_logger] [info] Finished building miter expression
+[2026-09-21 21:05:58.139] [miter_logger] [info] Starting solver
+[2026-09-21 21:05:58.139] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-21 21:05:58.139] [miter_logger] [info] Circuits are IDENTICAL

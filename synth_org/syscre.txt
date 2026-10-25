@@ -1,0 +1,153 @@
+mkdir -p /home/matheus-grossi/Projects/CNN/CNN/scripts/synth/convolution
+
+cd /home/matheus-grossi/Projects/CNN/CNN/scripts/synth/convolution
+
+cat > synth.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Síntese"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    synth
+EOF
+
+cat > floorplan.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Floorplan"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    floorplan
+EOF
+
+cat > place.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Placement"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    place
+EOF
+
+cat > cts.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - CTS"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    cts
+EOF
+
+cat > route.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Routing"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    route
+EOF
+
+cat > finish.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Finish / GDS"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk" \
+    finish
+
+GDS="$PROJECT_DIR/results/asap7/WTM/base/6_final.gds"
+
+echo
+if [ -f "$GDS" ]; then
+    echo "GDS gerado:"
+    ls -lh "$GDS"
+else
+    echo "Aviso: GDS não encontrado em:"
+    echo "$GDS"
+fi
+EOF
+
+cat > full_flow.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_DIR="/home/matheus-grossi/Projects/CNN/CNN/synth_org/convolution"
+ORFS="${ORFS:-$HOME/OpenROAD/OpenROAD-flow-scripts}"
+
+echo "========================================"
+echo " ASAP7 - Fluxo completo RTL -> GDS"
+echo " Projeto: $PROJECT_DIR"
+echo "========================================"
+
+make \
+    --file="$ORFS/flow/Makefile" \
+    DESIGN_CONFIG="$PROJECT_DIR/config.mk"
+
+GDS="$PROJECT_DIR/results/asap7/WTM/base/6_final.gds"
+
+echo
+if [ -f "$GDS" ]; then
+    echo "Fluxo concluído."
+    echo "GDS gerado:"
+    ls -lh "$GDS"
+else
+    echo "Fluxo terminou, mas o GDS não foi encontrado em:"
+    echo "$GDS"
+fi
+EOF
+
+chmod +x *.sh

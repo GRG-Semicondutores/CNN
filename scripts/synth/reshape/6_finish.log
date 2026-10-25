@@ -1,0 +1,141 @@
+============================================================
+ 6 - Finish / GDS
+============================================================
+Design:  reshape
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_1_fill density_fill
+Running density_fill.tcl, stage 6_1_fill
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/5_route.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/5_route.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+exec cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/5_route.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_fill.odb
+Elapsed time: 0:01.17[h:]min:sec. CPU time: user 1.08 sys 0.09 (99%). Peak memory: 196092KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_1_fill                  .odb            1            191 96a4421418469a858aa6
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/5_route.sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_fill.sdc
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 6_report final_report
+Running final_report.tcl, stage 6_report
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_fill.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_fill.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[WARNING STA-0450] virtual clock virtual_clk can not be propagated.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_final.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_final.sdc
+Deleted 0 routing obstructions
+Global output passed lec test
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation Flatten (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 115 rc segments
+[INFO RCX-0439] Coupling Cap extraction Flatten ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 56% of 308 wires extracted
+[INFO RCX-0442] 100% of 308 wires extracted
+[INFO RCX-0045] Extract 80 nets, 195 rsegs, 195 caps, 202 ccs
+[INFO RCX-0443] 80 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 0.00e+00 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 0.00e+00 V
+Average voltage  : 0.00e+00 V
+Average IR drop  : 0.00e+00 V
+Worstcase IR drop: 0.00e+00 V
+Percentage drop  : 0.00 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 0.00e+00 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 0.00e+00 V
+Average voltage  : 0.00e+00 V
+Average IR drop  : 0.00e+00 V
+Worstcase IR drop: 0.00e+00 V
+Percentage drop  : 0.00 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                                65      12.32
+  Tap cell                                 26       0.76
+  Total                                    91      13.08
+Report metrics stage 6, finish...
+No registers in design
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+[WARNING GUI-0076] Could not find the Qt platform plugin "wayland" in ""
+[WARNING GUI-0066] Heat map "IR Drop" has not been populated with data.
+Elapsed time: 0:02.72[h:]min:sec. CPU time: user 2.50 sys 0.25 (101%). Peak memory: 324996KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                  2            317                  N/A
+cp /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7_tech_1x_201209.lef /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base/klayout_tech.lef
+/usr/bin/python3 /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/util/generate_klayout_tech.py \
+	--template /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/KLayout/asap7.lyt \
+	--output /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base/klayout.lyt \
+	--lef-files /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base/klayout_tech.lef /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7sc7p5t_28_R_1x_220121a.lef   \
+	--map-files 
+/usr/bin/python3 /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/run_command.py --log /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/logs/asap7/reshape/base/6_1_merge.log --tee -- \
+        /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/klayout.sh -zz -rd design_name=Flatten \
+        -rd in_def=/home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_final.def \
+        -rd in_files="/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/gds/asap7sc7p5t_28_R_220121a.gds  " \
+        -rd seal_file="" \
+        -rd out_file=/home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_merged.gds \
+        -rd tech_file=/home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/objects/asap7/reshape/base/klayout.lyt \
+        -rd layer_map= \
+        -r /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/util/def2stream.py
+KLayout 0.30.0
+Warning: DEF UNITS does not match reader DBU (DEF UNITS is 1000 and corresponds to a DBU of 0.001, but reader DBU is set to 0.00025) (line=5, cell=, file=6_final.def)
+[INFO] Reporting cells prior to loading DEF ...
+	/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/gds/asap7sc7p5t_28_R_220121a.gds
+[INFO] GDS_ALLOW_EMPTY=fakeram.*
+[INFO] All LEF cells have matching GDS/OAS cells
+[INFO] No orphan cells in the final layout
+Elapsed time: 0:01.31[h:]min:sec. CPU time: user 1.14 sys 0.17 (99%). Peak memory: 396616KB.
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_1_merged.gds /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/6_final.gds
+No elapsed time found in /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/logs/asap7/reshape/base/6_final_lec_check.log
+/home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/logs/asap7/reshape/base
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil          0             87 0b3db2dd0a2fd3d1c263
+1_2_yosys                 .v              0            147 423c310d8b2b37c97d80
+1_2_yosys                 .sdc                             e5688bd5db141cdde086
+1_synth                   .odb            1            194 3d2bd02944e86bcebaf4
+1_synth                   .sdc                             47826fcce7e9dd2db460
+2_1_floorplan             .odb            1            213 7609d5aeed1009fb82c3
+2_1_floorplan             .sdc                             47826fcce7e9dd2db460
+2_2_floorplan_macro       .odb            1            191 7609d5aeed1009fb82c3
+2_3_floorplan_tapcell     .odb            1            192 52cfebc0e27b03228068
+2_4_floorplan_pdn         .odb            1            193 343d4c203b59ee45449c
+3_1_place_gp_skip_io      .odb            1            192 f854647be289225156d5
+3_2_place_iop             .odb            1            191 a0178f080ed43e4b9466
+3_3_place_gp              .odb            1            194 7efd8fd7e765c444f05e
+3_4_place_resized         .odb            1            211 7efd8fd7e765c444f05e
+3_5_place_dp              .odb            1            195 7efd8fd7e765c444f05e
+4_1_cts                   .odb            2            221 7efd8fd7e765c444f05e
+5_1_grt                   .odb            1            325 081f27271569e4975261
+5_1_grt                   .sdc                             47826fcce7e9dd2db460
+5_2_route                 .odb            1            922 edf2f2d3c95def4119f6
+5_3_fillcell              .odb            1            193 96a4421418469a858aa6
+6_1_fill                  .odb            1            191 96a4421418469a858aa6
+6_1_fill                  .sdc                             47826fcce7e9dd2db460
+6_1_merge                                 1            387                  N/A
+6_report                                  2            317                  N/A
+Total                                    19            922                     

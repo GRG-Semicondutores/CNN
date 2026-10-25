@@ -1,0 +1,65 @@
+OpenROAD 26Q3-2056-g41a28926b9 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_2_place_iop.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO RSZ-0026] Removed 80 buffers.
+Perform port buffering...
+[INFO RSZ-0027] Inserted 0 BUFx2_ASAP7_75t_R input buffers.
+[INFO RSZ-0028] Inserted 0 BUFx2_ASAP7_75t_R output buffers.
+global_placement -density 0.6 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          0.000 um^2
+[INFO GPL-0037] Total instances area:            0.758 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:                26
+[INFO GPL-0007] Movable instances:                   0
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                     80
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          0.000 um^2
+[INFO GPL-0019] Utilization:                     0.000 %
+[INFO GPL-0020] Standard cells area:             0.000 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[WARNING GPL-0123] No placeable instances in the top-level region. Removing it.
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 0	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00000012 HPWL: 92784
+[WARNING GPL-0136] No placeable instances - skipping placement.
+estimate_parasitics -placement
+Report metrics stage 3, global place...
+
+==========================================================================
+global place report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_3_place_gp.odb
+Elapsed time: 0:01.22[h:]min:sec. CPU time: user 1.14 sys 0.08 (100%). Peak memory: 199492KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_3_place_gp              .odb            1            194 7efd8fd7e765c444f05e

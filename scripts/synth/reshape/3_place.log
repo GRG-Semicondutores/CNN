@@ -1,0 +1,304 @@
+============================================================
+ 3 - Placement
+============================================================
+Design:  reshape
+Projeto: /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape
+Config:  /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/config.mk
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_1_place_gp_skip_io global_place_skip_io
+Running global_place_skip_io.tcl, stage 3_1_place_gp_skip_io
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.6 -pad_left 0 -pad_right 0
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          5.832 um^2
+[INFO GPL-0037] Total instances area:            6.590 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:               106
+[INFO GPL-0007] Movable instances:                  80
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                    160
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          5.832 um^2
+[INFO GPL-0019] Utilization:                    47.337 %
+[INFO GPL-0020] Standard cells area:             5.832 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 80	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.6000
+[INFO GPL-0024] Movable insts average area:      0.073 um^2
+[INFO GPL-0025] Ideal bin area:                  0.121 um^2
+[INFO GPL-0026] Ideal bin count:                   107
+[INFO GPL-0027] Total bin area:                 13.078 um^2
+[INFO GPL-0028] Bin count (X, Y):           8 ,      8
+[INFO GPL-0029] Bin size (W * H):       0.466 *  0.439 um
+[INFO GPL-0030] Number of bins:                     64
+[INFO GPL-0084] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9066 |  0.000000e+00 |   +0.00% |  8.00e-05 |      
+        5 |   0.0981 |  0.000000e+00 |          |  1.06e-04 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 5
+[INFO GPL-1002] Placed Cell Area                5.8320
+[INFO GPL-1003] Available Free Area            12.3201
+[INFO GPL-1004] Minimum Feasible Density        0.4800 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.5260
+[INFO GPL-1008]     - For 80% usage of free space: 0.5917
+[INFO GPL-1009]     - For 50% usage of free space: 0.9467
+[INFO GPL-1014] Final placement area: 5.83 (+0.00%)
+[INFO GPL-1018] Final HPWL (um): 0.00
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:01.16[h:]min:sec. CPU time: user 1.08 sys 0.10 (101%). Peak memory: 197400KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb            1            192 f854647be289225156d5
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_2_place_iop io_placement
+Running io_placement.tcl, stage 3_2_place_iop
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_1_place_gp_skip_io.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+place_pins -hor_layers M4 -ver_layers M5
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 264
+[INFO PPL-0002] Number of I/O             160
+[INFO PPL-0003] Number of I/O w/sink      160
+[INFO PPL-0004] Number of I/O w/o sink    0
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 502.99 um.
+Design area 7 um^2 50% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_2_place_iop.odb
+Elapsed time: 0:01.21[h:]min:sec. CPU time: user 1.12 sys 0.09 (99%). Peak memory: 196364KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_2_place_iop             .odb            1            191 a0178f080ed43e4b9466
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_3_place_gp global_place
+Running global_place.tcl, stage 3_3_place_gp
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_2_place_iop.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO RSZ-0026] Removed 80 buffers.
+Perform port buffering...
+[INFO RSZ-0027] Inserted 0 BUFx2_ASAP7_75t_R input buffers.
+[INFO RSZ-0028] Inserted 0 BUFx2_ASAP7_75t_R output buffers.
+global_placement -density 0.6 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+[INFO GPL-0190] Using 6 of 12 threads for placement: one per core, SMT siblings idle.
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0016] Core area:                      13.078 um^2
+[INFO GPL-0036] Movable instances area:          0.000 um^2
+[INFO GPL-0037] Total instances area:            0.758 um^2
+[INFO GPL-0035] Pin density area adjust:         0.000 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:                26
+[INFO GPL-0007] Movable instances:                   0
+[INFO GPL-0008] Fixed instances:                    26
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                     80
+[INFO GPL-0011] Number of pins:                    160
+[INFO GPL-0012] Die BBox:       (  0.000  0.000 ) (  7.818  7.818 ) um
+[INFO GPL-0013] Placement BBox: (  2.052  2.160 ) (  5.778  5.670 ) um
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                    13.078 um^2
+[INFO GPL-0017] Fixed instances area:            0.758 um^2
+[INFO GPL-0018] Movable instances area:          0.000 um^2
+[INFO GPL-0019] Utilization:                     0.000 %
+[INFO GPL-0020] Standard cells area:             0.000 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[WARNING GPL-0123] No placeable instances in the top-level region. Removing it.
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 0	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00000012 HPWL: 92784
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00000012 HPWL: 92784
+[WARNING GPL-0136] No placeable instances - skipping placement.
+estimate_parasitics -placement
+Report metrics stage 3, global place...
+
+==========================================================================
+global place report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_3_place_gp.odb
+Elapsed time: 0:01.22[h:]min:sec. CPU time: user 1.14 sys 0.08 (100%). Peak memory: 199492KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_3_place_gp              .odb            1            194 7efd8fd7e765c444f05e
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_4_place_resized resize
+Running resize.tcl, stage 3_4_place_resized
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_3_place_gp.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |        80
+       10 |     +0.0% |       0 |       0 |             0 |        70
+       20 |     +0.0% |       0 |       0 |             0 |        60
+       30 |     +0.0% |       0 |       0 |             0 |        50
+       40 |     +0.0% |       0 |       0 |             0 |        40
+       50 |     +0.0% |       0 |       0 |             0 |        30
+       60 |     +0.0% |       0 |       0 |             0 |        20
+       70 |     +0.0% |       0 |       0 |             0 |        10
+       80 |     +0.0% |       0 |       0 |             0 |         0
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.01s
+Floating nets: 
+Report metrics stage 3, resizer...
+No registers in design
+
+==========================================================================
+resizer report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+Instance count before 26, after 26
+Pin count before 0, after 0
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_4_place_resized.odb
+Elapsed time: 0:01.30[h:]min:sec. CPU time: user 1.14 sys 0.16 (100%). Peak memory: 216136KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb            1            211 7efd8fd7e765c444f05e
+/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/flow.sh 3_5_place_dp detail_place
+Running detail_place.tcl, stage 3_5_place_dp
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+read_liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_4_place_resized.odb
+read_sdc /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/2_floorplan.sdc
+source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_placement
+[INFO DPL-0006] Core area: 13.08 um^2
+[INFO DPL-0007] Movable instances area: 0.00 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.76 um^2
+[INFO DPL-0009] Utilization: 5.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 26 cells
+[INFO DPL-0500] Runtime: 0.00s
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL              84.1 u
+legalized HPWL             84.1 u
+delta HPWL                    0 %
+
+improve_placement -max_displacement "5 1"
+Detailed placement improvement.
+[INFO DPL-0401] Setting random seed to 1.
+[INFO DPL-0402] Setting maximum displacement 5 1 to 1350 270 units.
+[INFO DPL-0320] Collected 186 fixed cells.
+[INFO DPL-0318] Collected 0 single height cells.
+[INFO DPL-0321] Collected 0 wide cells.
+[INFO DPL-0322] Image (2052, 2160) - (5778, 5670)
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+[INFO DPL-0303] Running algorithm for independent set matching.
+[INFO DPL-0300] Set matching objective is wirelength.
+[INFO DPL-0202] No movable cells found
+[INFO DPL-0303] Running algorithm for global swaps.
+[INFO DPL-0306] Pass   1 of global swaps; hpwl is 8.420400e+04.
+[INFO DPL-0307] End of global swaps; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for vertical swaps.
+[INFO DPL-0308] Pass   1 of vertical swaps; hpwl is 8.420400e+04.
+[INFO DPL-0309] End of vertical swaps; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for reordering.
+[INFO DPL-0304] Pass   1 of reordering; objective is 8.420400e+04.
+[INFO DPL-0305] End of reordering; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0303] Running algorithm for random improvement.
+[INFO DPL-0324] Random improver is using random generator.
+[INFO DPL-0325] Random improver is using hpwl objective.
+[INFO DPL-0326] Random improver cost string is (a).
+[INFO DPL-0203] No movable cells found
+[INFO DPL-0327] Pass   1 of random improver; improvement in cost is 0.00 percent.
+[INFO DPL-0328] End of random improver; improvement is 0.000000 percent.
+[INFO DPL-0380] Cell flipping.
+[INFO DPL-0382] Changed 0 cell orientations for row compatibility.
+[INFO DPL-0383] Performed 0 cell flips.
+[INFO DPL-0384] End of flipping; objective is 8.420400e+04, improvement is 0.00 percent.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+Detailed Improvement Results
+------------------------------------------
+Original HPWL               84.1 u (      44.2,       39.9)
+Final HPWL                  84.1 u (      44.2,       39.9)
+Delta HPWL                   0.0 % (       0.0,        0.0)
+
+optimize_mirroring
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+Report metrics stage 3, detailed place...
+No registers in design
+
+==========================================================================
+detailed place report_design_area
+--------------------------------------------------------------------------
+Design area 1 um^2 6% utilization.
+write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_5_place_dp.odb
+write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_place.sdc
+Elapsed time: 0:01.17[h:]min:sec. CPU time: user 1.09 sys 0.09 (100%). Peak memory: 200384KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_5_place_dp              .odb            1            195 7efd8fd7e765c444f05e
+cp /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_5_place_dp.odb /home/matheus-grossi/Projects/CNN/CNN/synth_org/reshape/results/asap7/reshape/base/3_place.odb

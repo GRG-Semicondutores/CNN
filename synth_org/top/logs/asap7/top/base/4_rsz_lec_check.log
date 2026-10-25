@@ -1,0 +1,85 @@
+[2026-09-21 20:54:27.584] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-21 20:54:27.584] [miter_logger] [info] Collecting POs for design 0: CNN
+
+[2026-09-21 20:54:27.654] [miter_logger] [info] Collected 4101 PIs for design 0
+
+[2026-09-21 20:54:27.654] [miter_logger] [info] Collected 6721 POs for design 0
+
+[2026-09-21 20:54:27.654] [miter_logger] [info] design 0 PI summary by model/term (4101 total terminals, 14 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN        |  3352 |
+| CNN                  | kernel2   |   288 |
+| CNN                  | kernel1   |   144 |
+| CNN                  | imagem    |   128 |
+| TIELOx1_ASAP7_75t_R  | L         |    58 |
+| CNN                  | FCWeight1 |    32 |
+| CNN                  | FCWeight2 |    32 |
+| CNN                  | ConvBias1 |    16 |
+| CNN                  | ConvBias2 |    16 |
+| CNN                  | FCBias1   |    16 |
+| CNN                  | FCBias2   |    16 |
+| CNN                  | clk       |     1 |
+| CNN                  | rst       |     1 |
+| CNN                  | start     |     1 |
+
+[2026-09-21 20:54:27.655] [miter_logger] [info] design 0 PO summary by model/term (6721 total terminals, 4 unique rows):
+| Model                | Term       | Count |
+|----------------------|------------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK        |  3352 |
+| DFFHQNx1_ASAP7_75t_R | D          |  3352 |
+| CNN                  | result_FC2 |    16 |
+| CNN                  | valid_out4 |     1 |
+
+[2026-09-21 20:54:27.656] [miter_logger] [info] Collecting POs for design 1: CNN
+
+[2026-09-21 20:54:27.722] [miter_logger] [info] size of common inputs: 4043
+[2026-09-21 20:54:27.722] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 20:54:27.722] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 20:54:27.723] [miter_logger] [info] Collected 4101 PIs for design 1
+
+[2026-09-21 20:54:27.723] [miter_logger] [info] Collected 6721 POs for design 1
+
+[2026-09-21 20:54:27.723] [miter_logger] [info] design 1 PI summary by model/term (4101 total terminals, 14 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN        |  3352 |
+| CNN                  | kernel2   |   288 |
+| CNN                  | kernel1   |   144 |
+| CNN                  | imagem    |   128 |
+| TIELOx1_ASAP7_75t_R  | L         |    58 |
+| CNN                  | FCWeight1 |    32 |
+| CNN                  | FCWeight2 |    32 |
+| CNN                  | ConvBias1 |    16 |
+| CNN                  | ConvBias2 |    16 |
+| CNN                  | FCBias1   |    16 |
+| CNN                  | FCBias2   |    16 |
+| CNN                  | clk       |     1 |
+| CNN                  | rst       |     1 |
+| CNN                  | start     |     1 |
+
+[2026-09-21 20:54:27.724] [miter_logger] [info] design 1 PO summary by model/term (6721 total terminals, 4 unique rows):
+| Model                | Term       | Count |
+|----------------------|------------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK        |  3352 |
+| DFFHQNx1_ASAP7_75t_R | D          |  3352 |
+| CNN                  | result_FC2 |    16 |
+| CNN                  | valid_out4 |     1 |
+
+[2026-09-21 20:54:27.724] [miter_logger] [info] normalizeInputs: starting
+[2026-09-21 20:54:27.727] [miter_logger] [info] size of common inputs: 4101
+[2026-09-21 20:54:27.727] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 20:54:27.727] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 20:54:27.728] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-21 20:54:27.732] [miter_logger] [info] size of common outputs: 6721
+[2026-09-21 20:54:27.732] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-21 20:54:27.732] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-21 20:54:27.733] [miter_logger] [info] size of PIs in circuit 0: 4101
+[2026-09-21 20:54:27.733] [miter_logger] [info] size of PIs in circuit 1: 4101
+[2026-09-21 20:54:27.733] [miter_logger] [info] size of POs in circuit 0: 6721
+[2026-09-21 20:54:27.733] [miter_logger] [info] size of POs in circuit 1: 6721
+[2026-09-21 20:54:28.112] [miter_logger] [info] Building miter expression
+[2026-09-21 20:54:28.112] [miter_logger] [info] Finished building miter expression
+[2026-09-21 20:54:28.115] [miter_logger] [info] Starting solver
+[2026-09-21 20:54:28.115] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-21 20:54:28.115] [miter_logger] [info] Circuits are IDENTICAL

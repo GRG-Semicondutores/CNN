@@ -1,0 +1,84 @@
+[2026-09-21 16:53:49.564] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-21 16:53:49.564] [miter_logger] [info] Collecting POs for design 0: FCLayer
+
+[2026-09-21 16:53:49.589] [miter_logger] [info] Collected 752 PIs for design 0
+
+[2026-09-21 16:53:49.589] [miter_logger] [info] Collected 1065 POs for design 0
+
+[2026-09-21 16:53:49.589] [miter_logger] [info] design 0 PI summary by model/term (752 total terminals, 8 unique rows):
+| Model                | Term     | Count |
+|----------------------|----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN       |   492 |
+| FCLayer              | w        |   160 |
+| FCLayer              | b        |    80 |
+| FCLayer              | x        |    16 |
+| FCLayer              | clk      |     1 |
+| FCLayer              | rst      |     1 |
+| FCLayer              | valid_in |     1 |
+| TIELOx1_ASAP7_75t_R  | L        |     1 |
+
+[2026-09-21 16:53:49.589] [miter_logger] [info] design 0 PO summary by model/term (1065 total terminals, 4 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       |   492 |
+| DFFHQNx1_ASAP7_75t_R | D         |   492 |
+| FCLayer              | z         |    80 |
+| FCLayer              | valid_out |     1 |
+
+[2026-09-21 16:53:49.589] [miter_logger] [info] Collecting POs for design 1: FCLayer
+
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of common inputs: 751
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 16:53:49.604] [miter_logger] [info] Collected 761 PIs for design 1
+
+[2026-09-21 16:53:49.604] [miter_logger] [info] Collected 1065 POs for design 1
+
+[2026-09-21 16:53:49.604] [miter_logger] [info] design 1 PI summary by model/term (761 total terminals, 8 unique rows):
+| Model                | Term     | Count |
+|----------------------|----------|-------|
+| DFFHQNx1_ASAP7_75t_R | QN       |   492 |
+| FCLayer              | w        |   160 |
+| FCLayer              | b        |    80 |
+| FCLayer              | x        |    16 |
+| TIELOx1_ASAP7_75t_R  | L        |    10 |
+| FCLayer              | clk      |     1 |
+| FCLayer              | rst      |     1 |
+| FCLayer              | valid_in |     1 |
+
+[2026-09-21 16:53:49.604] [miter_logger] [info] design 1 PO summary by model/term (1065 total terminals, 4 unique rows):
+| Model                | Term      | Count |
+|----------------------|-----------|-------|
+| DFFHQNx1_ASAP7_75t_R | CLK       |   492 |
+| DFFHQNx1_ASAP7_75t_R | D         |   492 |
+| FCLayer              | z         |    80 |
+| FCLayer              | valid_out |     1 |
+
+[2026-09-21 16:53:49.604] [miter_logger] [info] normalizeInputs: starting
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff0 input: 22367.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23250.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23252.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23247.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23246.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23249.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23251.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23253.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23254.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23255.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] diff1 input: 23248.222.0.
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of common inputs: 751
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of diff0 inputs: 1
+[2026-09-21 16:53:49.604] [miter_logger] [info] size of diff1 inputs: 10
+[2026-09-21 16:53:49.605] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of common outputs: 1065
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of PIs in circuit 0: 752
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of PIs in circuit 1: 761
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of POs in circuit 0: 1065
+[2026-09-21 16:53:49.605] [miter_logger] [info] size of POs in circuit 1: 1065
+[2026-09-21 16:53:49.719] [miter_logger] [info] Building miter expression
+[2026-09-21 16:53:49.719] [miter_logger] [info] Finished building miter expression
+[2026-09-21 16:53:49.719] [miter_logger] [info] Starting solver
+[2026-09-21 16:53:49.719] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-21 16:53:49.719] [miter_logger] [info] Circuits are IDENTICAL

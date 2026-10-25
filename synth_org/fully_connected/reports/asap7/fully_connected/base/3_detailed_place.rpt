@@ -1,0 +1,422 @@
+
+==========================================================================
+detailed place report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
+==========================================================================
+detailed place report_wns
+--------------------------------------------------------------------------
+wns max 0.00
+
+==========================================================================
+detailed place report_worst_slack
+--------------------------------------------------------------------------
+worst slack max 5442.30
+
+==========================================================================
+detailed place report_clock_min_period
+--------------------------------------------------------------------------
+core_clk period_min = 4557.70 fmax = 219.41
+
+==========================================================================
+detailed place report_checks -path_delay min
+--------------------------------------------------------------------------
+Startpoint: gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock core_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                  0.00    0.00    0.00 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+     1    0.84   13.10   32.73   32.73 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_/QN (DFFHQNx1_ASAP7_75t_R)
+                                         _00151_ (net)
+                 13.10    0.03   32.76 ^ _19505_/A (NOR2x1_ASAP7_75t_R)
+     1    0.63    5.80    8.93   41.70 v _19505_/Y (NOR2x1_ASAP7_75t_R)
+                                         _09083_ (net)
+                  5.80    0.02   41.72 v gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_/D (DFFHQNx1_ASAP7_75t_R)
+                                 41.72   data arrival time
+
+                  0.00    0.00    0.00   clock core_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                                  0.00 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+                          8.67    8.67   library hold time
+                                  8.67   data required time
+-----------------------------------------------------------------------------
+                                  8.67   data required time
+                                -41.72   data arrival time
+-----------------------------------------------------------------------------
+                                 33.05   slack (MET)
+
+
+
+==========================================================================
+detailed place report_checks -path_delay max
+--------------------------------------------------------------------------
+Startpoint: b[15] (input port clocked by core_clk)
+Endpoint: z[9] (output port clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock core_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                       2000.00 2000.00 ^ input external delay
+     1    1.24    0.00    0.00 2000.00 ^ b[15] (in)
+                                         b[15] (net)
+                  0.26    0.08 2000.08 ^ input17/A (BUFx2_ASAP7_75t_R)
+    10   12.99   43.52   26.80 2026.89 ^ input17/Y (BUFx2_ASAP7_75t_R)
+                                         net16 (net)
+                 43.61    1.10 2027.99 ^ _21276_/A (HAxp5_ASAP7_75t_R)
+    10    9.73  166.34  127.17 2155.16 v _21276_/SN (HAxp5_ASAP7_75t_R)
+                                         _08088_ (net)
+                166.34    0.24 2155.40 v _14928_/A (OR3x1_ASAP7_75t_R)
+     4    2.96   22.15   51.53 2206.92 v _14928_/Y (OR3x1_ASAP7_75t_R)
+                                         _10053_ (net)
+                 22.15    0.12 2207.04 v _14929_/C (OR3x1_ASAP7_75t_R)
+     2    1.87   17.31   26.42 2233.46 v _14929_/Y (OR3x1_ASAP7_75t_R)
+                                         _10054_ (net)
+                 17.32    0.08 2233.54 v _14937_/A2 (OAI21x1_ASAP7_75t_R)
+     1    1.17   14.93   11.43 2244.97 ^ _14937_/Y (OAI21x1_ASAP7_75t_R)
+                                         _10062_ (net)
+                 14.93    0.06 2245.03 ^ _14945_/A1 (AO211x2_ASAP7_75t_R)
+    11    9.05   33.65   34.49 2279.52 ^ _14945_/Y (AO211x2_ASAP7_75t_R)
+                                         _10070_ (net)
+                 33.99    1.89 2281.41 ^ _14957_/B (AND2x2_ASAP7_75t_R)
+     1    1.17    8.16   20.66 2302.06 ^ _14957_/Y (AND2x2_ASAP7_75t_R)
+                                         gen_neurons[8].neuron.activationFunction.out[0] (net)
+                  8.16    0.04 2302.11 ^ _21182_/A (HAxp5_ASAP7_75t_R)
+     3    3.06   35.81   18.96 2321.07 v _21182_/CON (HAxp5_ASAP7_75t_R)
+                                         _07855_ (net)
+                 35.81    0.09 2321.16 v _19148_/A (NOR2x1_ASAP7_75t_R)
+     3    3.09   25.17   19.53 2340.69 ^ _19148_/Y (NOR2x1_ASAP7_75t_R)
+                                         _11630_ (net)
+                 25.18    0.11 2340.80 ^ _19149_/B (NAND2x1_ASAP7_75t_R)
+     1    0.71    9.98    7.88 2348.68 v _19149_/Y (NAND2x1_ASAP7_75t_R)
+                                         _11631_ (net)
+                  9.98    0.03 2348.71 v _19150_/D (OR4x1_ASAP7_75t_R)
+     4    4.14   28.04   37.12 2385.83 v _19150_/Y (OR4x1_ASAP7_75t_R)
+                                         _11632_ (net)
+                 28.05    0.34 2386.17 v _19164_/C (OR5x1_ASAP7_75t_R)
+     3    2.61   21.96   41.12 2427.30 v _19164_/Y (OR5x1_ASAP7_75t_R)
+                                         _11646_ (net)
+                 21.97    0.14 2427.44 v _19187_/B (OR3x1_ASAP7_75t_R)
+     1    0.57    7.81   22.30 2449.73 v _19187_/Y (OR3x1_ASAP7_75t_R)
+                                         _11669_ (net)
+                  7.81    0.02 2449.76 v _19189_/B (OA211x2_ASAP7_75t_R)
+     1    0.86    9.59   25.29 2475.05 v _19189_/Y (OA211x2_ASAP7_75t_R)
+                                         _11671_ (net)
+                  9.59    0.04 2475.09 v _19221_/A (OR4x1_ASAP7_75t_R)
+     7    5.34   34.10   36.70 2511.79 v _19221_/Y (OR4x1_ASAP7_75t_R)
+                                         _11703_ (net)
+                 34.13    0.62 2512.41 v _19243_/B (AO21x1_ASAP7_75t_R)
+     1    0.78    7.91   20.65 2533.06 v _19243_/Y (AO21x1_ASAP7_75t_R)
+                                         _11720_ (net)
+                  7.91    0.04 2533.10 v _19244_/B (OA21x2_ASAP7_75t_R)
+     1    0.62    6.56   12.26 2545.36 v _19244_/Y (OA21x2_ASAP7_75t_R)
+                                         net338 (net)
+                  6.56    0.02 2545.38 v output339/A (BUFx2_ASAP7_75t_R)
+     1    0.40    4.47   12.30 2557.68 v output339/Y (BUFx2_ASAP7_75t_R)
+                                         z[9] (net)
+                  4.47    0.02 2557.70 v z[9] (out)
+                               2557.70   data arrival time
+
+                  0.00 10000.00 10000.00   clock core_clk (rise edge)
+                          0.00 10000.00   clock network delay (ideal)
+                          0.00 10000.00   clock reconvergence pessimism
+                       -2000.00 8000.00   output external delay
+                               8000.00   data required time
+-----------------------------------------------------------------------------
+                               8000.00   data required time
+                               -2557.70   data arrival time
+-----------------------------------------------------------------------------
+                               5442.30   slack (MET)
+
+
+
+==========================================================================
+detailed place report_checks -unconstrained
+--------------------------------------------------------------------------
+Startpoint: b[15] (input port clocked by core_clk)
+Endpoint: z[9] (output port clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock core_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                       2000.00 2000.00 ^ input external delay
+     1    1.24    0.00    0.00 2000.00 ^ b[15] (in)
+                                         b[15] (net)
+                  0.26    0.08 2000.08 ^ input17/A (BUFx2_ASAP7_75t_R)
+    10   12.99   43.52   26.80 2026.89 ^ input17/Y (BUFx2_ASAP7_75t_R)
+                                         net16 (net)
+                 43.61    1.10 2027.99 ^ _21276_/A (HAxp5_ASAP7_75t_R)
+    10    9.73  166.34  127.17 2155.16 v _21276_/SN (HAxp5_ASAP7_75t_R)
+                                         _08088_ (net)
+                166.34    0.24 2155.40 v _14928_/A (OR3x1_ASAP7_75t_R)
+     4    2.96   22.15   51.53 2206.92 v _14928_/Y (OR3x1_ASAP7_75t_R)
+                                         _10053_ (net)
+                 22.15    0.12 2207.04 v _14929_/C (OR3x1_ASAP7_75t_R)
+     2    1.87   17.31   26.42 2233.46 v _14929_/Y (OR3x1_ASAP7_75t_R)
+                                         _10054_ (net)
+                 17.32    0.08 2233.54 v _14937_/A2 (OAI21x1_ASAP7_75t_R)
+     1    1.17   14.93   11.43 2244.97 ^ _14937_/Y (OAI21x1_ASAP7_75t_R)
+                                         _10062_ (net)
+                 14.93    0.06 2245.03 ^ _14945_/A1 (AO211x2_ASAP7_75t_R)
+    11    9.05   33.65   34.49 2279.52 ^ _14945_/Y (AO211x2_ASAP7_75t_R)
+                                         _10070_ (net)
+                 33.99    1.89 2281.41 ^ _14957_/B (AND2x2_ASAP7_75t_R)
+     1    1.17    8.16   20.66 2302.06 ^ _14957_/Y (AND2x2_ASAP7_75t_R)
+                                         gen_neurons[8].neuron.activationFunction.out[0] (net)
+                  8.16    0.04 2302.11 ^ _21182_/A (HAxp5_ASAP7_75t_R)
+     3    3.06   35.81   18.96 2321.07 v _21182_/CON (HAxp5_ASAP7_75t_R)
+                                         _07855_ (net)
+                 35.81    0.09 2321.16 v _19148_/A (NOR2x1_ASAP7_75t_R)
+     3    3.09   25.17   19.53 2340.69 ^ _19148_/Y (NOR2x1_ASAP7_75t_R)
+                                         _11630_ (net)
+                 25.18    0.11 2340.80 ^ _19149_/B (NAND2x1_ASAP7_75t_R)
+     1    0.71    9.98    7.88 2348.68 v _19149_/Y (NAND2x1_ASAP7_75t_R)
+                                         _11631_ (net)
+                  9.98    0.03 2348.71 v _19150_/D (OR4x1_ASAP7_75t_R)
+     4    4.14   28.04   37.12 2385.83 v _19150_/Y (OR4x1_ASAP7_75t_R)
+                                         _11632_ (net)
+                 28.05    0.34 2386.17 v _19164_/C (OR5x1_ASAP7_75t_R)
+     3    2.61   21.96   41.12 2427.30 v _19164_/Y (OR5x1_ASAP7_75t_R)
+                                         _11646_ (net)
+                 21.97    0.14 2427.44 v _19187_/B (OR3x1_ASAP7_75t_R)
+     1    0.57    7.81   22.30 2449.73 v _19187_/Y (OR3x1_ASAP7_75t_R)
+                                         _11669_ (net)
+                  7.81    0.02 2449.76 v _19189_/B (OA211x2_ASAP7_75t_R)
+     1    0.86    9.59   25.29 2475.05 v _19189_/Y (OA211x2_ASAP7_75t_R)
+                                         _11671_ (net)
+                  9.59    0.04 2475.09 v _19221_/A (OR4x1_ASAP7_75t_R)
+     7    5.34   34.10   36.70 2511.79 v _19221_/Y (OR4x1_ASAP7_75t_R)
+                                         _11703_ (net)
+                 34.13    0.62 2512.41 v _19243_/B (AO21x1_ASAP7_75t_R)
+     1    0.78    7.91   20.65 2533.06 v _19243_/Y (AO21x1_ASAP7_75t_R)
+                                         _11720_ (net)
+                  7.91    0.04 2533.10 v _19244_/B (OA21x2_ASAP7_75t_R)
+     1    0.62    6.56   12.26 2545.36 v _19244_/Y (OA21x2_ASAP7_75t_R)
+                                         net338 (net)
+                  6.56    0.02 2545.38 v output339/A (BUFx2_ASAP7_75t_R)
+     1    0.40    4.47   12.30 2557.68 v output339/Y (BUFx2_ASAP7_75t_R)
+                                         z[9] (net)
+                  4.47    0.02 2557.70 v z[9] (out)
+                               2557.70   data arrival time
+
+                  0.00 10000.00 10000.00   clock core_clk (rise edge)
+                          0.00 10000.00   clock network delay (ideal)
+                          0.00 10000.00   clock reconvergence pessimism
+                       -2000.00 8000.00   output external delay
+                               8000.00   data required time
+-----------------------------------------------------------------------------
+                               8000.00   data required time
+                               -2557.70   data arrival time
+-----------------------------------------------------------------------------
+                               5442.30   slack (MET)
+
+
+
+==========================================================================
+detailed place report_check_types -max_slew -max_cap -max_fanout -violators
+--------------------------------------------------------------------------
+
+==========================================================================
+detailed place max_slew_check_slack
+--------------------------------------------------------------------------
+119.99311065673828
+
+==========================================================================
+detailed place max_slew_check_limit
+--------------------------------------------------------------------------
+320.0
+
+==========================================================================
+detailed place max_slew_check_slack_limit
+--------------------------------------------------------------------------
+0.3750
+
+==========================================================================
+detailed place max_fanout_check_slack
+--------------------------------------------------------------------------
+1.0000000150474662e+30
+
+==========================================================================
+detailed place max_fanout_check_limit
+--------------------------------------------------------------------------
+1.0000000150474662e+30
+
+==========================================================================
+detailed place max_capacitance_check_slack
+--------------------------------------------------------------------------
+12.907915115356445
+
+==========================================================================
+detailed place max_capacitance_check_limit
+--------------------------------------------------------------------------
+23.040000915527344
+
+==========================================================================
+detailed place max_capacitance_check_slack_limit
+--------------------------------------------------------------------------
+0.5602
+
+==========================================================================
+detailed place max_slew_violation_count
+--------------------------------------------------------------------------
+max slew violation count 0
+
+==========================================================================
+detailed place max_fanout_violation_count
+--------------------------------------------------------------------------
+max fanout violation count 0
+
+==========================================================================
+detailed place max_cap_violation_count
+--------------------------------------------------------------------------
+max cap violation count 0
+
+==========================================================================
+detailed place setup_violation_count
+--------------------------------------------------------------------------
+setup violation count 0
+
+==========================================================================
+detailed place hold_violation_count
+--------------------------------------------------------------------------
+hold violation count 0
+
+==========================================================================
+detailed place report_checks -path_delay max reg to reg
+--------------------------------------------------------------------------
+Startpoint: gen_neurons[4].neuron.neuronMAC.mult[0][0]$_DFF_P_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: gen_neurons[4].neuron.neuronMAC.soma[0][14]$_DFF_P_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ gen_neurons[4].neuron.neuronMAC.mult[0][0]$_DFF_P_/CLK (DFFHQNx1_ASAP7_75t_R)
+  30.99   30.99 v gen_neurons[4].neuron.neuronMAC.mult[0][0]$_DFF_P_/QN (DFFHQNx1_ASAP7_75t_R)
+   9.28   40.28 ^ _18747_/Y (INVx1_ASAP7_75t_R)
+  13.28   53.56 v _21031_/CON (HAxp5_ASAP7_75t_R)
+  13.13   66.69 ^ _12060_/Y (INVx1_ASAP7_75t_R)
+  19.25   85.94 v _20104_/CON (FAx1_ASAP7_75t_R)
+  22.18  108.12 v _13396_/Y (OA21x2_ASAP7_75t_R)
+  18.53  126.65 v _13397_/Y (OA21x2_ASAP7_75t_R)
+  17.25  143.90 v _13398_/Y (OA21x2_ASAP7_75t_R)
+  18.66  162.56 v _13399_/Y (OA21x2_ASAP7_75t_R)
+  18.70  181.26 v _13400_/Y (OA21x2_ASAP7_75t_R)
+  22.94  204.20 v _13403_/Y (OA222x2_ASAP7_75t_R)
+  17.56  221.76 v _13404_/Y (AND4x1_ASAP7_75t_R)
+  25.58  247.34 v _13407_/Y (OR4x1_ASAP7_75t_R)
+  29.58  276.92 v _13408_/Y (OA211x2_ASAP7_75t_R)
+  25.09  302.01 ^ _13431_/Y (XOR2x2_ASAP7_75t_R)
+   0.03  302.05 ^ gen_neurons[4].neuron.neuronMAC.soma[0][14]$_DFF_P_/D (DFFHQNx1_ASAP7_75t_R)
+         302.05   data arrival time
+
+10000.00 10000.00   clock core_clk (rise edge)
+   0.00 10000.00   clock network delay (ideal)
+   0.00 10000.00   clock reconvergence pessimism
+        10000.00 ^ gen_neurons[4].neuron.neuronMAC.soma[0][14]$_DFF_P_/CLK (DFFHQNx1_ASAP7_75t_R)
+ -15.13 9984.87   library setup time
+        9984.87   data required time
+---------------------------------------------------------
+        9984.87   data required time
+        -302.05   data arrival time
+---------------------------------------------------------
+        9682.82   slack (MET)
+
+
+
+==========================================================================
+detailed place report_checks -path_delay min reg to reg
+--------------------------------------------------------------------------
+Startpoint: gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+  32.73   32.73 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[0]$_SDFF_PP0_/QN (DFFHQNx1_ASAP7_75t_R)
+   8.96   41.70 v _19505_/Y (NOR2x1_ASAP7_75t_R)
+   0.02   41.72 v gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_/D (DFFHQNx1_ASAP7_75t_R)
+          41.72   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ gen_neurons[0].neuron.neuronMAC.valid_pipe[1]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+   8.67    8.67   library hold time
+           8.67   data required time
+---------------------------------------------------------
+           8.67   data required time
+         -41.72   data arrival time
+---------------------------------------------------------
+          33.05   slack (MET)
+
+
+
+==========================================================================
+detailed place critical path target clock latency max path
+--------------------------------------------------------------------------
+0.0000
+
+==========================================================================
+detailed place critical path target clock latency min path
+--------------------------------------------------------------------------
+0.0000
+
+==========================================================================
+detailed place critical path source clock latency min path
+--------------------------------------------------------------------------
+0.0000
+
+==========================================================================
+detailed place critical path delay
+--------------------------------------------------------------------------
+2557.7000
+
+==========================================================================
+detailed place critical path slack
+--------------------------------------------------------------------------
+5442.2998
+
+==========================================================================
+detailed place slack div critical path delay
+--------------------------------------------------------------------------
+212.781006
+
+==========================================================================
+detailed place report_power
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             1.66e-04   1.09e-05   7.46e-08   1.77e-04  14.9%
+Combinational          5.45e-04   4.63e-04   7.24e-07   1.01e-03  85.1%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  7.12e-04   4.74e-04   7.99e-07   1.19e-03 100.0%
+                          60.0%      39.9%       0.1%

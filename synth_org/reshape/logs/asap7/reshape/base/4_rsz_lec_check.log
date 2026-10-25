@@ -1,0 +1,53 @@
+[2026-09-21 17:08:29.831] [miter_logger] [info] MiterStrategy::run starting
+[2026-09-21 17:08:29.831] [miter_logger] [info] Collecting POs for design 0: Flatten
+
+[2026-09-21 17:08:29.832] [miter_logger] [info] Collected 80 PIs for design 0
+
+[2026-09-21 17:08:29.832] [miter_logger] [info] Collected 80 POs for design 0
+
+[2026-09-21 17:08:29.832] [miter_logger] [info] design 0 PI summary by model/term (80 total terminals, 1 unique rows):
+| Model   | Term        | Count |
+|---------|-------------|-------|
+| Flatten | features_in |    80 |
+
+[2026-09-21 17:08:29.832] [miter_logger] [info] design 0 PO summary by model/term (80 total terminals, 1 unique rows):
+| Model   | Term     | Count |
+|---------|----------|-------|
+| Flatten | flat_out |    80 |
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] Collecting POs for design 1: Flatten
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of common inputs: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] Collected 80 PIs for design 1
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] Collected 80 POs for design 1
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] design 1 PI summary by model/term (80 total terminals, 1 unique rows):
+| Model   | Term        | Count |
+|---------|-------------|-------|
+| Flatten | features_in |    80 |
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] design 1 PO summary by model/term (80 total terminals, 1 unique rows):
+| Model   | Term     | Count |
+|---------|----------|-------|
+| Flatten | flat_out |    80 |
+
+[2026-09-21 17:08:29.833] [miter_logger] [info] normalizeInputs: starting
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of common inputs: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff0 inputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff1 inputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] normalizeOutputs: starting
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of common outputs: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff0 outputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of diff1 outputs: 0
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of PIs in circuit 0: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of PIs in circuit 1: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of POs in circuit 0: 80
+[2026-09-21 17:08:29.833] [miter_logger] [info] size of POs in circuit 1: 80
+[2026-09-21 17:08:29.834] [miter_logger] [info] Building miter expression
+[2026-09-21 17:08:29.834] [miter_logger] [info] Finished building miter expression
+[2026-09-21 17:08:29.834] [miter_logger] [info] Starting solver
+[2026-09-21 17:08:29.834] [miter_logger] [info] SAT solver finished: UNSAT
+[2026-09-21 17:08:29.834] [miter_logger] [info] Circuits are IDENTICAL

@@ -1,0 +1,239 @@
+
+==========================================================================
+floorplan final report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
+==========================================================================
+floorplan final report_wns
+--------------------------------------------------------------------------
+wns max 0.00
+
+==========================================================================
+floorplan final report_worst_slack
+--------------------------------------------------------------------------
+worst slack max 8.68
+
+==========================================================================
+floorplan final report_clock_min_period
+--------------------------------------------------------------------------
+virtual_clk period_min = 1.32 fmax = 756.12
+
+==========================================================================
+floorplan final report_checks -path_delay min
+--------------------------------------------------------------------------
+Startpoint: multiplier[10] (input port clocked by virtual_clk)
+Endpoint: result[21] (output port clocked by virtual_clk)
+Path Group: virtual_clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock virtual_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00 v input external delay
+     5    0.00    0.00    0.00    0.00 v multiplier[10] (in)
+                                         multiplier[10] (net)
+                  0.00    0.00    0.00 v _0938_/A (BUFX1P4H7R)
+    10    0.01    0.05    0.05    0.05 v _0938_/Y (BUFX1P4H7R)
+                                         _0179_ (net)
+                  0.05    0.00    0.05 v _1371_/B (NAND4X0P5H7R)
+     1    0.00    0.03    0.04    0.09 ^ _1371_/Y (NAND4X0P5H7R)
+                                         _0638_ (net)
+                  0.03    0.00    0.09 ^ _1372_/C0 (OAI211X1P4H7R)
+     1    0.00    0.02    0.02    0.11 v _1372_/Y (OAI211X1P4H7R)
+                                         result[21] (net)
+                  0.02    0.00    0.11 v result[21] (out)
+                                  0.11   data arrival time
+
+                  0.00    0.00    0.00   clock virtual_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                          0.00    0.00   output external delay
+                                  0.00   data required time
+-----------------------------------------------------------------------------
+                                  0.00   data required time
+                                 -0.11   data arrival time
+-----------------------------------------------------------------------------
+                                  0.11   slack (MET)
+
+
+
+==========================================================================
+floorplan final report_checks -path_delay max
+--------------------------------------------------------------------------
+Startpoint: multiplier[5] (input port clocked by virtual_clk)
+Endpoint: result[20] (output port clocked by virtual_clk)
+Path Group: virtual_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock virtual_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00 ^ input external delay
+     4    0.00    0.00    0.00    0.00 ^ multiplier[5] (in)
+                                         multiplier[5] (net)
+                  0.00    0.00    0.00 ^ _0784_/A (BUFX3H7R)
+    10    0.01    0.06    0.06    0.06 ^ _0784_/Y (BUFX3H7R)
+                                         _0026_ (net)
+                  0.06    0.00    0.06 ^ _0785_/A (BUFX1P4H7R)
+    10    0.01    0.09    0.09    0.14 ^ _0785_/Y (BUFX1P4H7R)
+                                         _0027_ (net)
+                  0.09    0.00    0.14 ^ _1176_/B (NAND4X0P5H7R)
+     1    0.00    0.08    0.08    0.22 v _1176_/Y (NAND4X0P5H7R)
+                                         _0423_ (net)
+                  0.08    0.00    0.22 v _1178_/A1 (AOI21X1H7R)
+     3    0.00    0.09    0.08    0.29 ^ _1178_/Y (AOI21X1H7R)
+                                         _0426_ (net)
+                  0.09    0.00    0.29 ^ _1179_/B (XOR2X1P4H7R)
+     1    0.00    0.03    0.11    0.40 v _1179_/Y (XOR2X1P4H7R)
+                                         _0427_ (net)
+                  0.03    0.00    0.40 v _1180_/B (XNOR2X1P4H7R)
+     2    0.00    0.03    0.08    0.48 v _1180_/Y (XNOR2X1P4H7R)
+                                         _0428_ (net)
+                  0.03    0.00    0.48 v _1213_/B (NOR2BX1P4H7R)
+     2    0.00    0.07    0.05    0.54 ^ _1213_/Z (NOR2BX1P4H7R)
+                                         _0464_ (net)
+                  0.07    0.00    0.54 ^ _1232_/A (XNOR3X1P4H7R)
+     3    0.00    0.04    0.18    0.72 v _1232_/Y (XNOR3X1P4H7R)
+                                         _0485_ (net)
+                  0.04    0.00    0.72 v _1233_/B (XNOR2X0P5H7R)
+     1    0.00    0.03    0.09    0.81 ^ _1233_/Y (XNOR2X0P5H7R)
+                                         _0486_ (net)
+                  0.03    0.00    0.81 ^ _1234_/B (XNOR2X3H7R)
+     2    0.00    0.04    0.10    0.91 v _1234_/Y (XNOR2X3H7R)
+                                         _0487_ (net)
+                  0.04    0.00    0.91 v _1237_/A (NAND2X6H7R)
+     6    0.01    0.05    0.03    0.94 ^ _1237_/Y (NAND2X6H7R)
+                                         _0491_ (net)
+                  0.05    0.00    0.94 ^ _1275_/AN (NOR3BX0P5H7R)
+     1    0.00    0.08    0.08    1.02 ^ _1275_/Y (NOR3BX0P5H7R)
+                                         _0532_ (net)
+                  0.08    0.00    1.02 ^ _1277_/B0 (OAI2BB2X0P7H7R)
+     1    0.00    0.07    0.07    1.10 v _1277_/Y (OAI2BB2X0P7H7R)
+                                         _0535_ (net)
+                  0.07    0.00    1.10 v _1282_/A (NAND3X6H7R)
+     2    0.00    0.04    0.04    1.14 ^ _1282_/Y (NAND3X6H7R)
+                                         _0540_ (net)
+                  0.04    0.00    1.14 ^ _1374_/B (NAND3BX1P4H7R)
+     2    0.00    0.05    0.05    1.18 v _1374_/Y (NAND3BX1P4H7R)
+                                         _0640_ (net)
+                  0.05    0.00    1.18 v _1377_/A0 (AOI21X1P4H7R)
+     1    0.00    0.04    0.05    1.23 ^ _1377_/Y (AOI21X1P4H7R)
+                                         _0644_ (net)
+                  0.04    0.00    1.23 ^ _1378_/B (XNOR2X3H7R)
+     1    0.00    0.02    0.09    1.32 v _1378_/Y (XNOR2X3H7R)
+                                         result[20] (net)
+                  0.02    0.00    1.32 v result[20] (out)
+                                  1.32   data arrival time
+
+                  0.00   10.00   10.00   clock virtual_clk (rise edge)
+                          0.00   10.00   clock network delay (ideal)
+                          0.00   10.00   clock reconvergence pessimism
+                          0.00   10.00   output external delay
+                                 10.00   data required time
+-----------------------------------------------------------------------------
+                                 10.00   data required time
+                                 -1.32   data arrival time
+-----------------------------------------------------------------------------
+                                  8.68   slack (MET)
+
+
+
+==========================================================================
+floorplan final report_checks -unconstrained
+--------------------------------------------------------------------------
+Startpoint: multiplier[5] (input port clocked by virtual_clk)
+Endpoint: result[20] (output port clocked by virtual_clk)
+Path Group: virtual_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock virtual_clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00 ^ input external delay
+     4    0.00    0.00    0.00    0.00 ^ multiplier[5] (in)
+                                         multiplier[5] (net)
+                  0.00    0.00    0.00 ^ _0784_/A (BUFX3H7R)
+    10    0.01    0.06    0.06    0.06 ^ _0784_/Y (BUFX3H7R)
+                                         _0026_ (net)
+                  0.06    0.00    0.06 ^ _0785_/A (BUFX1P4H7R)
+    10    0.01    0.09    0.09    0.14 ^ _0785_/Y (BUFX1P4H7R)
+                                         _0027_ (net)
+                  0.09    0.00    0.14 ^ _1176_/B (NAND4X0P5H7R)
+     1    0.00    0.08    0.08    0.22 v _1176_/Y (NAND4X0P5H7R)
+                                         _0423_ (net)
+                  0.08    0.00    0.22 v _1178_/A1 (AOI21X1H7R)
+     3    0.00    0.09    0.08    0.29 ^ _1178_/Y (AOI21X1H7R)
+                                         _0426_ (net)
+                  0.09    0.00    0.29 ^ _1179_/B (XOR2X1P4H7R)
+     1    0.00    0.03    0.11    0.40 v _1179_/Y (XOR2X1P4H7R)
+                                         _0427_ (net)
+                  0.03    0.00    0.40 v _1180_/B (XNOR2X1P4H7R)
+     2    0.00    0.03    0.08    0.48 v _1180_/Y (XNOR2X1P4H7R)
+                                         _0428_ (net)
+                  0.03    0.00    0.48 v _1213_/B (NOR2BX1P4H7R)
+     2    0.00    0.07    0.05    0.54 ^ _1213_/Z (NOR2BX1P4H7R)
+                                         _0464_ (net)
+                  0.07    0.00    0.54 ^ _1232_/A (XNOR3X1P4H7R)
+     3    0.00    0.04    0.18    0.72 v _1232_/Y (XNOR3X1P4H7R)
+                                         _0485_ (net)
+                  0.04    0.00    0.72 v _1233_/B (XNOR2X0P5H7R)
+     1    0.00    0.03    0.09    0.81 ^ _1233_/Y (XNOR2X0P5H7R)
+                                         _0486_ (net)
+                  0.03    0.00    0.81 ^ _1234_/B (XNOR2X3H7R)
+     2    0.00    0.04    0.10    0.91 v _1234_/Y (XNOR2X3H7R)
+                                         _0487_ (net)
+                  0.04    0.00    0.91 v _1237_/A (NAND2X6H7R)
+     6    0.01    0.05    0.03    0.94 ^ _1237_/Y (NAND2X6H7R)
+                                         _0491_ (net)
+                  0.05    0.00    0.94 ^ _1275_/AN (NOR3BX0P5H7R)
+     1    0.00    0.08    0.08    1.02 ^ _1275_/Y (NOR3BX0P5H7R)
+                                         _0532_ (net)
+                  0.08    0.00    1.02 ^ _1277_/B0 (OAI2BB2X0P7H7R)
+     1    0.00    0.07    0.07    1.10 v _1277_/Y (OAI2BB2X0P7H7R)
+                                         _0535_ (net)
+                  0.07    0.00    1.10 v _1282_/A (NAND3X6H7R)
+     2    0.00    0.04    0.04    1.14 ^ _1282_/Y (NAND3X6H7R)
+                                         _0540_ (net)
+                  0.04    0.00    1.14 ^ _1374_/B (NAND3BX1P4H7R)
+     2    0.00    0.05    0.05    1.18 v _1374_/Y (NAND3BX1P4H7R)
+                                         _0640_ (net)
+                  0.05    0.00    1.18 v _1377_/A0 (AOI21X1P4H7R)
+     1    0.00    0.04    0.05    1.23 ^ _1377_/Y (AOI21X1P4H7R)
+                                         _0644_ (net)
+                  0.04    0.00    1.23 ^ _1378_/B (XNOR2X3H7R)
+     1    0.00    0.02    0.09    1.32 v _1378_/Y (XNOR2X3H7R)
+                                         result[20] (net)
+                  0.02    0.00    1.32 v result[20] (out)
+                                  1.32   data arrival time
+
+                  0.00   10.00   10.00   clock virtual_clk (rise edge)
+                          0.00   10.00   clock network delay (ideal)
+                          0.00   10.00   clock reconvergence pessimism
+                          0.00   10.00   output external delay
+                                 10.00   data required time
+-----------------------------------------------------------------------------
+                                 10.00   data required time
+                                 -1.32   data arrival time
+-----------------------------------------------------------------------------
+                                  8.68   slack (MET)
+
+
+
+==========================================================================
+floorplan final report_power
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Combinational          8.94e-05   5.41e-05   8.99e-08   1.44e-04 100.0%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  8.94e-05   5.41e-05   8.99e-08   1.44e-04 100.0%
+                          62.3%      37.7%       0.1%
