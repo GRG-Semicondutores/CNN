@@ -26,8 +26,8 @@ obj_dir_cov/
 
 # Artefatos comuns de simulacao e cobertura
 *.vvp
-*.vcd
-*.fst
+.vcd
+.fst
 *.lxt
 *.lxt2
 *.vpd
