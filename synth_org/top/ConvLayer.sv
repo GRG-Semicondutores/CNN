@@ -32,6 +32,18 @@ genvar n;
 
 generate
     for (n = 0; n < N_FILTERS; n = n + 1) begin :gen_feature_maps
+        // Conexoes por elemento para simuladores sem suporte a fatias de arrays.
+        wire signed [DATA_WIDTH-1:0] filter_kernel [0:N_CHANNELS-1][0:N_KERNEL-1];
+        wire signed [ACC_WIDTH-1:0] filter_result [0:N_OUT-1];
+        for (genvar c = 0; c < N_CHANNELS; c = c + 1) begin :gen_kernel_channels
+            for (genvar k = 0; k < N_KERNEL; k = k + 1) begin :gen_kernel_elements
+                assign filter_kernel[c][k] = kernel[n][c][k];
+            end
+        end
+        for (genvar p = 0; p < N_OUT; p = p + 1) begin :gen_result_elements
+            assign result[n][p] = filter_result[p];
+        end
+
         FeatureMap #(
             .DATA_WIDTH(DATA_WIDTH),
             .IMG_SIZE(IMG_SIZE),
@@ -43,9 +55,9 @@ generate
             .rst(rst),
             .start(start), //ConvLayer propaga o pulso de start para os feature maps...
             .imagem(imagem),
-            .kernel(kernel[n]),
+            .kernel(filter_kernel),
             .bias(bias[n]),
-            .result(result[n]),
+            .result(filter_result),
             .valid_out(partial_valid_out[n]) //pega todos os valid_out de todos os featureMaps
         );
     end

@@ -1,0 +1,9 @@
+`verilator_config
+// Instrumentacao estrutural de src e cobertura funcional do testbench.
+// O RTL e apenas compilado/instrumentado; suas fontes nao sao alteradas.
+// A selecao do denominador (somente src) ocorre na exportacao do banco.
+// Nao desligar cobertura globalmente: isso tambem suprime pontos estruturais.
+coverage_on -file "*/src/*"
+coverage_on -file "*/testbenchs/CNN_top/testbench.sv"
+lint_off -file "*"
+lint_on -file "*/testbenchs/CNN_top/testbench.sv"

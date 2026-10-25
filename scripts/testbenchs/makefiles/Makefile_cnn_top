@@ -1,0 +1,123 @@
+# Testbench CNN_top / Icarus Verilog
+SHELL := /bin/bash
+.DEFAULT_GOAL := all
+
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+PROJECT_ROOT := $(abspath $(dir $(THIS_MAKEFILE))/../../..)
+RTL_DIR := $(PROJECT_ROOT)/src
+TB := $(PROJECT_ROOT)/testbenchs/CNN_top/testbench.sv
+TOP := testbench
+
+RESULTS_ROOT ?= $(PROJECT_ROOT)/results_tb
+RESULTS_DIR := $(abspath $(RESULTS_ROOT))/CNN_top/icarus
+LOG_DIR := $(RESULTS_DIR)/logs
+VVP_FILE := $(RESULTS_DIR)/cnn_top.vvp
+COMPILE_LOG := $(LOG_DIR)/compile.log
+SIM_LOG := $(LOG_DIR)/simulation.log
+CSV := $(RESULTS_DIR)/cnn_verif_results.csv
+WAVE := $(RESULTS_DIR)/tb_cnn_top_images.vcd
+
+# Arquivos do DUT usados apenas como entradas opacas do simulador.
+RTL := \
+	$(RTL_DIR)/CNN.sv \
+	$(RTL_DIR)/ConvLayer.sv \
+	$(RTL_DIR)/FeatureMap.sv \
+	$(RTL_DIR)/Convolution/Convolution.sv \
+	$(RTL_DIR)/DotProduct/DotProduct.sv \
+	$(RTL_DIR)/FCLayer.sv \
+	$(RTL_DIR)/Neuron.sv \
+	$(RTL_DIR)/Quantizer.sv \
+	$(RTL_DIR)/ReLU/ReLU.sv \
+	$(RTL_DIR)/MaxPooling.sv \
+	$(RTL_DIR)/Flatten.sv
+
+# Permite selecionar um modelo de simulacao fornecido pelo responsavel pelo DUT.
+DUT_FILES ?= $(RTL)
+
+IVERILOG ?= iverilog
+VVP ?= vvp
+GTKWAVE ?= gtkwave
+SURFER ?= surfer
+IVERILOG_FLAGS ?= -Wall
+VVP_FLAGS ?=
+
+TEST ?= ALL
+RANDOM_COUNT ?= 1000
+SEED ?= 20261025
+OBS_CYCLES ?= 64
+EXPECTED_LATENCY ?= 0
+ENABLE_WAVEFORM ?= 0
+TRACE_EXPECTED ?= 0
+PRINT_IMAGES ?= 0
+PLUSARGS ?=
+
+TB_ARGS = +TEST=$(TEST) +RANDOM_COUNT=$(RANDOM_COUNT) +SEED=$(SEED) \
+	+OBS_CYCLES=$(OBS_CYCLES) +EXPECTED_LATENCY=$(EXPECTED_LATENCY) \
+	$(if $(filter 1,$(ENABLE_WAVEFORM)),+DUMP_VCD) \
+	$(if $(filter 1,$(TRACE_EXPECTED)),+TRACE_EXPECTED) \
+	$(if $(filter 1,$(PRINT_IMAGES)),+PRINT_IMAGES) $(PLUSARGS)
+
+.PHONY: all icarus check_tools check_files compile run wave gtk surf clean help
+all: icarus
+icarus: run
+
+check_tools:
+	@command -v "$(IVERILOG)" >/dev/null 2>&1 || \
+		{ echo "ERRO: iverilog nao encontrado no PATH" >&2; exit 1; }
+	@command -v "$(VVP)" >/dev/null 2>&1 || \
+		{ echo "ERRO: vvp nao encontrado no PATH" >&2; exit 1; }
+
+check_files:
+	@for source in $(foreach source,$(DUT_FILES) $(TB),"$(source)"); do \
+		test -f "$$source" || { echo "ERRO: arquivo nao encontrado: $$source" >&2; exit 1; }; \
+	done
+
+compile: check_tools check_files
+	@mkdir -p "$(LOG_DIR)"
+	@echo "[IVERILOG] Compilando CNN_top..."
+	@set -o pipefail; \
+	$(IVERILOG) $(IVERILOG_FLAGS) -g2012 -s $(TOP) \
+		-o "$(VVP_FILE)" $(foreach source,$(DUT_FILES) $(TB),"$(source)") \
+		2>&1 | tee "$(COMPILE_LOG)"
+	@echo "[IVERILOG] VVP: $(VVP_FILE)"
+
+run: compile
+	@echo "[VVP] Executando CNN_top: TEST=$(TEST) SEED=$(SEED)"
+	@set -o pipefail; \
+	cd "$(RESULTS_DIR)" && \
+	$(VVP) "$(VVP_FILE)" $(VVP_FLAGS) $(TB_ARGS) \
+		2>&1 | tee "$(SIM_LOG)"
+	@echo "[VVP] Log: $(SIM_LOG)"
+	@echo "[VVP] CSV: $(CSV)"
+
+wave:
+	@$(MAKE) --no-print-directory -f "$(THIS_MAKEFILE)" run ENABLE_WAVEFORM=1
+	@echo "WAVE: $(WAVE)"
+
+gtk: wave
+	@test -f "$(WAVE)" || { echo "ERRO: waveform nao encontrada: $(WAVE)" >&2; exit 1; }
+	@$(GTKWAVE) "$(WAVE)"
+
+surf: wave
+	@test -f "$(WAVE)" || { echo "ERRO: waveform nao encontrada: $(WAVE)" >&2; exit 1; }
+	@$(SURFER) "$(WAVE)"
+
+clean:
+	@rm -rf -- "$(RESULTS_DIR)"
+	@echo "[CLEAN] Resultados CNN_top/Icarus removidos."
+
+help:
+	@echo "CNN_top / Icarus: compile, run (padrao), wave, gtk, surf, clean, help"
+	@echo "Uso: bash scripts/testbenchs/bash/CNN_top/cnn_top.sh [alvo] [VAR=valor ...]"
+	@echo "  run TEST=IMG-00                     Executa um cenario"
+	@echo "  run TEST=ALL RANDOM_COUNT=1000      Executa a campanha completa"
+	@echo "  wave TEST=IMG-01                    Gera waveform VCD"
+	@echo "  gtk TEST=IMG-01                     Gera waveform e abre GTKWave"
+	@echo "  surf TEST=IMG-01                    Gera waveform e abre Surfer"
+	@echo "Variaveis: TEST, RANDOM_COUNT, SEED, OBS_CYCLES, EXPECTED_LATENCY,"
+	@echo "           ENABLE_WAVEFORM, TRACE_EXPECTED, PRINT_IMAGES, PLUSARGS,"
+	@echo "           RESULTS_ROOT, VVP_FLAGS, DUT_FILES"
+	@echo "Resultados: $(RESULTS_DIR)"
+	@echo "Icarus: scoreboard e assertions procedurais; covergroups indisponiveis."
+	@echo "Caixa preta: somente portas publicas; EXPECTED_LATENCY=0 caracteriza a latencia."
+	@echo "IMG-19 e exploratorio: TEST=ALL pode terminar INCOMPLETE. Consulte [RESULT]."

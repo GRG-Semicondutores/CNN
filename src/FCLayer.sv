@@ -25,6 +25,11 @@ genvar n;
 
 generate
     for (n = 0; n < N_NEURONS; n = n + 1) begin :gen_neurons
+        wire signed [DATA_WIDTH-1:0] neuron_weights [0:WEIGHTS-1];
+        for (genvar w_idx = 0; w_idx < WEIGHTS; w_idx = w_idx + 1) begin :gen_weight_elements
+            assign neuron_weights[w_idx] = w[n][w_idx];
+        end
+
         Neuron #(
             .WEIGHTS(WEIGHTS),
             .DATA_WIDTH(DATA_WIDTH)
@@ -33,7 +38,7 @@ generate
             .valid_in(valid_in),
             .rst(rst),
             .x(x),
-            .w(w[n]),
+            .w(neuron_weights),
             .b(b[n]),
             .z(z_not_quantized[n]),
             .valid_out(partial_valid_out[n])

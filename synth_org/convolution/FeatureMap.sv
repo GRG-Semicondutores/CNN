@@ -32,6 +32,19 @@ assign valid_out = &partial_valid_out; //este bloco só manda um valid_out quand
 
 generate
     for (c = 0; c < N_CHANNELS; c = c + 1) begin :gen_channels
+        wire signed [DATA_WIDTH-1:0] channel_image [0:N_PIXELS-1];
+        wire signed [DATA_WIDTH-1:0] channel_kernel [0:N_KERNEL-1];
+        wire signed [ACC_WIDTH-1:0] channel_result [0:N_OUT-1];
+        for (genvar p = 0; p < N_PIXELS; p = p + 1) begin :gen_image_elements
+            assign channel_image[p] = imagem[c][p];
+        end
+        for (genvar k = 0; k < N_KERNEL; k = k + 1) begin :gen_kernel_elements
+            assign channel_kernel[k] = kernel[c][k];
+        end
+        for (genvar p = 0; p < N_OUT; p = p + 1) begin :gen_result_elements
+            assign partial_result[c][p] = channel_result[p];
+        end
+
         Convolution #(
             .IMG_SIZE(IMG_SIZE),
             .DATA_WIDTH(DATA_WIDTH),
@@ -41,9 +54,9 @@ generate
             .clk(clk),
             .rst(rst),
             .start(start), //propaga o pulso de start para o convolution
-            .imagem(imagem[c]),
-            .kernel(kernel[c]),
-            .result(partial_result[c]),
+            .imagem(channel_image),
+            .kernel(channel_kernel),
+            .result(channel_result),
             .valid_out(partial_valid_out[c]) //junta todos os valid_out dos blocos convolucionais
         );
     end

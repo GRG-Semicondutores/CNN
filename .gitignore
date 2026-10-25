@@ -2,6 +2,9 @@
 /results_tb/
 /results_uvm/
 
+# Bibliotecas de verificacao obtidas pelo setup local
+/.deps/
+
 # Arquivos GDS gerados pela sintese de convolution
 /synth_org/convolution/results/**/*.gds
 
