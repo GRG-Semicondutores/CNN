@@ -1,0 +1,286 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+\geometry{landscape,margin=2.2cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\emergencystretch}{2em}
+\setlength{\leftskip}{0pt}
+\setlength{\rightskip}{0pt}
+\setlength{\parfillskip}{0pt plus 1fil}
+\setlength{\LTleft}{\fill}
+\setlength{\LTright}{\fill}
+\widowpenalty=10000
+\clubpenalty=10000
+\lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,
+  keepspaces=true,frame=single,backgroundcolor=\color{gray!5}}
+\renewcommand{\lstlistingname}{Listagem}
+\newcommand{\arquivo}[1]{\texttt{\detokenize{#1}}}
+\title{Relatório de Verificação -- Topo CNN\\Netlist OpenROAD com SDF e bancada UVM}
+\author{Matheus Grossi}
+\date{27 de outubro de 2026\\\small Campanha registrada em 26 de outubro de 2026}
+\hypersetup{pdftitle={Verificação CNN -- UVM com SDF},pdfauthor={Matheus Grossi}}
+
+\begin{document}
+\maketitle
+
+\section{Identificação do Bloco}
+\begin{itemize}[label=\textbullet]
+\item \textbf{Bloco:} módulo \arquivo{CNN}, configuração reduzida do projeto GRG-Semicondutores/CNN.
+\item \textbf{Implementação verificada:} netlist \arquivo{6_final.v}, gerada pelo fluxo OpenROAD ASAP7 após posicionamento, CTS e roteamento; atrasos extraídos em \arquivo{6_final.sdf}. Embora o fluxo seja chamado de síntese nos scripts, os arquivos finais são de implementação física.
+\item \textbf{Documento:} versão 1.0; emissão em 27/10/2026; evidências da campanha concluída em 26/10/2026, conforme os metadados dos arquivos preservados.
+\item \textbf{Metodologia:} identificação, objetivo, estratégia, casos, fronteiras, resultados, análise, cobertura, rastreabilidade e conclusão, conforme os relatórios anteriores de CNN, DOT e ReLU.
+\item \textbf{Escopo:} observação das portas públicas pela bancada UVM; comparação numérica, protocolo, reset, latência e registro da anotação SDF. Não é certificação de sign-off temporal nem localização de defeitos internos.
+\end{itemize}
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{7.8cm}X}\toprule
+\textbf{Configuração} & \textbf{Valor registrado / rastreabilidade}\\\midrule
+Dados e configuração & 8 bits signed; imagem $4\times4\times1$; kernels $3\times3$; dois filtros por convolução; dois neurônios por FC; padding 1; quatro shifts iguais a 1.\\
+Clock / amostragem & 10 ns (100 MHz na bancada); saídas amostradas 1 ps após o posedge, com strobe da interface.\\
+Simulador & xezim 0.11.3; revisão \arquivo{44f5c88c}; motor de eventos.\\
+Biblioteca UVM & Accellera 1800.2-2017-1.0, identificada pelo caminho de compilação.\\
+Seleção / aleatórios / seed & \arquivo{TEST=ALL}, \arquivo{RANDOM_COUNT=1000}, \arquivo{SEED=20261025}.\\
+Watchdog / contrato de latência & \arquivo{OBS_CYCLES=64}; \arquivo{EXPECTED_LATENCY=0}: caracterização, sem impor um número contratual positivo.\\
+Bibliotecas / SDF & Modelos funcionais ASAP7 RVT com \arquivo{specify}; SDF com TIMESCALE 1 ps, 0,770 V e 0\,$^\circ$C; bibliotecas FF identificadas no log de exportação.\\
+Seleção min/typ/max & \arquivo{max} é o padrão do script. A linha de comando efetiva da campanha não foi arquivada; o seletor não é demonstrado isoladamente pelo log do simulador.\\
+Limite / término & Limite registrado de 1.000.000 ns; término após 720.200 ns (720,2\,$\mu$s), com \arquivo{$finish} após resultado FAIL.\\
+Resultado global & \textbf{FAIL}: 20 transações divergentes e 25 diferenças nas duas posições de saída.\\\bottomrule
+\end{tabularx}
+\caption{Condições da campanha. Parâmetros do clock não constituem evidência de frequência máxima do circuito.}
+\end{table}
+
+\section{Objetivo da Verificação}
+Verificar o resultado final da cadeia formada por duas convoluções, quantização, ReLU, pooling $2\times2$, flatten e duas camadas totalmente conectadas, usando a netlist de portas com seus atrasos SDF. O modelo de referência utiliza as imagens, kernels, pesos e biases observados no lançamento e não recebe respostas esperadas do driver.
+
+A regra aritmética adotada pela referência é
+\[
+Q_s(a)=\operatorname{sat}_{[-128,127]}
+\left((a+2^{s-1})\mathbin{\texttt{>>>}}s\right),\qquad s=1.
+\]
+O deslocamento é aritmético, com empate para $+\infty$. Nas convoluções, a quantização precede a ReLU; nas FCs, a ReLU precede a quantização. O modelo utiliza padding zero, correlação cruzada sem inversão do kernel e flatten por filtro e posição row-major. Essas regras são critérios executáveis da bancada e precisam permanecer coerentes com a especificação matemática do projeto.
+
+Também são avaliados associação entre start e resposta, pulsos de controle, watchdog, cancelamento por reset e recuperação. As saídas são números signed, não probabilidades de classificação. A campanha usa pesos sintéticos e não mede acurácia com imagens reais.
+
+\subsection{Base documental}
+O plano \href{../req_verif_CNN_top.md}{\arquivo{req_verif_CNN_top.md}} define os cenários públicos. O \href{../doc_verif/doc_verificacao_CNN_top.pdf}{relatório CNN em RTL} fornece a metodologia e a referência contextual de resultados. Os relatórios \href{../../DOT/doc_verif/doc_verificacao_DOT.pdf}{DOT} e \href{../../ReLU/doc_verif/doc_verificacao_ReLU.pdf}{ReLU} seguem a mesma organização. As notas do bloco em \href{../../../docs/CNN_block_notes.pdf}{\arquivo{docs/CNN_block_notes.pdf}} fundamentam os operadores. Os dados desta campanha são os logs, CSV e JSON congelados em \arquivo{evidencias/}; números de cobertura de outro simulador não foram transferidos para a campanha SDF.
+
+\section{Estratégia de Verificação}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{5.3cm}X}\toprule
+\textbf{Elemento} & \textbf{Responsabilidade / critério}\\\midrule
+Sequence e sequencer & Executar IMG-00 a IMG-21, com 100 starts dirigidos e 1.000 imagens xorshift32 reproduzíveis.\\
+Driver e interface & Aplicar dados, start e reset. Preparar os operandos antes do pulso; a sequência não depende de valid para lançar a próxima imagem isolada.\\
+Adaptador de portas & Conectar arrays da bancada aos vetores achatados da netlist, com o primeiro elemento nos bits mais significativos. A instância sintetizada \arquivo{tb_cnn.dut} não recebe parâmetros RTL.\\
+Monitor & Capturar entradas no posedge e aguardar o strobe gerado na interface após 1 ps para ler as saídas e publicar a transação de observação.\\
+Referência e scoreboard & Prever as duas saídas, comparar exatamente, verificar protocolo, watchdog, contagens e cancelamentos; registrar o CSV.\\
+Modelos de células e SDF & Usar modelos completos com UDPs e \arquivo{specify}. O xezim informou 155.094 sinais com atrasos e 26.816 verificações temporais anotadas.\\
+Subscriber de cobertura & Amostrar classes dos estímulos e eventos de quantização do modelo; cobertura não altera o status das transações.\\
+Encerramento & Retornar erro se a bancada não terminar em PASS; confirmar anotação SDF. A campanha completa terminou em FAIL e retornou 1 ao shell do simulador.\\\bottomrule
+\end{tabularx}
+\caption{Arquitetura e separação entre estímulo, observação, referência e aprovação.}
+\end{table}
+
+As transações pontuadas ficam isoladas e dispõem de 64 ciclos de observação. Há quatro ciclos de reset inicial, dois ciclos antes da sequence e dez ciclos finais. IMG-18 cancela operações em voo; IMG-19 é exploratório pela ausência de ready/busy ou contrato de aceitação de starts sobrepostos.
+
+\subsection{Compatibilidade e integridade da integração}
+O adaptador fica em \arquivo{scripts/UVM/gate_level/CNN_openroad_adapter.svh}. A seleção da ligação sintetizada usa \arquivo{CNN_TOP_GATE_LEVEL}. Os ajustes temporais deslocam o atraso original de 1 ps da classe para a interface: na versão instalada do xezim, o atraso na classe havia sido medido como 1 ns. O teste independente passou a coincidir com o CSV após a correção. A formatação de IDs foi ajustada para manter \arquivo{IMG-01}, pois \texttt{\%02d} produzia espaço em vez de zero e prejudicava a seleção da conferência de contagens.
+
+\arquivo{prepare_cnn_sdf.py} valida as larguras das portas e a presença de modelos para os 69 tipos de célula usados. Ele prepara uma cópia do SDF com nomes de busca do xezim: escopo \arquivo{dut}, sem o nome do módulo raiz, separadores por pontos e endpoints INTERCONNECT qualificados. Trinta linhas UDP com \arquivo{(bx)} são expandidas em \arquivo{(0x)} e \arquivo{(1x)}, preservando sua tabela lógica. Os modelos e o SDF de entrada não são reescritos. As cópias são específicas desse fluxo do xezim.
+
+O manifesto utilizado é \arquivo{6_final_xezim.inputs.json}; o arquivo antigo \arquivo{6_final_tb_cnn.inputs.json} não identifica esta execução. Na emissão do relatório, os hashes da netlist, SDF e cinco bibliotecas originais conferiram com o manifesto. A contagem de 47.390 entradas CELL inclui a raiz do SDF. Contagens de anotação não fornecem, sozinhas, uma porcentagem de cobertura temporal ou prova de equivalência de toda a ligação de portas.
+
+\input{tabelas/casos_e_fronteiras.tex}
+
+\section{Resultados}
+A campanha registrou \textbf{1.100 starts em 72.020 ciclos}: 1.065 PASS, 20 FAIL, três cancelamentos por reset e 12 INCOMPLETE. Foram comparadas 1.085 respostas e encontradas 25 diferenças de dados. O contador de falhas das verificações procedurais de protocolo ficou em zero. O resultado global é \textbf{FAIL}.
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{10.8cm}X}\toprule
+\textbf{Indicador} & \textbf{Resultado conferido}\\\midrule
+Reconciliação de starts & $1.100=1.065+20+3+12$.\\
+Respostas pontuadas & $1.085=1.065+20$; 2.170 posições de saída comparáveis.\\
+CSV de transações & 1.097 linhas: 1.065 PASS, 20 FAIL e 12 INCOMPLETE; os três abortos constam no log.\\
+Diferenças de dados & 25 posições: cinco transações divergem nas duas saídas e 15 em uma saída.\\
+Latência mínima / máxima & 38 / 38 ciclos, equivalentes a 380 ns entre bordas de lançamento e observação.\\
+Janela / contrato de latência & Watchdog de 64 ciclos; sem exigência de latência exata positiva.\\
+Taxa entre respostas pontuadas & $1.065/1.085=98,16\%$; é razão de transações, não cobertura de requisitos.\\
+Parcela dirigida pontuada & 65 PASS e 20 FAIL em 85 comparações: $76,47\%$ de aprovação; os demais 15 starts dirigidos são abortos ou exploratórios.\\
+Parcela pseudoaleatória & 1.000 PASS; todas as 1.000 saídas esperadas no CSV são $[0,127]$.\\
+Custo informado pelo simulador & 3.212.651,8 ms no total, aproximadamente 53 min 32,7 s; tempo simulado de 720,2\,$\mu$s.\\
+Retorno / encerramento & \arquivo{simulation.exitcode=1}; resultado FAIL e \arquivo{$fatal} da bancada; término com \arquivo{$finish}.\\\bottomrule
+\end{tabularx}
+\caption{Reconciliação independente do CSV com o log. Os tempos de execução são os medidos pelo xezim, não uma estimativa pelos horários dos arquivos.}
+\end{table}
+
+\subsection{Comportamentos esperados e critério de aprovação}
+Cada transação isolada deve produzir os dois resultados previstos a partir do payload aplicado no lançamento. Dado divergente, resposta inesperada, timeout e violações de protocolo constituem falha. Reset cancela uma pendência, e a operação seguinte deve se recuperar. Aprovação requer resultados pontuados corretos, contagens coerentes e ausência de erros; quantidade de bins atingidos não substitui esses critérios.
+
+PASS identifica comparação aprovada; FAIL identifica divergência em relação à referência executável; ABORT é cancelamento intencional por reset; INCOMPLETE preserva a falta de critério de aceitação de sobreposição. Os três abortos esperados não são defeitos. Os 12 incompletos não são comparações aprovadas. As 20 divergências têm precedência no resultado global.
+
+\section{Análise dos Resultados}
+\subsection{Resultados dos 22 cenários}
+\input{tabelas/resultados_por_cenario.tex}
+
+Sete cenários apresentam falhas, 14 não apresentam falha nos critérios executados e um permanece INCOMPLETE. A classificação de IMG-18 inclui cancelamentos esperados. Os 1.000 PASS de IMG-14 não eliminam as divergências dirigidas: a diversidade dos resultados esperados da parcela aleatória é de apenas um vetor final, $[0,127]$, sob W03. Isso não demonstra ausência de diversidade nas imagens; limita o poder discriminante das saídas dessa parcela para outras configurações, especialmente W02.
+
+\subsection{Registro completo das divergências}
+\input{tabelas/falhas.tex}
+Os números de lançamento e resposta são ciclos do CSV. O tempo da tabela é derivado de $t=(c_{\mathrm{resp}}-1)\,10+5+0,001$ ns, usando a fase inicial do clock e a amostragem declarada de 1 ps. Não é um timestamp de alta resolução extraído das mensagens UVM, que usam outra formatação. Todos os erros registrados são comparações OUTPUT; não houve timeout pontuado na campanha principal.
+
+\subsubsection{Divergências já presentes na referência RTL}
+\textbf{IMG-00/W03, transação 3.} A imagem nula com biases prevê $[127,0]$ e produz $[0,127]$, com duas posições divergentes. O mesmo par esperado/observado consta da referência RTL. Bias não nulo impede esperar automaticamente uma saída nula para uma imagem zero. A aparência de inversão nesse vetor não demonstra troca fixa das duas saídas: IMG-02/W03 espera e recebe $[0,127]$.
+
+\textbf{IMG-16, transação 1047.} Com W01, gradiente vertical e \arquivo{ConvBias2[0]=-45}, a referência prevê $[0,12]$ e observa-se $[127,12]$. O mesmo erro de uma posição consta do CSV RTL. Na referência, os valores negativos do filtro afetado são zerados pela ReLU; o valor 127 observado não foi explicado por observação interna. O cálculo detalhado desses dois vetores está no relatório RTL e não representa sondagem de estágios da netlist.
+
+\subsubsection{Dezoito falhas adicionais, concentradas em W02}
+As 18 novas transações reprovadas usam W02: cinco impulsos internos, dois cantos, sete impulsos de borda, a imagem A de IMG-17 e três perturbações de pixel de IMG-20. Exemplos: a transação 10 prevê $[24,24]$ e retorna $[24,4]$; a transação 16 prevê $[16,8]$ e retorna $[0,0]$. As transações 1080 e 1081 diferem em uma unidade na segunda saída ($121\to120$), e a 1082 apresenta $120\to119$ nessa posição.
+
+O agrupamento evidencia dependência do conjunto de pesos e do conteúdo espacial. Ele não demonstra que o SDF seja a causa: mudaram a representação do DUT e o simulador em relação ao relatório de referência, e há uma camada de adaptação de portas. Indexação, ligação de operandos, aritmética da implementação mapeada, comportamento dos modelos e temporização são hipóteses a separar. A investigação exige repetir o mesmo vetor e os mesmos artefatos com observação dos pinos e condições de atraso controladas, sem ajustar a referência para aprovar o DUT.
+
+\subsection{Reset e sobreposição}
+\begin{table}[H]\centering\small
+\begin{tabular}{rrrrl}\toprule
+\textbf{Offset} & \textbf{Tx abortada} & \textbf{Ciclo do aborto} & \textbf{Tx recuperação} & \textbf{Recuperação}\\\midrule
+1 & 1055 & 69.579 & 1056 & $[4,4]$, PASS, latência 38.\\
+4 & 1057 & 69.664 & 1058 & $[4,4]$, PASS, latência 38.\\
+8 & 1059 & 69.753 & 1060 & $[4,4]$, PASS, latência 38.\\\bottomrule
+\end{tabular}
+\caption{Cancelamentos intencionais e três respostas corretas após reset.}
+\end{table}
+Os offsets são critérios de sequenciamento de reset, não identificação de estágios internos. IMG-19 aplica três starts por intervalo de 2, 3, 4 e 8 clocks, totalizando 12 INCOMPLETE. A ausência de um contrato ready/busy impede aprovar throughput ou aceitação de sobreposição com esses registros.
+
+\subsection{Comparação contextual com a campanha RTL}
+Os 1.097 registros dos CSVs possuem os mesmos IDs, subcasos, conjuntos de pesos e vetores esperados. As duas falhas anteriores permanecem e foram adicionadas 18. A comparação não é uma prova de equivalência entre o RTL anterior e a netlist, nem um experimento que varie apenas o SDF.
+
+\begin{table}[H]\centering\small
+\begin{tabular}{p{8.8cm}rr}\toprule
+\textbf{Métrica} & \textbf{RTL / Verilator} & \textbf{Netlist + SDF / xezim}\\\midrule
+Starts / respostas pontuadas & 1.100 / 1.085 & 1.100 / 1.085\\
+PASS / FAIL & 1.083 / 2 & 1.065 / 20\\
+Diferenças de dados & 3 & 25\\
+Abortos / INCOMPLETE & 3 / 12 & 3 / 12\\
+Latência observada & 37 ciclos & 38 ciclos\\
+Falhas de protocolo reportadas & 0 & 0\\
+Resultado global & FAIL & FAIL\\\bottomrule
+\end{tabular}
+\caption{Comparação de resultados preservados, sem equiparar métricas de cobertura de ferramentas distintas.}
+\end{table}
+
+\begin{table}[H]\centering\small
+\input{tabelas/comparacao.tex}
+\caption{Falhas por cenário nas duas campanhas.}
+\end{table}
+O ciclo adicional é compatível com a observação das saídas antes da propagação do novo clock na rede física: a bancada mantém uma amostra 1 ps após o posedge. Não foi imposto \arquivo{EXPECTED_LATENCY=37}; o valor zero caracteriza a latência. A mesma latência de 38 ciclos ocorre nas respostas aprovadas e reprovadas e não explica, sozinha, as diferenças numéricas.
+
+\subsection{Validação dos verificadores e do ponto de amostragem}
+Uma auditoria separada de IMG-01 preservou três variantes isoladas. Um processo no módulo, independente do monitor UVM e da função de previsão, leu os pinos e os comparou com o CSV. Foram conferidos 214 ciclos em cada variante.
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{4.5cm}Xrrrr}\toprule
+\textbf{Variante} & \textbf{Condição / resultado exigido} & \textbf{Starts} & \textbf{Valid real} & \textbf{Valid interface} & \textbf{Status das tx}\\\midrule
+Normal & Pinos e CSV coincidentes; retorno de sucesso. & 3 & 3 & 3 & 3 PASS\\
+Dados corrompidos & Resultados da interface forçados a zero na cópia do adaptador; erros OUTPUT. & 3 & 3 & 3 & 3 FAIL\\
+Valid bloqueado & Valid da interface mantido em zero na cópia do adaptador; timeouts. & 3 & 3 & 0 & 3 FAIL\\\bottomrule
+\end{tabularx}
+\caption{Auditoria complementar: seis falhas intencionais corretamente detectadas. Retornos do Make: 0, 2 e 2.}
+\end{table}
+Na integração inicial, o \arquivo{#1ps} da classe atrasava a leitura em 1 ns na versão instalada. A medição encontrou borda em 5,000 ns e amostra em 6,000 ns, permitindo ao CSV indicar valid um ciclo antes do observador independente. A geração do strobe na interface restabeleceu 1 ps (5,000 para 5,001 ns) e os registros passaram a coincidir. Essa correção preserva a intenção temporal da bancada e não relaxa a comparação matemática.
+
+Os oito testes isolados do scoreboard pertencem à metodologia e às evidências do relatório RTL anterior. Eles não foram apresentados como uma nova execução de oito testes no xezim. A auditoria atual de três variantes comprova apenas os caminhos exercitados; não prova todos os casos de arredondamento, todas as ligações do adaptador ou a conformidade completa do simulador.
+
+\subsection{Sumário da cobertura}
+\textbf{Cobertura estrutural.} Não há relatório de linhas, branches, expressões ou toggle desta netlist na evidência disponível. Os percentuais do Verilator RTL não se aplicam ao xezim com SDF. O JSON informa zero sites de assertions instrumentados; o contador UVM igual a zero representa ausência de falhas nas verificações procedurais, não cobertura de assertions igual a 100\%.
+
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{5.3cm}r r X}\toprule
+\textbf{Grupo} & \textbf{Amostras JSON} & \textbf{Percentual no log} & \textbf{Evidência / ressalva}\\\midrule
+Cenários / pesos & 1.100 & 68,18\% & 22 IDs, seis valores de peso e 29 combinações de cruzamento; execução dos 22 casos confirmada também pelas contagens.\\
+Classes de pixels & 17.600 & 40,00\% & Apenas os bins zero (9.044) e positivo (8.556) constam como atingidos; os bins negativos e extremos não aparecem no JSON.\\
+Posições de impulso & 2 & 29,17\% & Duas linhas, uma coluna e duas combinações. O subscriber registrou apenas duas amostras, embora 19 starts pertençam a IMG-03/04/05.\\
+Sinal do bias & 8.800 & 100,00\% & Bins negativo, zero e positivo atingidos; o metadado de 11 valores de coverpoint não equivale a 11 bins declarados.\\
+Quantização da referência & 47.872 & 94,44\% & Quatro estágios, três classes de saturação e dez combinações; são eventos do modelo matemático, incluindo previsões depois canceladas por reset.\\\midrule
+Total de amostras & 75.374 & Não agregado & Soma de grupos com unidades distintas; não constitui total de requisitos verificados.\\\bottomrule
+\end{tabularx}
+\caption{Cobertura funcional preservada sem corrigir retroativamente lacunas ou denominadores.}
+\end{table}
+
+As taxas do xezim são compatíveis com a média de coverpoints e crosses de cada grupo. Por exemplo,
+\[
+C_{\mathrm{cenários}}=\frac{100(22/22)+100(6/7)+100(29/154)}{3}=68,18\%,
+\]
+enquanto os bins reconstruídos desse grupo totalizam $57/183=31,15\%$. Para posições de impulso, a média de $2/4$, $1/4$ e $2/16$ gera 29,17\%; a contagem por bins é $5/24=20,83\%$. Na quantização, a média de $4/4$, $3/3$ e $10/12$ gera 94,44\%, enquanto $17/19=89,47\%$ conta os bins. Assim, os percentuais não são diretamente comparáveis ao agregado por bins do relatório RTL.
+
+As classes de pixels e a amostragem de impulsos apresentam lacunas incompatíveis com uma conclusão de fechamento de cobertura. Os estímulos previstos incluem negativos, extremos e 19 impulsos; o JSON não comprova sua amostragem integral pelo subscriber. É necessário distinguir comportamento do coletor e implementação de covergroups no simulador. Não foram preenchidos bins por inferência a partir dos nomes dos testes. Os 12 crosses de quantização incluem combinações de saturação negativa nas FCs que a ordem ReLU antes de quantização torna inalcançáveis no modelo; permanecem no denominador.
+
+\textbf{Anotação temporal.} O log confirmou 155.094 sinais e 26.816 checks. Não foram identificadas mensagens de violação setup/hold/width/recovery nos registros preservados; os 25 erros identificados são OUTPUT. Isso não fornece um denominador de anotação completa, não cobre todos os corners e não substitui STA ou uma validação cruzada dos modelos e do simulador.
+
+O log também preserva mensagens léxicas da biblioteca UVM e um aviso do xezim sobre atraso extremo de $9,2\times10^{18}$ no tempo zero. Esse aviso não foi classificado como violação SDF e não interrompeu o clock nesta execução, que completou 72.020 ciclos. Ele continua registrado como limitação/diagnóstico da ferramenta; não foi suprimido para produzir a conclusão do relatório.
+
+\subsection{Evidências e reprodução}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{p{9.5cm}X}\toprule
+\textbf{Arquivo em evidencias/} & \textbf{Finalidade}\\\midrule
+\arquivo{simulation.log}, \arquivo{simulation.exitcode} & Execução completa e retorno original; erros, contagens, anotação e tempos.\\
+\arquivo{cnn_verif_results.csv}, \arquivo{report.log} & 1.097 transações não abortadas e resumo rastreável.\\
+\arquivo{falhas.csv}, \arquivo{resumo_por_cenario.csv} & Tabelas derivadas, com todas as 20 falhas e a reconciliação por cenário.\\
+\arquivo{xezim_cov.json} & Contadores e bins funcionais exportados pelo xezim.\\
+\arquivo{6_final_xezim.inputs.json}, \arquivo{export_sdf.log} & Hashes de entrada e identificação das bibliotecas usadas na exportação.\\
+\arquivo{rtl_referencia/}, \arquivo{comparacao_RTL_SDF.csv} & Cópia do CSV/resumo RTL e comparação por cenário.\\
+\arquivo{audit/} & Resumo, observação de pinos, CSVs, logs e retornos das três variantes de validação complementar.\\
+\arquivo{origens.json}, \arquivo{metricas.json} & Origem, datas de modificação, hashes, estado Git na emissão e métricas reconciliadas.\\
+\arquivo{SHA256SUMS} & Integridade da cópia documental, verificável sem executar nova simulação.\\\bottomrule
+\end{tabularx}
+\caption{As evidências são uma cópia congelada; novas simulações em results\_uvm não atualizam este relatório.}
+\end{table}
+
+\begin{lstlisting}[caption={Reprodução da campanha e da auditoria, a partir da raiz do repositório.}]
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh run TEST=ALL RANDOM_COUNT=1000 \
+  SEED=20261025 OBS_CYCLES=64 EXPECTED_LATENCY=0 SDF_MODE=max MAX_TIME=1ms
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh audit
+\end{lstlisting}
+O primeiro comando deve retornar erro enquanto houver falhas, como ocorreu nesta campanha. Ele explicita a configuração a usar em uma reprodução; não é prova de que todos os seus argumentos foram registrados na execução histórica. Não há waveform FST da campanha completa na cópia fornecida. A inspeção por pinos preservada refere-se somente à auditoria IMG-01.
+
+\begin{lstlisting}[caption={Reconciliar as evidências congeladas e conferir sua integridade.}]
+(cd UVM/CNN_top/doc_verif_sdf/evidencias && sha256sum -c SHA256SUMS)
+python3 UVM/CNN_top/doc_verif_sdf/gerar_metricas.py
+\end{lstlisting}
+
+O estado Git da emissão é \arquivo{FEAT--SDF--SIMU--UVM}, com alterações locais. O commit HEAD isoladamente não reproduz essas alterações. Os hashes das entradas conferiram com o manifesto, e os hashes dos fontes conferiram com a auditoria registrada. Ainda falta um manifesto único criado no início da campanha completa, contendo comando efetivo, ambiente, fontes e binário do simulador. A revisão RTL que originou a netlist não está ligada por hash ao relatório RTL anterior; isso limita a atribuição causal das diferenças.
+
+\subsection{Limitações e pendências}
+\begin{itemize}
+\item A configuração é reduzida, com dados de 8 bits; a campanha não é exaustiva em imagens, pesos, biases ou parâmetros.
+\item As 20 falhas estão demonstradas contra a referência executável; a localização da causa na netlist, adaptador, modelo ou simulador exige investigação adicional.
+\item O conjunto aleatório com W03 apresenta apenas um vetor final esperado para as 1.000 imagens previstas pelo gerador.
+\item A latência foi caracterizada, não aprovada contra contrato positivo. O fluxo avalia uma condição de clock e um conjunto de bibliotecas/SDF, sem fechamento multicorner.
+\item A existência de quatro estados e ausência de erro em resposta válida não comprovam comportamento completo com X/Z; não houve campanha dirigida dedicada.
+\item Sobreposição permanece INCOMPLETE; três abortos são intencionais. Não são falhas de throughput ou resultados matemáticos aprovados.
+\item As lacunas de cobertura de pixel/impulso e os denominadores distintos do xezim impedem declarar fechamento de cobertura. Não há evidência estrutural desta netlist.
+\item A auditoria independente cobre IMG-01 e dois tipos de falha, não todos os 1.100 starts da campanha completa. A validação cruzada do simulador continua relevante.
+\item A seleção min/typ/max histórica e a revisão exata dos RTLs de origem não estão completamente documentadas no início da execução.
+\end{itemize}
+
+\section{Conclusão}
+\textbf{A campanha UVM da netlist OpenROAD com SDF terminou em FAIL.} As 1.100 transações foram reconciliadas: 1.065 PASS, 20 FAIL, três abortos esperados e 12 INCOMPLETE. As 20 falhas compreendem 25 diferenças de dados em sete cenários. As duas divergências da campanha RTL permanecem, e 18 adicionais concentram-se em W02.
+
+As 1.085 respostas pontuadas tiveram latência de 38 ciclos. O reset cancelou três pendências e as três recuperações passaram. A integração registrou anotação SDF e a auditoria complementar confirmou a correspondência entre pinos e CSV, bem como a rejeição de dados corrompidos e valid ausente nos testes selecionados.
+
+A aprovação não pode ser inferida do sucesso dos 1.000 vetores aleatórios nem dos percentuais de cobertura. O fechamento requer investigar as divergências dirigidas, validar a origem e a ligação dos artefatos, esclarecer a coleta de cobertura e repetir a campanha com o comando e as revisões integralmente registrados. A referência matemática e os critérios foram preservados; não foram alterados para eliminar as falhas documentadas.
+
+\vfill
+\begin{center}\textbf{Bloco verificado:} CNN -- netlist ASAP7, UVM com SDF, configuração reduzida $4\times4\times1$, dados signed de 8 bits.\end{center}
+\end{document}

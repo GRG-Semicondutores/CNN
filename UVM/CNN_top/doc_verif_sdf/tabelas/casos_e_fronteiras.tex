@@ -1,0 +1,51 @@
+\section{Casos de Teste}
+Foram executados os 22 cenários descritos abaixo. A tabela apresenta a intenção dos estímulos; os resultados por cenário aparecem na seção de análise.
+
+\small
+\begin{longtable}{p{1.5cm}p{10.8cm}p{10.8cm}}
+\toprule\textbf{Caso} & \textbf{Condição e estímulo} & \textbf{Resultado esperado / finalidade}\\\midrule
+\endfirsthead
+\toprule\textbf{Caso} & \textbf{Condição e estímulo} & \textbf{Resultado esperado / finalidade}\\\midrule
+\endhead
+IMG-00 & Imagem nula, com W00, W01 e W03. & Verificar caminho zerado e efeito dos biases; uma imagem nula pode produzir resultado não nulo.\\
+IMG-01 & Imagens constantes positivas: $1$, $16$ e $127$, com W01. & Resultado final exato para pequenas amplitudes e extremo positivo.\\
+IMG-02 & Imagens constantes negativas: $-1$, $-16$ e $-128$, com W03. & Exercitar sinais negativos e sua propagação matemática no modelo completo.\\
+IMG-03 & Impulso positivo nas quatro posições internas e um impulso negativo. & Verificar sensibilidade espacial e polaridade das contribuições.\\
+IMG-04 & Impulso positivo nos quatro cantos e um negativo em um canto. & Exercitar fronteiras e padding por meio do resultado final.\\
+IMG-05 & Impulso positivo nos oito pixels das bordas sem cantos e um negativo. & Completar a cobertura das 16 posições em conjunto com IMG-03/04.\\
+IMG-06 & Gradiente horizontal com W02. & Verificar a resposta ao padrão orientado na horizontal.\\
+IMG-07 & Gradiente vertical com W02. & Verificar a resposta ao padrão orientado na vertical.\\
+IMG-08 & Xadrez com valores $+32/-32$. & Exercitar alternância espacial, sinais e seleção pelo maxpool.\\
+IMG-09 & Faixas horizontais nas duas polaridades. & Comparar respostas quando se inverte a polaridade das linhas.\\
+IMG-10 & Faixas verticais nas duas polaridades. & Comparar respostas quando se inverte a polaridade das colunas.\\
+IMG-11 & Diagonal principal positiva. & Exercitar orientação e posições específicas da imagem.\\
+IMG-12 & Diagonal secundária positiva. & Exercitar orientação complementar à diagonal principal.\\
+IMG-13 & Xadrez extremo, imagem toda $127$ e imagem toda $-128$. & Verificar fronteiras signed, quantização e saturação sob W03.\\
+IMG-14 & 1.000 imagens xorshift32, seed 20261025, com W03. & Amostrar o espaço de imagens com reprodução determinística e comparação exata.\\
+IMG-15 & Mesma imagem de gradiente com W01, W02 e W03. & Verificar a dependência do resultado em relação ao conjunto de pesos/bias.\\
+IMG-16 & Gradiente vertical e W01; alteração isolada do bias 0 de cada camada para $+45$ e $-45$. & Separar os efeitos de ConvBias1, ConvBias2, FCBias1 e FCBias2 em oito transações.\\
+IMG-17 & Imagens A, B e C em sequência isolada, sem sobreposição. & Preservar associação entre imagem e resultado, sem resíduo observável entre operações.\\
+IMG-18 & Reset em voo, com offsets de 1, 4 e 8 ciclos, seguido de uma imagem de recuperação em cada rodada. & Cancelar três pendências e aprovar as três respostas de recuperação; offsets não identificam estágios internos.\\
+IMG-19 & Três starts para cada intervalo entre inícios de 2, 3, 4 e 8 clocks. & Caracterizar a sobreposição; 12 transações exploratórias, sem aprovação funcional na ausência de contrato.\\
+IMG-20 & Gradiente-base e 16 variantes com incremento de um pixel. & Comparar exatamente a resposta à perturbação de cada posição.\\
+IMG-21 & Pesos/bias uniformes extremos e varredura de entrada de $-3$ a $3$. & Exercitar arredondamento e candidatos à saturação; os bins de quantização descrevem a referência.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Casos de Fronteira}
+\begin{table}[H]\centering\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.8cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{7.6cm}}\toprule
+\textbf{Fronteira} & \textbf{Exercício realizado} & \textbf{Interpretação exigida}\\\midrule
+Zero e biases & IMG-00 e IMG-16. & Zero na imagem não anula contribuições de bias.\\
+Extremos signed & $-128$ e $127$ em imagens e em conjuntos dirigidos de pesos/bias. & Produtos, somas e quantização devem respeitar as premissas signed do modelo.\\
+Arredondamento & Entradas $-3$ a $3$ no IMG-21 e shifts iguais a 1. & Aplicar a regra de empate para $+\infty$ definida na referência.\\
+Saturação & WSAT\_POS/WSAT\_NEG, W03 e imagens extremas. & Limitar os resultados quantizados a $[-128,127]$; cobertura amostra eventos do modelo.\\
+Espaço / padding & Impulsos internos, cantos e bordas; gradientes e diagonais. & Comparação final coerente com índices row-major e padding zero.\\
+Reset em atividade & IMG-18 em três offsets. & Cancelamento esperado das pendências e recuperação correta.\\
+Sobreposição & IMG-19 com quatro espaçamentos. & Caracterização INCOMPLETE até existir contrato público de aceitação.\\
+Estados X/Z & Verificações de resposta conhecida, sem campanha dirigida dedicada de X/Z. & Simulação em quatro estados não substitui estímulos dirigidos e validação dos modelos.\\\bottomrule
+\end{tabularx}
+\caption{Fronteiras funcionais e limites de interpretação da campanha.}
+\end{table}
+

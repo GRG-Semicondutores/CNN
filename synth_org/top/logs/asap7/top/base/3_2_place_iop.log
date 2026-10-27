@@ -24,6 +24,6 @@ Using 2 tracks default min distance between IO pins.
 [INFO PPL-0012] I/O nets HPWL: 19603.57 um.
 Design area 5311 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_2_place_iop.odb
-Elapsed time: 0:01.36[h:]min:sec. CPU time: user 1.24 sys 0.12 (99%). Peak memory: 253800KB.
+Elapsed time: 0:01.39[h:]min:sec. CPU time: user 1.27 sys 0.11 (99%). Peak memory: 254332KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-3_2_place_iop             .odb            1            247 836a4bb94ed1f41d9abe
+3_2_place_iop             .odb            1            248 836a4bb94ed1f41d9abe

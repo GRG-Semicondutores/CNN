@@ -77,7 +77,7 @@ Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
 [INFO RSZ-0034] Found 1 slew violations.
 [INFO RSZ-0036] Found 1 capacitance violations.
 [INFO RSZ-0038] Inserted 3 buffers in 2 nets.
-[INFO RSZ-0504] Runtime: 4.34s
+[INFO RSZ-0504] Runtime: 4.67s
 Took 5 seconds: repair_design -verbose
 Floating nets: 
 Report metrics stage 3, resizer...
@@ -89,6 +89,6 @@ Design area 5279 um^2 40% utilization.
 Instance count before 48763, after 48766
 Pin count before 154383, after 154389
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_4_place_resized.odb
-Elapsed time: 0:17.29[h:]min:sec. CPU time: user 29.35 sys 2.86 (186%). Peak memory: 455020KB.
+Elapsed time: 0:18.47[h:]min:sec. CPU time: user 30.58 sys 3.07 (182%). Peak memory: 455304KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-3_4_place_resized         .odb           17            444 3391cafb5a59b5c583ed
+3_4_place_resized         .odb           18            444 3391cafb5a59b5c583ed

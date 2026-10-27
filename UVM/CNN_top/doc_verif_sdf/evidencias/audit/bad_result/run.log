@@ -1,0 +1,36 @@
+[PREPARE] 69 tipos de celulas com modelos; 47390 celulas SDF; escopo=dut
+[PREPARE] SDF com escopo: /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/bad_result/results/CNN_top_sdf/6_final_xezim.sdf
+[PREPARE] 30 linhas UDP (bx) expandidas em copias dos modelos
+[XEZIM] RUN: compilacao + simulacao UVM; TEST=IMG-01 SDF_MODE=max
+=== xezim 0.11.3 ===
+git 44f5c88c (2026-10-26T14:52:06-07:00)
+[PP] warning: `include "CNN_openroad_adapter.svh" resolved to '/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/bad_result/CNN_openroad_adapter.svh'; a different copy in '/home/matheus-grossi/Projects/CNN/CNN/scripts/UVM/gate_level/CNN_openroad_adapter.svh' is shadowed by the search order
+[SDF] annotated 155094 signals with delays
+[SDF] annotated 26816 timing check(s)
+[xezim][warning] a #delay evaluated to a pathological real value 9.2000e18 at time 0 — the process is parked far in the future, so a clock driven by it will appear to stop. This usually means the delay expression produced NaN/inf or IEEE-754 bit garbage.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+[CFG] TEST=IMG-01 OBS_CYCLES=64 RANDOM_COUNT=1000 SEED=20261025
+
+========== IMG-01 ==========
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 455000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1 case=IMG-01 subcase=const_pos_1 launch=8 now=46 indice=0 exp=1 got=0
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 455000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1 case=IMG-01 subcase=const_pos_1 launch=8 now=46 indice=1 exp=1 got=0
+[FAIL-TX] IMG-01/const_pos_1 errors=2 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1115000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=2 case=IMG-01 subcase=const_pos_16 launch=74 now=112 indice=0 exp=4 got=0
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1115000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=2 case=IMG-01 subcase=const_pos_16 launch=74 now=112 indice=1 exp=4 got=0
+[FAIL-TX] IMG-01/const_pos_16 errors=2 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1775000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=3 case=IMG-01 subcase=const_pos_127 launch=140 now=178 indice=0 exp=32 got=0
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1775000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=3 case=IMG-01 subcase=const_pos_127 launch=140 now=178 indice=1 exp=32 got=0
+[FAIL-TX] IMG-01/const_pos_127 errors=2 latency=38
+
+============== RELATORIO FINAL ==============
+[SUMMARY] total_starts=3 checked_PASS=0 checked_FAIL=3 aborted_by_reset=0 incomplete=0
+[SUMMARY] errors=6 assertions=0 sim_cycles=214 seed=20261025
+[SUMMARY] outputs_checked=3 latency_min=38 latency_max=38
+[CASE] IMG-01 starts=3 pass=0 fail=3 incomplete=0
+[COVERAGE] scenarios=6.49% pixels=40.00% impulses=0.00% bias=33.33% quantization=55.56%
+[REPORT] CSV=/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/bad_result/results/CNN_top_sdf/cnn_verif_results.csv
+[RESULT] FAIL
+** Fatal: CNN UVM: campanha FAIL; consulte o relatorio
+   Time: 2140000  Scope: cnn_uvm_pkg.cnn_test.final_phase
+Simulation finished at time 2140000 ($finish called)
+make[1]: *** [/home/matheus-grossi/Projects/CNN/CNN/scripts/UVM/makefiles/Makefile_UVM_cnn_top_sdf:72: run] Error 1

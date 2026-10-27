@@ -119,6 +119,6 @@ Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
 Took 7 seconds: global_placement -skip_io -density 0.6 -pad_left 0 -pad_right 0
 Design area 5311 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_1_place_gp_skip_io.odb
-Elapsed time: 0:08.37[h:]min:sec. CPU time: user 42.87 sys 0.17 (514%). Peak memory: 347380KB.
+Elapsed time: 0:08.81[h:]min:sec. CPU time: user 45.06 sys 0.20 (513%). Peak memory: 347328KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
 3_1_place_gp_skip_io      .odb            8            339 ecf11cd02d3ce3bcbe8d

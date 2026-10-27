@@ -1,0 +1,33 @@
+============== RELATORIO FINAL ==============
+[SUMMARY] total_starts=1100 checked_PASS=1083 checked_FAIL=2 aborted_by_reset=3 incomplete=12
+[SUMMARY] errors=3 assertions=0 sim_cycles=72020 seed=20261025
+[SUMMARY] outputs_checked=1085 latency_min=37 latency_max=37
+[CASE] IMG-00 starts=3 pass=2 fail=1 incomplete=0
+[CASE] IMG-01 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-02 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-03 starts=5 pass=5 fail=0 incomplete=0
+[CASE] IMG-04 starts=5 pass=5 fail=0 incomplete=0
+[CASE] IMG-05 starts=9 pass=9 fail=0 incomplete=0
+[CASE] IMG-06 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-07 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-08 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-09 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-10 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-11 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-12 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-13 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-14 starts=1000 pass=1000 fail=0 incomplete=0
+[CASE] IMG-15 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-16 starts=8 pass=7 fail=1 incomplete=0
+[CASE] IMG-17 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-18 starts=6 pass=3 fail=0 incomplete=0
+[CASE] IMG-19 starts=12 pass=0 fail=0 incomplete=12
+[CASE] IMG-20 starts=17 pass=17 fail=0 incomplete=0
+[CASE] IMG-21 starts=11 pass=11 fail=0 incomplete=0
+[COVERAGE] scenarios=31.15% pixels=100.00% impulses=100.00% bias=100.00% quantization=89.47%
+[REPORT] CSV=cnn_verif_results.csv
+[RESULT] FAIL
+[REPORT] Banco de cobertura=results_uvm/CNN_top/coverage/cnn_uvm_coverage.dat
+[720200000] %Fatal: UVM_test.sv:39: Assertion failed in cnn_uvm_pkg.cnn_test.final_phase: CNN UVM: campanha FAIL; consulte o relatorio
+%Error: UVM/CNN_top/UVM_test.sv:39: Verilog $stop
+Aborting...

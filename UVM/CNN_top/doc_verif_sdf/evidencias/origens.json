@@ -1,0 +1,241 @@
+{
+  "report_date": "2026-10-27",
+  "timezone": "America/Sao_Paulo",
+  "git_branch": "FEAT--SDF--SIMU--UVM",
+  "git_HEAD": "841cdc54fe955b6d918b7449278574419afd372a",
+  "git_dirty": true,
+  "copied_evidence": {
+    "simulation.log": {
+      "source": "results_uvm/CNN_top_sdf/logs/simulation.log",
+      "sha256": "5535c09ba39d05351b721f30ec839de216b241c94ba367643a862ea68324566d",
+      "source_mtime": "2026-10-26T22:51:44-03:00"
+    },
+    "simulation.exitcode": {
+      "source": "results_uvm/CNN_top_sdf/logs/simulation.exitcode",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source_mtime": "2026-10-26T22:51:44-03:00"
+    },
+    "inputs.log": {
+      "source": "results_uvm/CNN_top_sdf/logs/inputs.log",
+      "sha256": "64336b08eaaac9473dadbd0171f8f2ec9271b32542dbd1e00132d73c55f426c1",
+      "source_mtime": "2026-10-26T21:58:11-03:00"
+    },
+    "cnn_verif_results.csv": {
+      "source": "results_uvm/CNN_top_sdf/cnn_verif_results.csv",
+      "sha256": "f56a3b2a9bd54e2ae3dd3bcc1992ea8592315c650211b2a54ad50461a57a12f3",
+      "source_mtime": "2026-10-26T22:51:44-03:00"
+    },
+    "xezim_cov.json": {
+      "source": "results_uvm/CNN_top_sdf/xezim_cov.json",
+      "sha256": "9b741a0037d801abcf5a9ba5b317cf5a3501bdb0b329d69c56c4663ec79f4ffa",
+      "source_mtime": "2026-10-26T22:51:44-03:00"
+    },
+    "6_final_xezim.inputs.json": {
+      "source": "results_uvm/CNN_top_sdf/6_final_xezim.inputs.json",
+      "sha256": "e50b8fa3e574b0f423fcd849d57aabacf7f237660c77fc8577dfa9c53681e423",
+      "source_mtime": "2026-10-26T21:58:11-03:00"
+    },
+    "rtl_referencia/cnn_verif_results.csv": {
+      "source": "UVM/CNN_top/doc_verif/evidencias/cnn_verif_results.csv",
+      "sha256": "a982ef975f6beb1bbb36acb10fe5c448f38913e6c99edfcefb297197398b4019",
+      "source_mtime": "2026-10-26T21:11:45-03:00"
+    },
+    "rtl_referencia/report.log": {
+      "source": "UVM/CNN_top/doc_verif/evidencias/report.log",
+      "sha256": "6160499e60313208e9510e7a41a0e22919883786cad5310c27f96a6472bf781b",
+      "source_mtime": "2026-10-26T21:11:45-03:00"
+    },
+    "audit/summary.json": {
+      "source": "results_uvm/CNN_top_sdf/audit/summary.json",
+      "sha256": "3e864e4175400f609ea7d4d976a5e15f62d6f33ddeb6c644961102e2b4485741",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    },
+    "export_sdf.log": {
+      "source": "synth_org/top/logs/asap7/top/base/export_sdf.log",
+      "sha256": "07521cd168d732fdfe8c4e2875d0020e998b541b762eb398d4de784bb7fcd00b",
+      "source_mtime": "2026-10-26T21:11:49-03:00"
+    },
+    "audit/normal/pins.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/normal/pins.csv",
+      "sha256": "11b3d11cf0624de75afb33109fc770ff4c71ca41817bea14e4e8ab4f6a88d76b",
+      "source_mtime": "2026-10-26T21:54:25-03:00"
+    },
+    "audit/normal/run.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/normal/run.log",
+      "sha256": "609e49f8b3163d46c3fa265f8fc93f54203ddd9f2e77f65a934e55b5325cc041",
+      "source_mtime": "2026-10-26T21:54:25-03:00"
+    },
+    "audit/normal/cnn_verif_results.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/normal/results/CNN_top_sdf/cnn_verif_results.csv",
+      "sha256": "fa4ab6347cec0c46fa43f75ba5c623092a5f9c9e6a333ae6220b4319bc2fd640",
+      "source_mtime": "2026-10-26T21:54:25-03:00"
+    },
+    "audit/normal/logs/simulation.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/normal/results/CNN_top_sdf/logs/simulation.log",
+      "sha256": "23d18842dab0efa206df7df9c7a87e7ded8e24fa978b3b013048a183824d4701",
+      "source_mtime": "2026-10-26T21:54:25-03:00"
+    },
+    "audit/normal/logs/simulation.exitcode": {
+      "source": "results_uvm/CNN_top_sdf/audit/normal/results/CNN_top_sdf/logs/simulation.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source_mtime": "2026-10-26T21:54:25-03:00"
+    },
+    "audit/bad_result/pins.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/bad_result/pins.csv",
+      "sha256": "5e826a388b4de02d809d96bf2ca737bea0caf8ef5c36e9689b64a51a00442ab7",
+      "source_mtime": "2026-10-26T21:54:49-03:00"
+    },
+    "audit/bad_result/run.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/bad_result/run.log",
+      "sha256": "eb40c0bb7f2d4771dfb93897f3593d5c91bbdd7bcb28cb6102e0b9710dbc4db1",
+      "source_mtime": "2026-10-26T21:54:49-03:00"
+    },
+    "audit/bad_result/cnn_verif_results.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/bad_result/results/CNN_top_sdf/cnn_verif_results.csv",
+      "sha256": "ad488885a675e4924f155695a66fcbb85aa26380ccbbf2f4f41ac61fe8f06134",
+      "source_mtime": "2026-10-26T21:54:49-03:00"
+    },
+    "audit/bad_result/logs/simulation.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/bad_result/results/CNN_top_sdf/logs/simulation.log",
+      "sha256": "88317e547b76b5baca7d11e3b61dce453f7a54abd5b040902953fa484c3ed4c3",
+      "source_mtime": "2026-10-26T21:54:49-03:00"
+    },
+    "audit/bad_result/logs/simulation.exitcode": {
+      "source": "results_uvm/CNN_top_sdf/audit/bad_result/results/CNN_top_sdf/logs/simulation.exitcode",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source_mtime": "2026-10-26T21:54:49-03:00"
+    },
+    "audit/missing_valid/pins.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/missing_valid/pins.csv",
+      "sha256": "c958318f5c595e05045774c96f3a662a95167a0b37b0e85f51f10773d3fce5cd",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    },
+    "audit/missing_valid/run.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/missing_valid/run.log",
+      "sha256": "0b644db1ddba3f59c260a6b73732c33d20981d33f1e4e5a922edcf32ffd5766a",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    },
+    "audit/missing_valid/cnn_verif_results.csv": {
+      "source": "results_uvm/CNN_top_sdf/audit/missing_valid/results/CNN_top_sdf/cnn_verif_results.csv",
+      "sha256": "3dcdd0be1d68764575c6c17086a1d497579c18820f3283798f36531b001aa9bd",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    },
+    "audit/missing_valid/logs/simulation.log": {
+      "source": "results_uvm/CNN_top_sdf/audit/missing_valid/results/CNN_top_sdf/logs/simulation.log",
+      "sha256": "52cbb05adbf328be626cc618a66b75f4a3cf75f92c0e935401acbfa4f5697379",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    },
+    "audit/missing_valid/logs/simulation.exitcode": {
+      "source": "results_uvm/CNN_top_sdf/audit/missing_valid/results/CNN_top_sdf/logs/simulation.exitcode",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source_mtime": "2026-10-26T21:55:13-03:00"
+    }
+  },
+  "inputs_at_report": {
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v": {
+      "sha256": "9df26f5e98a79db177bd0cab7d4ef1423e96734c0ae857f8d79a8b5cef029d14",
+      "matches_run_manifest": true,
+      "size": 5829671
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.sdf": {
+      "sha256": "080df0b464eaefe3047fcb3a08eebcc0319ad983447a8ebe0272a7e54796d83c",
+      "matches_run_manifest": true,
+      "size": 39187172
+    },
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_AO_RVT_TT_201020.v": {
+      "sha256": "7d60ca80e150189367085daffcca59e2eb768ac4739c50ad04c318d8a3bb9d48",
+      "matches_run_manifest": true,
+      "size": 202868
+    },
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_INVBUF_RVT_TT_201020.v": {
+      "sha256": "8804a647af1e2161c13fffcaef9ec50786494534872ec50adaae593967a3b459",
+      "matches_run_manifest": true,
+      "size": 17210
+    },
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_OA_RVT_TT_201020.v": {
+      "sha256": "d98d028cdc47061912c4dffe12af420b65d3ce3f89f728c5a03d9819967b77b4",
+      "matches_run_manifest": true,
+      "size": 197600
+    },
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_SEQ_RVT_TT_220101.v": {
+      "sha256": "6e63ff4b5587097a76bf395c6f2383035368d5c8d95dbf551ba324d3a9537fde",
+      "matches_run_manifest": true,
+      "size": 81234
+    },
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_SIMPLE_RVT_TT_201020.v": {
+      "sha256": "849946d9b648ef58f39a97027de5e7f24051f6ef4fded598dec861e3257ea4b6",
+      "matches_run_manifest": true,
+      "size": 30103
+    }
+  },
+  "audit_sources_at_report": {
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/testbench.sv": {
+      "sha256": "ea641f43cfd0f317fc498d1b00954e69f12b66e3d6b451d2aab3e6c8ba0a8bac",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/scripts/UVM/gate_level/CNN_openroad_adapter.svh": {
+      "sha256": "3f51944fb3d44a253494083462895554f0ccf3835ff6fdb42f77e1534cfcef5c",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v": {
+      "sha256": "9df26f5e98a79db177bd0cab7d4ef1423e96734c0ae857f8d79a8b5cef029d14",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.sdf": {
+      "sha256": "080df0b464eaefe3047fcb3a08eebcc0319ad983447a8ebe0272a7e54796d83c",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_agent.sv": {
+      "sha256": "c888eeec3d4710405a8a22779dd0251e1f0bfe14d617d2e88ccf03e9ec3f3cd5",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_config.sv": {
+      "sha256": "00f7853abf98391876b412ac398c8d2df9d72f2bd648eeeba00f71c14dfd3932",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_coverage.sv": {
+      "sha256": "d1461d07b9e8bd8bf483a85c0e53c48ef9ea9ffea10fb86d34ca2b029448a573",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_driver.sv": {
+      "sha256": "388bd2bf585d800c62c68372762afd5d1e6582550ea18859f04dfefebfed52d7",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_env.sv": {
+      "sha256": "f19f29b263c2bb8f1e3f850ab87cf4cbbadece1432773c3af20932f9daf2663d",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_monitor.sv": {
+      "sha256": "ddb523ac0849f7436dd25ec2065f654d9e8b2348da2daacda89db3bca8ae7683",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_reference.sv": {
+      "sha256": "947828f252a65c3aed5bbb3a8e6634ef2d9bb91c617d02dbdbe6eca515d80d02",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv": {
+      "sha256": "211fca09e83f36c3084340cf249e7850ebcdf1790ff21089705e0bd927957de5",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_seq_item.sv": {
+      "sha256": "0807894bcfc0b81ee935ee4a32224a2e2ed9f5a2bf50fb1e369c9c77548fad8b",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_sequence.sv": {
+      "sha256": "96dc35ead64ca2b18fc050e31a46a582863222e2d3c0140cb521e86aa759ab7b",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_sequencer.sv": {
+      "sha256": "bdfa59e4ee8d68e56bf649ea2894829e6b4852aca216f3ce76e4079a73270d0f",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_test.sv": {
+      "sha256": "b40a174641650c41b248871780ce89a2086e7005111f75ac7c1d6c2ee46b1c96",
+      "matches_audit_snapshot": true
+    },
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_tb_params.svh": {
+      "sha256": "384a1633f2fe457c033745559247d2cc4fc40144473dad632ce6fba0a47d655d",
+      "matches_audit_snapshot": true
+    }
+  }
+}

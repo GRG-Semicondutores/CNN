@@ -5,4 +5,4 @@ Warning: DEF UNITS does not match reader DBU (DEF UNITS is 1000 and corresponds 
 [INFO] GDS_ALLOW_EMPTY=fakeram.*
 [INFO] All LEF cells have matching GDS/OAS cells
 [INFO] No orphan cells in the final layout
-Elapsed time: 0:03.40[h:]min:sec. CPU time: user 3.01 sys 0.30 (97%). Peak memory: 600540KB.
+Elapsed time: 0:03.48[h:]min:sec. CPU time: user 2.99 sys 0.34 (95%). Peak memory: 600292KB.

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050b16"><meta name="description" content="Notas de arquitetura e referências acadêmicas que fundamentam o projeto."><title>Referências técnicas · CNN</title><link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/app.js" defer></script></head>
+<body class="document-page">
+<a class="skip-link" href="#document-content">Ir para o documento</a>
+<header class="topbar"><a class="brand" href="../index.html"><img src="../assets/favicon.svg" width="38" height="38" alt=""><span>CNN<span class="brand-caption">DOCUMENTAÇÃO DO PROJETO</span></span></a><a class="text-link" href="../index.html#documentacao">← Página principal</a></header>
+<main class="document-shell"><div class="document-toolbar"><span class="mono document-path">docs/README.md</span><div><a href="referencias.md" download>Documento-fonte · Markdown ↓</a><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/README.md" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div><div class="document-layout"><article class="document-body" id="document-content"><h1 id="referencias-do-projeto">Referências do projeto</h1>
+<p>Os materiais desta pasta descrevem a arquitetura de CNNs, alternativas de
+implementação em hardware e aplicações de redes neurais. Eles têm papéis
+diferentes: as notas do projeto apresentam os blocos, enquanto os materiais
+didáticos e acadêmicos fornecem a base conceitual.</p>
+<h2 id="arquitetura-da-cnn">Arquitetura da CNN</h2>
+<table align="center">
+<thead>
+<tr>
+<th>Documento</th>
+<th>Conteúdo relevante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../assets/documents/notas-cnn.pdf">Notas do bloco CNN</a></td>
+<td>Produto interno e validade, pp. 1–2; convolução, canais e filtros, pp. 3–5; neurônios e FC, pp. 6–7; pooling, ReLU, quantização e flatten, pp. 8–11; interface do topo, p. 12.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/material_de_aula_cd_hbr_de_arquiteturas_para_redes_neurais.pdf">Arquiteturas de hardware para CNNs — A-408</a></td>
+<td>Organização das camadas, produtos ponderados, bias e relação entre o cálculo da rede e sua implementação em hardware.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/topico9_P2_IA353_1s2026.pdf">IA353, tópico 9, parte 2 — Fernando J. Von Zuben</a></td>
+<td>Correlação cruzada e convolução, pp. 11–12; camadas convolucionais e densas, a partir da p. 55; max/average pooling, a partir da p. 61.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/material_de_aula_cd_hbr_de_arquiteturas_para_machine_learning.pdf">Arquiteturas para Machine Learning — A-407</a></td>
+<td>Material complementar sobre arquiteturas de processamento para aprendizado de máquina.</td>
+</tr>
+</tbody>
+</table>
+
+<p>As páginas indicadas são as posições no PDF. Algumas publicações também têm
+numeração impressa, que pode diferir da posição do arquivo.</p>
+<h3 id="convencoes-usadas-na-documentacao">Convenções usadas na documentação</h3>
+<p><strong>Canal e filtro têm funções distintas.</strong> Para cada filtro convolucional, há
+um kernel por canal de entrada. As contribuições desses canais são somadas e
+recebem o bias do filtro. Cada filtro produz um mapa de características; os
+mapas formam os canais de entrada da camada seguinte.</p>
+<p><strong>Convolução é o nome usual da operação nas CNNs.</strong> O material IA353 distingue
+essa denominação da correlação cruzada efetivamente usada nas camadas neurais.
+O modelo de verificação percorre as janelas sem inverter o kernel; a convenção
+espacial e a ordem dos canais estão especificadas no
+<a href="plano.html">plano de verificação</a>.</p>
+<p><strong>Bias e ativação são operações diferentes.</strong> O neurônio calcula
+<code>a = Σ(x_i × w_i) + b</code>. A ReLU aplica <code>max(0, a)</code> ao valor recebido. O ponto
+exato em que quantização e ativação entram na cadeia precisa estar definido
+para permitir uma comparação bit a bit.</p>
+<p><strong>Quantização exige mais que a largura dos dados.</strong> As notas explicam a
+redução de largura e a representação em ponto fixo, mas não fornecem um
+contrato completo de arredondamento e saturação para a campanha atual.
+O plano registra as regras adotadas pelo modelo, que devem ser confirmadas
+na especificação do projeto.</p>
+<p>Os exemplos de classificação, softmax e treinamento nos materiais didáticos
+explicam CNNs em geral. A campanha do repositório compara resultados numéricos
+com pesos sintéticos; ela não mede acurácia nem interpreta as duas saídas
+como probabilidades.</p>
+<h2 id="implementacao-e-avaliacao-em-hardware">Implementação e avaliação em hardware</h2>
+<table align="center">
+<thead>
+<tr>
+<th>Documento</th>
+<th>Tema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/metodos_para_desenvolver_redes_neurais_em_fpgas.pdf">Método para execução de redes neurais convolucionais em FPGA — Mark Cappello Ferreira de Sousa, 2019</a></td>
+<td>Mapeamento de camadas e operações de CNNs em FPGA.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/otimizacao_de_redes_neuronais_convolucionais_em.pdf">Otimização de redes neuronais convolucionais em FPGA utilizando técnicas de compressão — Tiago Alexandre Mateus Peres</a></td>
+<td>Representação dos parâmetros e técnicas de compressão para implementação.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/comparacao_de_desempenho_de_redes_neurais_em_diferentes_plataformas_de_hardware.pdf">Comparação de desempenho de redes neurais em diferentes plataformas de hardware — Enzo Victor Zucchetti Pietta, 2025</a></td>
+<td>Avaliação de execução em diferentes plataformas.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/arquiteturas_hibridas_reconfiguraveis_de_dsp.pdf">Arquiteturas híbridas reconfiguráveis de múltiplos propósitos baseadas em DSP e FPGA</a></td>
+<td>Organização de plataformas híbridas de processamento.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="material-complementar">Material complementar</h2>
+<ul>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/anotacoes_felipe.pdf">Anotações de Felipe</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/proposta_de_metodologia_para_utilizacao_em_hardware_reconfiguravel_para_aplicacoes_aeroespaciais.pdf">Proposta de metodologia para utilização em hardware reconfigurável para aplicações aeroespaciais</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/extensoes_para_design_de_hardware_digital_em_aplicacoes_aeroespaciais.pdf">Extensões para design de hardware digital em aplicações aeroespaciais</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/redes-neurais-aplicadas-ao-controle-de-atitude-de-satelites-com-geometria-variavel.pdf">Redes neurais aplicadas ao controle de atitude de satélites com geometria variável</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/material_de_aula_cd_hbr_de_algoritmos_de_mapeamento_invers%C3%A3o_de_matrizc.pdf">Algoritmos para mapeamento de arquiteturas — inversão de matrizes</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/um_estudo_sobre_a_transformada_rapida_de_fourier_e_aplicacoes.pdf">Um estudo sobre a transformada rápida de Fourier e seu uso em processamento de imagens</a>.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/tese-cam.pdf">Uma abordagem para pré-processamento de dados textuais em algoritmos de aprendizado — Claudia Aparecida Martins</a>.</li>
+</ul>
+<p>Esses documentos compõem a bibliografia de apoio. Sua presença na pasta não
+significa que os experimentos ou garantias neles descritos foram reproduzidos
+na CNN deste repositório. Os resultados do projeto estão nos relatórios de
+simulação e de implementação física apontados pelo <a href="projeto.html">README principal</a>.</p></article><aside class="document-toc" aria-label="Índice do documento"><details open><summary>Sumário</summary><div class="toc">
+<ul>
+<li><a href="#referencias-do-projeto">Referências do projeto</a><ul>
+<li><a href="#arquitetura-da-cnn">Arquitetura da CNN</a><ul>
+<li><a href="#convencoes-usadas-na-documentacao">Convenções usadas na documentação</a></li>
+</ul>
+</li>
+<li><a href="#implementacao-e-avaliacao-em-hardware">Implementação e avaliação em hardware</a></li>
+<li><a href="#material-complementar">Material complementar</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details></aside></div></main>
+<footer class="footer"><a href="../index.html#documentacao">← Documentação</a><span class="mono">CNN · SYSTEMVERILOG / UVM / ASAP7</span></footer>
+</body></html>

@@ -6,6 +6,13 @@ endpackage
 interface cnn_if(input logic clk);
     timeunit 1ns; timeprecision 1ps;
     import cnn_tb_types::*;
+    // O xezim 0.11.3 escala #1ps incorretamente no monitor de classe.
+    // O strobe da interface preserva o instante de amostragem da bancada.
+    bit monitor_sample_tick=1'b0;
+    always @(posedge clk) begin
+        #1ps;
+        monitor_sample_tick=~monitor_sample_tick;
+    end
     logic rst=1'b1, start=1'b0;
     data_t imagem     [0:N_CHANNELS-1][0:N_PIXELS-1];
     data_t kernel1    [0:N_FILTERS_LAYER_1-1][0:N_CHANNELS-1][0:N_KERNEL-1];
@@ -141,6 +148,9 @@ module tb_cnn;
     assign FCBias2 = cif.FCBias2;
     assign result_FC2 = cif.result_FC2;
 
+`ifdef CNN_TOP_GATE_LEVEL
+    `include "CNN_openroad_adapter.svh"
+`else
     CNN #(
         .DATA_WIDTH(DATA_WIDTH),
         .IMG_SIZE_1(IMG_SIZE_1),
@@ -172,6 +182,7 @@ module tb_cnn;
         .result_FC2(cif.result_FC2),
         .valid_out4(cif.valid_out4)
     );
+`endif
 
 
     initial begin

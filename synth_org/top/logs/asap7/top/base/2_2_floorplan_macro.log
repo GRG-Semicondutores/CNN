@@ -15,6 +15,6 @@ source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/
 No macros found: Skipping macro_placement
 Design area 5261 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_2_floorplan_macro.odb
-Elapsed time: 0:01.30[h:]min:sec. CPU time: user 1.19 sys 0.11 (99%). Peak memory: 247180KB.
+Elapsed time: 0:01.34[h:]min:sec. CPU time: user 1.21 sys 0.12 (99%). Peak memory: 248696KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-2_2_floorplan_macro       .odb            1            241 4d262188931b2d845489
+2_2_floorplan_macro       .odb            1            242 4d262188931b2d845489
