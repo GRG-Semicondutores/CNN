@@ -1,0 +1,29 @@
+\small
+\begin{longtable}{l p{8.1cm} r r r r r l}
+\toprule\textbf{ID} & \textbf{Caso} & \textbf{Starts} & \textbf{PASS} & \textbf{FAIL} & \textbf{ABORT} & \textbf{INC.} & \textbf{Situação}\\\midrule
+\endfirsthead
+\toprule\textbf{ID} & \textbf{Caso} & \textbf{Starts} & \textbf{PASS} & \textbf{FAIL} & \textbf{ABORT} & \textbf{INC.} & \textbf{Situação}\\\midrule\endhead
+IMG-00 & Imagem nula / biases & 3 & 2 & 1 & 0 & 0 & FAIL\\
+IMG-01 & Constantes positivas & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-02 & Constantes negativas & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-03 & Impulsos internos & 5 & 0 & 5 & 0 & 0 & FAIL\\
+IMG-04 & Impulsos nos cantos & 5 & 3 & 2 & 0 & 0 & FAIL\\
+IMG-05 & Impulsos nas bordas & 9 & 2 & 7 & 0 & 0 & FAIL\\
+IMG-06 & Gradiente horizontal & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-07 & Gradiente vertical & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-08 & Xadrez & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-09 & Faixas horizontais & 2 & 2 & 0 & 0 & 0 & PASS\\
+IMG-10 & Faixas verticais & 2 & 2 & 0 & 0 & 0 & PASS\\
+IMG-11 & Diagonal principal & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-12 & Diagonal secundária & 1 & 1 & 0 & 0 & 0 & PASS\\
+IMG-13 & Fronteiras signed & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-14 & Imagens pseudoaleatórias & 1.000 & 1.000 & 0 & 0 & 0 & PASS\\
+IMG-15 & Troca de pesos & 3 & 3 & 0 & 0 & 0 & PASS\\
+IMG-16 & Bias isolado por camada & 8 & 7 & 1 & 0 & 0 & FAIL\\
+IMG-17 & Sequência de imagens isoladas & 3 & 2 & 1 & 0 & 0 & FAIL\\
+IMG-18 & Reset em voo / recuperação & 6 & 3 & 0 & 3 & 0 & PASS (reset)\\
+IMG-19 & Starts sobrepostos & 12 & 0 & 0 & 0 & 12 & INCOMPLETE\\
+IMG-20 & Perturbação de um pixel & 17 & 14 & 3 & 0 & 0 & FAIL\\
+IMG-21 & Quantização e saturação & 11 & 11 & 0 & 0 & 0 & PASS\\
+\midrule\textbf{Total} && \textbf{1.100} & \textbf{1.065} & \textbf{20} & \textbf{3} & \textbf{12} & \textbf{FAIL}\\\bottomrule
+\end{longtable}\normalsize

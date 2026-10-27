@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050b16">
+  <meta name="description" content="CNN em SystemVerilog: arquitetura, implementação física ASAP7 e evidências de verificação UVM. Resultados, cobertura e formas de onda do projeto GRG-Semicondutores.">
+  <title>CNN · Documentação técnica do projeto</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<header class="topbar">
+  <a href="#inicio" class="brand" aria-label="CNN, início"><img src="assets/favicon.svg" width="38" height="38" alt=""><span>CNN<span class="brand-caption">GRG · SEMICONDUTORES</span></span></a>
+  <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">☰</span></button>
+  <nav class="primary-nav" id="primary-nav" aria-label="Navegação principal"><a href="#arquitetura">Arquitetura</a><a href="#sintese">Síntese</a><a href="#verificacao">Verificação</a><a href="#cobertura">Cobertura</a><a href="#waveforms">Formas de onda</a><a href="#documentacao">Documentação</a><a href="#modulos">Blocos</a></nav>
+  <a class="repo-link" href="https://github.com/GRG-Semicondutores/CNN" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+</header>
+<main id="conteudo">
+<section class="hero" id="inicio" aria-labelledby="hero-title">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="eyebrow"><span class="status-dot"></span> DOCUMENTAÇÃO TÉCNICA / SYSTEMVERILOG</p>
+    <h1 id="hero-title">Rede neural<br>convolucional<br><span>em hardware</span></h1>
+    <p class="hero-description">Documentação da arquitetura, da verificação funcional e da implementação física de uma rede neural convolucional descrita em SystemVerilog. O projeto utiliza uma bancada UVM e um fluxo de síntese e implementação com a biblioteca ASAP7.</p>
+    <div class="technology-list" aria-label="Tecnologias"><span>SystemVerilog</span><span>UVM</span><span>Verilator</span><span>OpenROAD</span><span>ASAP7</span></div>
+    <div class="hero-actions"><a class="button primary" href="#arquitetura">Arquitetura do projeto <span aria-hidden="true">↓</span></a><a class="button secondary" href="assets/documents/relatorio-cnn.pdf" target="_blank" rel="noopener">Relatório de verificação ↗</a></div>
+    <a class="campaign-notice" href="#verificacao"><span class="badge fail">FAIL</span><span>Campanha 25/10/2026 · 2 transações divergentes</span><span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="hero-visual">
+    <figure class="hero-chip"><div class="visual-label"><span class="mono">01 / IMPLEMENTAÇÃO FÍSICA</span><span class="mono">ASAP7</span></div><img src="assets/images/final_all.webp" width="1080" height="1080" alt="Layout da CNN com células, interconexões e rede de alimentação"><figcaption><strong>47.470</strong><span>células após síntese lógica</span><span class="crosshair" aria-hidden="true">+</span></figcaption></figure>
+    <figure class="hero-wave"><img src="assets/images/wav1.png" width="1835" height="1029" alt="Captura das entradas, dos pesos e das respostas da bancada no GTKWave"><figcaption><span class="mono">02 / VERIFICAÇÃO</span><strong>37 ciclos</strong><span>latência observada</span></figcaption></figure>
+  </div>
+  <a href="#arquitetura" class="hero-bottom mono">ARQUITETURA · VERIFICAÇÃO · IMPLEMENTAÇÃO FÍSICA <span aria-hidden="true">↓</span></a>
+</section>
+<div class="metric-strip" aria-label="Indicadores do projeto"><div><strong>8 <small>bits</small></strong><span>operandos com sinal</span></div><div><strong>4 × 4 × 1</strong><span>dimensões da imagem de teste</span></div><div><strong>22</strong><span>cenários executados</span></div><div><strong>1.100</strong><span>transações iniciadas</span></div></div>
+
+<section class="section" id="arquitetura" aria-labelledby="architecture-title">
+  <div class="section-heading"><div><p class="eyebrow">01 / ARQUITETURA</p><h2 id="architecture-title">Arquitetura da rede</h2></div><p class="section-lead">A arquitetura compreende duas camadas convolucionais, com quantização, ativação ReLU e max pooling, seguidas de duas camadas totalmente conectadas. O bloco Flatten reorganiza os mapas de características em um vetor de entrada para as camadas densas.</p></div>
+  <div class="architecture-layout">
+    <div class="pipeline-panel"><div class="panel-heading"><span class="mono">FLUXO DE DADOS DA CONFIGURAÇÃO DE TESTE</span><span class="badge neutral">REDUZIDA</span></div>
+      <ol class="pipeline">
+        <li><span class="pipeline-index">01</span><div><h3>Imagem de entrada</h3><p>16 pixels · um canal</p></div><code>4 × 4 × 1</code></li>
+        <li><span class="pipeline-index">02</span><div><h3>Convolução 1</h3><p>2 filtros · quantização · ReLU</p></div><code>4 × 4 × 2</code></li>
+        <li><span class="pipeline-index">03</span><div><h3>Max pooling 1</h3><p>Máximo em regiões 2 × 2</p></div><code>2 × 2 × 2</code></li>
+        <li><span class="pipeline-index">04</span><div><h3>Convolução 2</h3><p>2 filtros · quantização · ReLU</p></div><code>2 × 2 × 2</code></li>
+        <li><span class="pipeline-index">05</span><div><h3>Max pooling + flatten</h3><p>Mapas reorganizados em vetor</p></div><code>2 valores</code></li>
+        <li><span class="pipeline-index">06</span><div><h3>FC1 → FC2</h3><p>2 neurônios em cada camada</p></div><code>result_FC2</code></li>
+      </ol>
+    </div>
+    <aside class="architecture-aside"><h3>Parâmetros de verificação</h3><p class="prose">A configuração de verificação utiliza imagem de 4 × 4 pixels, um canal de entrada e kernels de 3 × 3. As duas camadas convolucionais possuem dois filtros cada; as duas camadas totalmente conectadas possuem dois neurônios cada. O padding e os deslocamentos de quantização são iguais a 1.</p><dl class="spec-list"><div><dt>Representação</dt><dd>−128 a 127</dd></div><div><dt>Período do clock</dt><dd>10 ns</dd></div><div><dt>Interface de verificação</dt><dd>Portas públicas</dd></div><div><dt>Resultado</dt><dd>2 valores com sinal</dd></div></dl><a class="text-link" href="reference/plano.html">Modelo matemático de referência ↗</a><p class="small muted">Os estímulos empregam pesos sintéticos para avaliar a correção aritmética e o comportamento da interface. A avaliação de acurácia de classificação está fora do escopo desta campanha.</p></aside>
+  </div>
+  <details class="figure-details"><summary>Diagrama conceitual da rede <span aria-hidden="true">+</span></summary><figure class="concept-figure"><a class="image-link" href="assets/images/neural_draw.png" data-lightbox data-gallery="concept" data-title="Diagrama conceitual da CNN"><img src="assets/images/neural_draw.png" width="666" height="509" alt="Desenho conceitual da composição das camadas convolucionais e densas" loading="lazy"></a><figcaption>Representação conceitual das camadas da rede. As dimensões utilizadas na verificação estão especificadas no fluxo de dados desta seção.</figcaption></figure></details>
+</section>
+
+<section class="section section-tinted" id="sintese" aria-labelledby="synthesis-title">
+  <div class="section-heading"><div><p class="eyebrow">02 / IMPLEMENTAÇÃO</p><h2 id="synthesis-title">Síntese e<br>implementação física</h2></div><p class="section-lead">O fluxo de implementação mapeia a descrição lógica em células da biblioteca ASAP7. Os resultados apresentados incluem a composição de células após a síntese, as análises temporais e de potência e as representações gráficas da implementação física.</p></div>
+  <div class="synthesis-metrics"><div class="metric-card"><span>Células sintetizadas</span><strong>47.470</strong><small>Yosys · synth_stat.txt</small></div><div class="metric-card"><span>Área reportada</span><strong>5259,006</strong><small>Unidades do relatório de síntese</small></div><div class="metric-card"><span>Potência estimada</span><strong>10,5 <small>mW</small></strong><small>OpenROAD · report_power</small></div></div>
+  <div class="timing-panel"><div><span class="badge pass">Sem violações</span><h3>Análise de timing</h3><p>Os relatórios registram TNS e WNS iguais a zero para as restrições temporais da execução analisada.</p></div><dl><div><dt>TNS</dt><dd>0,00</dd></div><div><dt>WNS</dt><dd>0,00</dd></div><div><dt>Setup</dt><dd>0 <small>violações</small></dd></div><div><dt>Hold</dt><dd>0 <small>violações</small></dd></div></dl></div>
+  <p class="small muted source-note">Fonte: <a href="downloads/synthesis/timing.rpt">6_finish.rpt ↗</a>. Os resultados temporais correspondem às restrições e condições da execução documentada. Os resultados da verificação funcional são apresentados na seção de verificação UVM.</p>
+  <div class="gallery physical-gallery"><figure class="gallery-card">
+<a class="image-link" href="assets/images/final_all.webp" data-lightbox data-gallery="physical" data-title="Layout final">
+<img src="assets/images/final_all.webp" alt="Layout final" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">01 / ASAP7</span><h3>Layout final</h3><p>Visão conjunta das células padrão, das interconexões e da rede de alimentação no núcleo da implementação.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_placement.webp" data-lightbox data-gallery="physical" data-title="Posicionamento das células">
+<img src="assets/images/final_placement.webp" alt="Posicionamento das células" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">02 / ASAP7</span><h3>Posicionamento das células</h3><p>Distribuição espacial das células padrão na área do núcleo após o posicionamento.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_routing.webp" data-lightbox data-gallery="physical" data-title="Roteamento das interconexões">
+<img src="assets/images/final_routing.webp" alt="Roteamento das interconexões" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">03 / ASAP7</span><h3>Roteamento das interconexões</h3><p>Distribuição das conexões entre células e terminais nas camadas de metal utilizadas pelo fluxo de implementação.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_congestion.webp" data-lightbox data-gallery="physical" data-title="Congestionamento de roteamento">
+<img src="assets/images/final_congestion.webp" alt="Congestionamento de roteamento" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">04 / ASAP7</span><h3>Congestionamento de roteamento</h3><p>Distribuição espacial da demanda por recursos de roteamento, conforme a escala apresentada na imagem.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_ir_drop.webp" data-lightbox data-gallery="physical" data-title="Queda de tensão na alimentação">
+<img src="assets/images/final_ir_drop.webp" alt="Queda de tensão na alimentação" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">05 / ASAP7</span><h3>Queda de tensão na alimentação</h3><p>Estimativa da queda de tensão resistiva na rede de alimentação (IR drop), com escala em milivolts.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_clocks.webp" data-lightbox data-gallery="physical" data-title="Rede de distribuição de clock">
+<img src="assets/images/final_clocks.webp" alt="Rede de distribuição de clock" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">06 / ASAP7</span><h3>Rede de distribuição de clock</h3><p>Representação das células e interconexões que compõem a rede de distribuição de clock no núcleo.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/final_worst_path.webp" data-lightbox data-gallery="physical" data-title="Caminho de análise temporal">
+<img src="assets/images/final_worst_path.webp" alt="Caminho de análise temporal" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">07 / ASAP7</span><h3>Caminho de análise temporal</h3><p>Representação, sobre o layout, do caminho selecionado pela análise de timing.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/cts_default_core_clk.webp" data-lightbox data-gallery="physical" data-title="Árvore de clock core_clk">
+<img src="assets/images/cts_default_core_clk.webp" alt="Árvore de clock core_clk" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">08 / ASAP7</span><h3>Árvore de clock core_clk</h3><p>Representação das ramificações da árvore de clock core_clk, com escala temporal em picosegundos.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/cts_default_core_clk_layout.webp" data-lightbox data-gallery="physical" data-title="Distribuição física da árvore de clock">
+<img src="assets/images/cts_default_core_clk_layout.webp" alt="Distribuição física da árvore de clock" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">09 / ASAP7</span><h3>Distribuição física da árvore de clock</h3><p>Representação da localização e da distribuição dos ramos da árvore de clock no layout.</p></figcaption></figure></div>
+  <details class="data-details"><summary>Composição das células padrão <span class="mono">RELATÓRIO YOSYS +</span></summary><div class="table-scroll"><table><caption>Tipos, contagens e área registrados após síntese lógica</caption><thead><tr><th scope="col">Tipo de célula</th><th scope="col">Quantidade</th><th scope="col">Área reportada</th></tr></thead><tbody><tr><th scope="row"><code>INVx1_ASAP7_75t_R</code></th><td>12.883</td><td>563,502</td></tr>
+<tr><th scope="row"><code>OA21x2_ASAP7_75t_R</code></th><td>4.915</td><td>501,625</td></tr>
+<tr><th scope="row"><code>HAxp5_ASAP7_75t_R</code></th><td>4.432</td><td>581,567</td></tr>
+<tr><th scope="row"><code>DFFHQNx1_ASAP7_75t_R</code></th><td>3.352</td><td>977,443</td></tr>
+<tr><th scope="row"><code>AND2x2_ASAP7_75t_R</code></th><td>3.039</td><td>265,852</td></tr>
+<tr><th scope="row"><code>FAx1_ASAP7_75t_R</code></th><td>2.728</td><td>556,839</td></tr>
+<tr><th scope="row"><code>NAND2x1_ASAP7_75t_R</code></th><td>1.931</td><td>168,924</td></tr>
+<tr><th scope="row"><code>XOR2x2_ASAP7_75t_R</code></th><td>1.674</td><td>268,476</td></tr>
+<tr><th scope="row"><code>NOR2x1_ASAP7_75t_R</code></th><td>1.364</td><td>119,323</td></tr>
+<tr><th scope="row"><code>BUFx2_ASAP7_75t_R</code></th><td>1.242</td><td>90,542</td></tr>
+<tr><th scope="row"><code>AO21x1_ASAP7_75t_R</code></th><td>1.205</td><td>105,413</td></tr>
+<tr><th scope="row"><code>AND3x1_ASAP7_75t_R</code></th><td>1.183</td><td>103,489</td></tr>
+<tr><th scope="row"><code>OR3x1_ASAP7_75t_R</code></th><td>1.131</td><td>98,940</td></tr>
+<tr><th scope="row"><code>OA211x2_ASAP7_75t_R</code></th><td>1.088</td><td>126,904</td></tr>
+<tr><th scope="row"><code>XNOR2x2_ASAP7_75t_R</code></th><td>1.007</td><td>161,503</td></tr>
+<tr><th scope="row"><code>OR2x2_ASAP7_75t_R</code></th><td>756</td><td>66,135</td></tr>
+<tr><th scope="row"><code>OAI21x1_ASAP7_75t_R</code></th><td>472</td><td>55,054</td></tr>
+<tr><th scope="row"><code>OR4x1_ASAP7_75t_R</code></th><td>376</td><td>38,375</td></tr>
+<tr><th scope="row"><code>AOI21x1_ASAP7_75t_R</code></th><td>339</td><td>39,541</td></tr>
+<tr><th scope="row"><code>AND4x1_ASAP7_75t_R</code></th><td>260</td><td>26,536</td></tr>
+<tr><th scope="row"><code>AOI211x1_ASAP7_75t_R</code></th><td>259</td><td>45,315</td></tr>
+<tr><th scope="row"><code>NOR3x1_ASAP7_75t_R</code></th><td>204</td><td>32,718</td></tr>
+<tr><th scope="row"><code>AO221x1_ASAP7_75t_R</code></th><td>197</td><td>28,723</td></tr>
+<tr><th scope="row"><code>AO211x2_ASAP7_75t_R</code></th><td>159</td><td>37,092</td></tr>
+<tr><th scope="row"><code>OA31x2_ASAP7_75t_R</code></th><td>151</td><td>33,024</td></tr>
+<tr><th scope="row"><code>OR5x1_ASAP7_75t_R</code></th><td>148</td><td>17,263</td></tr>
+<tr><th scope="row"><code>NAND3x1_ASAP7_75t_R</code></th><td>136</td><td>21,812</td></tr>
+<tr><th scope="row"><code>AND5x1_ASAP7_75t_R</code></th><td>109</td><td>12,714</td></tr>
+<tr><th scope="row"><code>AO32x1_ASAP7_75t_R</code></th><td>103</td><td>12,014</td></tr>
+<tr><th scope="row"><code>AOI221x1_ASAP7_75t_R</code></th><td>87</td><td>17,758</td></tr>
+<tr><th scope="row"><code>AO31x2_ASAP7_75t_R</code></th><td>86</td><td>20,062</td></tr>
+<tr><th scope="row"><code>AO22x1_ASAP7_75t_R</code></th><td>81</td><td>10,629</td></tr>
+<tr><th scope="row"><code>AOI22x1_ASAP7_75t_R</code></th><td>76</td><td>11,081</td></tr>
+<tr><th scope="row"><code>OAI22x1_ASAP7_75t_R</code></th><td>71</td><td>10,352</td></tr>
+<tr><th scope="row"><code>BUFx3_ASAP7_75t_R</code></th><td>65</td><td>5,686</td></tr>
+<tr><th scope="row"><code>OA22x2_ASAP7_75t_R</code></th><td>34</td><td>4,957</td></tr>
+<tr><th scope="row"><code>OA221x2_ASAP7_75t_R</code></th><td>27</td><td>6,299</td></tr>
+<tr><th scope="row"><code>AO222x2_ASAP7_75t_R</code></th><td>22</td><td>3,849</td></tr>
+<tr><th scope="row"><code>AND2x4_ASAP7_75t_R</code></th><td>15</td><td>2,187</td></tr>
+<tr><th scope="row"><code>OA222x2_ASAP7_75t_R</code></th><td>15</td><td>2,624</td></tr>
+<tr><th scope="row"><code>OA33x2_ASAP7_75t_R</code></th><td>15</td><td>2,187</td></tr>
+<tr><th scope="row"><code>AO33x2_ASAP7_75t_R</code></th><td>13</td><td>1,895</td></tr>
+<tr><th scope="row"><code>BUFx4f_ASAP7_75t_R</code></th><td>5</td><td>0,583</td></tr>
+<tr><th scope="row"><code>BUFx6f_ASAP7_75t_R</code></th><td>4</td><td>0,583</td></tr>
+<tr><th scope="row"><code>AO22x2_ASAP7_75t_R</code></th><td>3</td><td>0,437</td></tr>
+<tr><th scope="row"><code>AO221x2_ASAP7_75t_R</code></th><td>2</td><td>0,321</td></tr>
+<tr><th scope="row"><code>NAND2x2_ASAP7_75t_R</code></th><td>1</td><td>0,146</td></tr>
+<tr><th scope="row"><code>NAND3x2_ASAP7_75t_R</code></th><td>1</td><td>0,292</td></tr>
+<tr><th scope="row"><code>NOR2x2_ASAP7_75t_R</code></th><td>1</td><td>0,146</td></tr>
+<tr><th scope="row"><code>OR3x2_ASAP7_75t_R</code></th><td>1</td><td>0,102</td></tr>
+<tr><th scope="row"><code>OR5x2_ASAP7_75t_R</code></th><td>1</td><td>0,131</td></tr>
+<tr><th scope="row"><code>TIELOx1_ASAP7_75t_R</code></th><td>1</td><td>0,044</td></tr></tbody></table></div><a class="text-link" href="downloads/synthesis/synth-stat.txt">Relatório de composição de células ↗</a></details>
+</section>
+
+<section class="section" id="verificacao" aria-labelledby="verification-title">
+  <div class="section-heading"><div><p class="eyebrow">03 / VERIFICAÇÃO UVM</p><h2 id="verification-title">Verificação funcional</h2></div><p class="section-lead">A bancada UVM compara o vetor de saída do circuito com um modelo matemático independente, utilizando exclusivamente a interface pública do topo. A campanha compreende estímulos dirigidos, reset durante o processamento e 1.000 imagens pseudoaleatórias.</p></div>
+  <div class="result-banner"><div><span class="eyebrow">CAMPANHA REGISTRADA · 25/10/2026</span><h3>Resultado funcional <span class="badge fail">FAIL</span></h3><p>2 transações divergentes nas 1.085 respostas comparadas. Latência observada de 37 ciclos.</p></div><a class="button secondary" href="downloads/campaign/report.log">Relatório da campanha ↗</a></div>
+  <div class="outcome-grid"><div class="outcome pass-tone"><span>PASS</span><strong>1.083</strong><p>transações aprovadas</p></div><div class="outcome fail-tone"><span>FAIL</span><strong>2</strong><p>transações divergentes</p></div><div class="outcome"><span>ABORT</span><strong>3</strong><p>canceladas por reset</p></div><div class="outcome incomplete-tone"><span>INCOMPLETE</span><strong>12</strong><p>transações exploratórias</p></div></div>
+  <div class="failures"><article class="failure-card"><span class="badge fail">IMG-00 · tx 3</span>
+<h3>Imagem nula com biases do conjunto W03</h3><p class="small muted"><code>zero_com_bias_W03</code></p><div class="comparison"><div><span>Esperado</span><strong>[127, 0]</strong></div><div><span>Observado</span><strong>[0, 127]</strong></div></div>
+<p>Resposta no ciclo 177, após 37 ciclos. Divergências nas saídas: 2.</p></article><article class="failure-card"><span class="badge fail">IMG-16 · tx 1047</span>
+<h3>Bias −45 na segunda camada convolucional</h3><p class="small muted"><code>bias_group_1_value_-45</code></p><div class="comparison"><div><span>Esperado</span><strong>[0, 12]</strong></div><div><span>Observado</span><strong>[127, 12]</strong></div></div>
+<p>Resposta no ciclo 69.081, após 37 ciclos. Divergências nas saídas: 1.</p></article></div>
+  <div class="verification-notes"><p><strong>Reset e recuperação.</strong> O cenário IMG-18 provocou três cancelamentos por reset durante o processamento. As três transações de recuperação subsequentes foram aprovadas.</p><p><strong>Sobreposição.</strong> As 12 transações do cenário IMG-19 foram classificadas como INCOMPLETE, pois a interface não especifica um protocolo de aceitação para solicitações sobrepostas.</p><p><strong>Latência.</strong> A latência observada foi de 37 ciclos, dentro da janela de observação de 64 ciclos. Esse valor caracteriza a execução registrada; a campanha não estabeleceu um requisito de latência exata.</p></div>
+  <div class="table-toolbar"><h3>Matriz dos 22 cenários</h3><div class="filter-group" data-case-filters role="group" aria-label="Filtrar cenários"><button type="button" data-filter="all" aria-pressed="true">Todos</button><button type="button" data-filter="FAIL" aria-pressed="false">Falhas</button><button type="button" data-filter="INCOMPLETE" aria-pressed="false">Incompletos</button><button type="button" data-filter="PASS" aria-pressed="false">Aprovados</button></div></div>
+  <p class="small muted" id="case-count" aria-live="polite">22 cenários na campanha.</p>
+  <div class="table-scroll"><table class="case-table"><caption class="sr-only">Transações por cenário, com contagens e classificação</caption><thead><tr><th scope="col">ID</th><th scope="col">Cenário</th><th scope="col">Inícios</th><th scope="col">PASS</th><th scope="col">FAIL</th><th scope="col">ABORT</th><th scope="col">INC.</th><th scope="col">Status</th></tr></thead><tbody><tr data-case="FAIL"><th scope="row"><code>IMG-00</code></th><td>Imagem nula com variação de pesos e biases</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0</td><td><span class="badge fail">FAIL</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-01</code></th><td>Constantes positivas</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-02</code></th><td>Constantes negativas</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-03</code></th><td>Impulsos internos</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-04</code></th><td>Impulsos nos cantos</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-05</code></th><td>Impulsos nas bordas</td><td>9</td><td>9</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-06</code></th><td>Gradiente horizontal</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-07</code></th><td>Gradiente vertical</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-08</code></th><td>Padrão em xadrez</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-09</code></th><td>Faixas horizontais</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-10</code></th><td>Faixas verticais</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-11</code></th><td>Diagonal principal</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-12</code></th><td>Diagonal secundária</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-13</code></th><td>Limites da representação com sinal</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-14</code></th><td>Imagens pseudoaleatórias</td><td>1.000</td><td>1.000</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-15</code></th><td>Variação dos conjuntos de pesos</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="FAIL"><th scope="row"><code>IMG-16</code></th><td>Variação isolada dos biases</td><td>8</td><td>7</td><td>1</td><td>0</td><td>0</td><td><span class="badge fail">FAIL</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-17</code></th><td>Transações sequenciais sem sobreposição</td><td>3</td><td>3</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-18</code></th><td>Reset durante o processamento e recuperação</td><td>6</td><td>3</td><td>0</td><td>3</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="INCOMPLETE"><th scope="row"><code>IMG-19</code></th><td>Solicitações de início sobrepostas</td><td>12</td><td>0</td><td>0</td><td>0</td><td>12</td><td><span class="badge incomplete">INCOMPLETE</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-20</code></th><td>Perturbação de um pixel</td><td>17</td><td>17</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr>
+<tr data-case="PASS"><th scope="row"><code>IMG-21</code></th><td>Arredondamento e saturação na quantização</td><td>11</td><td>11</td><td>0</td><td>0</td><td>0</td><td><span class="badge pass">PASS</span></td></tr></tbody></table></div>
+  <div class="inline-links"><a href="downloads/campaign/cnn_verif_results.csv">Resultados por transação · CSV ↓</a><a href="downloads/campaign/simulation_coverage.log">Registro completo de simulação ↗</a><a href="assets/documents/relatorio-cnn.pdf">Análise das falhas em PDF ↗</a></div>
+</section>
+
+<section class="section section-tinted" id="cobertura" aria-labelledby="coverage-title">
+  <div class="section-heading"><div><p class="eyebrow">04 / COBERTURA</p><h2 id="coverage-title">Cobertura de código<br>e cobertura funcional</h2></div><p class="section-lead">A cobertura de código corresponde aos arquivos do diretório src elaborados na instância da CNN. A cobertura funcional registra as classes de estímulos e os cruzamentos definidos nos covergroups da bancada, incluindo eventos do modelo de referência.</p></div>
+  <div class="coverage-layout"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">ESTRUTURAL</span><h3>Métricas do Verilator</h3></div><span class="mono">11 ARQUIVOS</span></div><div class="meter"><div class="meter-label"><span>Linhas</span><strong>100,0%</strong></div>
+<div class="meter-track" role="meter" aria-label="Linhas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100.0"><span style="width:100.0%"></span></div>
+<p class="small muted">40 / 40 pontos</p></div><div class="meter"><div class="meter-label"><span>Ramos</span><strong>88,6%</strong></div>
+<div class="meter-track" role="meter" aria-label="Ramos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="88.6"><span style="width:88.6%"></span></div>
+<p class="small muted">62 / 70 pontos</p></div><div class="meter"><div class="meter-label"><span>Expressões</span><strong>91,7%</strong></div>
+<div class="meter-track" role="meter" aria-label="Expressões" aria-valuemin="0" aria-valuemax="100" aria-valuenow="91.7"><span style="width:91.7%"></span></div>
+<p class="small muted">44 / 48 pontos</p></div><div class="meter"><div class="meter-label"><span>Transições</span><strong>95,8%</strong></div>
+<div class="meter-track" role="meter" aria-label="Transições" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95.8"><span style="width:95.8%"></span></div>
+<p class="small muted">11.330 / 11.822 pontos</p></div><a class="text-link" href="coverage/index.html">Relatório de cobertura por arquivo ↗</a></article><article class="panel"><div class="panel-heading"><div><span class="eyebrow">FUNCIONAL</span><h3>Covergroups e cruzamentos</h3></div><span class="coverage-total">45,3<small>%</small></span></div><p class="small muted">106 de 234 bins atingidos nos covergroups da bancada e do modelo</p><div class="meter"><div class="meter-label"><span>Cenário × pesos</span><strong>31,1%</strong></div>
+<div class="meter-track" role="meter" aria-label="Cenário × pesos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="31.15"><span style="width:31.15%"></span></div>
+<p class="small muted">57 / 183 bins</p></div><div class="meter"><div class="meter-label"><span>Classes de pixels</span><strong>100,0%</strong></div>
+<div class="meter-track" role="meter" aria-label="Classes de pixels" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100.0"><span style="width:100.0%"></span></div>
+<p class="small muted">5 / 5 bins</p></div><div class="meter"><div class="meter-label"><span>Posição dos impulsos</span><strong>100,0%</strong></div>
+<div class="meter-track" role="meter" aria-label="Posição dos impulsos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100.0"><span style="width:100.0%"></span></div>
+<p class="small muted">24 / 24 bins</p></div><div class="meter"><div class="meter-label"><span>Sinal do bias</span><strong>100,0%</strong></div>
+<div class="meter-track" role="meter" aria-label="Sinal do bias" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100.0"><span style="width:100.0%"></span></div>
+<p class="small muted">3 / 3 bins</p></div><div class="meter"><div class="meter-label"><span>Quantização do modelo</span><strong>89,5%</strong></div>
+<div class="meter-track" role="meter" aria-label="Quantização do modelo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="89.47"><span style="width:89.47%"></span></div>
+<p class="small muted">17 / 19 bins</p></div></article></div>
+  <div class="coverage-footnotes"><p><strong>Representação LCOV.</strong> 75/75 linhas físicas e 199/211 ramos. Os totais dessa representação diferem dos contadores nativos do Verilator.</p><p><strong>Alcançabilidade.</strong> O cruzamento cenário × pesos inclui combinações não previstas na campanha. Dois bins de saturação negativa das camadas totalmente conectadas são inalcançáveis no modelo de referência, devido à aplicação de ReLU antes da quantização.</p><p><strong>Interpretação.</strong> Os contadores de cobertura incluem estruturas exercitadas em transações aprovadas e reprovadas. A análise desses percentuais deve ser acompanhada dos resultados das comparações funcionais.</p></div>
+  <details class="embedded-report"><summary>Consultar o relatório de cobertura nesta página <span aria-hidden="true">+</span></summary><iframe src="coverage/index.html?embed=1" title="Relatório de cobertura por arquivo da CNN" loading="lazy"></iframe><a class="text-link" href="coverage/index.html">Abrir relatório em outra página ↗</a></details>
+</section>
+
+<section class="section" id="waveforms" aria-labelledby="waveforms-title">
+  <div class="section-heading"><div><p class="eyebrow">05 / FORMAS DE ONDA</p><h2 id="waveforms-title">Formas de onda</h2></div><p class="section-lead">As capturas do GTKWave apresentam os sinais públicos da bancada, registrados em formato FST com profundidade de hierarquia igual a 1. As 92 entradas e saídas são espelhadas no escopo tb_cnn. Os barramentos utilizam representação hexadecimal; em 8 bits com sinal, 7F corresponde a 127 e 80 corresponde a −128.</p></div>
+  <div class="gallery wave-gallery"><figure class="gallery-card">
+<a class="image-link" href="assets/images/wav1.png" data-lightbox data-gallery="waves" data-title="Estímulos e respostas do topo">
+<img src="assets/images/wav1.png" alt="Estímulos e respostas do topo" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">01 / FST</span><h3>Estímulos e respostas do topo</h3><p>Registro inicial da simulação, com os pixels de entrada, os pesos, os biases, o vetor result_FC2 e os pulsos de valid_out4.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/wav2.png" data-lightbox data-gallery="waves" data-title="Sinais de entrada da imagem">
+<img src="assets/images/wav2.png" alt="Sinais de entrada da imagem" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">02 / FST</span><h3>Sinais de entrada da imagem</h3><p>Registro entre aproximadamente 52 e 57 µs, com os sinais de clock e start e os 16 pixels da imagem de entrada.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/wav3.png" data-lightbox data-gallery="waves" data-title="Sequenciamento das transações">
+<img src="assets/images/wav3.png" alt="Sequenciamento das transações" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">03 / FST</span><h3>Sequenciamento das transações</h3><p>Visão temporal da sequência de solicitações de início, em escala de centenas de microssegundos.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/wav4.png" data-lightbox data-gallery="waves" data-title="Controle e aplicação de reset">
+<img src="assets/images/wav4.png" alt="Controle e aplicação de reset" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">04 / FST</span><h3>Controle e aplicação de reset</h3><p>Registro do trecho final da simulação, incluindo os sinais de controle e as alterações dos pixels e dos conjuntos de pesos.</p></figcaption></figure>
+<figure class="gallery-card">
+<a class="image-link" href="assets/images/wav5.png" data-lightbox data-gallery="waves" data-title="Pesos, biases e vetor de saída">
+<img src="assets/images/wav5.png" alt="Pesos, biases e vetor de saída" loading="lazy" decoding="async" width="1080" height="1080"><span class="expand-label">Ampliar ↗</span></a>
+<figcaption><span class="mono image-number">05 / FST</span><h3>Pesos, biases e vetor de saída</h3><p>Registro dos barramentos de configuração, do vetor result_FC2 e do sinal de validade valid_out4.</p></figcaption></figure></div>
+  <p class="small muted">Os valores esperados, os valores observados e a classificação de cada transação estão disponíveis no arquivo CSV e nos registros de simulação.</p>
+</section>
+
+<section class="section section-tinted" id="documentacao" aria-labelledby="docs-title">
+  <div class="section-heading"><div><p class="eyebrow">06 / DOCUMENTAÇÃO</p><h2 id="docs-title">Documentação<br>e evidências</h2></div><p class="section-lead">Esta seção reúne a descrição da arquitetura, o plano de verificação, as instruções de simulação e os registros que fundamentam os resultados apresentados.</p></div>
+  <div class="resource-grid"><a class="resource-card" href="reference/projeto.html"><span class="mono">DOCUMENTO ↗</span><h3>Descrição geral do projeto</h3><p>Descrição da arquitetura, organização do repositório e resultados documentados da CNN.</p></a><a class="resource-card" href="reference/plano.html"><span class="mono">DOCUMENTO ↗</span><h3>Plano de verificação</h3><p>Configuração da bancada, modelo matemático de referência, critérios de avaliação e especificação dos 22 cenários.</p></a><a class="resource-card" href="reference/uvm.html"><span class="mono">DOCUMENTO ↗</span><h3>Ambiente de verificação UVM</h3><p>Estrutura dos componentes UVM, procedimentos de execução e interpretação dos resultados da campanha.</p></a><a class="resource-card" href="reference/simulacao.html"><span class="mono">DOCUMENTO ↗</span><h3>Procedimentos de simulação</h3><p>Instruções para execução das bancadas com Icarus Verilog e Verilator.</p></a><a class="resource-card" href="reference/referencias.html"><span class="mono">DOCUMENTO ↗</span><h3>Referências técnicas</h3><p>Notas de arquitetura e referências acadêmicas que fundamentam o projeto.</p></a><a class="resource-card" href="reference/evidencias.html"><span class="mono">DOCUMENTO ↗</span><h3>Registros da campanha de verificação</h3><p>Proveniência dos registros de simulação, dos resultados por transação e dos indicadores de cobertura.</p></a></div>
+  <div class="document-downloads"><a class="button primary" href="assets/documents/relatorio-cnn.pdf">Relatório de verificação · PDF ↗</a><a class="button secondary" href="assets/documents/notas-cnn.pdf">Notas do bloco CNN · PDF ↗</a><a class="text-link" href="SHA256SUMS">Manifesto de integridade · SHA-256 ↗</a></div>
+  <div class="provenance"><span class="mono">PROVENIÊNCIA DOS RESULTADOS</span><p>Os indicadores correspondem à campanha documentada em 25/10/2026 e foram extraídos dos artefatos versionados. A revisão informada abaixo identifica a geração deste site. Os registros disponíveis não identificam a revisão exata do RTL utilizada na campanha.</p><dl><div><dt>Data de geração (Brasília)</dt><dd>25/10/2026 18:22</dd></div><div><dt>Revisão do site</dt><dd><code>3c393a82 · alterações locais</code></dd></div><div><dt>Semente pseudoaleatória</dt><dd>20261025</dd></div></dl></div>
+</section>
+
+<section class="section" id="modulos" aria-labelledby="modules-title"><div class="section-heading"><div><p class="eyebrow">07 / BLOCOS</p><h2 id="modules-title">Módulos RTL</h2></div><p class="section-lead">Os módulos implementam as operações aritméticas, a combinação dos canais, a quantização, a ativação e a reorganização dos dados. A integração desses componentes constitui as camadas convolucionais e totalmente conectadas da rede.</p></div><div class="modules"><details class="module"><summary><span class="mono">01</span><strong>CNN</strong><span>Integração das camadas</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Integra as camadas da rede e disponibiliza a interface de entrada de pixels, pesos e biases, além do vetor de saída.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/CNN.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">02</span><strong>ConvLayer</strong><span>Camada convolucional</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Organiza os filtros da camada convolucional, cada um responsável por um mapa de características de saída.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/ConvLayer.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">03</span><strong>FeatureMap</strong><span>Combinação dos canais de entrada</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Combina as contribuições convolucionais dos canais de entrada com o bias associado ao filtro.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/FeatureMap.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">04</span><strong>Convolution</strong><span>Convolução de um canal</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Calcula as somas de produtos entre os coeficientes do kernel e as janelas de dados de um canal de entrada.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/Convolution/Convolution.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">05</span><strong>DotProduct</strong><span>Produto interno de vetores</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Calcula a soma dos produtos entre elementos correspondentes dos vetores de entrada e de pesos.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/DotProduct/DotProduct.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">06</span><strong>Quantizer</strong><span>Quantização dos resultados</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Aplica a reescala dos resultados aritméticos e a redução da largura de representação numérica.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/Quantizer.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">07</span><strong>ReLU</strong><span>Função de ativação ReLU</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Aplica a função de ativação que preserva valores não negativos e substitui valores negativos por zero.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/ReLU/ReLU.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">08</span><strong>MaxPooling</strong><span>Redução espacial por máximo</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Seleciona o valor máximo de cada região de 2 × 2 elementos do mapa de características.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/MaxPooling.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">09</span><strong>Flatten</strong><span>Reorganização dos mapas de características</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Reorganiza os mapas de características em um vetor destinado às camadas totalmente conectadas.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/Flatten.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">10</span><strong>Neuron</strong><span>Neurônio artificial</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Calcula a soma ponderada das entradas, adiciona o bias e aplica a função de ativação.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/Neuron.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details><details class="module"><summary><span class="mono">11</span><strong>FCLayer</strong><span>Camada totalmente conectada</span><span class="module-plus" aria-hidden="true">+</span></summary><div><p>Organiza os neurônios que processam o vetor de entrada de uma camada totalmente conectada.</p><a class="text-link" href="https://github.com/GRG-Semicondutores/CNN/blob/main/src/FCLayer.sv" target="_blank" rel="noopener noreferrer">Arquivo no repositório ↗</a></div></details></div></section>
+</main>
+<footer class="footer"><a class="brand" href="#inicio"><span class="mono">CNN / GRG</span></a><p>Documentação técnica do projeto CNN · GRG-Semicondutores.</p><a href="https://github.com/GRG-Semicondutores/CNN">Repositório ↗</a></footer>
+<dialog class="lightbox" id="image-dialog" aria-labelledby="image-dialog-title"><div class="lightbox-toolbar"><h2 id="image-dialog-title">Imagem do projeto</h2><button type="button" data-lightbox-close aria-label="Fechar imagem">Fechar ×</button></div><figure><img id="lightbox-image" alt=""><figcaption id="lightbox-caption"></figcaption></figure><div class="lightbox-controls"><button type="button" data-lightbox-prev>← Anterior</button><span id="lightbox-count" class="mono"></span><button type="button" data-lightbox-next>Próxima →</button></div></dialog>
+</body>
+</html>

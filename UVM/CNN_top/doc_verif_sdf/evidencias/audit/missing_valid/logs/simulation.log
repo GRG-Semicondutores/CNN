@@ -1,0 +1,28 @@
+=== xezim 0.11.3 ===
+git 44f5c88c (2026-10-26T14:52:06-07:00)
+[PP] warning: `include "CNN_openroad_adapter.svh" resolved to '/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/missing_valid/CNN_openroad_adapter.svh'; a different copy in '/home/matheus-grossi/Projects/CNN/CNN/scripts/UVM/gate_level/CNN_openroad_adapter.svh' is shadowed by the search order
+[SDF] annotated 155094 signals with delays
+[SDF] annotated 26816 timing check(s)
+[xezim][warning] a #delay evaluated to a pathological real value 9.2000e18 at time 0 — the process is parked far in the future, so a clock driven by it will appear to stop. This usually means the delay expression produced NaN/inf or IEEE-754 bit garbage.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+[CFG] TEST=IMG-01 OBS_CYCLES=64 RANDOM_COUNT=1000 SEED=20261025
+
+========== IMG-01 ==========
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 715000: uvm_test_top.env.scb [CNN_SCB] [FAIL][TIMEOUT] tx=1 case=IMG-01 subcase=const_pos_1 launch=8 now=72 valid_out4 ausente na janela de 64 ciclos
+[FAIL-TX] IMG-01/const_pos_1 errors=1 latency=-1
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1375000: uvm_test_top.env.scb [CNN_SCB] [FAIL][TIMEOUT] tx=2 case=IMG-01 subcase=const_pos_16 launch=74 now=138 valid_out4 ausente na janela de 64 ciclos
+[FAIL-TX] IMG-01/const_pos_16 errors=1 latency=-1
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 2035000: uvm_test_top.env.scb [CNN_SCB] [FAIL][TIMEOUT] tx=3 case=IMG-01 subcase=const_pos_127 launch=140 now=204 valid_out4 ausente na janela de 64 ciclos
+[FAIL-TX] IMG-01/const_pos_127 errors=1 latency=-1
+
+============== RELATORIO FINAL ==============
+[SUMMARY] total_starts=3 checked_PASS=0 checked_FAIL=3 aborted_by_reset=0 incomplete=0
+[SUMMARY] errors=3 assertions=0 sim_cycles=214 seed=20261025
+[SUMMARY] outputs_checked=0 latency_min=-1 latency_max=-1
+[CASE] IMG-01 starts=3 pass=0 fail=3 incomplete=0
+[COVERAGE] scenarios=6.49% pixels=40.00% impulses=0.00% bias=33.33% quantization=55.56%
+[REPORT] CSV=/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/missing_valid/results/CNN_top_sdf/cnn_verif_results.csv
+[RESULT] FAIL
+** Fatal: CNN UVM: campanha FAIL; consulte o relatorio
+   Time: 2140000  Scope: cnn_uvm_pkg.cnn_test.final_phase
+Simulation finished at time 2140000 ($finish called)

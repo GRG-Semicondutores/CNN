@@ -24,7 +24,7 @@ class cnn_monitor extends uvm_monitor;
             tr.subcase=$sformatf("%0s",vif.tb_subcase);
             tr.weights=$sformatf("%0s",vif.tb_weights);
             tr.exploratory=vif.tb_exploratory; tr.cases_started=vif.tb_cases_started;
-            #1ps;
+            @(vif.monitor_sample_tick);
             tr.rst=vif.rst; tr.start=vif.start; tr.valid=vif.valid_out4;
             for (int n=0;n<N_NEURONS_2;n++) tr.result[n]=vif.result_FC2[n];
             ap.write(tr);

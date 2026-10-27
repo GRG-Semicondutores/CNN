@@ -21,6 +21,6 @@ Tap and End Cap cell insertion
 [INFO TAP-0005] Inserted 852 tapcells.
 Design area 5311 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_3_floorplan_tapcell.odb
-Elapsed time: 0:01.26[h:]min:sec. CPU time: user 1.15 sys 0.10 (99%). Peak memory: 243420KB.
+Elapsed time: 0:01.34[h:]min:sec. CPU time: user 1.20 sys 0.12 (99%). Peak memory: 243692KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
 2_3_floorplan_tapcell     .odb            1            237 01298dd51f088d39a1ef

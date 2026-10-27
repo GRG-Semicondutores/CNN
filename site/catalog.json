@@ -1,0 +1,213 @@
+{
+  "repository": "https://github.com/GRG-Semicondutores/CNN",
+  "branch": "main",
+  "campaign_date": "25/10/2026",
+  "modules": [
+    [
+      "CNN",
+      "Integração das camadas",
+      "Integra as camadas da rede e disponibiliza a interface de entrada de pixels, pesos e biases, além do vetor de saída.",
+      "src/CNN.sv"
+    ],
+    [
+      "ConvLayer",
+      "Camada convolucional",
+      "Organiza os filtros da camada convolucional, cada um responsável por um mapa de características de saída.",
+      "src/ConvLayer.sv"
+    ],
+    [
+      "FeatureMap",
+      "Combinação dos canais de entrada",
+      "Combina as contribuições convolucionais dos canais de entrada com o bias associado ao filtro.",
+      "src/FeatureMap.sv"
+    ],
+    [
+      "Convolution",
+      "Convolução de um canal",
+      "Calcula as somas de produtos entre os coeficientes do kernel e as janelas de dados de um canal de entrada.",
+      "src/Convolution/Convolution.sv"
+    ],
+    [
+      "DotProduct",
+      "Produto interno de vetores",
+      "Calcula a soma dos produtos entre elementos correspondentes dos vetores de entrada e de pesos.",
+      "src/DotProduct/DotProduct.sv"
+    ],
+    [
+      "Quantizer",
+      "Quantização dos resultados",
+      "Aplica a reescala dos resultados aritméticos e a redução da largura de representação numérica.",
+      "src/Quantizer.sv"
+    ],
+    [
+      "ReLU",
+      "Função de ativação ReLU",
+      "Aplica a função de ativação que preserva valores não negativos e substitui valores negativos por zero.",
+      "src/ReLU/ReLU.sv"
+    ],
+    [
+      "MaxPooling",
+      "Redução espacial por máximo",
+      "Seleciona o valor máximo de cada região de 2 × 2 elementos do mapa de características.",
+      "src/MaxPooling.sv"
+    ],
+    [
+      "Flatten",
+      "Reorganização dos mapas de características",
+      "Reorganiza os mapas de características em um vetor destinado às camadas totalmente conectadas.",
+      "src/Flatten.sv"
+    ],
+    [
+      "Neuron",
+      "Neurônio artificial",
+      "Calcula a soma ponderada das entradas, adiciona o bias e aplica a função de ativação.",
+      "src/Neuron.sv"
+    ],
+    [
+      "FCLayer",
+      "Camada totalmente conectada",
+      "Organiza os neurônios que processam o vetor de entrada de uma camada totalmente conectada.",
+      "src/FCLayer.sv"
+    ]
+  ],
+  "scenarios": [
+    "Imagem nula com variação de pesos e biases",
+    "Constantes positivas",
+    "Constantes negativas",
+    "Impulsos internos",
+    "Impulsos nos cantos",
+    "Impulsos nas bordas",
+    "Gradiente horizontal",
+    "Gradiente vertical",
+    "Padrão em xadrez",
+    "Faixas horizontais",
+    "Faixas verticais",
+    "Diagonal principal",
+    "Diagonal secundária",
+    "Limites da representação com sinal",
+    "Imagens pseudoaleatórias",
+    "Variação dos conjuntos de pesos",
+    "Variação isolada dos biases",
+    "Transações sequenciais sem sobreposição",
+    "Reset durante o processamento e recuperação",
+    "Solicitações de início sobrepostas",
+    "Perturbação de um pixel",
+    "Arredondamento e saturação na quantização"
+  ],
+  "physical": [
+    [
+      "final_all.webp",
+      "Layout final",
+      "Visão conjunta das células padrão, das interconexões e da rede de alimentação no núcleo da implementação."
+    ],
+    [
+      "final_placement.webp",
+      "Posicionamento das células",
+      "Distribuição espacial das células padrão na área do núcleo após o posicionamento."
+    ],
+    [
+      "final_routing.webp",
+      "Roteamento das interconexões",
+      "Distribuição das conexões entre células e terminais nas camadas de metal utilizadas pelo fluxo de implementação."
+    ],
+    [
+      "final_congestion.webp",
+      "Congestionamento de roteamento",
+      "Distribuição espacial da demanda por recursos de roteamento, conforme a escala apresentada na imagem."
+    ],
+    [
+      "final_ir_drop.webp",
+      "Queda de tensão na alimentação",
+      "Estimativa da queda de tensão resistiva na rede de alimentação (IR drop), com escala em milivolts."
+    ],
+    [
+      "final_clocks.webp",
+      "Rede de distribuição de clock",
+      "Representação das células e interconexões que compõem a rede de distribuição de clock no núcleo."
+    ],
+    [
+      "final_worst_path.webp",
+      "Caminho de análise temporal",
+      "Representação, sobre o layout, do caminho selecionado pela análise de timing."
+    ],
+    [
+      "cts_default_core_clk.webp",
+      "Árvore de clock core_clk",
+      "Representação das ramificações da árvore de clock core_clk, com escala temporal em picosegundos."
+    ],
+    [
+      "cts_default_core_clk_layout.webp",
+      "Distribuição física da árvore de clock",
+      "Representação da localização e da distribuição dos ramos da árvore de clock no layout."
+    ]
+  ],
+  "waveforms": [
+    [
+      "wav1.png",
+      "Estímulos e respostas do topo",
+      "Registro inicial da simulação, com os pixels de entrada, os pesos, os biases, o vetor result_FC2 e os pulsos de valid_out4."
+    ],
+    [
+      "wav2.png",
+      "Sinais de entrada da imagem",
+      "Registro entre aproximadamente 52 e 57 µs, com os sinais de clock e start e os 16 pixels da imagem de entrada."
+    ],
+    [
+      "wav3.png",
+      "Sequenciamento das transações",
+      "Visão temporal da sequência de solicitações de início, em escala de centenas de microssegundos."
+    ],
+    [
+      "wav4.png",
+      "Controle e aplicação de reset",
+      "Registro do trecho final da simulação, incluindo os sinais de controle e as alterações dos pixels e dos conjuntos de pesos."
+    ],
+    [
+      "wav5.png",
+      "Pesos, biases e vetor de saída",
+      "Registro dos barramentos de configuração, do vetor result_FC2 e do sinal de validade valid_out4."
+    ]
+  ],
+  "documents": [
+    [
+      "projeto",
+      "README.md",
+      "Descrição geral do projeto",
+      "Descrição da arquitetura, organização do repositório e resultados documentados da CNN."
+    ],
+    [
+      "plano",
+      "UVM/CNN_top/req_verif_CNN_top.md",
+      "Plano de verificação",
+      "Configuração da bancada, modelo matemático de referência, critérios de avaliação e especificação dos 22 cenários."
+    ],
+    [
+      "uvm",
+      "UVM/CNN_top/README_UVM.md",
+      "Ambiente de verificação UVM",
+      "Estrutura dos componentes UVM, procedimentos de execução e interpretação dos resultados da campanha."
+    ],
+    [
+      "simulacao",
+      "testbenchs/CNN_top/README.md",
+      "Procedimentos de simulação",
+      "Instruções para execução das bancadas com Icarus Verilog e Verilator."
+    ],
+    [
+      "referencias",
+      "docs/README.md",
+      "Referências técnicas",
+      "Notas de arquitetura e referências acadêmicas que fundamentam o projeto."
+    ],
+    [
+      "evidencias",
+      "UVM/CNN_top/doc_verif/evidencias/README.md",
+      "Registros da campanha de verificação",
+      "Proveniência dos registros de simulação, dos resultados por transação e dos indicadores de cobertura."
+    ]
+  ],
+  "failure_descriptions": {
+    "zero_com_bias_W03": "Imagem nula com biases do conjunto W03",
+    "bias_group_1_value_-45": "Bias −45 na segunda camada convolucional"
+  }
+}

@@ -226,7 +226,7 @@ abc -script /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/abc
 15.1. Extracting gate netlist of module `\CNN' to `<abc-temp-dir>/input.blif'..
 15.1.1. Executed ABC.
 15.1.2. Re-integrating ABC results.
-Took 28 seconds: abc -script /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib -dont_use *x1p*_ASAP7* -dont_use *xp*_ASAP7* -dont_use SDF* -dont_use ICG* -constr /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/abc.constr -D 10000
+Took 29 seconds: abc -script /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/scripts/abc_speed.script -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz -liberty /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib -dont_use *x1p*_ASAP7* -dont_use *xp*_ASAP7* -dont_use SDF* -dont_use ICG* -constr /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/objects/asap7/top/base/abc.constr -D 10000
 16. Executing SPLITNETS pass (splitting up multi-bit signals).
 17. Executing OPT_CLEAN pass (remove unused cells and wires).
 18. Executing HILOMAP pass (mapping to constant drivers).
@@ -237,9 +237,10 @@ Took 28 seconds: abc -script /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts
 23. Executing Verilog backend.
 23.1. Executing BMUXMAP pass.
 23.2. Executing DEMUXMAP pass.
-End of script. Logfile hash: 05513fa209, time: 63.43s, user: 40.81s, system: 0.95s, MEM: 589.23 MB peak
+End of script. Logfile hash: 05513fa209, time: 67.40s, user: 43.43s, system: 1.04s, MEM: 575.91 MB peak
 Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 15.2.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
-Time spent: 40% 1x abc (27 sec), 24% 1x extract_fa (16 sec), ...
-Elapsed time: 1:03.56[h:]min:sec. CPU time: user 68.27 sys 1.11 (109%). Peak memory: 603372KB.
+Time spent: 40% 1x abc (29 sec), 24% 1x extract_fa (17 sec), ...
+Elapsed time: 1:07.53[h:]min:sec. CPU time: user 72.27 sys 1.20 (108%). Peak memory: 589728KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-1_2_yosys                 .v             63            589 a777e3c6aa8ed4fdc64d
+1_2_yosys                 .v             67            575 a777e3c6aa8ed4fdc64d
+1_2_yosys                 .sdc                             cea570fc1bb4b984b8de

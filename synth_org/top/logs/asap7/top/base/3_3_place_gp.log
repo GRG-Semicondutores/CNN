@@ -220,7 +220,7 @@ Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
 [INFO GPL-1013] Total timing-driven delta area: 13.05 (+0.24%)
 [INFO GPL-1014] Final placement area: 5560.58 (+0.24%)
 [INFO GPL-1018] Final HPWL (um): 97515.24
-Took 30 seconds: global_placement -density 0.6 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+Took 32 seconds: global_placement -density 0.6 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
 estimate_parasitics -placement
 Report metrics stage 3, global place...
 
@@ -229,6 +229,6 @@ global place report_design_area
 --------------------------------------------------------------------------
 Design area 5278 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_3_place_gp.odb
-Elapsed time: 0:37.57[h:]min:sec. CPU time: user 99.50 sys 7.56 (284%). Peak memory: 810888KB.
+Elapsed time: 0:39.85[h:]min:sec. CPU time: user 104.04 sys 7.75 (280%). Peak memory: 810884KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-3_3_place_gp              .odb           37            791 3bfa85fcb7f4aaeb332a
+3_3_place_gp              .odb           39            791 3bfa85fcb7f4aaeb332a

@@ -73,6 +73,6 @@ finish report_design_area
 --------------------------------------------------------------------------
 Design area 5408 um^2 41% utilization.
 [WARNING GUI-0076] Could not find the Qt platform plugin "wayland" in ""
-Elapsed time: 0:47.47[h:]min:sec. CPU time: user 70.55 sys 5.29 (159%). Peak memory: 1429896KB.
+Elapsed time: 0:48.24[h:]min:sec. CPU time: user 70.55 sys 5.43 (157%). Peak memory: 1427792KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-6_report                                 47           1396                  N/A
+6_report                                 48           1394                  N/A

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050b16"><meta name="description" content="Instruções para execução das bancadas com Icarus Verilog e Verilator."><title>Procedimentos de simulação · CNN</title><link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/app.js" defer></script></head>
+<body class="document-page">
+<a class="skip-link" href="#document-content">Ir para o documento</a>
+<header class="topbar"><a class="brand" href="../index.html"><img src="../assets/favicon.svg" width="38" height="38" alt=""><span>CNN<span class="brand-caption">DOCUMENTAÇÃO DO PROJETO</span></span></a><a class="text-link" href="../index.html#documentacao">← Página principal</a></header>
+<main class="document-shell"><div class="document-toolbar"><span class="mono document-path">testbenchs/CNN_top/README.md</span><div><a href="simulacao.md" download>Documento-fonte · Markdown ↓</a><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/testbenchs/CNN_top/README.md" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div><div class="document-layout"><article class="document-body" id="document-content"><h1 id="simulacao-do-topo-cnn-sem-uvm">Simulação do topo CNN sem UVM</h1>
+<p>A bancada aplica os 22 cenários IMG-00 a IMG-21 à configuração reduzida da CNN
+e compara <code>result_FC2</code> quando <code>valid_out4</code> está ativo. Os parâmetros, o modelo
+matemático e os critérios estão no
+<a href="plano.html">plano de verificação</a>.
+Para o ambiente UVM, consulte o <a href="uvm.html">guia UVM</a>.</p>
+<h2 id="icarus-verilog">Icarus Verilog</h2>
+<p>Requer <code>iverilog</code>, <code>vvp</code> e Make. Execute a partir da raiz do repositório:</p>
+<pre><code class="language-bash"># Campanha completa ou um cenário.
+bash scripts/testbenchs/bash/CNN_top/cnn_top.sh
+bash scripts/testbenchs/bash/CNN_top/cnn_top.sh run TEST=IMG-01
+
+# Compilar sem executar.
+bash scripts/testbenchs/bash/CNN_top/cnn_top.sh compile
+
+# Gerar VCD opcional.
+bash scripts/testbenchs/bash/CNN_top/cnn_top.sh wave TEST=IMG-01
+</code></pre>
+<p>Os resultados ficam em <code>results_tb/CNN_top/icarus/</code>: executável <code>cnn_top.vvp</code>,
+logs de compilação e simulação, <code>cnn_verif_results.csv</code> e, quando solicitado,
+<code>tb_cnn_top_images.vcd</code>. No Icarus, as verificações de protocolo são
+procedurais; os covergroups não são suportados e aparecem como <code>N/A</code>.</p>
+<h2 id="verilator-e-cobertura">Verilator e cobertura</h2>
+<p>O fluxo foi validado com Verilator 5.052. Requer compilador C++, Make e Python 3;
+os relatórios usam <code>verilator_coverage</code>, <code>lcov</code> e <code>genhtml</code>.</p>
+<pre><code class="language-bash"># Campanha completa com cobertura, ou execução de um cenário.
+bash scripts/testbenchs/bash/CNN_top/cnn_top_verilator.sh coverage
+bash scripts/testbenchs/bash/CNN_top/cnn_top_verilator.sh run TEST=IMG-01
+
+# Amostra pseudoaleatória reproduzível.
+bash scripts/testbenchs/bash/CNN_top/cnn_top_verilator.sh coverage TEST=IMG-14 RANDOM_COUNT=100 SEED=42
+
+# Reprocessar a cobertura existente.
+bash scripts/testbenchs/bash/CNN_top/cnn_top_verilator.sh report
+</code></pre>
+<p>Os resultados ficam em <code>results_tb/CNN_top/verilator/</code>. Os principais arquivos
+são <code>logs/simulation_coverage.log</code>, <code>cnn_verif_results.csv</code>,
+<code>coverage/coverage_summary.log</code>, <code>coverage/coverage_by_file.csv</code> e
+<code>coverage/html/index.html</code>. Os bins da bancada ficam separados em
+<code>coverage/functional_summary.log</code>, <code>coverage/coverage_bins.log</code> e
+<code>coverage/functional_html/index.html</code>.</p>
+<p>O resumo nativo mede pontos de linha, branch, expressão e toggle, além de
+FSMs quando instrumentadas. O HTML LCOV apresenta linhas físicas e ramos;
+os denominadores dessas representações são diferentes. A biblioteca de
+verificação e o testbench não entram no denominador da cobertura RTL.
+Somente os arquivos de <code>src</code> elaborados na hierarquia são medidos.</p>
+<p><code>coverage</code> executa uma nova campanha; <code>report</code> processa o banco já existente.
+Os dados são gravados antes do encerramento FAIL e o relatório é gerado
+mesmo quando há divergências. O Verilator não valida a propagação de X/Z em
+quatro estados.</p>
+<h2 id="controles-e-interpretacao">Controles e interpretação</h2>
+<p>Os dois scripts aceitam <code>TEST</code>, <code>RANDOM_COUNT</code>, <code>SEED</code>, <code>OBS_CYCLES</code>,
+<code>EXPECTED_LATENCY</code>, <code>TRACE_EXPECTED</code>, <code>PRINT_IMAGES</code>, <code>RESULTS_ROOT</code> e
+<code>PLUSARGS</code>. Use <code>help</code> para consultar os alvos e controles de cada fluxo.
+No Verilator sem UVM, <code>JOBS=2</code> é o padrão de compilação.</p>
+<p>A latência é medida entre start e resposta válida. <code>EXPECTED_LATENCY=0</code>
+caracteriza o valor observado; um número positivo ativa a comparação exata.
+<code>OBS_CYCLES=64</code> é a janela de observação e o limite de espera por resposta.
+<code>PLUSARGS=+NO_TIMING_CHECK</code> desativa a comparação de latência contratual,
+mas mantém esse limite e marca a campanha como INCOMPLETE.</p>
+<p>O CSV registra esperado, observado, ciclos, latência, status e quantidade de
+erros. Os três cancelamentos intencionais do IMG-18 aparecem no log e no resumo,
+sem linha CSV própria. O IMG-19 permanece exploratório, sem pontuação funcional,
+até existir contrato para aceitação de imagens sobrepostas.</p>
+<p>Confira sempre <code>[RESULT]</code> no log. Nesta bancada, FAIL retorna erro por
+<code>$fatal</code>, enquanto INCOMPLETE encerra com <code>$finish</code> e pode retornar zero ao
+shell. Na UVM, os dois estados retornam erro. Essa diferença de encerramento
+não muda a classificação funcional das transações.</p>
+<p>O VCD opcional pertence a estes fluxos sem UVM. O ambiente UVM gera o dump
+nativo FST, com profundidade 1, em <code>waveform/CNN_top_UVM.fst</code>.</p></article><aside class="document-toc" aria-label="Índice do documento"><details open><summary>Sumário</summary><div class="toc">
+<ul>
+<li><a href="#simulacao-do-topo-cnn-sem-uvm">Simulação do topo CNN sem UVM</a><ul>
+<li><a href="#icarus-verilog">Icarus Verilog</a></li>
+<li><a href="#verilator-e-cobertura">Verilator e cobertura</a></li>
+<li><a href="#controles-e-interpretacao">Controles e interpretação</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details></aside></div></main>
+<footer class="footer"><a href="../index.html#documentacao">← Documentação</a><span class="mono">CNN · SYSTEMVERILOG / UVM / ASAP7</span></footer>
+</body></html>
