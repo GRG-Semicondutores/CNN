@@ -1,0 +1,37 @@
+[PREPARE] 69 tipos de celulas com modelos; 47390 celulas SDF; escopo=dut
+[PREPARE] SDF com escopo: /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/normal/results/CNN_top_sdf/6_final_xezim.sdf
+[PREPARE] 30 linhas UDP (bx) expandidas em copias dos modelos
+[XEZIM] RUN: compilacao + simulacao UVM; TEST=IMG-01 SDF_MODE=max
+=== xezim 0.11.3 ===
+git 44f5c88c (2026-10-26T14:52:06-07:00)
+[SDF] annotated 155094 signals with delays
+[SDF] annotated 26816 timing check(s)
+[xezim][warning] a #delay evaluated to a pathological real value 9.2000e18 at time 0 — the process is parked far in the future, so a clock driven by it will appear to stop. This usually means the delay expression produced NaN/inf or IEEE-754 bit garbage.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+[CFG] TEST=IMG-01 OBS_CYCLES=64 RANDOM_COUNT=1000 SEED=20261025
+
+========== IMG-01 ==========
+[PASS] tx=1 IMG-01/const_pos_1 expected=[1,1] observed=[1,1] latency=38
+[PASS] tx=2 IMG-01/const_pos_16 expected=[4,4] observed=[4,4] latency=38
+[PASS] tx=3 IMG-01/const_pos_127 expected=[32,32] observed=[32,32] latency=38
+
+============== RELATORIO FINAL ==============
+[SUMMARY] total_starts=3 checked_PASS=3 checked_FAIL=0 aborted_by_reset=0 incomplete=0
+[SUMMARY] errors=0 assertions=0 sim_cycles=214 seed=20261025
+[SUMMARY] outputs_checked=3 latency_min=38 latency_max=38
+[CASE] IMG-01 starts=3 pass=3 fail=0 incomplete=0
+[COVERAGE] scenarios=6.49% pixels=40.00% impulses=0.00% bias=33.33% quantization=55.56%
+[REPORT] CSV=/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/audit/normal/results/CNN_top_sdf/cnn_verif_results.csv
+[RESULT] PASS
+UVM_INFO /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/base/uvm_report_server.svh(864) @ 2140000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    1
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+
+Simulation finished at time 2140000 ($finish called)

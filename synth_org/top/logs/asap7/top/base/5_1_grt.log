@@ -118,7 +118,7 @@ Number of nets:           55129
 #macroValidViaAp       = 0
 #macroNoAp             = 0
 [INFO DRT-0166] Complete pin access.
-[INFO DRT-0267] cpu time = 00:10:32, elapsed time = 00:00:53, memory = 429.75 (MB), peak = 451.95 (MB)
+[INFO DRT-0267] cpu time = 00:10:24, elapsed time = 00:00:53, memory = 430.64 (MB), peak = 452.49 (MB)
 Took 54 seconds: pin_access
 global_route -congestion_report_file /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/reports/asap7/top/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -resistance_aware
 [INFO GRT-0020] Min routing layer: M2
@@ -322,7 +322,7 @@ Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
 ---------------------------------------------------------------------
 [INFO RSZ-0036] Found 2 capacitance violations.
 [INFO RSZ-0038] Inserted 2 buffers in 2 nets.
-[INFO RSZ-0504] Runtime: 4.69s
+[INFO RSZ-0504] Runtime: 5.23s
 Took 5 seconds: repair_design -verbose
 global_route -start_incremental
 detailed_placement
@@ -343,7 +343,7 @@ Iteration | Violations |    Cells |    Sites
 ---------------------------------------------
         0 |          0 |         0 |         0
 Negotiation phase 1 converged at iteration 0.
-[INFO DPL-0500] Runtime: 0.28s
+[INFO DPL-0500] Runtime: 0.30s
 Placement Analysis
 ---------------------------------
 total displacement          1.0 u
@@ -359,7 +359,7 @@ estimate_parasitics -global_routing
 repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
 [INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
 [INFO RSZ-0098] No setup violations found
-[INFO RSZ-0505] Runtime: 1.05s
+[INFO RSZ-0505] Runtime: 1.15s
 [INFO RSZ-0033] No hold violations found.
 [INFO RSZ-0506] Runtime: 0.35s
 global_route -start_incremental
@@ -376,7 +376,7 @@ detailed_placement
 [INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
 [INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
 [INFO DPL-0393]   height 1 row(s): 49147 cells
-[INFO DPL-0500] Runtime: 0.26s
+[INFO DPL-0500] Runtime: 0.27s
 Placement Analysis
 ---------------------------------
 total displacement          0.0 u
@@ -392,7 +392,7 @@ estimate_parasitics -global_routing
 repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
 [INFO RSZ-0100] Repair move sequence: RerouteMove 
 [INFO RSZ-0098] No setup violations found
-[INFO RSZ-0505] Runtime: 1.06s
+[INFO RSZ-0505] Runtime: 1.07s
 Repair antennas...
 [WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
 [INFO ANT-0002] Found 0 net violations.
@@ -412,7 +412,7 @@ write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/resu
 [INFO FLW-0011] Path endpoint path count 3598
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.odb
 write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_1_grt.sdc
-Elapsed time: 1:33.57[h:]min:sec. CPU time: user 761.01 sys 10.11 (824%). Peak memory: 1106288KB.
+Elapsed time: 1:35.07[h:]min:sec. CPU time: user 756.63 sys 9.96 (806%). Peak memory: 1107540KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-5_1_grt                   .odb           93           1080 5943904c9dc127ee767c
+5_1_grt                   .odb           95           1081 5943904c9dc127ee767c
 5_1_grt                   .sdc                             92671cc5e77142235d49

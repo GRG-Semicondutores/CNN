@@ -1,0 +1,8 @@
+Reading tracefile results_uvm/CNN_top/coverage/cnn_top_rtl.info.
+Summary coverage rate:
+  source files: 7
+  lines.......: 100.0% (75 of 75 lines)
+  functions...: no data found
+  branches....: 94.3% (199 of 211 branches)
+Message summary:
+  no messages were reported

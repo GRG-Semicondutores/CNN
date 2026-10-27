@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050b16"><meta name="description" content="Configuração da bancada, modelo matemático de referência, critérios de avaliação e especificação dos 22 cenários."><title>Plano de verificação · CNN</title><link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/app.js" defer></script></head>
+<body class="document-page">
+<a class="skip-link" href="#document-content">Ir para o documento</a>
+<header class="topbar"><a class="brand" href="../index.html"><img src="../assets/favicon.svg" width="38" height="38" alt=""><span>CNN<span class="brand-caption">DOCUMENTAÇÃO DO PROJETO</span></span></a><a class="text-link" href="../index.html#documentacao">← Página principal</a></header>
+<main class="document-shell"><div class="document-toolbar"><span class="mono document-path">UVM/CNN_top/req_verif_CNN_top.md</span><div><a href="plano.md" download>Documento-fonte · Markdown ↓</a><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/UVM/CNN_top/req_verif_CNN_top.md" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div><div class="document-layout"><article class="document-body" id="document-content"><h1 id="plano-de-verificacao-do-topo-cnn">Plano de verificação do topo CNN</h1>
+<p><strong>Projeto:</strong> GRG-Semicondutores/CNN<br>
+<strong>DUT:</strong> módulo <code>CNN</code><br>
+<strong>Ambiente UVM:</strong> <code>UVM/CNN_top/</code>, módulo de simulação <code>tb_cnn</code><br>
+<strong>Versão do plano:</strong> 1.2 — 25/10/2026<br>
+<strong>Configuração:</strong> rede reduzida com imagem 4 × 4 × 1 e dados signed de 8 bits</p>
+<p>Este plano define os estímulos, o modelo matemático e os critérios de
+avaliação da campanha. O <a href="uvm.html">guia UVM</a> contém os comandos de uso;
+o <a href="../assets/documents/relatorio-cnn.pdf">relatório em PDF</a> registra os
+resultados da execução. As bancadas sem UVM usam os mesmos parâmetros e
+critérios matemáticos, com as diferenças de ferramenta descritas no
+<a href="simulacao.html">respectivo guia</a>.</p>
+<h2 id="1-objetivo-e-escopo">1. Objetivo e escopo</h2>
+<p>Verificar se as entradas públicas da CNN produzem os resultados finais
+calculados por um modelo aritmético independente. A campanha também verifica
+respostas válidas, pulsos de controle, cancelamento por reset e recuperação.</p>
+<p>A avaliação é em caixa preta: os verificadores observam as entradas,
+<code>result_FC2</code> e <code>valid_out4</code>. As matrizes intermediárias do modelo são cálculos
+de referência, não observações de estágios internos do DUT. A cobertura de
+código é obtida pela instrumentação automática do Verilator em <code>src</code>.</p>
+<p>Os testes usam imagens e pesos sintéticos. Não avaliam acurácia de
+classificação, treinamento, softmax ou frequência máxima de operação física.</p>
+<h3 id="base-documental">Base documental</h3>
+<ul>
+<li><a href="../assets/documents/notas-cnn.pdf">Notas do bloco CNN</a>: produtos internos e validade, pp. 1–2; canais e filtros, pp. 3–5; neurônios e FC, pp. 6–7; pooling, ReLU, quantização e flatten, pp. 8–11; interface do topo, p. 12.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/topico9_P2_IA353_1s2026.pdf">IA353, tópico 9, parte 2</a>: correlação cruzada em CNNs, pp. 11–12; camadas densas e pooling.</li>
+<li><a href="https://github.com/GRG-Semicondutores/CNN/blob/main/docs/material_de_aula_cd_hbr_de_arquiteturas_para_redes_neurais.pdf">A-408 — Arquiteturas de hardware para CNNs</a>: organização das camadas e cálculo de somas ponderadas com bias.</li>
+<li><a href="referencias.html">Guia das referências</a>: contexto dos materiais acadêmicos e distinção entre teoria, implementação e verificação.</li>
+</ul>
+<p>As notas descrevem a função dos blocos. Para comparar valores bit a bit, este
+plano também fixa convenções de indexação, arredondamento e saturação. A
+confirmação dessas regras na especificação do projeto permanece necessária
+para decidir se uma divergência exige mudança no DUT ou no modelo.</p>
+<h2 id="2-configuracao-e-interface">2. Configuração e interface</h2>
+<table align="center">
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th align="right">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATA_WIDTH</code></td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td><code>IMG_SIZE_1</code></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td><code>KERNEL_SIZE</code></td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td><code>N_CHANNELS</code></td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td><code>N_FILTERS_LAYER_1</code>, <code>N_FILTERS_LAYER_2</code></td>
+<td align="right">2, 2</td>
+</tr>
+<tr>
+<td><code>PADDING_1</code>, <code>PADDING_2</code></td>
+<td align="right">1, 1</td>
+</tr>
+<tr>
+<td><code>N_NEURONS_1</code>, <code>N_NEURONS_2</code></td>
+<td align="right">2, 2</td>
+</tr>
+<tr>
+<td><code>SHIFT_1</code>, <code>SHIFT_2</code>, <code>SHIFT_3</code>, <code>SHIFT_4</code></td>
+<td align="right">1, 1, 1, 1</td>
+</tr>
+<tr>
+<td>Período do clock da bancada</td>
+<td align="right">10 ns</td>
+</tr>
+</tbody>
+</table>
+
+<table align="center">
+<thead>
+<tr>
+<th>Porta</th>
+<th>Direção</th>
+<th>Organização na configuração executada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clk</code>, <code>rst</code>, <code>start</code></td>
+<td>Entrada</td>
+<td>Clock; reset ativo alto; solicitação de processamento.</td>
+</tr>
+<tr>
+<td><code>imagem</code></td>
+<td>Entrada</td>
+<td><code>[canal][pixel]</code>: 1 × 16 valores.</td>
+</tr>
+<tr>
+<td><code>kernel1</code></td>
+<td>Entrada</td>
+<td><code>[filtro][canal][posição]</code>: 2 × 1 × 9 valores.</td>
+</tr>
+<tr>
+<td><code>kernel2</code></td>
+<td>Entrada</td>
+<td><code>[filtro][canal][posição]</code>: 2 × 2 × 9 valores.</td>
+</tr>
+<tr>
+<td><code>FCWeight1</code>, <code>FCWeight2</code></td>
+<td>Entrada</td>
+<td><code>[neurônio][entrada]</code>: 2 × 2 valores em cada matriz.</td>
+</tr>
+<tr>
+<td><code>ConvBias1</code>, <code>ConvBias2</code>, <code>FCBias1</code>, <code>FCBias2</code></td>
+<td>Entrada</td>
+<td>Dois valores em cada grupo.</td>
+</tr>
+<tr>
+<td><code>result_FC2</code></td>
+<td>Saída</td>
+<td>Dois valores signed de 8 bits.</td>
+</tr>
+<tr>
+<td><code>valid_out4</code></td>
+<td>Saída</td>
+<td>Qualifica o vetor final.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Os operandos e as saídas têm representação em complemento de dois, no
+intervalo de −128 a 127. A interface contém 86 operandos de 8 bits, duas
+saídas de 8 bits e quatro sinais escalares, incluindo clock e controles:
+92 elementos observáveis no dump.</p>
+<p><strong>REQ-CFG-001:</strong> instanciar o DUT com todos os parâmetros desta seção.<br>
+<strong>REQ-CFG-002:</strong> registrar configuração, seed e controles usados na execução.</p>
+<h2 id="3-modelo-aritmetico">3. Modelo aritmético</h2>
+<p>O modelo recebe uma cópia das entradas observadas no lançamento e calcula
+uma expectativa fixa para aquela transação. A resposta do DUT não participa
+do cálculo esperado.</p>
+<h3 id="31-indexacao-e-convolucoes">3.1 Indexação e convoluções</h3>
+<p>A imagem é organizada por linhas: <code>imagem[ch][4*r+c]</code> representa o pixel
+<code>(r,c)</code> do canal <code>ch</code>. Os kernels usam <code>k = 3*kr+kc</code>. O modelo percorre as
+janelas sem inverter o kernel, seguindo a convenção de correlação cruzada
+usualmente denominada convolução em CNNs.</p>
+<p>Para cada filtro, o acumulador recebe uma vez o bias e soma os produtos de
+todos os canais e posições válidas da janela. Fora dos limites da imagem,
+a contribuição é zero. Cada filtro produz um mapa distinto; os mapas não
+são somados entre si.</p>
+<h3 id="32-quantizacao-ativacao-e-reducao-espacial">3.2 Quantização, ativação e redução espacial</h3>
+<p>A quantização adotada é:</p>
+<pre><code class="language-text">rounded = (acc + 2^(SHIFT-1)) &gt;&gt;&gt; SHIFT
+Q(acc)  = limitar rounded ao intervalo [-128, 127]
+</code></pre>
+<p>O deslocamento é aritmético. Com os shifts iguais a 1, o arredondamento é ao
+mais próximo, com empate para +∞. Por exemplo, <code>Q(-3) = -1</code>, <code>Q(-1) = 0</code> e
+<code>Q(3) = 2</code>. A saturação ocorre depois do arredondamento.</p>
+<p>Nas convoluções, a ordem é soma de produtos com bias → quantização → ReLU →
+max pooling. A ReLU calcula <code>max(0, valor)</code>. O pooling seleciona o máximo de
+cada região 2 × 2, sem sobreposição.</p>
+<p>O flatten ordena primeiro por filtro e depois por posição espacial, por
+linhas. Cada FC calcula <code>a_n = bias_n + Σ(x_i × peso_n,i)</code>, aplica ReLU ao
+acumulador e quantiza o resultado. Os acumuladores do modelo usam <code>longint</code>
+para evitar overflow matemático com as dimensões desta campanha; essa escolha
+não descreve larguras internas do DUT.</p>
+<table align="center">
+<thead>
+<tr>
+<th>Etapa do modelo</th>
+<th>Forma lógica</th>
+<th align="right">Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entrada</td>
+<td>4 × 4 × 1</td>
+<td align="right">16</td>
+</tr>
+<tr>
+<td>Convolução 1</td>
+<td>4 × 4 × 2</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td>Pooling 1</td>
+<td>2 × 2 × 2</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td>Convolução 2</td>
+<td>2 × 2 × 2</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td>Pooling 2</td>
+<td>1 × 1 × 2</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>Flatten, FC1 e FC2</td>
+<td>Vetor de 2 valores em cada etapa</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>REQ-GM-001:</strong> calcular expectativas somente a partir das entradas.<br>
+<strong>REQ-GM-002:</strong> manter a representação signed, o padding e a ordem de operações definidos acima.<br>
+<strong>REQ-GM-003:</strong> manter a expectativa da transação estável até resposta, timeout ou reset.<br>
+<strong>REQ-GM-004:</strong> confirmar as regras de ponto fixo com a especificação do projeto; exemplos genéricos das referências não substituem esse detalhamento.</p>
+<h2 id="4-estimulos-e-conjuntos-de-pesos">4. Estímulos e conjuntos de pesos</h2>
+<table align="center">
+<thead>
+<tr>
+<th>Conjunto</th>
+<th>Construção e finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W00</td>
+<td>Pesos e biases zerados; verifica o caminho de resultado nulo.</td>
+</tr>
+<tr>
+<td>W01</td>
+<td>Elemento central unitário nos kernels; correspondência dos filtros na segunda convolução; matrizes diagonais com peso 2 nas FCs; biases zerados. Facilita cálculos analíticos.</td>
+</tr>
+<tr>
+<td>W02</td>
+<td>Kernels Sobel na primeira convolução e combinações dirigidas nas camadas seguintes; exercita orientação e posição espacial.</td>
+</tr>
+<tr>
+<td>W03</td>
+<td>Valores signed distribuídos a partir do padrão <code>[-128,127,-64,64,-3,3,-1,1]</code>, com offsets por filtro, canal e neurônio; inclui biases não nulos.</td>
+</tr>
+<tr>
+<td>WSAT_POS / WSAT_NEG</td>
+<td>Pesos e biases uniformes em 127 ou −128; exercitam candidatos à saturação.</td>
+</tr>
+</tbody>
+</table>
+
+<p>A construção exata dos vetores é feita em
+<a href="https://github.com/GRG-Semicondutores/CNN/blob/main/UVM/CNN_top/UVM_sequence.sv">UVM_sequence.sv</a>. No IMG-16, um bias de W01 é alterado para
++45 ou −45; o campo <code>weights</code> continua como W01, e a alteração é identificada
+pelo nome do subcaso.</p>
+<p>O IMG-14 usa xorshift32 com estado próprio e seed padrão 20261025. A seed e a
+quantidade de imagens são registradas para permitir a reprodução dos vetores.</p>
+<h3 id="matriz-de-cenarios">Matriz de cenários</h3>
+<table align="center">
+<thead>
+<tr>
+<th>Caso</th>
+<th>Estímulo</th>
+<th align="right">Starts padrão</th>
+<th>Verificação principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IMG-00</td>
+<td>Imagem nula com W00, W01 e W03</td>
+<td align="right">3</td>
+<td>Resultado nulo e contribuição dos biases.</td>
+</tr>
+<tr>
+<td>IMG-01</td>
+<td>Constantes 1, 16 e 127, com W01</td>
+<td align="right">3</td>
+<td>Valores positivos e extremo superior.</td>
+</tr>
+<tr>
+<td>IMG-02</td>
+<td>Constantes −1, −16 e −128, com W03</td>
+<td align="right">3</td>
+<td>Valores negativos e extremo inferior.</td>
+</tr>
+<tr>
+<td>IMG-03</td>
+<td>Quatro impulsos internos positivos e um negativo</td>
+<td align="right">5</td>
+<td>Posições internas e polaridade.</td>
+</tr>
+<tr>
+<td>IMG-04</td>
+<td>Impulsos nos quatro cantos e um negativo</td>
+<td align="right">5</td>
+<td>Cantos e padding.</td>
+</tr>
+<tr>
+<td>IMG-05</td>
+<td>Impulsos nos oito pixels de borda sem cantos e um negativo</td>
+<td align="right">9</td>
+<td>Bordas; completa as 16 posições com IMG-03/04.</td>
+</tr>
+<tr>
+<td>IMG-06</td>
+<td>Gradiente horizontal</td>
+<td align="right">1</td>
+<td>Orientação horizontal.</td>
+</tr>
+<tr>
+<td>IMG-07</td>
+<td>Gradiente vertical</td>
+<td align="right">1</td>
+<td>Orientação vertical.</td>
+</tr>
+<tr>
+<td>IMG-08</td>
+<td>Xadrez de +32/−32</td>
+<td align="right">1</td>
+<td>Alternância espacial.</td>
+</tr>
+<tr>
+<td>IMG-09</td>
+<td>Faixas horizontais, duas polaridades</td>
+<td align="right">2</td>
+<td>Alternância por linhas.</td>
+</tr>
+<tr>
+<td>IMG-10</td>
+<td>Faixas verticais, duas polaridades</td>
+<td align="right">2</td>
+<td>Alternância por colunas.</td>
+</tr>
+<tr>
+<td>IMG-11</td>
+<td>Diagonal principal</td>
+<td align="right">1</td>
+<td>Distribuição espacial dirigida.</td>
+</tr>
+<tr>
+<td>IMG-12</td>
+<td>Diagonal secundária</td>
+<td align="right">1</td>
+<td>Orientação complementar.</td>
+</tr>
+<tr>
+<td>IMG-13</td>
+<td>Xadrez extremo, imagem 127 e imagem −128</td>
+<td align="right">3</td>
+<td>Limites signed.</td>
+</tr>
+<tr>
+<td>IMG-14</td>
+<td>Imagens pseudoaleatórias com W03</td>
+<td align="right">1.000</td>
+<td>Amostragem reproduzível do espaço de imagens.</td>
+</tr>
+<tr>
+<td>IMG-15</td>
+<td>Gradiente fixo com W01, W02 e W03</td>
+<td align="right">3</td>
+<td>Dependência dos pesos e biases.</td>
+</tr>
+<tr>
+<td>IMG-16</td>
+<td>Gradiente vertical e alteração isolada dos quatro grupos de bias</td>
+<td align="right">8</td>
+<td>Bias +45/−45 por camada.</td>
+</tr>
+<tr>
+<td>IMG-17</td>
+<td>Imagens A, B e C, sem sobreposição</td>
+<td align="right">3</td>
+<td>Associação entre estímulo e resposta.</td>
+</tr>
+<tr>
+<td>IMG-18</td>
+<td>Reset em três offsets e três imagens de recuperação</td>
+<td align="right">6</td>
+<td>Três cancelamentos esperados e recuperação.</td>
+</tr>
+<tr>
+<td>IMG-19</td>
+<td>Três starts para cada intervalo de 2, 3, 4 e 8 clocks</td>
+<td align="right">12</td>
+<td>Caracterização exploratória de sobreposição.</td>
+</tr>
+<tr>
+<td>IMG-20</td>
+<td>Gradiente-base e 16 variantes com um pixel incrementado</td>
+<td align="right">17</td>
+<td>Perturbação de cada posição.</td>
+</tr>
+<tr>
+<td>IMG-21</td>
+<td>Pesos/bias extremos e entradas de −3 a 3</td>
+<td align="right">11</td>
+<td>Saturação e arredondamento.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Com <code>TEST=ALL</code> e <code>RANDOM_COUNT=1000</code>, a sequência inicia 1.100 transações.
+Nessa seleção, o total esperado é <code>100 + RANDOM_COUNT</code>.</p>
+<h2 id="5-protocolo-temporizacao-e-reset">5. Protocolo, temporização e reset</h2>
+<p>O reset inicial permanece ativo por quatro ciclos. A sequence começa após
+mais duas bordas de descida. Os dados são preparados antes da ativação de
+<code>start</code>, que fica alto entre duas bordas de descida consecutivas. O monitor
+captura as entradas na borda de subida e observa a resposta 1 ps depois,
+após as atualizações NBA.</p>
+<p>Uma transação pontuada mantém as entradas estáveis durante a janela de
+observação. O sequenciamento aguarda um intervalo fixo, controlado por
+<code>OBS_CYCLES</code>; não usa <code>valid_out4</code> para decidir quando lançar a próxima imagem.
+O scoreboard rastreia uma única pendência.</p>
+<p>A latência é a diferença entre o ciclo de lançamento e o ciclo da resposta
+válida. <code>EXPECTED_LATENCY=0</code> caracteriza o tempo observado. Um valor positivo
+ativa a comparação com uma exigência temporal fornecida pela especificação.
+<code>OBS_CYCLES=64</code> limita a espera por uma resposta. <code>+NO_TIMING_CHECK</code> desativa a
+comparação de latência contratual e marca a campanha como INCOMPLETE; o limite
+de espera por resposta continua ativo.</p>
+<p>No IMG-18, reset cancela a pendência. Cada rodada inicia uma imagem de
+recuperação, cujo resultado deve ser comparado normalmente. Os offsets 1, 4
+e 8 são parâmetros do teste e não identificam estágios internos.</p>
+<p>No IMG-19, os dados podem mudar com uma operação ainda em andamento. Todos
+os seus starts são exploratórios: a interface não possui ready/busy nem um
+contrato de aceitação de sobreposição. O cenário não estabelece throughput
+mínimo ou máximo.</p>
+<p><strong>REQ-IF-001:</strong> comparar o vetor final somente quando <code>valid_out4</code> estiver ativo.<br>
+<strong>REQ-IF-002:</strong> preparar dados e amostrar respostas em fases de clock definidas.<br>
+<strong>REQ-TIME-001:</strong> detectar ausência de resposta na janela configurada.<br>
+<strong>REQ-TIME-002:</strong> comparar latência exata somente quando houver um valor contratual positivo.<br>
+<strong>REQ-RST-001:</strong> cancelar pendências em reset e verificar as respostas de recuperação.<br>
+<strong>REQ-SEQ-001:</strong> pontuar imagens isoladas; classificar a sobreposição sem contrato como exploratória.</p>
+<h2 id="6-verificadores-e-classificacao">6. Verificadores e classificação</h2>
+<p>O scoreboard compara cada uma das duas saídas com o modelo e detecta resposta
+inesperada, novo start com pendência, timeout e erro nas contagens de estímulos.
+Na UVM, as verificações de protocolo são procedurais: pulso de start de um
+ciclo, validade após reset, pulso de saída de um ciclo e ausência de X/Z em
+resposta válida, respeitando a limitação de dois estados do Verilator.</p>
+<table align="center">
+<thead>
+<tr>
+<th>Registro</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PASS</td>
+<td>Transação pontuada sem erro de dados ou controle detectado.</td>
+</tr>
+<tr>
+<td>FAIL</td>
+<td>Divergência em um dos critérios executáveis da bancada.</td>
+</tr>
+<tr>
+<td>ABORT</td>
+<td>Pendência cancelada intencionalmente por reset. Não é uma comparação aprovada ou reprovada.</td>
+</tr>
+<tr>
+<td>INCOMPLETE</td>
+<td>Transação exploratória ou campanha sem condições para aprovação, como diagnóstico com comparação temporal desativada.</td>
+</tr>
+</tbody>
+</table>
+
+<p>No resultado global, <code>FAIL</code> tem precedência sobre <code>INCOMPLETE</code>, que tem
+precedência sobre <code>PASS</code>. A UVM retorna erro ao shell para FAIL e INCOMPLETE.
+A bancada sem UVM registra INCOMPLETE no log, mas encerra esse estado com
+<code>$finish</code>; por isso o código de saída isolado não representa aprovação.</p>
+<p><strong>REQ-SB-001:</strong> registrar cenário, subcaso, índice, esperado, observado e ciclo nas divergências.<br>
+<strong>REQ-SB-002:</strong> reconciliar starts com PASS, FAIL, abortos e incompletos.<br>
+<strong>REQ-RESULT-001:</strong> manter os estados distintos no resumo; abortos esperados e casos exploratórios não devem ser apresentados como PASS.<br>
+<strong>REQ-XZ-001:</strong> não declarar validação de X/Z com base em uma simulação de dois estados.</p>
+<h2 id="7-cobertura">7. Cobertura</h2>
+<h3 id="71-funcional">7.1 Funcional</h3>
+<table align="center">
+<thead>
+<tr>
+<th>Grupo</th>
+<th>O que amostra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cg_scenario</code></td>
+<td>IDs de teste, rótulos de pesos e cruzamento entre eles.</td>
+</tr>
+<tr>
+<td><code>cg_pixel</code></td>
+<td>−128, negativos, zero, positivos e 127.</td>
+</tr>
+<tr>
+<td><code>cg_spatial</code></td>
+<td>Linha e coluna dos impulsos únicos em IMG-03/04/05.</td>
+</tr>
+<tr>
+<td><code>cg_bias</code></td>
+<td>Bias negativo, zero e positivo.</td>
+</tr>
+<tr>
+<td><code>cg_quant</code></td>
+<td>Estágio e classe de saturação calculados pelo modelo.</td>
+</tr>
+</tbody>
+</table>
+
+<p>A cobertura de quantização descreve a referência matemática. Os dois bins de
+saturação negativa nas FCs não são atingíveis com ReLU antes da quantização.
+O cruzamento cenário × pesos inclui combinações não previstas pela sequência
+e um rótulo <code>modified</code> não usado. Esses pontos precisam de revisão de
+alcançabilidade; os percentuais registrados não foram recalculados para
+excluí-los.</p>
+<h3 id="72-estrutural">7.2 Estrutural</h3>
+<p>O fluxo Verilator instrumenta os arquivos de <code>src</code> elaborados no topo. O
+relatório estrutural exclui a biblioteca UVM, a bancada e seus covergroups.
+O resumo nativo apresenta pontos de linha, branch, expressão, toggle e FSM
+quando disponíveis. O HTML LCOV apresenta linhas físicas e ramos; seus
+contadores têm denominadores diferentes dos pontos nativos.</p>
+<p><strong>REQ-COV-001:</strong> apresentar cobertura funcional e estrutural separadamente.<br>
+<strong>REQ-COV-002:</strong> manter os contadores de cobertura mesmo em uma execução FAIL.<br>
+<strong>REQ-COV-003:</strong> justificar bins ausentes ou inalcançáveis sem tratá-los como exercitados.<br>
+<strong>REQ-COV-004:</strong> avaliar a cobertura junto dos resultados funcionais; atividade de código não implica correção do DUT.</p>
+<h2 id="8-execucao-e-registros">8. Execução e registros</h2>
+<p>O <a href="uvm.html">guia UVM</a> é a referência de comandos. A campanha completa é:</p>
+<pre><code class="language-bash">bash scripts/UVM/bash/CNN_top/uvm_cnn_top.sh coverage \
+  TEST=ALL RANDOM_COUNT=1000 SEED=20261025
+</code></pre>
+<p>Os logs, o CSV e os relatórios de cobertura ficam em <code>results_uvm/CNN_top/</code>.
+O dump nativo é <code>waveform/CNN_top_UVM.fst</code>, com profundidade 1 e somente as IOs
+públicas espelhadas em <code>tb_cnn</code>. A contagem dos elementos de arrays não aumenta
+a profundidade de hierarquia de módulos.</p>
+<p>O CSV tem o cabeçalho:</p>
+<pre><code class="language-csv">tx_id,test_id,subcase,weights,start_cycle,end_cycle,latency_cycles,expected0,expected1,observed0,observed1,status,errors
+</code></pre>
+<p>Transações concluídas ou exploratórias geram linhas CSV. Os abortos constam
+no log e no resumo, sem linha própria. Assim, a campanha padrão tem 1.097
+linhas CSV e três registros de aborto.</p>
+<p><strong>REQ-REP-001:</strong> guardar logs, CSV, versão do simulador, parâmetros e seed.<br>
+<strong>REQ-REP-002:</strong> manter as evidências usadas pelo relatório junto ao documento.<br>
+<strong>REQ-REP-003:</strong> registrar, em uma próxima revisão do fluxo, a revisão exata dos fontes executados e dos parâmetros de construção, para completar a rastreabilidade da campanha.</p>
+<h2 id="9-aprovacao-e-pendencias">9. Aprovação e pendências</h2>
+<p>A configuração só pode ser aprovada quando os casos pontuados coincidirem
+com o modelo, as contagens estiverem reconciliadas e as verificações de
+controle não acusarem erro. As regras matemáticas precisam corresponder à
+especificação do projeto. Uma aprovação que inclua latência contratual,
+sobreposição ou X/Z depende também dos respectivos critérios e execuções.</p>
+<table align="center">
+<thead>
+<tr>
+<th>Item</th>
+<th>Situação em 25/10/2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execução dos 22 cenários</td>
+<td>Concluída no Verilator 5.052, com UVM 2017-1.0.</td>
+</tr>
+<tr>
+<td>Resultado funcional</td>
+<td>FAIL: IMG-00/W03 e IMG-16/<code>ConvBias2[0] = -45</code>.</td>
+</tr>
+<tr>
+<td>Reset em voo e recuperação</td>
+<td>Três cancelamentos esperados e três recuperações PASS.</td>
+</tr>
+<tr>
+<td>Latência observada</td>
+<td>37 ciclos nas 1.085 respostas comparadas; exigência contratual ainda a definir.</td>
+</tr>
+<tr>
+<td>Sobreposição</td>
+<td>12 INCOMPLETE do IMG-19; falta contrato de aceitação.</td>
+</tr>
+<tr>
+<td>Quantização e indexação</td>
+<td>Regras do modelo definidas; confirmação na especificação ainda necessária.</td>
+</tr>
+<tr>
+<td>Metas de cobertura</td>
+<td>Revisar bins inalcançáveis, cruzamentos não planejados e lacunas estruturais.</td>
+</tr>
+<tr>
+<td>X/Z</td>
+<td>Verificação em quatro estados não concluída para a campanha UVM.</td>
+</tr>
+<tr>
+<td>Identificação dos fontes</td>
+<td>Incluir a revisão e o estado dos arquivos executados no registro automatizado.</td>
+</tr>
+</tbody>
+</table>
+
+<p>O <a href="../assets/documents/relatorio-cnn.pdf">relatório</a> apresenta as contagens,
+os cálculos dos casos de falha e a cobertura. O plano define critérios e
+pendências; ele não substitui as evidências de execução.</p>
+<h2 id="10-rastreabilidade">10. Rastreabilidade</h2>
+<table align="center">
+<thead>
+<tr>
+<th>Requisitos</th>
+<th>Implementação / evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REQ-CFG-*</code></td>
+<td>Parâmetros em <code>UVM_tb_params.svh</code> e instanciação em <code>testbench.sv</code>.</td>
+</tr>
+<tr>
+<td><code>REQ-GM-*</code></td>
+<td><code>UVM_reference.sv</code>; cálculos analíticos documentados no relatório.</td>
+</tr>
+<tr>
+<td><code>REQ-IF-*</code>, <code>REQ-TIME-*</code></td>
+<td><code>UVM_driver.sv</code>, <code>UVM_monitor.sv</code> e <code>UVM_scoreboard.sv</code>.</td>
+</tr>
+<tr>
+<td><code>REQ-RST-*</code>, <code>REQ-SEQ-*</code></td>
+<td>IMG-17/18/19 em <code>UVM_sequence.sv</code>; registros de recuperação e cancelamento.</td>
+</tr>
+<tr>
+<td><code>REQ-SB-*</code>, <code>REQ-RESULT-*</code>, <code>REQ-XZ-*</code></td>
+<td>Scoreboard, resumo final e logs; limitações do simulador identificadas.</td>
+</tr>
+<tr>
+<td><code>REQ-COV-*</code></td>
+<td><code>UVM_coverage.sv</code>, scripts de cobertura e relatórios separados.</td>
+</tr>
+<tr>
+<td><code>REQ-REP-*</code></td>
+<td>Logs, CSV e cópia de evidências; revisão exata dos fontes permanece pendente.</td>
+</tr>
+</tbody>
+</table>
+
+<p>A versão 1.2 reúne os critérios vigentes e a situação dos requisitos para
+a configuração documentada.</p></article><aside class="document-toc" aria-label="Índice do documento"><details open><summary>Sumário</summary><div class="toc">
+<ul>
+<li><a href="#plano-de-verificacao-do-topo-cnn">Plano de verificação do topo CNN</a><ul>
+<li><a href="#1-objetivo-e-escopo">1. Objetivo e escopo</a><ul>
+<li><a href="#base-documental">Base documental</a></li>
+</ul>
+</li>
+<li><a href="#2-configuracao-e-interface">2. Configuração e interface</a></li>
+<li><a href="#3-modelo-aritmetico">3. Modelo aritmético</a><ul>
+<li><a href="#31-indexacao-e-convolucoes">3.1 Indexação e convoluções</a></li>
+<li><a href="#32-quantizacao-ativacao-e-reducao-espacial">3.2 Quantização, ativação e redução espacial</a></li>
+</ul>
+</li>
+<li><a href="#4-estimulos-e-conjuntos-de-pesos">4. Estímulos e conjuntos de pesos</a><ul>
+<li><a href="#matriz-de-cenarios">Matriz de cenários</a></li>
+</ul>
+</li>
+<li><a href="#5-protocolo-temporizacao-e-reset">5. Protocolo, temporização e reset</a></li>
+<li><a href="#6-verificadores-e-classificacao">6. Verificadores e classificação</a></li>
+<li><a href="#7-cobertura">7. Cobertura</a><ul>
+<li><a href="#71-funcional">7.1 Funcional</a></li>
+<li><a href="#72-estrutural">7.2 Estrutural</a></li>
+</ul>
+</li>
+<li><a href="#8-execucao-e-registros">8. Execução e registros</a></li>
+<li><a href="#9-aprovacao-e-pendencias">9. Aprovação e pendências</a></li>
+<li><a href="#10-rastreabilidade">10. Rastreabilidade</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details></aside></div></main>
+<footer class="footer"><a href="../index.html#documentacao">← Documentação</a><span class="mono">CNN · SYSTEMVERILOG / UVM / ASAP7</span></footer>
+</body></html>

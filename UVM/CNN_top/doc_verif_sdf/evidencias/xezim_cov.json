@@ -1,0 +1,15 @@
+{
+  "sim_time": 720200000,
+  "assertion_sites": 0,
+  "assertion_pass_total": 0,
+  "assertion_fail_total": 0,
+  "assertions": [
+  ],
+  "covergroups": [
+    {"name": "cnn_coverage::cg_scenario", "samples": 1100, "coverpoints": {"cp_test": 22, "cp_weight": 6}, "crosses": {"cross_test_weight": 29}, "bins": {"cp_test.cases[13]": 3, "cp_test.cases[5]": 9, "cp_weight.w02": 64, "cp_test.cases[10]": 2, "cp_test.cases[15]": 3, "cp_test.cases[2]": 3, "cp_weight.w03": 1008, "cp_test.cases[8]": 1, "cp_test.cases[3]": 5, "cp_weight.w01": 23, "cp_test.cases[9]": 2, "cp_test.cases[4]": 5, "cp_test.cases[17]": 3, "cp_test.cases[18]": 6, "cp_test.cases[19]": 12, "cp_test.cases[20]": 17, "cp_test.cases[0]": 3, "cp_weight.wsat_plus": 2, "cp_weight.wsat_minus": 2, "cp_weight.w00": 1, "cp_test.cases[1]": 3, "cp_test.cases[6]": 1, "cp_test.cases[11]": 1, "cp_test.cases[16]": 8, "cp_test.cases[7]": 1, "cp_test.cases[14]": 1000, "cp_test.cases[21]": 11, "cp_test.cases[12]": 1}},
+    {"name": "cnn_coverage::cg_pixel", "samples": 17600, "coverpoints": {"cp_pixel": 2}, "crosses": {}, "bins": {"cp_pixel.zero": 9044, "cp_pixel.positive": 8556}},
+    {"name": "cnn_coverage::cg_spatial", "samples": 2, "coverpoints": {"cp_col": 1, "cp_row": 2}, "crosses": {"cross_location": 2}, "bins": {"cp_row.rows[1]": 1, "cp_col.cols[0]": 2, "cp_row.rows[3]": 1}},
+    {"name": "cnn_coverage::cg_bias", "samples": 8800, "coverpoints": {"cp_bias": 11}, "crosses": {}, "bins": {"cp_bias.negative": 4052, "cp_bias.positive": 4052, "cp_bias.zero": 696}},
+    {"name": "cnn_coverage::cg_quant", "samples": 47872, "coverpoints": {"cp_stage": 4, "cp_sat": 3}, "crosses": {"cross_stage_sat": 10}, "bins": {"cp_stage.fc2": 2176, "cp_sat.positive": 21990, "cp_sat.negative": 19973, "cp_sat.none": 5909, "cp_stage.conv2": 8704, "cp_stage.conv1": 34816, "cp_stage.fc1": 2176}}
+  ]
+}

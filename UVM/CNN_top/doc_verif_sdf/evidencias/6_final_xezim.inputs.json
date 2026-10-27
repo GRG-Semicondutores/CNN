@@ -1,0 +1,14 @@
+{
+  "scope": "dut",
+  "sdf_cells": 47390,
+  "udp_binary_edges_expanded": 30,
+  "inputs": {
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v": "9df26f5e98a79db177bd0cab7d4ef1423e96734c0ae857f8d79a8b5cef029d14",
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.sdf": "080df0b464eaefe3047fcb3a08eebcc0319ad983447a8ebe0272a7e54796d83c",
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_AO_RVT_TT_201020.v": "7d60ca80e150189367085daffcca59e2eb768ac4739c50ad04c318d8a3bb9d48",
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_INVBUF_RVT_TT_201020.v": "8804a647af1e2161c13fffcaef9ec50786494534872ec50adaae593967a3b459",
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_OA_RVT_TT_201020.v": "d98d028cdc47061912c4dffe12af420b65d3ce3f89f728c5a03d9819967b77b4",
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_SEQ_RVT_TT_220101.v": "6e63ff4b5587097a76bf395c6f2383035368d5c8d95dbf551ba324d3a9537fde",
+    "/home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/verilog/stdcell/asap7sc7p5t_SIMPLE_RVT_TT_201020.v": "849946d9b648ef58f39a97027de5e7f24051f6ef4fded598dec861e3257ea4b6"
+  }
+}

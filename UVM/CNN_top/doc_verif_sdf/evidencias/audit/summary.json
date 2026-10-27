@@ -1,0 +1,57 @@
+{
+  "normal": {
+    "returncode": 0,
+    "observed_cycles": 214,
+    "real_starts": 3,
+    "dut_valid_pulses": 3,
+    "interface_valid_pulses": 3,
+    "scoreboard_statuses": [
+      "PASS",
+      "PASS",
+      "PASS"
+    ]
+  },
+  "bad_result": {
+    "returncode": 2,
+    "observed_cycles": 214,
+    "real_starts": 3,
+    "dut_valid_pulses": 3,
+    "interface_valid_pulses": 3,
+    "scoreboard_statuses": [
+      "FAIL",
+      "FAIL",
+      "FAIL"
+    ]
+  },
+  "missing_valid": {
+    "returncode": 2,
+    "observed_cycles": 214,
+    "real_starts": 3,
+    "dut_valid_pulses": 3,
+    "interface_valid_pulses": 0,
+    "scoreboard_statuses": [
+      "FAIL",
+      "FAIL",
+      "FAIL"
+    ]
+  },
+  "source_sha256": {
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/testbench.sv": "ea641f43cfd0f317fc498d1b00954e69f12b66e3d6b451d2aab3e6c8ba0a8bac",
+    "/home/matheus-grossi/Projects/CNN/CNN/scripts/UVM/gate_level/CNN_openroad_adapter.svh": "3f51944fb3d44a253494083462895554f0ccf3835ff6fdb42f77e1534cfcef5c",
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v": "9df26f5e98a79db177bd0cab7d4ef1423e96734c0ae857f8d79a8b5cef029d14",
+    "/home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.sdf": "080df0b464eaefe3047fcb3a08eebcc0319ad983447a8ebe0272a7e54796d83c",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_agent.sv": "c888eeec3d4710405a8a22779dd0251e1f0bfe14d617d2e88ccf03e9ec3f3cd5",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_config.sv": "00f7853abf98391876b412ac398c8d2df9d72f2bd648eeeba00f71c14dfd3932",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_coverage.sv": "d1461d07b9e8bd8bf483a85c0e53c48ef9ea9ffea10fb86d34ca2b029448a573",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_driver.sv": "388bd2bf585d800c62c68372762afd5d1e6582550ea18859f04dfefebfed52d7",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_env.sv": "f19f29b263c2bb8f1e3f850ab87cf4cbbadece1432773c3af20932f9daf2663d",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_monitor.sv": "ddb523ac0849f7436dd25ec2065f654d9e8b2348da2daacda89db3bca8ae7683",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_reference.sv": "947828f252a65c3aed5bbb3a8e6634ef2d9bb91c617d02dbdbe6eca515d80d02",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv": "211fca09e83f36c3084340cf249e7850ebcdf1790ff21089705e0bd927957de5",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_seq_item.sv": "0807894bcfc0b81ee935ee4a32224a2e2ed9f5a2bf50fb1e369c9c77548fad8b",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_sequence.sv": "96dc35ead64ca2b18fc050e31a46a582863222e2d3c0140cb521e86aa759ab7b",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_sequencer.sv": "bdfa59e4ee8d68e56bf649ea2894829e6b4852aca216f3ce76e4079a73270d0f",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_test.sv": "b40a174641650c41b248871780ce89a2086e7005111f75ac7c1d6c2ee46b1c96",
+    "/home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_tb_params.svh": "384a1633f2fe457c033745559247d2cc4fc40144473dad632ce6fba0a47d655d"
+  }
+}

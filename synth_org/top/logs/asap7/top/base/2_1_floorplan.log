@@ -37,7 +37,7 @@ repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_g
 [WARNING EST-0027] no estimated parasitics. Using wire load models.
 [INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
 [INFO RSZ-0098] No setup violations found
-[INFO RSZ-0505] Runtime: 0.22s
+[INFO RSZ-0505] Runtime: 0.23s
 Default units for flow
  time 1ps
  capacitance 1fF
@@ -82,7 +82,7 @@ floorplan final report_design_area
 Design area 5261 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_1_floorplan.odb
 write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_1_floorplan.sdc
-Elapsed time: 0:06.14[h:]min:sec. CPU time: user 7.81 sys 0.47 (134%). Peak memory: 370040KB.
+Elapsed time: 0:06.68[h:]min:sec. CPU time: user 8.38 sys 0.49 (132%). Peak memory: 370720KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-2_1_floorplan             .odb            6            361 4d262188931b2d845489
+2_1_floorplan             .odb            6            362 4d262188931b2d845489
 2_1_floorplan             .sdc                             1c7de0d010f23773960d

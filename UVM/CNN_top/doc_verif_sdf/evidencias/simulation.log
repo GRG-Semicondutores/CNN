@@ -1,0 +1,1297 @@
+=== xezim 0.11.3 ===
+git 44f5c88c (2026-10-26T14:52:06-07:00)
+Max time: 1000000 ns
+------------------------------
+[compile] (1/8) parsing /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv
+In file included from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/base/uvm_base.svh:108,
+                 from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv:31:
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/base/uvm_component.svh:1649:7: info: unknown escape sequence '\%' in string literal (IEEE 1800-2017 §5.9)
+    1649 |       "the module name and component name: $sformatf(\"\%m.\%s\",\"",name,"\")."};
+         |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_model.svh:439,
+                 from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv:37:
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1562:4: info: unknown escape sequence '\
+' in string literal (IEEE 1800-2017 §5.9)
+    1562 | 			`uvm_warning("UVM/REG/ADDR",$sformatf("this version of UVM does not properly support memories with \
+         | 			^~~~~~~~~~~~
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1562:4: note: in expansion of macro `uvm_warning`
+In file included from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_model.svh:439,
+                 from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv:37:
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1569:5: info: unknown escape sequence '\
+' in string literal (IEEE 1800-2017 §5.9)
+    1569 | 				`uvm_warning("UVM/REG/ADDR",$sformatf("memory %s is not matching the word width of the enclosing map %s  \
+         | 				^~~~~~~~~~~~
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1569:5: note: in expansion of macro `uvm_warning`
+In file included from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_model.svh:439,
+                 from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv:37:
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1576:5: info: unknown escape sequence '\
+' in string literal (IEEE 1800-2017 §5.9)
+    1576 | 				`uvm_warning("UVM/REG/ADDR",$sformatf("the memory %s is not matching the word width of the enclosing map %s  \
+         | 				^~~~~~~~~~~~
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1576:5: note: in expansion of macro `uvm_warning`
+In file included from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_model.svh:439,
+                 from /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv:37:
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1581:4: info: unknown escape sequence '\
+' in string literal (IEEE 1800-2017 §5.9)
+    1581 | 			`uvm_warning("UVM/REG/ADDR",$sformatf("this implementation of UVM requires memory words to be k*8 bits (mem %s \
+         | 			^~~~~~~~~~~~
+/home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/reg/uvm_reg_map.svh:1581:4: note: in expansion of macro `uvm_warning`
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/.deps/1800.2-2017-1.0/src/uvm_pkg.sv: package uvm_pkg
+[compile] (2/8) parsing /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_AO_RVT_TT_201020.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_AO_RVT_TT_201020.v: module A2O1A1Ixp33_ASAP7_75t_R, module A2O1A1O1Ixp25_ASAP7_75t_R, module AO211x2_ASAP7_75t_R, module AO21x1_ASAP7_75t_R, module AO21x2_ASAP7_75t_R, module AO221x1_ASAP7_75t_R, module AO221x2_ASAP7_75t_R, module AO222x2_ASAP7_75t_R, module AO22x1_ASAP7_75t_R, module AO22x2_ASAP7_75t_R, module AO31x2_ASAP7_75t_R, module AO322x2_ASAP7_75t_R, module AO32x1_ASAP7_75t_R, module AO32x2_ASAP7_75t_R, module AO331x1_ASAP7_75t_R, module AO331x2_ASAP7_75t_R, module AO332x1_ASAP7_75t_R, module AO332x2_ASAP7_75t_R, module AO333x1_ASAP7_75t_R, module AO333x2_ASAP7_75t_R, module AO33x2_ASAP7_75t_R, module AOI211x1_ASAP7_75t_R, module AOI211xp5_ASAP7_75t_R, module AOI21x1_ASAP7_75t_R, module AOI21xp33_ASAP7_75t_R, module AOI21xp5_ASAP7_75t_R, module AOI221x1_ASAP7_75t_R, module AOI221xp5_ASAP7_75t_R, module AOI222xp33_ASAP7_75t_R, module AOI22x1_ASAP7_75t_R, module AOI22xp33_ASAP7_75t_R, module AOI22xp5_ASAP7_75t_R, module AOI311xp33_ASAP7_75t_R, module AOI31xp33_ASAP7_75t_R, module AOI31xp67_ASAP7_75t_R, module AOI321xp33_ASAP7_75t_R, module AOI322xp5_ASAP7_75t_R, module AOI32xp33_ASAP7_75t_R, module AOI331xp33_ASAP7_75t_R, module AOI332xp33_ASAP7_75t_R, module AOI333xp33_ASAP7_75t_R, module AOI33xp33_ASAP7_75t_R
+[compile] (3/8) parsing /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_INVBUF_RVT_TT_201020.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_INVBUF_RVT_TT_201020.v: module BUFx10_ASAP7_75t_R, module BUFx12_ASAP7_75t_R, module BUFx12f_ASAP7_75t_R, module BUFx16f_ASAP7_75t_R, module BUFx24_ASAP7_75t_R, module BUFx2_ASAP7_75t_R, module BUFx3_ASAP7_75t_R, module BUFx4_ASAP7_75t_R, module BUFx4f_ASAP7_75t_R, module BUFx5_ASAP7_75t_R, module BUFx6f_ASAP7_75t_R, module BUFx8_ASAP7_75t_R, module CKINVDCx10_ASAP7_75t_R, module CKINVDCx11_ASAP7_75t_R, module CKINVDCx12_ASAP7_75t_R, module CKINVDCx14_ASAP7_75t_R, module CKINVDCx16_ASAP7_75t_R, module CKINVDCx20_ASAP7_75t_R, module CKINVDCx5p33_ASAP7_75t_R, module CKINVDCx6p67_ASAP7_75t_R, module CKINVDCx8_ASAP7_75t_R, module CKINVDCx9p33_ASAP7_75t_R, module HB1xp67_ASAP7_75t_R, module HB2xp67_ASAP7_75t_R, module HB3xp67_ASAP7_75t_R, module HB4xp67_ASAP7_75t_R, module INVx11_ASAP7_75t_R, module INVx13_ASAP7_75t_R, module INVx1_ASAP7_75t_R, module INVx2_ASAP7_75t_R, module INVx3_ASAP7_75t_R, module INVx4_ASAP7_75t_R, module INVx5_ASAP7_75t_R, module INVx6_ASAP7_75t_R, module INVx8_ASAP7_75t_R, module INVxp33_ASAP7_75t_R, module INVxp67_ASAP7_75t_R, primitive altos_latch, primitive altos_dff_err, primitive altos_dff, primitive altos_dff_r_err, primitive altos_dff_r, primitive altos_dff_s_err, primitive altos_dff_s, primitive altos_dff_sr_err, primitive altos_dff_sr_0, primitive altos_dff_sr_1, primitive altos_latch_r, primitive altos_latch_s, primitive altos_latch_sr_0, primitive altos_latch_sr_1
+[compile] (4/8) parsing /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_OA_RVT_TT_201020.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_OA_RVT_TT_201020.v: module O2A1O1Ixp33_ASAP7_75t_R, module O2A1O1Ixp5_ASAP7_75t_R, module OA211x2_ASAP7_75t_R, module OA21x2_ASAP7_75t_R, module OA221x2_ASAP7_75t_R, module OA222x2_ASAP7_75t_R, module OA22x2_ASAP7_75t_R, module OA31x2_ASAP7_75t_R, module OA331x1_ASAP7_75t_R, module OA331x2_ASAP7_75t_R, module OA332x1_ASAP7_75t_R, module OA332x2_ASAP7_75t_R, module OA333x1_ASAP7_75t_R, module OA333x2_ASAP7_75t_R, module OA33x2_ASAP7_75t_R, module OAI211xp5_ASAP7_75t_R, module OAI21x1_ASAP7_75t_R, module OAI21xp33_ASAP7_75t_R, module OAI21xp5_ASAP7_75t_R, module OAI221xp5_ASAP7_75t_R, module OAI222xp33_ASAP7_75t_R, module OAI22x1_ASAP7_75t_R, module OAI22xp33_ASAP7_75t_R, module OAI22xp5_ASAP7_75t_R, module OAI311xp33_ASAP7_75t_R, module OAI31xp33_ASAP7_75t_R, module OAI31xp67_ASAP7_75t_R, module OAI321xp33_ASAP7_75t_R, module OAI322xp33_ASAP7_75t_R, module OAI32xp33_ASAP7_75t_R, module OAI331xp33_ASAP7_75t_R, module OAI332xp33_ASAP7_75t_R, module OAI333xp33_ASAP7_75t_R, module OAI33xp33_ASAP7_75t_R
+[compile] (5/8) parsing /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_SEQ_RVT_TT_220101.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_SEQ_RVT_TT_220101.v: module DFFASRHQNx1_ASAP7_75t_R, module DFFHQNx1_ASAP7_75t_R, module DFFHQNx2_ASAP7_75t_R, module DFFHQNx3_ASAP7_75t_R, module DFFHQx4_ASAP7_75t_R, module DFFLQNx1_ASAP7_75t_R, module DFFLQNx2_ASAP7_75t_R, module DFFLQNx3_ASAP7_75t_R, module DFFLQx4_ASAP7_75t_R, module DHLx1_ASAP7_75t_R, module DHLx2_ASAP7_75t_R, module DHLx3_ASAP7_75t_R, module DLLx1_ASAP7_75t_R, module DLLx2_ASAP7_75t_R, module DLLx3_ASAP7_75t_R, module ICGx1_ASAP7_75t_R, module ICGx2_ASAP7_75t_R, module ICGx2p67DC_ASAP7_75t_R, module ICGx3_ASAP7_75t_R, module ICGx4DC_ASAP7_75t_R, module ICGx4_ASAP7_75t_R, module ICGx5_ASAP7_75t_R, module ICGx5p33DC_ASAP7_75t_R, module ICGx6p67DC_ASAP7_75t_R, module ICGx8DC_ASAP7_75t_R, module SDFHx1_ASAP7_75t_R, module SDFHx2_ASAP7_75t_R, module SDFHx3_ASAP7_75t_R, module SDFHx4_ASAP7_75t_R, module SDFLx1_ASAP7_75t_R, module SDFLx2_ASAP7_75t_R, module SDFLx3_ASAP7_75t_R, module SDFLx4_ASAP7_75t_R
+[compile] (6/8) parsing /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_SIMPLE_RVT_TT_201020.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cells/asap7sc7p5t_SIMPLE_RVT_TT_201020.v: module AND2x2_ASAP7_75t_R, module AND2x4_ASAP7_75t_R, module AND2x6_ASAP7_75t_R, module AND3x1_ASAP7_75t_R, module AND3x2_ASAP7_75t_R, module AND3x4_ASAP7_75t_R, module AND4x1_ASAP7_75t_R, module AND4x2_ASAP7_75t_R, module AND5x1_ASAP7_75t_R, module AND5x2_ASAP7_75t_R, module FAx1_ASAP7_75t_R, module HAxp5_ASAP7_75t_R, module MAJIxp5_ASAP7_75t_R, module MAJx2_ASAP7_75t_R, module MAJx3_ASAP7_75t_R, module NAND2x1_ASAP7_75t_R, module NAND2x1p5_ASAP7_75t_R, module NAND2x2_ASAP7_75t_R, module NAND2xp33_ASAP7_75t_R, module NAND2xp5_ASAP7_75t_R, module NAND2xp67_ASAP7_75t_R, module NAND3x1_ASAP7_75t_R, module NAND3x2_ASAP7_75t_R, module NAND3xp33_ASAP7_75t_R, module NAND4xp25_ASAP7_75t_R, module NAND4xp75_ASAP7_75t_R, module NAND5xp2_ASAP7_75t_R, module NOR2x1_ASAP7_75t_R, module NOR2x1p5_ASAP7_75t_R, module NOR2x2_ASAP7_75t_R, module NOR2xp33_ASAP7_75t_R, module NOR2xp67_ASAP7_75t_R, module NOR3x1_ASAP7_75t_R, module NOR3x2_ASAP7_75t_R, module NOR3xp33_ASAP7_75t_R, module NOR4xp25_ASAP7_75t_R, module NOR4xp75_ASAP7_75t_R, module NOR5xp2_ASAP7_75t_R, module OR2x2_ASAP7_75t_R, module OR2x4_ASAP7_75t_R, module OR2x6_ASAP7_75t_R, module OR3x1_ASAP7_75t_R, module OR3x2_ASAP7_75t_R, module OR3x4_ASAP7_75t_R, module OR4x1_ASAP7_75t_R, module OR4x2_ASAP7_75t_R, module OR5x1_ASAP7_75t_R, module OR5x2_ASAP7_75t_R, module TIEHIx1_ASAP7_75t_R, module TIELOx1_ASAP7_75t_R, module XNOR2x1_ASAP7_75t_R, module XNOR2x2_ASAP7_75t_R, module XNOR2xp5_ASAP7_75t_R, module XOR2x1_ASAP7_75t_R, module XOR2x2_ASAP7_75t_R, module XOR2xp5_ASAP7_75t_R
+[compile] (7/8) parsing /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/6_final.v: module CNN
+[compile] (8/8) parsing /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/testbench.sv
+[compile]   /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/testbench.sv: package cnn_tb_types, interface cnn_if, package cnn_uvm_pkg, module tb_cnn
+[PHASE] simulator construction: 384.8ms (materialize 122.2, names 29.6, static 82.7, arrays_1d 0.0, arrays_other 24.9, prev 0.7, drop 0.0; signals 316067, named 316067)
+[SDF] annotated 155094 signals with delays
+[SDF] annotated 26816 timing check(s)
+[PHASE] time-0 settle: 165.6ms (200613 entry_evals, 1 settle_iters, 200162 comb_entries, 316067 signals)
+[PHASE] time-0 settle breakdown: DC 0.0ms/165249 (0.0µs), CA 104.5ms/50902 (2.1µs), AB 0.0ms/0 (0.0µs)
+[PHASE] compilation: 12902.1ms
+[EVENT-EDGE] ARMED mode ON: 0 input signals, 0 fanout edges
+[EVENT-EDGE] measure (timestamp): 0 edge blocks, 0 gateable, 0 gateable-with-EMPTY-data-reads, avg data-reads/gateable=0.00
+[EVENT-EDGE] SKIP mode ON (sim_time >= 0) — skipping gateable flop fires with no data-input change
+[xezim][warning] a #delay evaluated to a pathological real value 9.2000e18 at time 0 — the process is parked far in the future, so a clock driven by it will appear to stop. This usually means the delay expression produced NaN/inf or IEEE-754 bit garbage.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+[CFG] TEST=ALL OBS_CYCLES=64 RANDOM_COUNT=1000 SEED=20261025
+
+========== IMG-00 ==========
+[PASS] tx=1 IMG-00/zero_W00 expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=2 IMG-00/zero_W01 expected=[0,0] observed=[0,0] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1775000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=3 case=IMG-00 subcase=zero_com_bias_W03 launch=140 now=178 indice=0 exp=127 got=0
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 1775000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=3 case=IMG-00 subcase=zero_com_bias_W03 launch=140 now=178 indice=1 exp=0 got=127
+[FAIL-TX] IMG-00/zero_com_bias_W03 errors=2 latency=38
+
+========== IMG-01 ==========
+[PASS] tx=4 IMG-01/const_pos_1 expected=[1,1] observed=[1,1] latency=38
+[PASS] tx=5 IMG-01/const_pos_16 expected=[4,4] observed=[4,4] latency=38
+[PASS] tx=6 IMG-01/const_pos_127 expected=[32,32] observed=[32,32] latency=38
+
+========== IMG-02 ==========
+[PASS] tx=7 IMG-02/const_neg_1 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=8 IMG-02/const_neg_16 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=9 IMG-02/const_neg_128 expected=[0,127] observed=[0,127] latency=38
+
+========== IMG-03 ==========
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 6395000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=10 case=IMG-03 subcase=imp_pos_r1_c1 launch=602 now=640 indice=1 exp=24 got=4
+[FAIL-TX] IMG-03/imp_pos_r1_c1 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 7055000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=11 case=IMG-03 subcase=imp_pos_r1_c2 launch=668 now=706 indice=1 exp=16 got=4
+[FAIL-TX] IMG-03/imp_pos_r1_c2 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 7715000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=12 case=IMG-03 subcase=imp_pos_r2_c1 launch=734 now=772 indice=1 exp=20 got=8
+[FAIL-TX] IMG-03/imp_pos_r2_c1 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 8375000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=13 case=IMG-03 subcase=imp_pos_r2_c2 launch=800 now=838 indice=1 exp=16 got=8
+[FAIL-TX] IMG-03/imp_pos_r2_c2 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 9035000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=14 case=IMG-03 subcase=imp_neg_r1_c1 launch=866 now=904 indice=0 exp=16 got=12
+[FAIL-TX] IMG-03/imp_neg_r1_c1 errors=1 latency=38
+
+========== IMG-04 ==========
+[PASS] tx=15 IMG-04/corner_pos_r0_c0 expected=[0,0] observed=[0,0] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 10355000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=16 case=IMG-04 subcase=corner_pos_r0_c3 launch=998 now=1036 indice=0 exp=16 got=0
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 10355000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=16 case=IMG-04 subcase=corner_pos_r0_c3 launch=998 now=1036 indice=1 exp=8 got=0
+[FAIL-TX] IMG-04/corner_pos_r0_c3 errors=2 latency=38
+[PASS] tx=17 IMG-04/corner_pos_r3_c0 expected=[8,16] observed=[8,16] latency=38
+[PASS] tx=18 IMG-04/corner_pos_r3_c3 expected=[24,24] observed=[24,24] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 12335000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=19 case=IMG-04 subcase=corner_neg_r0_c0 launch=1196 now=1234 indice=1 exp=24 got=0
+[FAIL-TX] IMG-04/corner_neg_r0_c0 errors=1 latency=38
+
+========== IMG-05 ==========
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 12995000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=20 case=IMG-05 subcase=edge_pos_r0_c1 launch=1262 now=1300 indice=1 exp=8 got=0
+[FAIL-TX] IMG-05/edge_pos_r0_c1 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 13655000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=21 case=IMG-05 subcase=edge_pos_r0_c2 launch=1328 now=1366 indice=1 exp=8 got=0
+[FAIL-TX] IMG-05/edge_pos_r0_c2 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 14315000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=22 case=IMG-05 subcase=edge_pos_r1_c0 launch=1394 now=1432 indice=1 exp=16 got=0
+[FAIL-TX] IMG-05/edge_pos_r1_c0 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 14975000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=23 case=IMG-05 subcase=edge_pos_r1_c3 launch=1460 now=1498 indice=0 exp=24 got=16
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 14975000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=23 case=IMG-05 subcase=edge_pos_r1_c3 launch=1460 now=1498 indice=1 exp=24 got=4
+[FAIL-TX] IMG-05/edge_pos_r1_c3 errors=2 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 15635000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=24 case=IMG-05 subcase=edge_pos_r2_c0 launch=1526 now=1564 indice=1 exp=16 got=0
+[FAIL-TX] IMG-05/edge_pos_r2_c0 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 16295000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=25 case=IMG-05 subcase=edge_pos_r2_c3 launch=1592 now=1630 indice=0 exp=16 got=24
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 16295000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=25 case=IMG-05 subcase=edge_pos_r2_c3 launch=1592 now=1630 indice=1 exp=20 got=8
+[FAIL-TX] IMG-05/edge_pos_r2_c3 errors=2 latency=38
+[PASS] tx=26 IMG-05/edge_pos_r3_c1 expected=[24,24] observed=[24,24] latency=38
+[PASS] tx=27 IMG-05/edge_pos_r3_c2 expected=[20,16] observed=[20,16] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 18275000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=28 case=IMG-05 subcase=edge_neg_r0_c1 launch=1790 now=1828 indice=0 exp=20 got=8
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 18275000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=28 case=IMG-05 subcase=edge_neg_r0_c1 launch=1790 now=1828 indice=1 exp=16 got=0
+[FAIL-TX] IMG-05/edge_neg_r0_c1 errors=2 latency=38
+
+========== IMG-06 ==========
+[PASS] tx=29 IMG-06/grad_h expected=[127,120] observed=[127,120] latency=38
+
+========== IMG-07 ==========
+[PASS] tx=30 IMG-07/grad_v expected=[120,127] observed=[120,127] latency=38
+
+========== IMG-08 ==========
+[PASS] tx=31 IMG-08/chessboard expected=[24,24] observed=[24,24] latency=38
+
+========== IMG-09 ==========
+[PASS] tx=32 IMG-09/horizontal_pos_first expected=[16,8] observed=[16,8] latency=38
+[PASS] tx=33 IMG-09/horizontal_neg_first expected=[48,72] observed=[48,72] latency=38
+
+========== IMG-10 ==========
+[PASS] tx=34 IMG-10/vertical_pos_first expected=[8,16] observed=[8,16] latency=38
+[PASS] tx=35 IMG-10/vertical_neg_first expected=[72,48] observed=[72,48] latency=38
+
+========== IMG-11 ==========
+[PASS] tx=36 IMG-11/main_diagonal expected=[48,48] observed=[48,48] latency=38
+
+========== IMG-12 ==========
+[PASS] tx=37 IMG-12/secondary_diagonal expected=[48,48] observed=[48,48] latency=38
+
+========== IMG-13 ==========
+[PASS] tx=38 IMG-13/extreme_chessboard expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=39 IMG-13/all_127 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=40 IMG-13/all_minus_128 expected=[0,127] observed=[0,127] latency=38
+
+========== IMG-14 ==========
+[CFG] IMG-14 seed=20261025 quantidade=1000
+[PASS] tx=41 IMG-14/random_0 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=42 IMG-14/random_1 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=43 IMG-14/random_2 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=44 IMG-14/random_3 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=45 IMG-14/random_4 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=46 IMG-14/random_5 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=47 IMG-14/random_6 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=48 IMG-14/random_7 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=49 IMG-14/random_8 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=50 IMG-14/random_9 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=51 IMG-14/random_10 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=52 IMG-14/random_11 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=53 IMG-14/random_12 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=54 IMG-14/random_13 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=55 IMG-14/random_14 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=56 IMG-14/random_15 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=57 IMG-14/random_16 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=58 IMG-14/random_17 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=59 IMG-14/random_18 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=60 IMG-14/random_19 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=61 IMG-14/random_20 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=62 IMG-14/random_21 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=63 IMG-14/random_22 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=64 IMG-14/random_23 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=65 IMG-14/random_24 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=66 IMG-14/random_25 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=67 IMG-14/random_26 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=68 IMG-14/random_27 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=69 IMG-14/random_28 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=70 IMG-14/random_29 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=71 IMG-14/random_30 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=72 IMG-14/random_31 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=73 IMG-14/random_32 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=74 IMG-14/random_33 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=75 IMG-14/random_34 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=76 IMG-14/random_35 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=77 IMG-14/random_36 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=78 IMG-14/random_37 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=79 IMG-14/random_38 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=80 IMG-14/random_39 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=81 IMG-14/random_40 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=82 IMG-14/random_41 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=83 IMG-14/random_42 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=84 IMG-14/random_43 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=85 IMG-14/random_44 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=86 IMG-14/random_45 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=87 IMG-14/random_46 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=88 IMG-14/random_47 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=89 IMG-14/random_48 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=90 IMG-14/random_49 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=91 IMG-14/random_50 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=92 IMG-14/random_51 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=93 IMG-14/random_52 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=94 IMG-14/random_53 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=95 IMG-14/random_54 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=96 IMG-14/random_55 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=97 IMG-14/random_56 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=98 IMG-14/random_57 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=99 IMG-14/random_58 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=100 IMG-14/random_59 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=101 IMG-14/random_60 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=102 IMG-14/random_61 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=103 IMG-14/random_62 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=104 IMG-14/random_63 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=105 IMG-14/random_64 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=106 IMG-14/random_65 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=107 IMG-14/random_66 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=108 IMG-14/random_67 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=109 IMG-14/random_68 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=110 IMG-14/random_69 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=111 IMG-14/random_70 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=112 IMG-14/random_71 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=113 IMG-14/random_72 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=114 IMG-14/random_73 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=115 IMG-14/random_74 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=116 IMG-14/random_75 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=117 IMG-14/random_76 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=118 IMG-14/random_77 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=119 IMG-14/random_78 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=120 IMG-14/random_79 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=121 IMG-14/random_80 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=122 IMG-14/random_81 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=123 IMG-14/random_82 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=124 IMG-14/random_83 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=125 IMG-14/random_84 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=126 IMG-14/random_85 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=127 IMG-14/random_86 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=128 IMG-14/random_87 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=129 IMG-14/random_88 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=130 IMG-14/random_89 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=131 IMG-14/random_90 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=132 IMG-14/random_91 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=133 IMG-14/random_92 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=134 IMG-14/random_93 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=135 IMG-14/random_94 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=136 IMG-14/random_95 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=137 IMG-14/random_96 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=138 IMG-14/random_97 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=139 IMG-14/random_98 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=140 IMG-14/random_99 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=141 IMG-14/random_100 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=142 IMG-14/random_101 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=143 IMG-14/random_102 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=144 IMG-14/random_103 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=145 IMG-14/random_104 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=146 IMG-14/random_105 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=147 IMG-14/random_106 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=148 IMG-14/random_107 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=149 IMG-14/random_108 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=150 IMG-14/random_109 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=151 IMG-14/random_110 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=152 IMG-14/random_111 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=153 IMG-14/random_112 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=154 IMG-14/random_113 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=155 IMG-14/random_114 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=156 IMG-14/random_115 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=157 IMG-14/random_116 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=158 IMG-14/random_117 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=159 IMG-14/random_118 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=160 IMG-14/random_119 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=161 IMG-14/random_120 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=162 IMG-14/random_121 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=163 IMG-14/random_122 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=164 IMG-14/random_123 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=165 IMG-14/random_124 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=166 IMG-14/random_125 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=167 IMG-14/random_126 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=168 IMG-14/random_127 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=169 IMG-14/random_128 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=170 IMG-14/random_129 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=171 IMG-14/random_130 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=172 IMG-14/random_131 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=173 IMG-14/random_132 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=174 IMG-14/random_133 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=175 IMG-14/random_134 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=176 IMG-14/random_135 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=177 IMG-14/random_136 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=178 IMG-14/random_137 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=179 IMG-14/random_138 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=180 IMG-14/random_139 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=181 IMG-14/random_140 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=182 IMG-14/random_141 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=183 IMG-14/random_142 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=184 IMG-14/random_143 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=185 IMG-14/random_144 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=186 IMG-14/random_145 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=187 IMG-14/random_146 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=188 IMG-14/random_147 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=189 IMG-14/random_148 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=190 IMG-14/random_149 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=191 IMG-14/random_150 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=192 IMG-14/random_151 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=193 IMG-14/random_152 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=194 IMG-14/random_153 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=195 IMG-14/random_154 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=196 IMG-14/random_155 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=197 IMG-14/random_156 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=198 IMG-14/random_157 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=199 IMG-14/random_158 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=200 IMG-14/random_159 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=201 IMG-14/random_160 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=202 IMG-14/random_161 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=203 IMG-14/random_162 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=204 IMG-14/random_163 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=205 IMG-14/random_164 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=206 IMG-14/random_165 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=207 IMG-14/random_166 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=208 IMG-14/random_167 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=209 IMG-14/random_168 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=210 IMG-14/random_169 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=211 IMG-14/random_170 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=212 IMG-14/random_171 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=213 IMG-14/random_172 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=214 IMG-14/random_173 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=215 IMG-14/random_174 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=216 IMG-14/random_175 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=217 IMG-14/random_176 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=218 IMG-14/random_177 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=219 IMG-14/random_178 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=220 IMG-14/random_179 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=221 IMG-14/random_180 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=222 IMG-14/random_181 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=223 IMG-14/random_182 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=224 IMG-14/random_183 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=225 IMG-14/random_184 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=226 IMG-14/random_185 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=227 IMG-14/random_186 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=228 IMG-14/random_187 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=229 IMG-14/random_188 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=230 IMG-14/random_189 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=231 IMG-14/random_190 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=232 IMG-14/random_191 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=233 IMG-14/random_192 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=234 IMG-14/random_193 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=235 IMG-14/random_194 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=236 IMG-14/random_195 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=237 IMG-14/random_196 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=238 IMG-14/random_197 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=239 IMG-14/random_198 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=240 IMG-14/random_199 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=241 IMG-14/random_200 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=242 IMG-14/random_201 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=243 IMG-14/random_202 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=244 IMG-14/random_203 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=245 IMG-14/random_204 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=246 IMG-14/random_205 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=247 IMG-14/random_206 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=248 IMG-14/random_207 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=249 IMG-14/random_208 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=250 IMG-14/random_209 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=251 IMG-14/random_210 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=252 IMG-14/random_211 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=253 IMG-14/random_212 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=254 IMG-14/random_213 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=255 IMG-14/random_214 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=256 IMG-14/random_215 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=257 IMG-14/random_216 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=258 IMG-14/random_217 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=259 IMG-14/random_218 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=260 IMG-14/random_219 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=261 IMG-14/random_220 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=262 IMG-14/random_221 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=263 IMG-14/random_222 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=264 IMG-14/random_223 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=265 IMG-14/random_224 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=266 IMG-14/random_225 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=267 IMG-14/random_226 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=268 IMG-14/random_227 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=269 IMG-14/random_228 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=270 IMG-14/random_229 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=271 IMG-14/random_230 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=272 IMG-14/random_231 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=273 IMG-14/random_232 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=274 IMG-14/random_233 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=275 IMG-14/random_234 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=276 IMG-14/random_235 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=277 IMG-14/random_236 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=278 IMG-14/random_237 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=279 IMG-14/random_238 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=280 IMG-14/random_239 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=281 IMG-14/random_240 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=282 IMG-14/random_241 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=283 IMG-14/random_242 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=284 IMG-14/random_243 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=285 IMG-14/random_244 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=286 IMG-14/random_245 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=287 IMG-14/random_246 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=288 IMG-14/random_247 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=289 IMG-14/random_248 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=290 IMG-14/random_249 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=291 IMG-14/random_250 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=292 IMG-14/random_251 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=293 IMG-14/random_252 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=294 IMG-14/random_253 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=295 IMG-14/random_254 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=296 IMG-14/random_255 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=297 IMG-14/random_256 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=298 IMG-14/random_257 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=299 IMG-14/random_258 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=300 IMG-14/random_259 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=301 IMG-14/random_260 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=302 IMG-14/random_261 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=303 IMG-14/random_262 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=304 IMG-14/random_263 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=305 IMG-14/random_264 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=306 IMG-14/random_265 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=307 IMG-14/random_266 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=308 IMG-14/random_267 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=309 IMG-14/random_268 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=310 IMG-14/random_269 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=311 IMG-14/random_270 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=312 IMG-14/random_271 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=313 IMG-14/random_272 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=314 IMG-14/random_273 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=315 IMG-14/random_274 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=316 IMG-14/random_275 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=317 IMG-14/random_276 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=318 IMG-14/random_277 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=319 IMG-14/random_278 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=320 IMG-14/random_279 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=321 IMG-14/random_280 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=322 IMG-14/random_281 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=323 IMG-14/random_282 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=324 IMG-14/random_283 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=325 IMG-14/random_284 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=326 IMG-14/random_285 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=327 IMG-14/random_286 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=328 IMG-14/random_287 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=329 IMG-14/random_288 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=330 IMG-14/random_289 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=331 IMG-14/random_290 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=332 IMG-14/random_291 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=333 IMG-14/random_292 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=334 IMG-14/random_293 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=335 IMG-14/random_294 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=336 IMG-14/random_295 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=337 IMG-14/random_296 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=338 IMG-14/random_297 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=339 IMG-14/random_298 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=340 IMG-14/random_299 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=341 IMG-14/random_300 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=342 IMG-14/random_301 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=343 IMG-14/random_302 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=344 IMG-14/random_303 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=345 IMG-14/random_304 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=346 IMG-14/random_305 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=347 IMG-14/random_306 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=348 IMG-14/random_307 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=349 IMG-14/random_308 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=350 IMG-14/random_309 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=351 IMG-14/random_310 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=352 IMG-14/random_311 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=353 IMG-14/random_312 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=354 IMG-14/random_313 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=355 IMG-14/random_314 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=356 IMG-14/random_315 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=357 IMG-14/random_316 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=358 IMG-14/random_317 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=359 IMG-14/random_318 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=360 IMG-14/random_319 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=361 IMG-14/random_320 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=362 IMG-14/random_321 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=363 IMG-14/random_322 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=364 IMG-14/random_323 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=365 IMG-14/random_324 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=366 IMG-14/random_325 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=367 IMG-14/random_326 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=368 IMG-14/random_327 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=369 IMG-14/random_328 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=370 IMG-14/random_329 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=371 IMG-14/random_330 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=372 IMG-14/random_331 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=373 IMG-14/random_332 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=374 IMG-14/random_333 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=375 IMG-14/random_334 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=376 IMG-14/random_335 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=377 IMG-14/random_336 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=378 IMG-14/random_337 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=379 IMG-14/random_338 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=380 IMG-14/random_339 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=381 IMG-14/random_340 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=382 IMG-14/random_341 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=383 IMG-14/random_342 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=384 IMG-14/random_343 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=385 IMG-14/random_344 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=386 IMG-14/random_345 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=387 IMG-14/random_346 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=388 IMG-14/random_347 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=389 IMG-14/random_348 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=390 IMG-14/random_349 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=391 IMG-14/random_350 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=392 IMG-14/random_351 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=393 IMG-14/random_352 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=394 IMG-14/random_353 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=395 IMG-14/random_354 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=396 IMG-14/random_355 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=397 IMG-14/random_356 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=398 IMG-14/random_357 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=399 IMG-14/random_358 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=400 IMG-14/random_359 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=401 IMG-14/random_360 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=402 IMG-14/random_361 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=403 IMG-14/random_362 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=404 IMG-14/random_363 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=405 IMG-14/random_364 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=406 IMG-14/random_365 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=407 IMG-14/random_366 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=408 IMG-14/random_367 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=409 IMG-14/random_368 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=410 IMG-14/random_369 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=411 IMG-14/random_370 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=412 IMG-14/random_371 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=413 IMG-14/random_372 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=414 IMG-14/random_373 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=415 IMG-14/random_374 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=416 IMG-14/random_375 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=417 IMG-14/random_376 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=418 IMG-14/random_377 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=419 IMG-14/random_378 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=420 IMG-14/random_379 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=421 IMG-14/random_380 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=422 IMG-14/random_381 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=423 IMG-14/random_382 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=424 IMG-14/random_383 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=425 IMG-14/random_384 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=426 IMG-14/random_385 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=427 IMG-14/random_386 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=428 IMG-14/random_387 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=429 IMG-14/random_388 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=430 IMG-14/random_389 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=431 IMG-14/random_390 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=432 IMG-14/random_391 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=433 IMG-14/random_392 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=434 IMG-14/random_393 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=435 IMG-14/random_394 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=436 IMG-14/random_395 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=437 IMG-14/random_396 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=438 IMG-14/random_397 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=439 IMG-14/random_398 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=440 IMG-14/random_399 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=441 IMG-14/random_400 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=442 IMG-14/random_401 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=443 IMG-14/random_402 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=444 IMG-14/random_403 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=445 IMG-14/random_404 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=446 IMG-14/random_405 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=447 IMG-14/random_406 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=448 IMG-14/random_407 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=449 IMG-14/random_408 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=450 IMG-14/random_409 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=451 IMG-14/random_410 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=452 IMG-14/random_411 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=453 IMG-14/random_412 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=454 IMG-14/random_413 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=455 IMG-14/random_414 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=456 IMG-14/random_415 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=457 IMG-14/random_416 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=458 IMG-14/random_417 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=459 IMG-14/random_418 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=460 IMG-14/random_419 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=461 IMG-14/random_420 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=462 IMG-14/random_421 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=463 IMG-14/random_422 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=464 IMG-14/random_423 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=465 IMG-14/random_424 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=466 IMG-14/random_425 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=467 IMG-14/random_426 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=468 IMG-14/random_427 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=469 IMG-14/random_428 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=470 IMG-14/random_429 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=471 IMG-14/random_430 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=472 IMG-14/random_431 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=473 IMG-14/random_432 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=474 IMG-14/random_433 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=475 IMG-14/random_434 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=476 IMG-14/random_435 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=477 IMG-14/random_436 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=478 IMG-14/random_437 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=479 IMG-14/random_438 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=480 IMG-14/random_439 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=481 IMG-14/random_440 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=482 IMG-14/random_441 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=483 IMG-14/random_442 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=484 IMG-14/random_443 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=485 IMG-14/random_444 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=486 IMG-14/random_445 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=487 IMG-14/random_446 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=488 IMG-14/random_447 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=489 IMG-14/random_448 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=490 IMG-14/random_449 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=491 IMG-14/random_450 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=492 IMG-14/random_451 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=493 IMG-14/random_452 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=494 IMG-14/random_453 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=495 IMG-14/random_454 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=496 IMG-14/random_455 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=497 IMG-14/random_456 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=498 IMG-14/random_457 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=499 IMG-14/random_458 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=500 IMG-14/random_459 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=501 IMG-14/random_460 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=502 IMG-14/random_461 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=503 IMG-14/random_462 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=504 IMG-14/random_463 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=505 IMG-14/random_464 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=506 IMG-14/random_465 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=507 IMG-14/random_466 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=508 IMG-14/random_467 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=509 IMG-14/random_468 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=510 IMG-14/random_469 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=511 IMG-14/random_470 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=512 IMG-14/random_471 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=513 IMG-14/random_472 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=514 IMG-14/random_473 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=515 IMG-14/random_474 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=516 IMG-14/random_475 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=517 IMG-14/random_476 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=518 IMG-14/random_477 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=519 IMG-14/random_478 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=520 IMG-14/random_479 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=521 IMG-14/random_480 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=522 IMG-14/random_481 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=523 IMG-14/random_482 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=524 IMG-14/random_483 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=525 IMG-14/random_484 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=526 IMG-14/random_485 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=527 IMG-14/random_486 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=528 IMG-14/random_487 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=529 IMG-14/random_488 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=530 IMG-14/random_489 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=531 IMG-14/random_490 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=532 IMG-14/random_491 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=533 IMG-14/random_492 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=534 IMG-14/random_493 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=535 IMG-14/random_494 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=536 IMG-14/random_495 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=537 IMG-14/random_496 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=538 IMG-14/random_497 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=539 IMG-14/random_498 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=540 IMG-14/random_499 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=541 IMG-14/random_500 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=542 IMG-14/random_501 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=543 IMG-14/random_502 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=544 IMG-14/random_503 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=545 IMG-14/random_504 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=546 IMG-14/random_505 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=547 IMG-14/random_506 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=548 IMG-14/random_507 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=549 IMG-14/random_508 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=550 IMG-14/random_509 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=551 IMG-14/random_510 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=552 IMG-14/random_511 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=553 IMG-14/random_512 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=554 IMG-14/random_513 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=555 IMG-14/random_514 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=556 IMG-14/random_515 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=557 IMG-14/random_516 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=558 IMG-14/random_517 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=559 IMG-14/random_518 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=560 IMG-14/random_519 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=561 IMG-14/random_520 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=562 IMG-14/random_521 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=563 IMG-14/random_522 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=564 IMG-14/random_523 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=565 IMG-14/random_524 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=566 IMG-14/random_525 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=567 IMG-14/random_526 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=568 IMG-14/random_527 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=569 IMG-14/random_528 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=570 IMG-14/random_529 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=571 IMG-14/random_530 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=572 IMG-14/random_531 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=573 IMG-14/random_532 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=574 IMG-14/random_533 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=575 IMG-14/random_534 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=576 IMG-14/random_535 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=577 IMG-14/random_536 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=578 IMG-14/random_537 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=579 IMG-14/random_538 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=580 IMG-14/random_539 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=581 IMG-14/random_540 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=582 IMG-14/random_541 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=583 IMG-14/random_542 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=584 IMG-14/random_543 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=585 IMG-14/random_544 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=586 IMG-14/random_545 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=587 IMG-14/random_546 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=588 IMG-14/random_547 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=589 IMG-14/random_548 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=590 IMG-14/random_549 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=591 IMG-14/random_550 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=592 IMG-14/random_551 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=593 IMG-14/random_552 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=594 IMG-14/random_553 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=595 IMG-14/random_554 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=596 IMG-14/random_555 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=597 IMG-14/random_556 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=598 IMG-14/random_557 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=599 IMG-14/random_558 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=600 IMG-14/random_559 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=601 IMG-14/random_560 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=602 IMG-14/random_561 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=603 IMG-14/random_562 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=604 IMG-14/random_563 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=605 IMG-14/random_564 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=606 IMG-14/random_565 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=607 IMG-14/random_566 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=608 IMG-14/random_567 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=609 IMG-14/random_568 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=610 IMG-14/random_569 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=611 IMG-14/random_570 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=612 IMG-14/random_571 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=613 IMG-14/random_572 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=614 IMG-14/random_573 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=615 IMG-14/random_574 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=616 IMG-14/random_575 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=617 IMG-14/random_576 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=618 IMG-14/random_577 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=619 IMG-14/random_578 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=620 IMG-14/random_579 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=621 IMG-14/random_580 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=622 IMG-14/random_581 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=623 IMG-14/random_582 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=624 IMG-14/random_583 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=625 IMG-14/random_584 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=626 IMG-14/random_585 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=627 IMG-14/random_586 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=628 IMG-14/random_587 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=629 IMG-14/random_588 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=630 IMG-14/random_589 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=631 IMG-14/random_590 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=632 IMG-14/random_591 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=633 IMG-14/random_592 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=634 IMG-14/random_593 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=635 IMG-14/random_594 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=636 IMG-14/random_595 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=637 IMG-14/random_596 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=638 IMG-14/random_597 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=639 IMG-14/random_598 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=640 IMG-14/random_599 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=641 IMG-14/random_600 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=642 IMG-14/random_601 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=643 IMG-14/random_602 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=644 IMG-14/random_603 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=645 IMG-14/random_604 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=646 IMG-14/random_605 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=647 IMG-14/random_606 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=648 IMG-14/random_607 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=649 IMG-14/random_608 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=650 IMG-14/random_609 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=651 IMG-14/random_610 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=652 IMG-14/random_611 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=653 IMG-14/random_612 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=654 IMG-14/random_613 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=655 IMG-14/random_614 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=656 IMG-14/random_615 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=657 IMG-14/random_616 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=658 IMG-14/random_617 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=659 IMG-14/random_618 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=660 IMG-14/random_619 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=661 IMG-14/random_620 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=662 IMG-14/random_621 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=663 IMG-14/random_622 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=664 IMG-14/random_623 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=665 IMG-14/random_624 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=666 IMG-14/random_625 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=667 IMG-14/random_626 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=668 IMG-14/random_627 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=669 IMG-14/random_628 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=670 IMG-14/random_629 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=671 IMG-14/random_630 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=672 IMG-14/random_631 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=673 IMG-14/random_632 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=674 IMG-14/random_633 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=675 IMG-14/random_634 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=676 IMG-14/random_635 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=677 IMG-14/random_636 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=678 IMG-14/random_637 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=679 IMG-14/random_638 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=680 IMG-14/random_639 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=681 IMG-14/random_640 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=682 IMG-14/random_641 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=683 IMG-14/random_642 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=684 IMG-14/random_643 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=685 IMG-14/random_644 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=686 IMG-14/random_645 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=687 IMG-14/random_646 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=688 IMG-14/random_647 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=689 IMG-14/random_648 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=690 IMG-14/random_649 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=691 IMG-14/random_650 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=692 IMG-14/random_651 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=693 IMG-14/random_652 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=694 IMG-14/random_653 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=695 IMG-14/random_654 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=696 IMG-14/random_655 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=697 IMG-14/random_656 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=698 IMG-14/random_657 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=699 IMG-14/random_658 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=700 IMG-14/random_659 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=701 IMG-14/random_660 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=702 IMG-14/random_661 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=703 IMG-14/random_662 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=704 IMG-14/random_663 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=705 IMG-14/random_664 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=706 IMG-14/random_665 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=707 IMG-14/random_666 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=708 IMG-14/random_667 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=709 IMG-14/random_668 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=710 IMG-14/random_669 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=711 IMG-14/random_670 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=712 IMG-14/random_671 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=713 IMG-14/random_672 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=714 IMG-14/random_673 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=715 IMG-14/random_674 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=716 IMG-14/random_675 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=717 IMG-14/random_676 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=718 IMG-14/random_677 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=719 IMG-14/random_678 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=720 IMG-14/random_679 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=721 IMG-14/random_680 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=722 IMG-14/random_681 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=723 IMG-14/random_682 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=724 IMG-14/random_683 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=725 IMG-14/random_684 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=726 IMG-14/random_685 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=727 IMG-14/random_686 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=728 IMG-14/random_687 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=729 IMG-14/random_688 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=730 IMG-14/random_689 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=731 IMG-14/random_690 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=732 IMG-14/random_691 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=733 IMG-14/random_692 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=734 IMG-14/random_693 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=735 IMG-14/random_694 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=736 IMG-14/random_695 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=737 IMG-14/random_696 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=738 IMG-14/random_697 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=739 IMG-14/random_698 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=740 IMG-14/random_699 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=741 IMG-14/random_700 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=742 IMG-14/random_701 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=743 IMG-14/random_702 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=744 IMG-14/random_703 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=745 IMG-14/random_704 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=746 IMG-14/random_705 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=747 IMG-14/random_706 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=748 IMG-14/random_707 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=749 IMG-14/random_708 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=750 IMG-14/random_709 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=751 IMG-14/random_710 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=752 IMG-14/random_711 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=753 IMG-14/random_712 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=754 IMG-14/random_713 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=755 IMG-14/random_714 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=756 IMG-14/random_715 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=757 IMG-14/random_716 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=758 IMG-14/random_717 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=759 IMG-14/random_718 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=760 IMG-14/random_719 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=761 IMG-14/random_720 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=762 IMG-14/random_721 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=763 IMG-14/random_722 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=764 IMG-14/random_723 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=765 IMG-14/random_724 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=766 IMG-14/random_725 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=767 IMG-14/random_726 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=768 IMG-14/random_727 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=769 IMG-14/random_728 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=770 IMG-14/random_729 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=771 IMG-14/random_730 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=772 IMG-14/random_731 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=773 IMG-14/random_732 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=774 IMG-14/random_733 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=775 IMG-14/random_734 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=776 IMG-14/random_735 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=777 IMG-14/random_736 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=778 IMG-14/random_737 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=779 IMG-14/random_738 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=780 IMG-14/random_739 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=781 IMG-14/random_740 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=782 IMG-14/random_741 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=783 IMG-14/random_742 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=784 IMG-14/random_743 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=785 IMG-14/random_744 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=786 IMG-14/random_745 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=787 IMG-14/random_746 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=788 IMG-14/random_747 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=789 IMG-14/random_748 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=790 IMG-14/random_749 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=791 IMG-14/random_750 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=792 IMG-14/random_751 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=793 IMG-14/random_752 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=794 IMG-14/random_753 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=795 IMG-14/random_754 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=796 IMG-14/random_755 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=797 IMG-14/random_756 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=798 IMG-14/random_757 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=799 IMG-14/random_758 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=800 IMG-14/random_759 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=801 IMG-14/random_760 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=802 IMG-14/random_761 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=803 IMG-14/random_762 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=804 IMG-14/random_763 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=805 IMG-14/random_764 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=806 IMG-14/random_765 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=807 IMG-14/random_766 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=808 IMG-14/random_767 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=809 IMG-14/random_768 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=810 IMG-14/random_769 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=811 IMG-14/random_770 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=812 IMG-14/random_771 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=813 IMG-14/random_772 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=814 IMG-14/random_773 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=815 IMG-14/random_774 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=816 IMG-14/random_775 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=817 IMG-14/random_776 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=818 IMG-14/random_777 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=819 IMG-14/random_778 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=820 IMG-14/random_779 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=821 IMG-14/random_780 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=822 IMG-14/random_781 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=823 IMG-14/random_782 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=824 IMG-14/random_783 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=825 IMG-14/random_784 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=826 IMG-14/random_785 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=827 IMG-14/random_786 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=828 IMG-14/random_787 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=829 IMG-14/random_788 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=830 IMG-14/random_789 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=831 IMG-14/random_790 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=832 IMG-14/random_791 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=833 IMG-14/random_792 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=834 IMG-14/random_793 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=835 IMG-14/random_794 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=836 IMG-14/random_795 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=837 IMG-14/random_796 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=838 IMG-14/random_797 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=839 IMG-14/random_798 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=840 IMG-14/random_799 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=841 IMG-14/random_800 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=842 IMG-14/random_801 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=843 IMG-14/random_802 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=844 IMG-14/random_803 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=845 IMG-14/random_804 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=846 IMG-14/random_805 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=847 IMG-14/random_806 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=848 IMG-14/random_807 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=849 IMG-14/random_808 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=850 IMG-14/random_809 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=851 IMG-14/random_810 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=852 IMG-14/random_811 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=853 IMG-14/random_812 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=854 IMG-14/random_813 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=855 IMG-14/random_814 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=856 IMG-14/random_815 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=857 IMG-14/random_816 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=858 IMG-14/random_817 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=859 IMG-14/random_818 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=860 IMG-14/random_819 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=861 IMG-14/random_820 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=862 IMG-14/random_821 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=863 IMG-14/random_822 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=864 IMG-14/random_823 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=865 IMG-14/random_824 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=866 IMG-14/random_825 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=867 IMG-14/random_826 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=868 IMG-14/random_827 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=869 IMG-14/random_828 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=870 IMG-14/random_829 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=871 IMG-14/random_830 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=872 IMG-14/random_831 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=873 IMG-14/random_832 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=874 IMG-14/random_833 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=875 IMG-14/random_834 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=876 IMG-14/random_835 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=877 IMG-14/random_836 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=878 IMG-14/random_837 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=879 IMG-14/random_838 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=880 IMG-14/random_839 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=881 IMG-14/random_840 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=882 IMG-14/random_841 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=883 IMG-14/random_842 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=884 IMG-14/random_843 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=885 IMG-14/random_844 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=886 IMG-14/random_845 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=887 IMG-14/random_846 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=888 IMG-14/random_847 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=889 IMG-14/random_848 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=890 IMG-14/random_849 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=891 IMG-14/random_850 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=892 IMG-14/random_851 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=893 IMG-14/random_852 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=894 IMG-14/random_853 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=895 IMG-14/random_854 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=896 IMG-14/random_855 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=897 IMG-14/random_856 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=898 IMG-14/random_857 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=899 IMG-14/random_858 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=900 IMG-14/random_859 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=901 IMG-14/random_860 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=902 IMG-14/random_861 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=903 IMG-14/random_862 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=904 IMG-14/random_863 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=905 IMG-14/random_864 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=906 IMG-14/random_865 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=907 IMG-14/random_866 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=908 IMG-14/random_867 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=909 IMG-14/random_868 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=910 IMG-14/random_869 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=911 IMG-14/random_870 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=912 IMG-14/random_871 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=913 IMG-14/random_872 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=914 IMG-14/random_873 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=915 IMG-14/random_874 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=916 IMG-14/random_875 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=917 IMG-14/random_876 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=918 IMG-14/random_877 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=919 IMG-14/random_878 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=920 IMG-14/random_879 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=921 IMG-14/random_880 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=922 IMG-14/random_881 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=923 IMG-14/random_882 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=924 IMG-14/random_883 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=925 IMG-14/random_884 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=926 IMG-14/random_885 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=927 IMG-14/random_886 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=928 IMG-14/random_887 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=929 IMG-14/random_888 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=930 IMG-14/random_889 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=931 IMG-14/random_890 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=932 IMG-14/random_891 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=933 IMG-14/random_892 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=934 IMG-14/random_893 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=935 IMG-14/random_894 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=936 IMG-14/random_895 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=937 IMG-14/random_896 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=938 IMG-14/random_897 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=939 IMG-14/random_898 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=940 IMG-14/random_899 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=941 IMG-14/random_900 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=942 IMG-14/random_901 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=943 IMG-14/random_902 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=944 IMG-14/random_903 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=945 IMG-14/random_904 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=946 IMG-14/random_905 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=947 IMG-14/random_906 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=948 IMG-14/random_907 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=949 IMG-14/random_908 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=950 IMG-14/random_909 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=951 IMG-14/random_910 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=952 IMG-14/random_911 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=953 IMG-14/random_912 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=954 IMG-14/random_913 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=955 IMG-14/random_914 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=956 IMG-14/random_915 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=957 IMG-14/random_916 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=958 IMG-14/random_917 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=959 IMG-14/random_918 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=960 IMG-14/random_919 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=961 IMG-14/random_920 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=962 IMG-14/random_921 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=963 IMG-14/random_922 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=964 IMG-14/random_923 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=965 IMG-14/random_924 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=966 IMG-14/random_925 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=967 IMG-14/random_926 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=968 IMG-14/random_927 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=969 IMG-14/random_928 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=970 IMG-14/random_929 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=971 IMG-14/random_930 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=972 IMG-14/random_931 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=973 IMG-14/random_932 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=974 IMG-14/random_933 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=975 IMG-14/random_934 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=976 IMG-14/random_935 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=977 IMG-14/random_936 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=978 IMG-14/random_937 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=979 IMG-14/random_938 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=980 IMG-14/random_939 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=981 IMG-14/random_940 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=982 IMG-14/random_941 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=983 IMG-14/random_942 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=984 IMG-14/random_943 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=985 IMG-14/random_944 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=986 IMG-14/random_945 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=987 IMG-14/random_946 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=988 IMG-14/random_947 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=989 IMG-14/random_948 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=990 IMG-14/random_949 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=991 IMG-14/random_950 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=992 IMG-14/random_951 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=993 IMG-14/random_952 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=994 IMG-14/random_953 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=995 IMG-14/random_954 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=996 IMG-14/random_955 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=997 IMG-14/random_956 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=998 IMG-14/random_957 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=999 IMG-14/random_958 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1000 IMG-14/random_959 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1001 IMG-14/random_960 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1002 IMG-14/random_961 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1003 IMG-14/random_962 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1004 IMG-14/random_963 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1005 IMG-14/random_964 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1006 IMG-14/random_965 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1007 IMG-14/random_966 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1008 IMG-14/random_967 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1009 IMG-14/random_968 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1010 IMG-14/random_969 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1011 IMG-14/random_970 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1012 IMG-14/random_971 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1013 IMG-14/random_972 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1014 IMG-14/random_973 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1015 IMG-14/random_974 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1016 IMG-14/random_975 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1017 IMG-14/random_976 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1018 IMG-14/random_977 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1019 IMG-14/random_978 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1020 IMG-14/random_979 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1021 IMG-14/random_980 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1022 IMG-14/random_981 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1023 IMG-14/random_982 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1024 IMG-14/random_983 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1025 IMG-14/random_984 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1026 IMG-14/random_985 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1027 IMG-14/random_986 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1028 IMG-14/random_987 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1029 IMG-14/random_988 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1030 IMG-14/random_989 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1031 IMG-14/random_990 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1032 IMG-14/random_991 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1033 IMG-14/random_992 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1034 IMG-14/random_993 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1035 IMG-14/random_994 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1036 IMG-14/random_995 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1037 IMG-14/random_996 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1038 IMG-14/random_997 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1039 IMG-14/random_998 expected=[0,127] observed=[0,127] latency=38
+[PASS] tx=1040 IMG-14/random_999 expected=[0,127] observed=[0,127] latency=38
+
+========== IMG-15 ==========
+[PASS] tx=1041 IMG-15/fixed_img_W01 expected=[12,12] observed=[12,12] latency=38
+[PASS] tx=1042 IMG-15/fixed_img_W02 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1043 IMG-15/fixed_img_W03 expected=[0,127] observed=[0,127] latency=38
+
+========== IMG-16 ==========
+[PASS] tx=1044 IMG-16/bias_group_0_value_45 expected=[24,12] observed=[24,12] latency=38
+[PASS] tx=1045 IMG-16/bias_group_0_value_-45 expected=[1,12] observed=[1,12] latency=38
+[PASS] tx=1046 IMG-16/bias_group_1_value_45 expected=[35,12] observed=[35,12] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 690815000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1047 case=IMG-16 subcase=bias_group_1_value_-45 launch=69044 now=69082 indice=0 exp=0 got=127
+[FAIL-TX] IMG-16/bias_group_1_value_-45 errors=1 latency=38
+[PASS] tx=1048 IMG-16/bias_group_2_value_45 expected=[35,12] observed=[35,12] latency=38
+[PASS] tx=1049 IMG-16/bias_group_2_value_-45 expected=[0,12] observed=[0,12] latency=38
+[PASS] tx=1050 IMG-16/bias_group_3_value_45 expected=[35,12] observed=[35,12] latency=38
+[PASS] tx=1051 IMG-16/bias_group_3_value_-45 expected=[0,12] observed=[0,12] latency=38
+
+========== IMG-17 ==========
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 694115000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1052 case=IMG-17 subcase=image_A launch=69374 now=69412 indice=1 exp=16 got=4
+[FAIL-TX] IMG-17/image_A errors=1 latency=38
+[PASS] tx=1053 IMG-17/image_B expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1054 IMG-17/image_C expected=[24,24] observed=[24,24] latency=38
+
+========== IMG-18 ==========
+[ABORT] tx=1055 IMG-18/reset_in_flight_after_1 cancelada por reset no ciclo=69579
+[PASS] tx=1056 IMG-18/recovery_after_reset_1 expected=[4,4] observed=[4,4] latency=38
+[ABORT] tx=1057 IMG-18/reset_in_flight_after_4 cancelada por reset no ciclo=69664
+[PASS] tx=1058 IMG-18/recovery_after_reset_4 expected=[4,4] observed=[4,4] latency=38
+[ABORT] tx=1059 IMG-18/reset_in_flight_after_8 cancelada por reset no ciclo=69753
+[PASS] tx=1060 IMG-18/recovery_after_reset_8 expected=[4,4] observed=[4,4] latency=38
+
+========== IMG-19 ==========
+[INCOMPLETE] IMG-19/burst_gap_2_img_0: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_2_img_1: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_2_img_2: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_3_img_0: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_3_img_1: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_3_img_2: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_4_img_0: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_4_img_1: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_4_img_2: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_8_img_0: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_8_img_1: start sobreposto sem protocolo ready/busy
+[INCOMPLETE] IMG-19/burst_gap_8_img_2: start sobreposto sem protocolo ready/busy
+
+========== IMG-20 ==========
+[PASS] tx=1073 IMG-20/base_gradient expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1074 IMG-20/pixel_plus_one_0 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1075 IMG-20/pixel_plus_one_1 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1076 IMG-20/pixel_plus_one_2 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1077 IMG-20/pixel_plus_one_3 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1078 IMG-20/pixel_plus_one_4 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1079 IMG-20/pixel_plus_one_5 expected=[127,120] observed=[127,120] latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 706635000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1080 case=IMG-20 subcase=pixel_plus_one_6 launch=70626 now=70664 indice=1 exp=121 got=120
+[FAIL-TX] IMG-20/pixel_plus_one_6 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 707295000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1081 case=IMG-20 subcase=pixel_plus_one_7 launch=70692 now=70730 indice=1 exp=121 got=120
+[FAIL-TX] IMG-20/pixel_plus_one_7 errors=1 latency=38
+UVM_ERROR /home/matheus-grossi/Projects/CNN/CNN/UVM/CNN_top/UVM_scoreboard.sv(50) @ 707955000: uvm_test_top.env.scb [CNN_SCB] [FAIL][OUTPUT] tx=1082 case=IMG-20 subcase=pixel_plus_one_8 launch=70758 now=70796 indice=1 exp=120 got=119
+[FAIL-TX] IMG-20/pixel_plus_one_8 errors=1 latency=38
+[PASS] tx=1083 IMG-20/pixel_plus_one_9 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1084 IMG-20/pixel_plus_one_10 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1085 IMG-20/pixel_plus_one_11 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1086 IMG-20/pixel_plus_one_12 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1087 IMG-20/pixel_plus_one_13 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1088 IMG-20/pixel_plus_one_14 expected=[127,120] observed=[127,120] latency=38
+[PASS] tx=1089 IMG-20/pixel_plus_one_15 expected=[127,120] observed=[127,120] latency=38
+
+========== IMG-21 ==========
+[PASS] tx=1090 IMG-21/positive_saturation_candidate expected=[127,127] observed=[127,127] latency=38
+[PASS] tx=1091 IMG-21/negative_input_pos_weights expected=[127,127] observed=[127,127] latency=38
+[PASS] tx=1092 IMG-21/negative_x_negative expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1093 IMG-21/positive_x_negative expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1094 IMG-21/rounding_probe_-3 expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1095 IMG-21/rounding_probe_-2 expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1096 IMG-21/rounding_probe_-1 expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1097 IMG-21/rounding_probe_0 expected=[0,0] observed=[0,0] latency=38
+[PASS] tx=1098 IMG-21/rounding_probe_1 expected=[1,1] observed=[1,1] latency=38
+[PASS] tx=1099 IMG-21/rounding_probe_2 expected=[1,1] observed=[1,1] latency=38
+[PASS] tx=1100 IMG-21/rounding_probe_3 expected=[1,1] observed=[1,1] latency=38
+
+============== RELATORIO FINAL ==============
+[SUMMARY] total_starts=1100 checked_PASS=1065 checked_FAIL=20 aborted_by_reset=3 incomplete=12
+[SUMMARY] errors=25 assertions=0 sim_cycles=72020 seed=20261025
+[SUMMARY] outputs_checked=1085 latency_min=38 latency_max=38
+[CASE] IMG-00 starts=3 pass=2 fail=1 incomplete=0
+[CASE] IMG-01 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-02 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-03 starts=5 pass=0 fail=5 incomplete=0
+[CASE] IMG-04 starts=5 pass=3 fail=2 incomplete=0
+[CASE] IMG-05 starts=9 pass=2 fail=7 incomplete=0
+[CASE] IMG-06 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-07 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-08 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-09 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-10 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-11 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-12 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-13 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-14 starts=1000 pass=1000 fail=0 incomplete=0
+[CASE] IMG-15 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-16 starts=8 pass=7 fail=1 incomplete=0
+[CASE] IMG-17 starts=3 pass=2 fail=1 incomplete=0
+[CASE] IMG-18 starts=6 pass=3 fail=0 incomplete=0
+[CASE] IMG-19 starts=12 pass=0 fail=0 incomplete=12
+[CASE] IMG-20 starts=17 pass=14 fail=3 incomplete=0
+[CASE] IMG-21 starts=11 pass=11 fail=0 incomplete=0
+[COVERAGE] scenarios=68.18% pixels=40.00% impulses=29.17% bias=100.00% quantization=94.44%
+[REPORT] CSV=/home/matheus-grossi/Projects/CNN/CNN/results_uvm/CNN_top_sdf/cnn_verif_results.csv
+[RESULT] FAIL
+** Fatal: CNN UVM: campanha FAIL; consulte o relatorio
+[PROF] settle=0.0ms edges=0.0ms nba=0.0ms process=0.0ms snap=0.0ms sched=0.0ms
+[PROF] edge_waiters=0.0ms edge_cg=0.0ms waiter_iters=191921896
+[PROF] clocks_only_detect=0 nba_elided=0 (iters with clocks-only scan / NBAs dropped at eval because value matched signal_table)
+[PROF] edge_detect=0.0ms edge_exec=0.0ms edges_fired=0 insns=12444832 ns_per_insn=0.0 fallbacks=0
+[FUSE] array-read-NBA fusions (static sites): 0
+[FUSE] packed-loop NBA copies (static sites): 0
+[FUSE] packed blocking fills (dynamic executions): 0
+[FUSE] const-operand ALU fusions (static sites): Add=6 Eq=16 CaseEq=0 Xor=0 And=1 Or=0 Mul=2 Sub=0 total=25
+[FUSE] Move-into-assign forwards (static sites): 0
+[FUSE] copies forwarded into readers (static sites): 128
+[FUSE] provably-unsigned scrubs elided (static sites): 7
+[FUSE] AddC2 superinstructions (static sites): 0
+[PROF] settle_dc=0.0ms(2429398714) settle_ca=842289.6ms(324555160) settle_ab=0.0ms(0)
+[PROF] engine=event
+[PROF] tables: signals=316067 sig_to_edge_pos=0 edge_signals=0 armed_input_ranges=0 dirty_signals=316067 gate_lane_ops=537
+[PROF] vm_insns_total=12444832
+[PROF] write_observer: quiet=0 observed=0
+[PROF] clock_tree: roots=0 entries=0 eager_evals=0
+[PROF] settle_calls=29142186 settle_iters=36434088 max_iters=2 entry_evals=2153189014 unresolved_entries=0/200162
+[PROF] settle_writes=985496929 (45.8% of evals changed a signal, 1167692085 quiet) dep_edges=1783849051 (1.8 per write) repass_evals=20800609
+[PROF] two_state_evals=179621618 (14551 entries lowered)
+[PROF] simulation_loop=3199576.7ms iters=31869693 avg=100.40µs/iter
+[COV] assertions: 0 sites (assert=0, assume=0, cover=0) — 0 passes, 0 fails
+[COV] coverage: 5 covergroup instances, 75374 samples, 51 unique coverpoint values, 41 unique cross tuples
+[COV] wrote coverage DB to xezim_cov.json
+   Time: 720200000  Scope: cnn_uvm_pkg.cnn_test.final_phase
+[PHASE] simulation: 3199749.7ms
+[PHASE] total: 3212651.8ms
+------------------------------
+------------------------------
+Simulation finished at time 720200000 ($finish called)

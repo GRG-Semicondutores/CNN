@@ -67,7 +67,7 @@ clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
 [INFO CTS-0101]  Average sink wire length 205.22 um
 [INFO CTS-0102]  Path depth 4 - 5
 [INFO CTS-0207]  Dummy loads inserted 167
-[INFO CTS-0500] Runtime: 2.65s
+[INFO CTS-0500] Runtime: 2.66s
 estimate_parasitics -placement
 detailed_placement
 [INFO DPL-0006] Core area: 13118.03 um^2
@@ -90,7 +90,7 @@ Iteration | Violations |    Cells |    Sites
         2 |         83 |         7 |        76
         3 |          0 |         0 |         0
 Negotiation phase 1 converged at iteration 3.
-[INFO DPL-0500] Runtime: 0.45s
+[INFO DPL-0500] Runtime: 0.48s
 Placement Analysis
 ---------------------------------
 total displacement       4625.6 u
@@ -104,9 +104,9 @@ estimate_parasitics -placement
 repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
 [INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
 [INFO RSZ-0098] No setup violations found
-[INFO RSZ-0505] Runtime: 1.16s
+[INFO RSZ-0505] Runtime: 1.17s
 [INFO RSZ-0033] No hold violations found.
-[INFO RSZ-0506] Runtime: 0.19s
+[INFO RSZ-0506] Runtime: 0.20s
 Repair timing output passed lec test
 detailed_placement
 [INFO DPL-0006] Core area: 13118.03 um^2
@@ -121,7 +121,7 @@ detailed_placement
 [INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
 [INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
 [INFO DPL-0393]   height 1 row(s): 49145 cells
-[INFO DPL-0500] Runtime: 0.25s
+[INFO DPL-0500] Runtime: 0.26s
 Placement Analysis
 ---------------------------------
 total displacement          0.0 u
@@ -140,6 +140,6 @@ cts final report_design_area
 Design area 5407 um^2 41% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_1_cts.odb
 write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/4_cts.sdc
-Elapsed time: 0:23.06[h:]min:sec. CPU time: user 55.11 sys 5.38 (262%). Peak memory: 691492KB.
+Elapsed time: 0:23.96[h:]min:sec. CPU time: user 56.53 sys 5.54 (259%). Peak memory: 686704KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-4_1_cts                   .odb           23            675 d28bc4f8c1dbe5140986
+4_1_cts                   .odb           23            670 d28bc4f8c1dbe5140986

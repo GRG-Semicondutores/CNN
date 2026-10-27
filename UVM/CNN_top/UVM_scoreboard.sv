@@ -37,7 +37,10 @@ class cnn_scoreboard extends uvm_scoreboard;
         end
     endfunction
     function string case_name(int id);
-        return id<0 ? "INIT" : $sformatf("IMG-%02d",id);
+        // %02d produz espaco em vez de zero no xezim 0.11.3. O nome correto
+        // preserva a selecao da verificacao de contagem em check_phase.
+        if (id<0) return "INIT";
+        return id<10 ? $sformatf("IMG-0%0d",id) : $sformatf("IMG-%0d",id);
     endfunction
     virtual function void report_error(string category,string detail);
         cnn_seq_item context_item;
@@ -187,8 +190,8 @@ class cnn_scoreboard extends uvm_scoreboard;
                  error_count,assertion_error_count,cycle_count,cfg.seed);
         $display("[SUMMARY] outputs_checked=%0d latency_min=%0d latency_max=%0d",outputs_checked,min_latency,max_latency);
         for (int i=0;i<22;i++) if (case_executed[i])
-            $display("[CASE] IMG-%02d starts=%0d pass=%0d fail=%0d incomplete=%0d",
-                     i,launched_per_case[i],pass_per_case[i],fail_per_case[i],incomplete_per_case[i]);
+            $display("[CASE] %s starts=%0d pass=%0d fail=%0d incomplete=%0d",
+                     case_name(i),launched_per_case[i],pass_per_case[i],fail_per_case[i],incomplete_per_case[i]);
         if (coverage!=null) coverage.print_summary();
         $display("[REPORT] CSV=%s",cfg.csv_path);
         $display("[RESULT] %s",result_status);

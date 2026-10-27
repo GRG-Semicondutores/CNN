@@ -31,7 +31,7 @@ Iteration | Violations |    Cells |    Sites
         0 |       1580 |       488 |      1092
         1 |          0 |         0 |         0
 Negotiation phase 1 converged at iteration 1.
-[INFO DPL-0500] Runtime: 0.54s
+[INFO DPL-0500] Runtime: 0.57s
 Placement Analysis
 ---------------------------------
 total displacement      11313.9 u
@@ -94,7 +94,7 @@ Original HPWL           103464.7 u (   48162.1,    55302.6)
 Final HPWL               98973.9 u (   45746.9,    53227.0)
 Delta HPWL                  -4.3 % (      -5.0,       -3.8)
 
-Took 6 seconds: improve_placement -max_displacement "5 1"
+Took 7 seconds: improve_placement -max_displacement "5 1"
 optimize_mirroring
 [INFO DPL-0020] Mirrored 3907 instances
 [INFO DPL-0021] HPWL before           98973.9 u
@@ -110,6 +110,6 @@ detailed place report_design_area
 Design area 5279 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_5_place_dp.odb
 write_sdc -no_timestamp /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/3_place.sdc
-Elapsed time: 0:20.70[h:]min:sec. CPU time: user 31.43 sys 2.49 (163%). Peak memory: 533980KB.
+Elapsed time: 0:21.80[h:]min:sec. CPU time: user 32.36 sys 2.61 (160%). Peak memory: 534692KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-3_5_place_dp              .odb           20            521 8eb9cf20041201b70cc3
+3_5_place_dp              .odb           21            522 8eb9cf20041201b70cc3

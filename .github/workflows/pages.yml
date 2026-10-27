@@ -1,0 +1,66 @@
+name: Site do projeto — GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/pages/**'
+      - 'README.md'
+      - 'docs/**'
+      - 'images/**'
+      - 'UVM/CNN_top/**'
+      - 'testbenchs/CNN_top/**'
+      - 'synth_org/top/reports/asap7/top/base/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Obter o repositório
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Preparar o gerador
+        run: |
+          python3 -m venv "$RUNNER_TEMP/cnn-pages-env"
+          "$RUNNER_TEMP/cnn-pages-env/bin/pip" install -r scripts/pages/requirements.txt
+
+      - name: Validar os leitores e gerar o site
+        run: |
+          "$RUNNER_TEMP/cnn-pages-env/bin/python" -m unittest discover -s scripts/pages -p 'test_*.py'
+          "$RUNNER_TEMP/cnn-pages-env/bin/python" scripts/pages/build.py
+          "$RUNNER_TEMP/cnn-pages-env/bin/python" scripts/pages/check.py _site
+
+      - name: Preparar o artefato do GitHub Pages
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configurar o GitHub Pages
+        uses: actions/configure-pages@v6.0.0
+
+      - name: Publicar o site
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

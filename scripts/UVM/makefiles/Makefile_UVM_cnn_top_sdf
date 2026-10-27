@@ -1,0 +1,108 @@
+# CNN_top UVM / xezim: netlist OpenROAD com atrasos SDF.
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+.DEFAULT_GOAL := run
+
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+PROJECT_ROOT := $(abspath $(dir $(THIS_MAKEFILE))/../../..)
+TB_DIR := $(PROJECT_ROOT)/UVM/CNN_top
+UVM_HOME ?= $(PROJECT_ROOT)/.deps/1800.2-2017-1.0/src
+UVM_SRC := $(abspath $(UVM_HOME))
+ORFS ?= $(HOME)/OpenROAD/OpenROAD-flow-scripts
+CELL_DIR ?= $(ORFS)/flow/platforms/asap7/verilog/stdcell
+CELL_FILES ?= $(wildcard $(CELL_DIR)/asap7sc7p5t_*_RVT_TT_*.v)
+NETLIST ?= $(PROJECT_ROOT)/synth_org/top/results/asap7/top/base/6_final.v
+SDF ?= $(PROJECT_ROOT)/synth_org/top/results/asap7/top/base/6_final.sdf
+NETLIST_PATH := $(abspath $(NETLIST))
+SDF_PATH := $(abspath $(SDF))
+RESULTS_ROOT ?= $(PROJECT_ROOT)/results_uvm
+RESULTS_DIR := $(abspath $(RESULTS_ROOT))/CNN_top_sdf
+LOG_DIR := $(RESULTS_DIR)/logs
+SCOPED_SDF := $(RESULTS_DIR)/6_final_xezim.sdf
+PREPARED_CELLS := $(addprefix $(RESULTS_DIR)/cells/,$(notdir $(CELL_FILES)))
+PREPARE := $(PROJECT_ROOT)/scripts/UVM/validation/prepare_cnn_sdf.py
+
+XEZIM ?= xezim
+PYTHON ?= python3
+XEZIM_FLAGS ?= --verbose
+SDF_MODE ?= max
+MAX_TIME ?= 1ms
+TEST ?= ALL
+RANDOM_COUNT ?= 1000
+SEED ?= 20261025
+OBS_CYCLES ?= 64
+EXPECTED_LATENCY ?= 0
+UVM_TESTNAME ?= cnn_test
+UVM_VERBOSITY ?= UVM_LOW
+ENABLE_WAVEFORM ?= 0
+PLUSARGS ?=
+
+COMMON_FLAGS = -s tb_cnn --error-exit -override_timescale 1ns/1ps \
+	-D CNN_TOP_GATE_LEVEL \
+	-I "$(UVM_SRC)" -I "$(TB_DIR)" \
+	-I "$(PROJECT_ROOT)/scripts/UVM/gate_level" $(XEZIM_FLAGS)
+SOURCES = "$(UVM_SRC)/uvm_pkg.sv" $(foreach source,$(PREPARED_CELLS),"$(source)") \
+	"$(NETLIST_PATH)" "$(TB_DIR)/testbench.sv"
+TB_ARGS = +UVM_TESTNAME=$(UVM_TESTNAME) +UVM_VERBOSITY=$(UVM_VERBOSITY) +UVM_NO_RELNOTES \
+	+TEST=$(TEST) +RANDOM_COUNT=$(RANDOM_COUNT) +SEED=$(SEED) +seed=$(SEED) \
+	+OBS_CYCLES=$(OBS_CYCLES) +EXPECTED_LATENCY=$(EXPECTED_LATENCY) \
+	"+CSV_PATH=$(RESULTS_DIR)/cnn_verif_results.csv" $(PLUSARGS)
+
+.PHONY: all check compile run audit help
+all: run
+
+check:
+	@command -v "$(XEZIM)" >/dev/null || { echo "ERRO: xezim nao encontrado no PATH" >&2; exit 1; }
+	@test -f "$(UVM_SRC)/uvm_pkg.sv" -a -f "$(UVM_SRC)/uvm_macros.svh" || \
+		{ echo "ERRO: UVM_HOME invalido; execute scripts/UVM/bash/CNN_top/setup_uvm.sh ou informe UVM_HOME." >&2; exit 1; }
+	@case "$(SDF_MODE)" in min|typ|max) ;; *) echo "ERRO: SDF_MODE deve ser min, typ ou max" >&2; exit 1;; esac
+	@mkdir -p "$(LOG_DIR)"
+	@$(PYTHON) "$(PREPARE)" --netlist "$(NETLIST_PATH)" --sdf "$(SDF_PATH)" \
+		--output "$(SCOPED_SDF)" --scope dut \
+		--cells $(foreach source,$(CELL_FILES),"$(source)") | tee "$(LOG_DIR)/inputs.log"
+
+compile: check
+	@echo "[XEZIM] COMPILE: compilacao e elaboracao; para simular, use o alvo run."
+	@cd "$(RESULTS_DIR)"; \
+	$(XEZIM) --compile $(COMMON_FLAGS) $(SOURCES) 2>&1 | tee "$(LOG_DIR)/compile.log"
+
+# xezim compila e simula em uma unica chamada; run nao repete compile.
+run: check
+	@echo "[XEZIM] RUN: compilacao + simulacao UVM; TEST=$(TEST) SDF_MODE=$(SDF_MODE)"
+	@cd "$(RESULTS_DIR)"; \
+	status=0; \
+	$(XEZIM) --simulate $(COMMON_FLAGS) $(SOURCES) \
+		--sdf "$(SCOPED_SDF)" --sdf-$(SDF_MODE) --max-time "$(MAX_TIME)" \
+		$(if $(filter 1,$(ENABLE_WAVEFORM)),--fst "$(RESULTS_DIR)/CNN_top_UVM_sdf.fst" --fst-scope tb_cnn.cif) \
+		$(TB_ARGS) 2>&1 | tee "$(LOG_DIR)/simulation.log" || status=$$?; \
+	if [[ $$status == 0 ]] && ! grep -Eq '\[SDF\] annotated [1-9][0-9]* signals with delays' "$(LOG_DIR)/simulation.log"; then \
+		echo "ERRO: nenhuma anotacao SDF confirmada; consulte simulation.log" >&2; status=1; \
+	fi; \
+	if [[ $$status == 0 ]] && ! grep -Eq '\[SDF\] annotated [1-9][0-9]* timing check' "$(LOG_DIR)/simulation.log"; then \
+		echo "ERRO: nenhuma verificacao temporal SDF confirmada; consulte simulation.log" >&2; status=1; \
+	fi; \
+	if [[ $$status == 0 ]] && ! grep -Fq '[RESULT] PASS' "$(LOG_DIR)/simulation.log"; then \
+		echo "ERRO: bancada nao concluiu com PASS (inclusive timeout); consulte simulation.log" >&2; status=1; \
+	fi; \
+	printf '%s\n' "$$status" > "$(LOG_DIR)/simulation.exitcode"; \
+	exit "$$status"
+
+audit:
+	@$(PYTHON) "$(PROJECT_ROOT)/scripts/UVM/validation/check_cnn_sdf_simulation.py" \
+		--output "$(RESULTS_DIR)/audit" --xezim "$(XEZIM)" --uvm-home "$(UVM_SRC)" \
+		--netlist "$(NETLIST_PATH)" --sdf "$(SDF_PATH)" \
+		--cells $(foreach source,$(CELL_FILES),"$(source)")
+
+help:
+	@echo "CNN_top UVM / xezim + OpenROAD + SDF"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh (campanha completa: 1100 transacoes por padrao)"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh run TEST=IMG-01 (teste curto)"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh compile (somente compila)"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh run TEST=ALL RANDOM_COUNT=1000"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh audit (pinos + falhas injetadas)"
+	@echo "Alvos: check, compile, run, audit, all, help."
+	@echo "Variaveis: XEZIM, UVM_HOME (src), ORFS, CELL_FILES, NETLIST, SDF, RESULTS_ROOT,"
+	@echo "           SDF_MODE=min|typ|max (padrao max), MAX_TIME=1ms,"
+	@echo "           TEST, SEED, RANDOM_COUNT, OBS_CYCLES, EXPECTED_LATENCY,"
+	@echo "           ENABLE_WAVEFORM=0|1, PLUSARGS, XEZIM_FLAGS."
+	@echo "Resultados: $(RESULTS_DIR)"

@@ -1,0 +1,73 @@
+{
+  "campaign_date": "25/10/2026",
+  "summary": {
+    "total_starts": 1100,
+    "checked_PASS": 1083,
+    "checked_FAIL": 2,
+    "aborted_by_reset": 3,
+    "incomplete": 12,
+    "errors": 3,
+    "assertions": 0,
+    "sim_cycles": 72020,
+    "seed": 20261025,
+    "outputs_checked": 1085,
+    "latency_min": 37,
+    "latency_max": 37
+  },
+  "status": "FAIL",
+  "native": {
+    "line": {
+      "hit": 40,
+      "total": 40,
+      "percent": 100.0
+    },
+    "toggle": {
+      "hit": 11330,
+      "total": 11822,
+      "percent": 95.8
+    },
+    "branch": {
+      "hit": 62,
+      "total": 70,
+      "percent": 88.6
+    },
+    "expr": {
+      "hit": 44,
+      "total": 48,
+      "percent": 91.7
+    },
+    "fsm_state": {
+      "hit": 0,
+      "total": 0,
+      "percent": 0.0
+    },
+    "fsm_arc": {
+      "hit": 0,
+      "total": 0,
+      "percent": 0.0
+    }
+  },
+  "functional": {
+    "hit": 106,
+    "total": 234,
+    "percent": 45.3
+  },
+  "lcov": {
+    "line_hit": 75,
+    "line_total": 75,
+    "branch_hit": 199,
+    "branch_total": 211
+  },
+  "synthesis": {
+    "cells": 47470,
+    "area": 5259.006,
+    "power_W": 0.0105,
+    "timing": {
+      "tns": 0.0,
+      "wns": 0.0,
+      "slack": 5497.88,
+      "setup": 0.0,
+      "hold": 0.0
+    }
+  }
+}

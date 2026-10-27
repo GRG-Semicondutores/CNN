@@ -15,9 +15,9 @@ source /home/matheus-grossi/OpenROAD/OpenROAD-flow-scripts/flow/platforms/asap7/
 [WARNING PDN-1051] No instances found for grid (CORE_macro_grid_1).
 [WARNING PDN-1051] No instances found for grid (CORE_macro_grid_2).
 [INFO PDN-0001] Inserting grid: top
-[INFO PDN-0500] Runtime: 0.17s
+[INFO PDN-0500] Runtime: 0.18s
 Design area 5311 um^2 40% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/2_4_floorplan_pdn.odb
-Elapsed time: 0:01.61[h:]min:sec. CPU time: user 1.49 sys 0.11 (99%). Peak memory: 256212KB.
+Elapsed time: 0:01.67[h:]min:sec. CPU time: user 1.51 sys 0.14 (98%). Peak memory: 256264KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
 2_4_floorplan_pdn         .odb            1            250 27e106e06cc78a01d501

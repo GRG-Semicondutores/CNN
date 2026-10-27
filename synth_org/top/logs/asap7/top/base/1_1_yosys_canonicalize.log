@@ -27,9 +27,9 @@ Setting clock period to 10000
 12.2. Analyzing design hierarchy..
 13. Executing OPT_CLEAN pass (remove unused cells and wires).
 14. Executing RTLIL backend.
-End of script. Logfile hash: 24a2cd2fb2, time: 0.62s, user: 0.52s, system: 0.06s, MEM: 84.05 MB peak
+End of script. Logfile hash: 24a2cd2fb2, time: 0.64s, user: 0.54s, system: 0.07s, MEM: 84.09 MB peak
 Yosys 0.68+ (git sha1 a5af9d690, Release, GNU /usr/bin/c++ 15.2.0) [github.com/The-OpenROAD-Project/yosys at HEAD]
-Time spent: 73% 12x read_liberty (0 sec), 10% 1x opt_clean (0 sec), ...
-Elapsed time: 0:00.64[h:]min:sec. CPU time: user 0.53 sys 0.07 (94%). Peak memory: 88008KB.
+Time spent: 71% 12x read_liberty (0 sec), 10% 1x opt_clean (0 sec), ...
+Elapsed time: 0:00.66[h:]min:sec. CPU time: user 0.56 sys 0.08 (97%). Peak memory: 88288KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-1_1_yosys_canonicalize    .rtlil          0             85 4ef981a2cda760c98c3d
+1_1_yosys_canonicalize    .rtlil          0             86 4ef981a2cda760c98c3d

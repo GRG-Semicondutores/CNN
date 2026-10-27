@@ -16,6 +16,6 @@ filler_placement "FILLERxp5_ASAP7_75t_R FILLER_ASAP7_75t_R DECAPx1_ASAP7_75t_R D
 [INFO DPL-0001] Placed 67857 filler instances.
 Design area 5408 um^2 41% utilization.
 write_db /home/matheus-grossi/Projects/CNN/CNN/synth_org/top/results/asap7/top/base/5_3_fillcell.odb
-Elapsed time: 0:01.97[h:]min:sec. CPU time: user 1.77 sys 0.19 (99%). Peak memory: 428004KB.
+Elapsed time: 0:02.04[h:]min:sec. CPU time: user 1.77 sys 0.24 (98%). Peak memory: 428528KB.
 Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
-5_3_fillcell              .odb            1            417 850d9356bb4f63b04dd7
+5_3_fillcell              .odb            2            418 850d9356bb4f63b04dd7

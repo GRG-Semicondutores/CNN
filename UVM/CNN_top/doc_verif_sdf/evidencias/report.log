@@ -1,0 +1,40 @@
+[PHASE] simulator construction: 384.8ms (materialize 122.2, names 29.6, static 82.7, arrays_1d 0.0, arrays_other 24.9, prev 0.7, drop 0.0; signals 316067, named 316067)
+[SDF] annotated 155094 signals with delays
+[SDF] annotated 26816 timing check(s)
+[PHASE] time-0 settle: 165.6ms (200613 entry_evals, 1 settle_iters, 200162 comb_entries, 316067 signals)
+[PHASE] time-0 settle breakdown: DC 0.0ms/165249 (0.0µs), CA 104.5ms/50902 (2.1µs), AB 0.0ms/0 (0.0µs)
+[PHASE] compilation: 12902.1ms
+[CFG] TEST=ALL OBS_CYCLES=64 RANDOM_COUNT=1000 SEED=20261025
+[CFG] IMG-14 seed=20261025 quantidade=1000
+[ABORT] tx=1055 IMG-18/reset_in_flight_after_1 cancelada por reset no ciclo=69579
+[ABORT] tx=1057 IMG-18/reset_in_flight_after_4 cancelada por reset no ciclo=69664
+[ABORT] tx=1059 IMG-18/reset_in_flight_after_8 cancelada por reset no ciclo=69753
+[SUMMARY] total_starts=1100 checked_PASS=1065 checked_FAIL=20 aborted_by_reset=3 incomplete=12
+[SUMMARY] errors=25 assertions=0 sim_cycles=72020 seed=20261025
+[SUMMARY] outputs_checked=1085 latency_min=38 latency_max=38
+[CASE] IMG-00 starts=3 pass=2 fail=1 incomplete=0
+[CASE] IMG-01 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-02 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-03 starts=5 pass=0 fail=5 incomplete=0
+[CASE] IMG-04 starts=5 pass=3 fail=2 incomplete=0
+[CASE] IMG-05 starts=9 pass=2 fail=7 incomplete=0
+[CASE] IMG-06 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-07 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-08 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-09 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-10 starts=2 pass=2 fail=0 incomplete=0
+[CASE] IMG-11 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-12 starts=1 pass=1 fail=0 incomplete=0
+[CASE] IMG-13 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-14 starts=1000 pass=1000 fail=0 incomplete=0
+[CASE] IMG-15 starts=3 pass=3 fail=0 incomplete=0
+[CASE] IMG-16 starts=8 pass=7 fail=1 incomplete=0
+[CASE] IMG-17 starts=3 pass=2 fail=1 incomplete=0
+[CASE] IMG-18 starts=6 pass=3 fail=0 incomplete=0
+[CASE] IMG-19 starts=12 pass=0 fail=0 incomplete=12
+[CASE] IMG-20 starts=17 pass=14 fail=3 incomplete=0
+[CASE] IMG-21 starts=11 pass=11 fail=0 incomplete=0
+[COVERAGE] scenarios=68.18% pixels=40.00% impulses=29.17% bias=100.00% quantization=94.44%
+[RESULT] FAIL
+[PHASE] simulation: 3199749.7ms
+[PHASE] total: 3212651.8ms
