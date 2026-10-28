@@ -1,5 +1,11 @@
 # CNN em Verilog/SystemVerilog
 
+<p align="center">
+  <a href="images/render.png"><img src="images/render.png" alt="Render ilustrativo de um circuito integrado para apresentação do projeto CNN" width="800" /></a>
+  <br />
+  <em>Render ilustrativo do projeto CNN.</em>
+</p>
+
 <div align="justify">
 
 Implementação de uma rede neural convolucional em hardware, com duas camadas
@@ -201,6 +207,19 @@ status e latências nos CSVs. Os percentuais de cobertura exigem atenção aos
 denominadores: instruções do xezim não equivalem a linhas do Verilator,
 e as regras de instrumentação de ramos e toggles também podem diferir.
 
+#### Relatório de cobertura UVM + RTL
+
+A captura da campanha completa no xezim mostra 98,44% de statement,
+92,98% de branch e 55,59% de toggle. Foram registrados 1.083 PASS, duas
+FAIL, três cancelamentos por reset e 12 INCOMPLETE em 1.100 starts.
+Os percentuais de cobertura não substituem o resultado funcional **FAIL**.
+
+<p align="center">
+  <a href="images/rtl_coverage.png"><img src="images/rtl_coverage.png" alt="Relatório UVM com RTL no xezim: cobertura de statement, branch e toggle e resumo das 1.100 transações" width="1100" /></a>
+  <br />
+  <em>Cobertura RTL — Totais por instância e resultado da bancada UVM no xezim.</em>
+</p>
+
 ### Resultado registrado em 25/10/2026
 
 <table align="center">
@@ -328,6 +347,17 @@ A waveform registra as IOs durante essa mesma simulação com SDF ativo.
 </tbody>
 </table>
 
+<details>
+<summary>Captura do resumo histórico com netlist e SDF</summary>
+
+<p align="center">
+  <a href="images/umv_sdf_report.png"><img src="images/umv_sdf_report.png" alt="Resumo histórico da campanha SDF: 1.065 PASS, 20 FAIL e latência de 38 ciclos" width="650" /></a>
+  <br />
+  <em>Resumo histórico — Captura dos resultados da campanha de 26/10/2026 apresentados na tabela acima.</em>
+</p>
+
+</details>
+
 As duas divergências registradas na campanha RTL permaneceram, e 18 falhas
 adicionais concentraram-se no conjunto de pesos W02. Os 1.000 aleatórios
 passaram, mas as 20 falhas dirigidas mantiveram o resultado global **FAIL**.
@@ -369,6 +399,43 @@ dos pontos não cobertos. Essa cobertura corresponde à netlist e aos modelos
 de células; a campanha histórica acima não coletou essas métricas.
 O [guia do fluxo](scripts/UVM/gate_level/README.md#code-coverage-no-xezim)
 descreve as opções e o alvo `report`, que regenera o relatório sem simular.
+
+### Cobertura da execução com netlist e SDF
+
+A nova captura do painel SDF registra **91,34% de toggle**
+(392.284/429.468 direções de transição), em 47.448 escopos. Statement e
+branch aparecem como **N/A**, pois o xezim informou zero pontos nessas
+métricas para esta netlist e seus modelos de células.
+
+Nessa execução com coleta de cobertura, o log registra 1.067 PASS,
+18 FAIL, três cancelamentos por reset e 12 INCOMPLETE, totalizando
+1.100 starts. As 1.085 respostas comparadas tiveram latência de 38 ciclos,
+e o resultado global permaneceu **FAIL**. Esse registro corresponde à
+captura abaixo; o resumo e o PDF históricos acima preservam a campanha
+anterior, com 1.065 PASS e 20 FAIL.
+
+<p align="center">
+  <a href="images/sdf_uvm_cov.png"><img src="images/sdf_uvm_cov.png" alt="Painel de cobertura UVM com netlist e SDF: toggle de 91,34%, statement e branch N/A, 1.067 PASS e 18 FAIL" width="1100" /></a>
+  <br />
+  <em>Cobertura com SDF — Painel gerado a partir do banco nativo do xezim, com as contagens da execução com coleta de cobertura.</em>
+</p>
+
+<details>
+<summary>Captura da apresentação anterior do relatório de cobertura SDF</summary>
+
+<p align="center">
+  <a href="images/cov_xezim_report.png"><img src="images/cov_xezim_report.png" alt="Apresentação anterior do relatório SDF: 47.448 escopos, statement e branch N/A e toggle de 91,34%" width="1100" /></a>
+  <br />
+  <em>Apresentação anterior — Os mesmos totais de cobertura SDF, antes da atualização do layout HTML.</em>
+</p>
+
+</details>
+
+Para atualizar o painel a partir do banco já coletado:
+
+```bash
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh report
+```
 
 ### Forma de onda da simulação com SDF
 
