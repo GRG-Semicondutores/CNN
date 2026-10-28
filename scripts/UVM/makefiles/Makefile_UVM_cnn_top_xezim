@@ -1,0 +1,110 @@
+# CNN_top UVM / xezim: RTL original e cobertura nativa do DUT.
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+.DEFAULT_GOAL := coverage
+THIS_MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
+PROJECT_ROOT := $(abspath $(dir $(THIS_MAKEFILE))/../../..)
+RTL_DIR ?= $(PROJECT_ROOT)/src
+TB_DIR := $(PROJECT_ROOT)/UVM/CNN_top
+UVM_HOME ?= $(PROJECT_ROOT)/.deps/1800.2-2017-1.0/src
+UVM_SRC := $(abspath $(UVM_HOME))
+DUT_FILES ?= $(addprefix $(RTL_DIR)/,CNN.sv ConvLayer.sv FeatureMap.sv \
+ Convolution/Convolution.sv DotProduct/DotProduct.sv FCLayer.sv Neuron.sv \
+ Quantizer.sv ReLU/ReLU.sv MaxPooling.sv Flatten.sv)
+RESULTS_ROOT ?= $(PROJECT_ROOT)/results_uvm
+RESULTS_DIR := $(abspath $(RESULTS_ROOT))/CNN_top_xezim
+LOG_DIR := $(RESULTS_DIR)/logs
+COV_DB := $(RESULTS_DIR)/xezim_cov.json
+COV_DIR := $(RESULTS_DIR)/coverage
+COV_REPORT := $(PROJECT_ROOT)/scripts/UVM/validation/report_xezim_coverage.py
+XEZIM ?= xezim
+PYTHON ?= python3
+XEZIM_FLAGS ?= --verbose
+MAX_TIME ?= 1ms
+TEST ?= ALL
+RANDOM_COUNT ?= 1000
+SEED ?= 20261025
+OBS_CYCLES ?= 64
+EXPECTED_LATENCY ?= 0
+UVM_TESTNAME ?= cnn_test
+UVM_VERBOSITY ?= UVM_LOW
+ENABLE_COVERAGE ?= 1
+COVERAGE_KINDS ?= stmt,branch,toggle
+COVERAGE_SCOPE ?= tb_cnn.dut
+ENABLE_WAVEFORM ?= 1
+WAVE ?= $(PROJECT_ROOT)/waveform/CNN_top_UVM_RTL_XEZIM.fst
+WAVE_PATH := $(abspath $(WAVE))
+PLUSARGS ?=
+COMMON_FLAGS = -s tb_cnn --error-exit -override_timescale 1ns/1ps \
+ -I "$(UVM_SRC)" -I "$(TB_DIR)" $(XEZIM_FLAGS)
+SOURCES = "$(UVM_SRC)/uvm_pkg.sv" $(foreach source,$(DUT_FILES),"$(source)") "$(TB_DIR)/testbench.sv"
+TB_ARGS = +UVM_TESTNAME=$(UVM_TESTNAME) +UVM_VERBOSITY=$(UVM_VERBOSITY) +UVM_NO_RELNOTES \
+ +TEST=$(TEST) +RANDOM_COUNT=$(RANDOM_COUNT) +SEED=$(SEED) +seed=$(SEED) \
+ +OBS_CYCLES=$(OBS_CYCLES) +EXPECTED_LATENCY=$(EXPECTED_LATENCY) \
+ "+CSV_PATH=$(RESULTS_DIR)/cnn_verif_results.csv" $(PLUSARGS)
+
+.PHONY: all check compile run coverage report help
+all: coverage
+check:
+	@command -v "$(XEZIM)" >/dev/null || { echo "ERRO: xezim nao encontrado" >&2; exit 1; }
+	@test -f "$(UVM_SRC)/uvm_pkg.sv" -a -f "$(UVM_SRC)/uvm_macros.svh" || \
+		{ echo "ERRO: UVM_HOME invalido; execute scripts/UVM/bash/CNN_top/setup_uvm.sh" >&2; exit 1; }
+	@case "$(ENABLE_COVERAGE):$(ENABLE_WAVEFORM)" in [01]:[01]) ;; *) echo "ERRO: ENABLE_COVERAGE e ENABLE_WAVEFORM devem ser 0 ou 1" >&2; exit 1;; esac
+	@if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then \
+		$(XEZIM) --help 2>&1 | grep -- '--code-coverage-scope' >/dev/null || \
+		{ echo "ERRO: xezim sem suporte a code coverage por escopo" >&2; exit 1; }; \
+		test -n "$(COVERAGE_SCOPE)" || { echo "ERRO: COVERAGE_SCOPE vazio" >&2; exit 1; }; \
+	fi
+	@for source in $(foreach source,$(DUT_FILES) $(TB_DIR)/testbench.sv,"$(source)"); do \
+		test -f "$$source" || { echo "ERRO: arquivo ausente: $$source" >&2; exit 1; }; done
+	@if [[ "$(ENABLE_WAVEFORM)" == 1 ]]; then \
+		for existing in "$(PROJECT_ROOT)/waveform/CNN_top_UVM.fst" "$(PROJECT_ROOT)/waveform/CNN_top_UVM_SDF.fst"; do \
+			if [[ "$(WAVE_PATH)" -ef "$$existing" ]] || [[ "$$(realpath -m "$(WAVE_PATH)")" == "$$(realpath -m "$$existing")" ]]; then \
+				echo "ERRO: WAVE sobrescreveria waveform de outro fluxo: $$existing" >&2; exit 1; fi; \
+		done; \
+	fi
+	@mkdir -p "$(LOG_DIR)"
+
+compile: check
+	@cd "$(RESULTS_DIR)"; $(XEZIM) --compile $(COMMON_FLAGS) $(SOURCES) 2>&1 | tee "$(LOG_DIR)/compile.log"
+
+run: check
+	@echo "[XEZIM] UVM + RTL; TEST=$(TEST) SEED=$(SEED) ENABLE_COVERAGE=$(ENABLE_COVERAGE)"
+	@rm -f "$(COV_DB)" "$(COV_DIR)/index.html" "$(COV_DIR)/summary.txt" \
+		"$(COV_DIR)/scopes.csv" "$(COV_DIR)/design_units.csv" "$(COV_DIR)/uncovered.csv"
+	@if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then mkdir -p "$(COV_DIR)"; fi
+	@if [[ "$(ENABLE_WAVEFORM)" == 1 ]]; then mkdir -p "$(dir $(WAVE_PATH))"; fi
+	@cd "$(RESULTS_DIR)"; status=0; \
+	$(XEZIM) -V > "$(LOG_DIR)/xezim_version.log" 2>&1; \
+	XEZIM_COV_DB="$(COV_DB)" $(XEZIM) --simulate $(COMMON_FLAGS) $(SOURCES) --max-time "$(MAX_TIME)" \
+		$(if $(filter 1,$(ENABLE_COVERAGE)),--code-coverage=$(COVERAGE_KINDS) --code-coverage-scope "$(COVERAGE_SCOPE)") \
+		$(if $(filter 1,$(ENABLE_WAVEFORM)),--fst "$(WAVE_PATH)" --fst-scope tb_cnn.cif) \
+		$(TB_ARGS) 2>&1 | tee "$(LOG_DIR)/simulation.log" || status=$$?; \
+	sed -n '/============== RELATORIO FINAL ==============/,$$p' "$(LOG_DIR)/simulation.log" > "$(LOG_DIR)/report.log"; \
+	if [[ $$status == 0 ]] && ! grep -Fq '[RESULT] PASS' "$(LOG_DIR)/simulation.log"; then \
+		echo "ERRO: bancada nao concluiu com PASS (inclusive timeout)" >&2; status=1; fi; \
+	if [[ "$(ENABLE_WAVEFORM)" == 1 ]]; then \
+		if [[ -s "$(WAVE_PATH)" ]]; then echo "[REPORT] FST RTL xezim=$(WAVE_PATH)"; \
+		else echo "ERRO: waveform ausente ou vazia" >&2; status=1; fi; fi; \
+	if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then \
+		$(PYTHON) "$(COV_REPORT)" --database "$(COV_DB)" --output-dir "$(COV_DIR)" \
+			--design-kind rtl --simulation-log "$(LOG_DIR)/simulation.log" || { \
+				if [[ $$status == 0 ]]; then status=1; fi; }; fi; \
+	printf '%s\n' "$$status" > "$(LOG_DIR)/simulation.exitcode"; exit "$$status"
+
+coverage:
+	@$(MAKE) --no-print-directory -f "$(THIS_MAKEFILE)" run ENABLE_COVERAGE=1
+report:
+	@$(PYTHON) "$(COV_REPORT)" --database "$(COV_DB)" --output-dir "$(COV_DIR)" \
+		--design-kind rtl --simulation-log "$(LOG_DIR)/simulation.log"
+help:
+	@echo "CNN_top UVM + RTL / xezim: coverage (padrao), run, compile, report, help"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage TEST=ALL RANDOM_COUNT=1000 SEED=20261025"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage TEST=IMG-01"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh report (nao simula)"
+	@echo "Variaveis: TEST, RANDOM_COUNT, SEED, OBS_CYCLES, EXPECTED_LATENCY, MAX_TIME,"
+	@echo "           ENABLE_COVERAGE=0|1, COVERAGE_KINDS=stmt,branch,toggle, COVERAGE_SCOPE=tb_cnn.dut,"
+	@echo "           ENABLE_WAVEFORM=0|1, WAVE, RESULTS_ROOT, UVM_HOME, RTL_DIR, DUT_FILES,"
+	@echo "           XEZIM, XEZIM_FLAGS, PLUSARGS, UVM_TESTNAME, UVM_VERBOSITY."
+	@echo "HTML: $(COV_DIR)/index.html"
+	@echo "FST: $(WAVE_PATH); resultados separados de CNN_top (Verilator) e CNN_top_sdf."

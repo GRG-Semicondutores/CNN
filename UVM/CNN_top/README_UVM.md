@@ -13,7 +13,7 @@ neurônios por FC.
 
 A observação funcional usa as portas públicas, incluindo `result_FC2` e
 `valid_out4`. A cobertura do RTL é obtida pela instrumentação automática do
-Verilator em `src`.
+simulador em `src`, com fluxos para Verilator e xezim.
 
 ## Executar
 
@@ -120,6 +120,75 @@ existente pode ser selecionada com `UVM_HOME=/caminho/uvm/src`.
 `run` executa sem instrumentação de cobertura; `run_cov` executa com coleta,
 sem gerar o HTML. `coverage` coleta e gera os relatórios; `report` usa o banco
 existente. Uma nova simulação substitui os arquivos de saída daquela execução.
+
+## UVM + RTL no xezim
+
+O script `scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh` usa os mesmos
+arquivos RTL e o mesmo testbench, sem definir `CNN_TOP_GATE_LEVEL` ou
+`CNN_TOP_VERILATOR_COVERAGE`. Não requer bibliotecas ASAP7, netlist, SDF,
+compilador C++, LCOV ou genhtml. Usa xezim com suporte a code coverage,
+Make, Python 3 e a mesma distribuição UVM.
+
+```bash
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage TEST=IMG-01
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage TEST=ALL RANDOM_COUNT=1000 SEED=20261025
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh compile
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh report
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh help
+```
+
+Sem argumentos, executa `coverage` com os mesmos 1.100 starts da campanha
+padrão. `run` também habilita cobertura e waveform por padrão;
+`run ENABLE_COVERAGE=0 ENABLE_WAVEFORM=0` desativa ambas.
+`report` somente processa um banco existente: para uma execução sem
+instrumentação, é preciso simular novamente com `coverage` antes de usá-lo.
+
+| Artefato | Caminho do fluxo RTL / xezim |
+| --- | --- |
+| HTML de code coverage | `results_uvm/CNN_top_xezim/coverage/index.html` |
+| Banco nativo, incluindo covergroups | `results_uvm/CNN_top_xezim/xezim_cov.json` |
+| Resumo, instâncias, módulos e pontos não cobertos | `results_uvm/CNN_top_xezim/coverage/{summary.txt,scopes.csv,design_units.csv,uncovered.csv}` |
+| Log e retorno da simulação | `results_uvm/CNN_top_xezim/logs/{simulation.log,simulation.exitcode}` |
+| CSV do scoreboard | `results_uvm/CNN_top_xezim/cnn_verif_results.csv` |
+| Waveform das IOs | `waveform/CNN_top_UVM_RTL_XEZIM.fst` |
+
+Os resultados são separados dos diretórios de Verilator e SDF. O script
+rejeita um destino `WAVE` igual ao das waveforms desses dois fluxos.
+Uma nova execução substitui somente os artefatos do destino escolhido.
+`RESULTS_ROOT` e `WAVE` permitem escolher outros destinos.
+
+O xezim recebe `--code-coverage=stmt,branch,toggle` e
+`--code-coverage-scope tb_cnn.dut`. O escopo inclui as instâncias do DUT,
+sem a bancada UVM. `COVERAGE_KINDS` e `COVERAGE_SCOPE` permitem restringir
+a coleta. `MAX_TIME=1ms` é o limite padrão; atingir o limite sem resultado
+PASS não é tratado como aprovação.
+
+O gerador `scripts/UVM/validation/report_xezim_coverage.py` apresenta os
+dados nativos em HTML com cartões, resultado funcional, busca, filtros e
+ordenação por módulo. É o mesmo layout do fluxo com SDF, identificado aqui
+como **UVM + RTL**. Não possui recursos externos e pode ser aberto localmente.
+Total zero é N/A; os totais dos cartões contam pontos por instância, enquanto
+a tabela por módulo une hits de suas instâncias. Os covergroups continuam
+no JSON, sem reconstruir percentuais a partir de bins ausentes.
+
+Para comparar com Verilator, mantenha a revisão dos fontes, configuração,
+`TEST`, `RANDOM_COUNT`, `SEED`, `OBS_CYCLES` e critério de latência iguais.
+Os CSVs permitem confrontar os subcasos, pesos, vetores e ciclos. As métricas
+de cobertura têm definições e denominadores próprios: statement não é uma
+contagem de linhas, e toggle do xezim não rastreia arrays unpacked nesta
+versão. Não trate percentuais diferentes, sozinhos, como divergência funcional.
+
+O relatório é emitido também após FAIL, quando há banco válido, mantendo
+o retorno não zero. Nenhuma alteração em RTL ou na bancada é necessária.
+
+Validação local com xezim 0.11.3: a campanha `TEST=ALL RANDOM_COUNT=1000
+SEED=20261025` iniciou 1.100 transações, com 1.083 PASS, duas FAIL, três
+cancelamentos por reset e 12 INCOMPLETE. As falhas permaneceram em IMG-00
+e IMG-16. Os 1.097 registros do CSV coincidiram integralmente com o CSV
+Verilator existente em `results_uvm/CNN_top/cnn_verif_results.csv`, incluindo
+vetores, status e ciclos; não foi uma nova execução do Verilator.
+A cobertura nativa por instância foi 504/512 (98,44%) em statement,
+450/484 (92,98%) em branch e 4.436/7.980 (55,59%) em toggle.
 
 ## Organização do ambiente
 
