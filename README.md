@@ -3,7 +3,7 @@
 <p align="center">
   <a href="images/render.png"><img src="images/render.png" alt="Render ilustrativo de um circuito integrado para apresentação do projeto CNN" width="800" /></a>
   <br />
-  <em>Render ilustrativo do projeto CNN.</em>
+  <em>Render do GDSII do projeto CNN.</em>
 </p>
 
 <div align="justify">
