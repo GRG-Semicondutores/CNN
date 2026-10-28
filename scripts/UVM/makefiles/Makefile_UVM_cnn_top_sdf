@@ -34,7 +34,16 @@ OBS_CYCLES ?= 64
 EXPECTED_LATENCY ?= 0
 UVM_TESTNAME ?= cnn_test
 UVM_VERBOSITY ?= UVM_LOW
-ENABLE_WAVEFORM ?= 0
+ENABLE_WAVEFORM ?= 1
+WAVE ?= $(PROJECT_ROOT)/waveform/CNN_top_UVM_SDF.fst
+WAVE_PATH := $(abspath $(WAVE))
+RTL_WAVE := $(PROJECT_ROOT)/waveform/CNN_top_UVM.fst
+ENABLE_COVERAGE ?= 1
+COVERAGE_KINDS ?= stmt,branch,toggle
+COVERAGE_SCOPE ?= tb_cnn.dut
+COV_DB := $(RESULTS_DIR)/xezim_cov.json
+COV_DIR := $(RESULTS_DIR)/coverage
+COV_REPORT := $(PROJECT_ROOT)/scripts/UVM/validation/report_xezim_coverage.py
 PLUSARGS ?=
 
 COMMON_FLAGS = -s tb_cnn --error-exit -override_timescale 1ns/1ps \
@@ -48,7 +57,7 @@ TB_ARGS = +UVM_TESTNAME=$(UVM_TESTNAME) +UVM_VERBOSITY=$(UVM_VERBOSITY) +UVM_NO_
 	+OBS_CYCLES=$(OBS_CYCLES) +EXPECTED_LATENCY=$(EXPECTED_LATENCY) \
 	"+CSV_PATH=$(RESULTS_DIR)/cnn_verif_results.csv" $(PLUSARGS)
 
-.PHONY: all check compile run audit help
+.PHONY: all check compile run coverage report audit help
 all: run
 
 check:
@@ -56,6 +65,18 @@ check:
 	@test -f "$(UVM_SRC)/uvm_pkg.sv" -a -f "$(UVM_SRC)/uvm_macros.svh" || \
 		{ echo "ERRO: UVM_HOME invalido; execute scripts/UVM/bash/CNN_top/setup_uvm.sh ou informe UVM_HOME." >&2; exit 1; }
 	@case "$(SDF_MODE)" in min|typ|max) ;; *) echo "ERRO: SDF_MODE deve ser min, typ ou max" >&2; exit 1;; esac
+	@case "$(ENABLE_COVERAGE)" in 0|1) ;; *) echo "ERRO: ENABLE_COVERAGE deve ser 0 ou 1" >&2; exit 1;; esac
+	@if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then \
+		$(XEZIM) --help 2>&1 | grep -- '--code-coverage-scope' >/dev/null || \
+		{ echo "ERRO: xezim sem suporte a code coverage por escopo" >&2; exit 1; }; \
+		test -n "$(COVERAGE_SCOPE)" || { echo "ERRO: COVERAGE_SCOPE vazio" >&2; exit 1; }; \
+	fi
+	@if [[ "$(ENABLE_WAVEFORM)" == 1 ]] && { \
+		[[ "$(WAVE_PATH)" -ef "$(RTL_WAVE)" ]] || \
+		[[ "$$(realpath -m "$(WAVE_PATH)")" == "$$(realpath -m "$(RTL_WAVE)")" ]]; \
+	}; then \
+		echo "ERRO: WAVE deve ser diferente da waveform RTL: $(RTL_WAVE)" >&2; exit 1; \
+	fi
 	@mkdir -p "$(LOG_DIR)"
 	@$(PYTHON) "$(PREPARE)" --netlist "$(NETLIST_PATH)" --sdf "$(SDF_PATH)" \
 		--output "$(SCOPED_SDF)" --scope dut \
@@ -69,11 +90,18 @@ compile: check
 # xezim compila e simula em uma unica chamada; run nao repete compile.
 run: check
 	@echo "[XEZIM] RUN: compilacao + simulacao UVM; TEST=$(TEST) SDF_MODE=$(SDF_MODE)"
+	@if [[ "$(ENABLE_WAVEFORM)" == 1 ]]; then mkdir -p "$(dir $(WAVE_PATH))"; fi
+	@rm -f "$(COV_DB)" "$(COV_DIR)/summary.txt" "$(COV_DIR)/index.html" \
+		"$(COV_DIR)/scopes.csv" "$(COV_DIR)/design_units.csv" "$(COV_DIR)/uncovered.csv"
+	@if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then \
+		mkdir -p "$(COV_DIR)"; \
+	fi
 	@cd "$(RESULTS_DIR)"; \
 	status=0; \
-	$(XEZIM) --simulate $(COMMON_FLAGS) $(SOURCES) \
+	XEZIM_COV_DB="$(COV_DB)" $(XEZIM) --simulate $(COMMON_FLAGS) $(SOURCES) \
 		--sdf "$(SCOPED_SDF)" --sdf-$(SDF_MODE) --max-time "$(MAX_TIME)" \
-		$(if $(filter 1,$(ENABLE_WAVEFORM)),--fst "$(RESULTS_DIR)/CNN_top_UVM_sdf.fst" --fst-scope tb_cnn.cif) \
+		$(if $(filter 1,$(ENABLE_WAVEFORM)),--fst "$(WAVE_PATH)" --fst-scope tb_cnn.cif) \
+		$(if $(filter 1,$(ENABLE_COVERAGE)),--code-coverage=$(COVERAGE_KINDS) --code-coverage-scope "$(COVERAGE_SCOPE)") \
 		$(TB_ARGS) 2>&1 | tee "$(LOG_DIR)/simulation.log" || status=$$?; \
 	if [[ $$status == 0 ]] && ! grep -Eq '\[SDF\] annotated [1-9][0-9]* signals with delays' "$(LOG_DIR)/simulation.log"; then \
 		echo "ERRO: nenhuma anotacao SDF confirmada; consulte simulation.log" >&2; status=1; \
@@ -84,8 +112,29 @@ run: check
 	if [[ $$status == 0 ]] && ! grep -Fq '[RESULT] PASS' "$(LOG_DIR)/simulation.log"; then \
 		echo "ERRO: bancada nao concluiu com PASS (inclusive timeout); consulte simulation.log" >&2; status=1; \
 	fi; \
+	if [[ "$(ENABLE_WAVEFORM)" == 1 ]]; then \
+		if [[ -s "$(WAVE_PATH)" ]]; then \
+			echo "[REPORT] FST SDF=$(WAVE_PATH)"; \
+		else \
+			echo "ERRO: waveform SDF ausente ou vazia: $(WAVE_PATH)" >&2; status=1; \
+		fi; \
+	fi; \
+	if [[ "$(ENABLE_COVERAGE)" == 1 ]]; then \
+		$(PYTHON) "$(COV_REPORT)" --database "$(COV_DB)" --output-dir "$(COV_DIR)" \
+			--design-kind sdf --simulation-log "$(LOG_DIR)/simulation.log" || { \
+				echo "ERRO: relatorio de code coverage nao foi gerado" >&2; \
+				if [[ $$status == 0 ]]; then status=1; fi; \
+			}; \
+	fi; \
 	printf '%s\n' "$$status" > "$(LOG_DIR)/simulation.exitcode"; \
 	exit "$$status"
+
+coverage:
+	@$(MAKE) --no-print-directory -f "$(THIS_MAKEFILE)" run ENABLE_COVERAGE=1
+
+report:
+	@$(PYTHON) "$(COV_REPORT)" --database "$(COV_DB)" --output-dir "$(COV_DIR)" \
+		--design-kind sdf --simulation-log "$(LOG_DIR)/simulation.log"
 
 audit:
 	@$(PYTHON) "$(PROJECT_ROOT)/scripts/UVM/validation/check_cnn_sdf_simulation.py" \
@@ -100,9 +149,15 @@ help:
 	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh compile (somente compila)"
 	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh run TEST=ALL RANDOM_COUNT=1000"
 	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh audit (pinos + falhas injetadas)"
-	@echo "Alvos: check, compile, run, audit, all, help."
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh coverage (simula com code coverage)"
+	@echo "  bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh report (relatorio do banco existente)"
+	@echo "Alvos: check, compile, run, coverage, report, audit, all, help."
 	@echo "Variaveis: XEZIM, UVM_HOME (src), ORFS, CELL_FILES, NETLIST, SDF, RESULTS_ROOT,"
 	@echo "           SDF_MODE=min|typ|max (padrao max), MAX_TIME=1ms,"
 	@echo "           TEST, SEED, RANDOM_COUNT, OBS_CYCLES, EXPECTED_LATENCY,"
-	@echo "           ENABLE_WAVEFORM=0|1, PLUSARGS, XEZIM_FLAGS."
+	@echo "           ENABLE_WAVEFORM=0|1 (padrao 1), WAVE, PLUSARGS, XEZIM_FLAGS."
+	@echo "           ENABLE_COVERAGE=0|1 (padrao 1), COVERAGE_KINDS=stmt,branch,toggle,"
+	@echo "           COVERAGE_SCOPE=tb_cnn.dut (inclui as celulas da netlist)."
 	@echo "Resultados: $(RESULTS_DIR)"
+	@echo "FST SDF: $(WAVE_PATH) (IOs da interface tb_cnn.cif)."
+	@echo "Code coverage: $(COV_DIR)/index.html e summary.txt; banco: $(COV_DB)"
