@@ -161,6 +161,46 @@ os controles de execução e os arquivos de saída. A
 [bancada sem UVM](testbenchs/CNN_top/README.md) possui fluxos para Icarus e
 Verilator.
 
+### Executar UVM + RTL no xezim
+
+O fluxo alternativo usa os mesmos arquivos RTL, a mesma bancada UVM e os
+mesmos critérios de aprovação, com coleta nativa de `statement`, `branch`
+e `toggle` no escopo `tb_cnn.dut`. Requer xezim, Make, Python 3 e a biblioteca
+UVM instalada pelo setup acima.
+
+```bash
+# Teste curto com cobertura e waveform próprias.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage TEST=IMG-01
+
+# Campanha completa: 1.000 transações aleatórias + 100 dirigidas.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh coverage \
+  TEST=ALL RANDOM_COUNT=1000 SEED=20261025
+
+# Regenerar o HTML a partir do banco já coletado, sem simular.
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_xezim.sh report
+```
+
+O HTML fica em `results_uvm/CNN_top_xezim/coverage/index.html`, com cartões
+de métricas, resultado UVM, busca e ordenação por módulo e downloads dos
+dados por instância e dos pontos não cobertos. O layout é compartilhado com
+o relatório xezim da netlist com SDF e funciona localmente, sem dependências
+externas. A apresentação é uma automação do projeto sobre o banco nativo
+`xezim_cov.json`, não um emissor HTML do xezim.
+
+Os logs e o CSV ficam em `results_uvm/CNN_top_xezim/`, e a waveform usa
+`waveform/CNN_top_UVM_RTL_XEZIM.fst`. Os resultados do Verilator continuam
+em `results_uvm/CNN_top/`; os da netlist em `results_uvm/CNN_top_sdf/`.
+`ENABLE_WAVEFORM=0` desativa o dump e `ENABLE_COVERAGE=0` desativa a
+instrumentação no alvo `run`. Um resultado FAIL mantém o retorno de erro e
+ainda gera cobertura quando o banco está disponível.
+
+Para comparar os simuladores, execute `coverage` com os mesmos `TEST`,
+`RANDOM_COUNT` e `SEED` nos scripts `uvm_cnn_top.sh` e
+`uvm_cnn_top_xezim.sh`. Compare primeiro os vetores esperados/observados,
+status e latências nos CSVs. Os percentuais de cobertura exigem atenção aos
+denominadores: instruções do xezim não equivalem a linhas do Verilator,
+e as regras de instrumentação de ramos e toggles também podem diferir.
+
 ### Resultado registrado em 25/10/2026
 
 <table align="center">
@@ -214,7 +254,136 @@ registram os resultados. O clock da bancada tem período de 10 ns; os 37 ciclos
 medidos correspondem a 370 ns e não representam uma exigência temporal já
 confirmada para todas as configurações da CNN.
 
-### Formas de onda da simulação
+### Resultados com netlist e anotação SDF — 26/10/2026
+
+A campanha completa da netlist final do OpenROAD ASAP7, com atrasos SDF,
+foi executada no xezim 0.11.3 com a bancada UVM 2017-1.0. Foram utilizados
+`6_final.v` e `6_final.sdf`, em `synth_org/top/results/asap7/top/base/`,
+com `TEST=ALL`, `RANDOM_COUNT=1000`, `SEED=20261025` e clock de 10 ns.
+Os 22 cenários totalizaram 1.000 transações aleatórias e 100 dirigidas.
+
+Nesse fluxo, o DUT é a netlist `6_final.v`, compilada no xezim junto dos
+modelos das células ASAP7 e da bancada UVM. O arquivo `6_final.sdf` é
+anotado na instância do DUT para aplicar os atrasos do circuito implementado
+pelo OpenROAD, usando os valores máximos de atraso (`--sdf-max`). O adaptador
+de portas conecta os arrays da interface UVM aos vetores da netlist.
+
+As sequências e o driver UVM fornecem imagens, kernels, pesos e biases;
+o monitor captura as respostas e o scoreboard compara as saídas com o
+modelo de referência, mantendo os critérios de verificação da bancada.
+A waveform registra as IOs durante essa mesma simulação com SDF ativo.
+
+<table align="center">
+<thead>
+<tr>
+<th>Indicador</th>
+<th align="right">Resultado com netlist e SDF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transações iniciadas</td>
+<td align="right">1.100</td>
+</tr>
+<tr>
+<td>PASS</td>
+<td align="right">1.065</td>
+</tr>
+<tr>
+<td>FAIL</td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td>Canceladas por reset</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td>INCOMPLETE, por sobreposição exploratória</td>
+<td align="right">12</td>
+</tr>
+<tr>
+<td>Diferenças de dados nas saídas</td>
+<td align="right">25</td>
+</tr>
+<tr>
+<td>Respostas comparadas</td>
+<td align="right">1.085</td>
+</tr>
+<tr>
+<td>Latência observada</td>
+<td align="right">38 ciclos — 380 ns</td>
+</tr>
+<tr>
+<td>Sinais com atrasos SDF anotados</td>
+<td align="right">155.094</td>
+</tr>
+<tr>
+<td>Verificações temporais anotadas</td>
+<td align="right">26.816</td>
+</tr>
+<tr>
+<td>Resultado global</td>
+<td align="right"><strong>FAIL</strong></td>
+</tr>
+</tbody>
+</table>
+
+As duas divergências registradas na campanha RTL permaneceram, e 18 falhas
+adicionais concentraram-se no conjunto de pesos W02. Os 1.000 aleatórios
+passaram, mas as 20 falhas dirigidas mantiveram o resultado global **FAIL**.
+Os três cancelamentos por reset foram intencionais, e os 12 casos de
+sobreposição permaneceram exploratórios. A comparação com RTL envolve
+outra representação do DUT e outro simulador; ela não isola o SDF como
+causa das divergências.
+
+O [relatório UVM com SDF](UVM/CNN_top/doc_verif_sdf/doc_verificacao_CNN_top_SDF.pdf)
+apresenta todas as falhas, a comparação com RTL e as limitações de cobertura.
+As [evidências preservadas](UVM/CNN_top/doc_verif_sdf/evidencias/README.md)
+incluem os logs, o CSV, a auditoria dos verificadores e o manifesto SHA-256.
+O [guia do fluxo](scripts/UVM/gate_level/README.md) descreve as dependências
+e os ajustes de compatibilidade.
+
+Para executar a campanha completa a partir da raiz do repositório:
+
+```bash
+bash scripts/UVM/bash/CNN_top/uvm_cnn_top_sdf.sh run \
+  TEST=ALL RANDOM_COUNT=1000 SEED=20261025
+```
+
+Nas novas execuções, a geração de waveform está habilitada por padrão. O
+fluxo com netlist e SDF grava `waveform/CNN_top_UVM_SDF.fst`, com as IOs
+da interface e os atrasos anotados. A waveform RTL usa o arquivo distinto
+`waveform/CNN_top_UVM.fst`. O dump SDF fica disponível também quando a
+campanha termina em FAIL. Para abri-lo:
+
+```bash
+gtkwave waveform/CNN_top_UVM_SDF.fst
+```
+
+O script também habilita **code coverage** no xezim por padrão: instruções
+(`statement`), decisões (`branch`) e transições de bits (`toggle`), limitadas
+ao DUT `tb_cnn.dut` e suas células. Após a simulação, inclusive em caso de
+FAIL, o banco `results_uvm/CNN_top_sdf/xezim_cov.json` é convertido no
+relatório `results_uvm/CNN_top_sdf/coverage/index.html`, com resumo e CSVs
+dos pontos não cobertos. Essa cobertura corresponde à netlist e aos modelos
+de células; a campanha histórica acima não coletou essas métricas.
+O [guia do fluxo](scripts/UVM/gate_level/README.md#code-coverage-no-xezim)
+descreve as opções e o alvo `report`, que regenera o relatório sem simular.
+
+### Forma de onda da simulação com SDF
+
+A captura abaixo é um recorte de `waveform/CNN_top_UVM_SDF.fst`, no
+intervalo de aproximadamente 0 a 50 µs. Ela mostra o reset, os pulsos de
+`start`, os 16 pixels da imagem e parte dos parâmetros aplicados à netlist
+durante a execução UVM com anotação SDF. Clique para abrir no tamanho original.
+
+<p align="center">
+  <a href="images/wav_sdf.png"><img src="images/wav_sdf.png" alt="Recorte da simulação UVM com netlist OpenROAD e anotação SDF: reset, start, pixels e parâmetros de entrada" width="1100" /></a>
+  <br />
+  <em>Waveform SDF — Estímulos da bancada UVM aplicados à netlist do OpenROAD com os atrasos SDF ativos.</em>
+</p>
+
+### Formas de onda da simulação RTL
 
 As capturas abaixo foram obtidas no GTKWave a partir de
 `waveform/CNN_top_UVM.fst`, com observação das IOs públicas da bancada.

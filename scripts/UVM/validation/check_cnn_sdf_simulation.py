@@ -148,6 +148,8 @@ def main():
                    'CELL_FILES=' + ' '.join(str(path.resolve()) for path in args.cells),
                    f'TB_DIR={work}', f'RESULTS_ROOT={work}/results',
                    f'XEZIM_FLAGS=-I {shlex.quote(str(TB_DIR))}', 'TEST=IMG-01', 'MAX_TIME=5us',
+                   'ENABLE_WAVEFORM=0',
+                   'ENABLE_COVERAGE=0',
                    f'PLUSARGS={shlex.quote("+CNN_SDF_AUDIT=" + str(work / "pins.csv"))}']
         print(f'[AUDIT] {variant}; log: {work}/run.log', flush=True)
         with (work / 'run.log').open('w') as log:
